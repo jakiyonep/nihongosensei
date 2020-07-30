@@ -50,10 +50,12 @@ MARKDOWNIFY_WHITELIST_TAGS = {
     'a', 'p',
     'h1', 'h2', 'h3','h4', 'h5', 'h6', 'h7',
     'ul', 'li', 'span', 'ol',
-    'strong',
-    'img',
+    'strong', 'img',
 
 }
+MARKDOWNIFY_WHITELIST_ATTRS = [
+    'src',
+]
 
 MIDDLEWARE = [
     #'django.middleware.security.SecurityMiddleware'
