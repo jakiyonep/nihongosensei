@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -31,8 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'sensei_app',
     'whitenoise.runserver_nostatic',
+    'sensei_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,7 +55,7 @@ MARKDOWNIFY_WHITELIST_TAGS = {
 }
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware'
+    #'django.middleware.security.SecurityMiddleware'
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -115,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+SECRET_KEY = '3m%vn1eea%ck0s)mwzd1*lonb!i%ap99w40+lr=y9q*a&#90w6'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
