@@ -1,0 +1,7 @@
+<div class="sidebar">
+	<a class="sidebar_head strong_button" href="{% url 'sensei_app:question_add' %}"><span>質問する</span></a>
+	<p class="sidebar_head">カテゴリー</p>
+	{% for category in question_categories %}
+		<a class="question_category question_category_{{category.category_slug}}" href="{% url 'sensei_app:question_category' category.category_slug %}">{{ category }} <span class="category_num_posts">{{category.num_posts}}</span></a>
+	{% endfor %}
+</div>

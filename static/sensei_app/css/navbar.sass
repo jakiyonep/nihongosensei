@@ -1,0 +1,89 @@
+$base_bacground_color: rgb(247, 247, 247)
+$base_letter_color: rgb(111, 111, 111)
+$strong_red: rgb(255, 102, 102)
+
+
+
+
+.navbar_wrapper
+	background-color: rgb(208, 208, 208)
+	overflow-x: hidden
+	z-index: 2
+	position: relative
+	position: fixed
+	width: 100%
+	transition: top 0.5s
+	.navbar
+		width: 95vw
+		height: 5em
+		margin: 0 auto
+		display: flex
+		justify-content: space-between
+		align-items: center
+		.navbar_logo
+			width: 20%
+			height: 100%
+			.logo_img
+				object-fit: contain
+				max-height: 100%
+		.navbar_list
+			width: 80%
+			display: inline-block
+			.navbar_item
+				display: inline-block
+				height: 100%
+				margin-right: 0.5em
+				a
+					display: inline-block
+					color: rgb(115, 115, 115)
+					font-size: 1.4rem
+					height: 100%
+					padding: 1em 0.2em
+					transition: 0.4s
+					border-bottom: 1px solid rgba(5, 71, 54, 0)
+				a:hover
+					background-color: white
+					transition: 0.2s
+					border-radius: 0
+
+
+		.navbar_button
+			display: none
+			padding: 0.2em 0.4em
+			border-radius: 1px
+		.fa-bars
+			color: white
+			font-size: 1.6rem
+
+.navbar_list_collapse
+	transform: translateY(-100%)
+	transition: 0.5s
+	z-index: 3
+	position: relative
+	padding-top: 3em
+	padding-bottom: 3em
+	background-color: rgb(255, 255, 255)
+	.navbar_item_collapse
+		text-align: center
+		margin-bottom: 1em
+		a
+			margin: 0 auto
+			display: block
+			width: 80%
+			padding: 0 0.5em
+			border-bottom: 1px solid grey
+			&:hover
+				border-bottom: 1px solid $strong_red
+.menu_drop
+	transform: translateX(0)
+	transition: 0.5s
+	display: block
+
+
+@media screen and (max-width:800px)
+	.navbar
+		height: 4em!important
+	.navbar_list
+		display: none!important
+	.navbar_button
+		display: inline-block!important

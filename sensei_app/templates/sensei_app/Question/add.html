@@ -1,0 +1,43 @@
+{% extends 'sensei_app/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}質問する{% endblock %}
+{% block description %}
+  日本語や日本語教育に関する質問をして、疑問を解決しましょう！
+{% endblock %}
+{% block content %}
+<head>
+	<link rel="stylesheet" href="{% static 'sensei_app/css/question.min.css' %}">
+</head>
+<body>
+	{% include 'sensei_app/navbar.html' %}
+	<div class="wrapper question_list_wrapper question_add_wrapper">
+		<section class="left_column">
+			<div class="left_top">
+				<h1 class="section_head">質問する</h1>
+			</div>
+			<main class="question_add">
+        <form class="question_form" action="{% url 'sensei_app:question_add' %}" method="POST">
+					<section class="title">
+						{{form.title}}
+					</section>
+					<section class="author">
+						{{form.author}}
+					</section>
+					<section class="category">
+						{{form.category}}
+					</section>
+					<section class="content">
+						{{form.content}}
+					</section>
+					<button type="submit" name="button" class="strong_button"><span>投稿する</span></button>
+					{% csrf_token %}
+				</form>
+			</main>
+		</section>
+		<aside class="right_column">
+
+		</aside>
+	</div>
+</body>
+{% endblock %}

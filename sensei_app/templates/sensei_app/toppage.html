@@ -1,0 +1,13 @@
+{% extends 'sensei_app/base.html' %}
+{% block content %}
+{% load static %}
+<head>
+
+</head>
+<body>
+	{% include 'sensei_app/navbar.html' %}
+	<div class="wrapper toppage_wrapper">
+		<a class="section_head" href="{% url 'sensei_app:question_list' %}">質問</a>
+	</div>
+</body>
+{% endblock %}

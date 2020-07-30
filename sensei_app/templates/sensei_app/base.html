@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ed">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}集まれ日本語教師!{% endblock %}</title>
+    <meta name="description" content="{% block description %}「集まれ日本語教師!」へようこそ!{% endblock %}">
+		<!--CSS-->
+		<link rel="stylesheet" href="{% static 'sensei_app/css/destyle.css' %}">
+		<link rel="stylesheet" href="{% static 'sensei_app/css/common.min.css' %}">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet">
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="{% static 'sensei_app/js/all.js' %}"></script>
+  </head>
+
+  {% block content %}
+  {% endblock %}
+</html>
