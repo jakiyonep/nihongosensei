@@ -19,7 +19,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-ALLOWED_HOSTS = ['.herokuapp.com']
+
 
 import dj_database_url
 

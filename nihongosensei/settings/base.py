@@ -51,6 +51,7 @@ MARKDOWNIFY_WHITELIST_TAGS = {
     'h1', 'h2', 'h3','h4', 'h5', 'h6', 'h7',
     'ul', 'li', 'span', 'ol',
     'strong',
+    'img',
 
 }
 
@@ -143,8 +144,8 @@ STATICFILES_DIRS = [
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles', 'media_root')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 
 """ summernote"""
 

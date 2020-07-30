@@ -15,7 +15,8 @@ class Question(models.Model):
     content = models.TextField(null=True, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    is_public = models.BooleanField(default=False)
+    is_public = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='test_images', null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -24,8 +25,8 @@ class Question(models.Model):
         ordering=['-created_at']
 
     def save(self, *args, **kwargs):
-        if self.is_public and not self.published_at:
-            self.published_at = timezone.now()
+        if self.is_public and not self.updated_at:
+            self.updated_at = timezone.now()
         super().save(*args, **kwargs)
 
 class Answer(models.Model):
