@@ -1,0 +1,135 @@
+$nihongo-bg: rgb(251, 136, 74)
+$sensei-bg: rgb(52, 117, 242)
+$jltct-bg: rgb(76, 230, 118)
+$others-bg: rgb(41, 112, 129)
+$question-bg: rgb(230, 230, 230)
+$border-primary: rgb(121, 121, 121)
+$strong-color: rgb(255, 112, 112)
+
+.question_list_wrapper
+	justify-content: space-between
+	.left_column
+		width: 75%
+		.questions
+			.question_container
+				margin-bottom: 3rem
+				background-color: $question-bg
+				padding: 2rem 1rem
+				border-radius: 1rem
+				.question_link
+					width: 100%
+					height: 100%
+				.question_title
+					font-size: 1.4rem
+					margin-bottom: 1rem
+					border-bottom: 1px solid $border-primary
+					transition: 0.5s
+					&:hover
+						border-bottom: 2px solid $strong-color
+						letter-spacing: 0.1rem
+				.question_created_at
+					margin-right: 1rem
+					margin-bottom: 0.5rem
+					display: inline-block
+				.question_author
+					span
+						font-weight: bold
+
+	.right_column
+		width: 20%
+
+
+.question_category
+	display: inline-block
+	padding: 0.5rem 1rem
+	background-color: $nihongo-bg
+	color: white
+	border-radius: 1rem
+	transition: 0.5s
+	&:hover
+		transition: 0.5s
+		background-color: white
+		color: $nihongo-bg
+.question_category_nihongo
+.question_category_sensei
+	background-color: $sensei-bg
+	&:hover
+		color: $sensei-bg
+.question_category_jltct
+	background-color: $jltct-bg
+	&:hover
+		color: $jltct-bg
+.question_category_others
+	background-color: $others-bg
+	&:hover
+		color: $others-bg
+
+.sidebar
+	.sidebar_head
+		margin-bottom: 3rem
+		font-size: 1.5rem
+	.question_category
+		display: inline-block
+		margin-bottom: 1rem
+	.category_num_posts
+
+
+
+.question_detail_wrapper
+	display: flex
+	.question_category
+		margin: 1rem 0
+	.question_content
+		border-top: 1px solid $border-primary
+		border-bottom: 1px solid $border-primary
+		margin: 2rem 0
+		padding: 2rem 0
+	.answer_section
+		margin: 3rem 0
+		.submit_answer
+			margin-bottom: 5rem
+		.answers
+			.answer
+				background-color: rgb(252, 252, 252)
+				padding: 3rem 1rem
+				border-radius: 1rem
+				margin-bottom: 3rem
+				.answer_author
+					display: inline-block
+					margin-bottom: 2rem
+					span
+						font-weight: bold
+				.answer_content
+					padding-left: 1rem
+
+
+.question_add_wrapper
+	.left_column
+		width: 100%
+		margin: 0 auto
+	.question_add
+		section
+			margin-bottom: 3rem
+			&>*
+				border: 1px solid grey
+			input
+				width: 60%
+			textarea
+				width: 60%
+			select
+				width: 60%
+	.selected_question
+		margin: 5rem 0
+		padding: 2rem 0
+		>*
+			margin-bottom: 1rem
+		.selected_question_title
+			font-size: 1.5rem
+		.selected_question_author
+			span
+				font-weight: bold
+		.selected_question_content
+			border-top: 1px solid $border-primary
+			border-bottom: 1px solid $border-primary
+			margin: 2rem 0
+			padding: 2rem 0

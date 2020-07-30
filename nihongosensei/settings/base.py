@@ -115,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-SECRET_KEY = '3m%vn1eea%ck0s)mwzd1*lonb!i%ap99w40+lr=y9q*a&#90w6'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -151,3 +151,7 @@ MEDIA_URL = '/media/'
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 
+if DEBUG:
+    STATIC_URL = '/static/'
+else:
+    STATIC_URL = 'https://%s/%s/' % (AWS_S3_URL, 'static')
