@@ -16,7 +16,9 @@
 	<div class="wrapper question_list_wrapper question_detail_wrapper">
 		<main class="left_column">
 			<div class="left_top">
-				{{object.answers}}
+				{% if object.answers == None %}
+					{{object.answers}}
+				{% endif %}
 				<h1 class="section_head">{{object.title}}</h1>
 				<span class="question_created_at">投稿日時:{{ object.created_at | naturaltime}}</span><br>
 				<a href="{% url 'sensei_app:question_category' object.category.category_slug %}" class="question_category question_category_{{ object.category.category_slug }}">{{ question.category }}</a>
@@ -31,17 +33,21 @@
 					<a class="strong_button" href="{% url 'sensei_app:answer' object.pk %}">回答する</a>
 				</div>
 				<p class="section_head">みんなの回答</p>
-				<div class="answers">
-					{% for answer in object.answers.all %}
-						<div class="answer">
-							<p class="answer_author"><span>{{answer.author}}</span>さんの回答</p>
-							<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
-							<div class="content answer_content">
-								{{answer.content|markdownify}}
+				{% if object.answers.all %}
+					<div class="answers">
+						{% for answer in object.answers.all %}
+							<div class="answer">
+								<p class="answer_author"><span>{{answer.author}}</span>さんの回答</p>
+								<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
+								<div class="content answer_content">
+									{{answer.content|markdownify}}
+								</div>
 							</div>
-						</div>
-					{% endfor %}
-				</div>
+						{% endfor %}
+					</div>
+					{% else %}
+						<p style="font-size: 1.3rem;">まだ回答がありません</p>
+				{% endif %}
 			</section>
 		</main>
 		<aside class="right_column">
