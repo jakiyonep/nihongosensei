@@ -1,12 +1,19 @@
-$base_bacground_color: rgb(247, 247, 247)
-$base_letter_color: rgb(111, 111, 111)
-$strong_red: rgb(255, 102, 102)
+$nihongo-bg: rgb(251, 136, 74)
+$sensei-bg: rgb(52, 117, 242)
+$jltct-bg: rgb(76, 230, 118)
+$others-bg: rgb(41, 112, 129)
+$question-bg: rgb(230, 230, 230)
+$border-primary: rgb(121, 121, 121)
+$border-secondary: rgb(228, 228, 228)
+$strong-color: rgb(255, 112, 112)
+$link-color: rgb(3, 196, 214)
+
 
 
 
 
 .navbar_wrapper
-	background-color: rgb(208, 208, 208)
+	background-color: rgba(208, 208, 208, 0.78)
 	overflow-x: hidden
 	z-index: 2
 	position: relative
@@ -21,13 +28,27 @@ $strong_red: rgb(255, 102, 102)
 		justify-content: space-between
 		align-items: center
 		.navbar_logo
-			width: 20%
+			width: 35%
 			height: 100%
-			.logo_img
-				object-fit: contain
-				max-height: 100%
+			display: flex
+			align-items: center
+			.logo_container
+				font-family: fantasy
+				padding: 0.5rem  1rem
+				background-color: rgb(255, 255, 255)
+				border-radius: 1rem
+				font-size: 1.3rem
+				display: flex
+				align-items: center
+				justify-content: space-between
+				.logo_img
+					object-fit: contain
+					max-height: 100%
+				span
+					word-break: keep-all
+
 		.navbar_list
-			width: 80%
+			width: 65%
 			display: inline-block
 			.navbar_item
 				display: inline-block
@@ -45,8 +66,6 @@ $strong_red: rgb(255, 102, 102)
 					background-color: white
 					transition: 0.2s
 					border-radius: 0
-
-
 		.navbar_button
 			display: none
 			padding: 0.2em 0.4em
@@ -73,7 +92,7 @@ $strong_red: rgb(255, 102, 102)
 			padding: 0 0.5em
 			border-bottom: 1px solid grey
 			&:hover
-				border-bottom: 1px solid $strong_red
+				border-bottom: 1px solid $strong_color
 .menu_drop
 	transform: translateX(0)
 	transition: 0.5s
@@ -87,3 +106,5 @@ $strong_red: rgb(255, 102, 102)
 		display: none!important
 	.navbar_button
 		display: inline-block!important
+	.navbar_logo
+		width: 80%!important

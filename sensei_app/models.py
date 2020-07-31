@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.core.validators import EmailValidator
+
 
 class QuestionCategory(models.Model):
     category_name = models.CharField(null=True, blank=False, max_length=100)
@@ -40,3 +42,9 @@ class Answer(models.Model):
     def __str__(self):
         sliced_content = self.content[:10]
         return sliced_content
+
+class Contact(models.Model):
+    name = models.CharField(null=True, blank=False, max_length=100)
+    email = models.EmailField(null=True, blank=False,)
+    content = models.TextField(null=True, blank=False)
+

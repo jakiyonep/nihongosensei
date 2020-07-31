@@ -1,7 +1,35 @@
 from django import forms
-from django.forms import ModelForm, TextInput, Textarea, Select
-from .models import Question, Answer
+from django.forms import ModelForm, TextInput, Textarea, Select, EmailInput
+from .models import Question, Answer, Contact
 
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ('name', 'email', 'content')
+        widgets = {
+            'name': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '名前',
+            }),
+            'email': EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'メールアドレス',
+            }),
+            'content': Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'お問い合わせ内容',
+            }),
+        }
+        labels = {
+            'email': 'メールアドレス',
+        }
+        error_messages = {
+            'email': {
+                'invalid': ("無効なメールアドレスです"),
+            },
+        }
 
 
 class QuestionForm(forms.ModelForm):
@@ -46,4 +74,6 @@ class AnswerForm(forms.ModelForm):
                 'placeholder': '回答内容',
             }),
         }
+
+
 

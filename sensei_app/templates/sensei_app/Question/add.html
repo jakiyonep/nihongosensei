@@ -17,7 +17,7 @@
 				<h1 class="section_head">質問する</h1>
 			</div>
 			<main class="question_add">
-        <form class="question_form" action="{% url 'sensei_app:question_add' %}" method="POST">
+        <form class="question_form" action="{% url 'sensei_app:question_add' %}" onsubmit="return confirm('投稿してもよろしいでしょうか？');"  method="POST">
 					<section class="title">
 						{{form.title}}
 					</section>
@@ -30,14 +30,11 @@
 					<section class="content">
 						{{form.content}}
 					</section>
-					<button type="submit" name="button" class="strong_button"><span>投稿する</span></button>
+					<button type="submit" name="button" class="strong_button">投稿する</button>
 					{% csrf_token %}
 				</form>
 			</main>
 		</section>
-		<aside class="right_column">
-
-		</aside>
 	</div>
 </body>
 {% endblock %}

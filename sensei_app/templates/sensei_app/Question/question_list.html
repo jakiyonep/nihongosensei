@@ -12,10 +12,8 @@
 <body>
 	{% include 'sensei_app/navbar.html' %}
 	<div class="wrapper question_list_wrapper">
+		<h1 class="section_head">みんなの質問</h1>
 		<section class="left_column">
-			<div class="left_top">
-				<h1 class="section_head">みんなの質問</h1>
-			</div>
 			<main class="questions">
 				{% for question in object_list %}
 					<article class="question_container">
@@ -25,6 +23,7 @@
 							<a href="{% url 'sensei_app:question_category' question.category.category_slug %}" class="question_category question_category_{{ question.category.category_slug }}">{{ question.category }}</a>
 							<br>
 							<span class="question_author">{{ question.author }}さん</span>
+							<p class="question_answers"><span>{{question.answers.count}}</span>件の回答</p>
 						</a>
 					</article>
 				{% endfor %}

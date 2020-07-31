@@ -4,24 +4,31 @@ $jltct-bg: rgb(76, 230, 118)
 $others-bg: rgb(41, 112, 129)
 $question-bg: rgb(230, 230, 230)
 $border-primary: rgb(121, 121, 121)
+$border-secondary: rgb(228, 228, 228)
 $strong-color: rgb(255, 112, 112)
 $link-color: rgb(3, 196, 214)
 
 *
 	color: rgb(66, 66, 66)
 	line-height: 1.8rem
+	box-sizing: border-box
 .wrapper
 	width: 80vw
 	margin: 0 auto
 	display: flex
 	margin-bottom: 10rem
+	flex-direction: row
+	flex-wrap: wrap
 
 .section_head
 	font-size: 2rem
 	margin-bottom: 5rem
+	width: 100%
 	color: $strong-color
 
+
 .content
+	overflow-x: auto
 	*
 		margin: 2rem 0
 	h1, h2, h3, h4, h5, h6
@@ -57,38 +64,20 @@ $link-color: rgb(3, 196, 214)
 		color: $link-color
 
 .strong_button
-  display: inline-block
-  width: 200px
-  text-align: center
-  background-color: $strong-color
-  border: 2px solid $strong-color
-  font-size: 16px
-  color: $strong-color
-  text-decoration: none
-  padding: 10px 24px
-  border-radius: 4px
-  position: relative
-.strong_button span
-	position: relative
-	z-index: 1
-	color: grey
-.strong_button::before,
-.strong_button::after
-	content: ""
+	color: white
+	background-color: $strong-color
+	padding: 1rem
+	border-radius: .5rem
+	margin-bottom: 7rem
 	display: block
-	background-color: #FFF
-	width: 50%
-	height: 100%
-	position: absolute
-	top: 0
-	transition: .2s
-.strong_button::before
-	left: 0
-.strong_button::after
-	right: 0
-.strong_button:hover:before,
-.strong_button:hover:after
-	width: 0
-	background-color: #FFF
-.strong_button:hover
-	color: #FFF
+	text-align: center
+	transition: .5s
+	&:hover
+		transition: .5s
+		background-color: white
+		color: $strong-color
+
+@media screen and (max-width:1100px)
+	.wrapper
+		width: 90vw
+		flex-direction: column

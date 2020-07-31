@@ -18,7 +18,7 @@
 				<h1 class="section_head">回答する</h1>
 			</div>
 			<main class="question_add">
-        <form class="question_form"  method="POST">
+        <form class="question_form"  method="POST" onsubmit="return confirm('投稿してもよろしいでしょうか？');" >
 					<section class="author">
 						{{form.author}}
 					</section>

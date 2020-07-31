@@ -5,7 +5,7 @@
 <div class="navbar_wrapper" id="navbar">
 <nav class="navbar">
 	<div class="navbar_logo">
-	  <a href="/">Logo Here </a>
+	  <a class="logo_container" href="/"><i class="fas fa-hands-helping"></i><span>Nihongo Community</span></a>
 	</div>
   <ul class="navbar_list">
     <li class="navbar_item">
@@ -14,8 +14,8 @@
       </a>
     </li>
 		<li class="navbar_item">
-			<a href="{% url 'sensei_app:question_list' %}">
-				問い合わせ
+			<a href="{% url 'sensei_app:contact_add' %}">
+				お問い合わせ
 			</a>
 		</li>
 
@@ -26,22 +26,12 @@
 <ul class="navbar_list_collapse" id="navbar_collapse">
 	<li class="navbar_item_collapse">
 		<a href="{% url 'sensei_app:question_list' %}">
-			質問
+			みんなの質問
 		</a>
 	</li>
 	<li class="navbar_item_collapse">
-		<a href="{% url 'sensei_app:question_list' %}">
-			質問
-		</a>
-	</li>
-	<li class="navbar_item_collapse">
-		<a href="{% url 'sensei_app:question_list' %}">
-			質問
-		</a>
-	</li>
-	<li class="navbar_item_collapse">
-		<a href="{% url 'sensei_app:question_list' %}">
-			質問
+		<a href="{% url 'sensei_app:contact_add' %}">
+			お問い合わせ
 		</a>
 	</li>
 </ul>

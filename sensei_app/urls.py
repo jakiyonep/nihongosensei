@@ -11,5 +11,6 @@ urlpatterns =[
     path('question/category/<str:question_category_slug>/', QuestionCategoryView.as_view(), name="question_category"),
     path('question/add/', QuestionAdd, name="question_add"),
     path('question/answer/<int:pk>', AnswerFormView.as_view(), name="answer"),
+    path('contact/add', ContactAdd, name='contact_add'),
 ]
 

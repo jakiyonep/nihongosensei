@@ -2,9 +2,12 @@ $nihongo-bg: rgb(251, 136, 74)
 $sensei-bg: rgb(52, 117, 242)
 $jltct-bg: rgb(76, 230, 118)
 $others-bg: rgb(41, 112, 129)
-$question-bg: rgb(230, 230, 230)
+$question-bg: rgb(252, 252, 252)
 $border-primary: rgb(121, 121, 121)
+$border-secondary: rgb(228, 228, 228)
 $strong-color: rgb(255, 112, 112)
+$link-color: rgb(3, 196, 214)
+
 
 .question_list_wrapper
 	justify-content: space-between
@@ -34,6 +37,11 @@ $strong-color: rgb(255, 112, 112)
 				.question_author
 					span
 						font-weight: bold
+				.question_answers
+					margin-top: 0.5rem
+					span
+						color: $strong-color
+						font-size: 1.1rem
 
 	.right_column
 		width: 20%
@@ -68,9 +76,14 @@ $strong-color: rgb(255, 112, 112)
 	.sidebar_head
 		margin-bottom: 3rem
 		font-size: 1.5rem
+	.sidebar_category_container
+		background-color: $question-bg
+		padding: 1rem
+		border-radius: 1rem
 	.question_category
 		display: inline-block
 		margin-bottom: 1rem
+
 	.category_num_posts
 
 
@@ -90,17 +103,18 @@ $strong-color: rgb(255, 112, 112)
 			margin-bottom: 5rem
 		.answers
 			.answer
-				background-color: rgb(252, 252, 252)
+				background-color: $question-bg
 				padding: 3rem 1rem
 				border-radius: 1rem
 				margin-bottom: 3rem
 				.answer_author
 					display: inline-block
-					margin-bottom: 2rem
+					margin-bottom: 1rem
 					span
 						font-weight: bold
 				.answer_content
-					padding-left: 1rem
+					
+					margin-top: 2rem
 
 
 .question_add_wrapper
@@ -108,16 +122,20 @@ $strong-color: rgb(255, 112, 112)
 		width: 100%
 		margin: 0 auto
 	.question_add
-		section
-			margin-bottom: 3rem
-			&>*
-				border: 1px solid grey
-			input
-				width: 60%
-			textarea
-				width: 60%
-			select
-				width: 60%
+		.question_form
+			display: flex
+			flex-direction: column
+			justify-content: center
+			section
+				margin-bottom: 3rem
+				&>*
+					border: 1px solid $border-secondary
+				input
+					width: 100%
+				textarea
+					width: 100%
+				select
+					width: 100%
 	.selected_question
 		margin: 5rem 0
 		padding: 2rem 0
@@ -133,3 +151,37 @@ $strong-color: rgb(255, 112, 112)
 			border-bottom: 1px solid $border-primary
 			margin: 2rem 0
 			padding: 2rem 0
+
+@media screen and (max-width:1100px)
+	.question_list_wrapper
+		.section_head
+			order: 1
+		.left_column
+			width: 100%!important
+			order: 3
+		.right_column
+			width: 100%!important
+			order: 2
+		.question_link
+			display: flex
+			flex-direction: column
+		.question_author
+			margin-top: 1rem
+			display: inline-block
+
+
+		.sidebar
+			margin-bottom: 5rem
+			padding-bottom: 5rem
+			border-bottom: 2px solid $border-primary
+			.sidebar_head
+				width: 100%
+			.sidebar_category
+				width: 100%
+				overflow-x: scroll
+				white-space: nowrap
+				.question_category
+					overflow-x: scroll
+
+
+		.question_add_wrapper

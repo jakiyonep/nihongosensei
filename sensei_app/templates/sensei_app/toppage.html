@@ -2,13 +2,35 @@
 {% block content %}
 {% load static %}
 <head>
-
+	<link rel="stylesheet" href="{% static 'sensei_app/css/toppage.min.css' %}">
 </head>
 <body>
 	{% include 'sensei_app/navbar.html' %}
 	<div class="wrapper toppage_wrapper">
-		<a class="section_head" href="{% url 'sensei_app:question_list' %}">質問</a>
+
+		<section>
+			<a class="toppage_card" href="{% url 'sensei_app:question_list' %}">
+				<div class="card_img">
+					<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/toppage_questions.png" alt="">
+				</div>
+				<div class="card_right">
+					<h1 class="card_top">みんなの質問</h1>
+					<p class="card_desc">あなたが疑問に思っていることは皆さんも疑問に思っているはず!自分だけでなく皆さんのためにも質問をしてみましょう!</p>
+				</div>
+			</a>
+		</section>
+
+		<section>
+			<a class="toppage_card" href="{% url 'sensei_app:contact_add' %}">
+				<div class="card_img">
+					<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/Toppage_Contact.png" alt="">
+				</div>
+				<div class="card_right">
+					<h1 class="card_top">お問い合わせ</h1>
+					<p class="card_desc">「集まれ日本語教師!」をより良いコミュニティーにするためにあなたのご意見が必要です!疑問点、改善点、要望などなんでも受け付けております。</p>
+				</div>
+			</a>
+		</section>
 	</div>
-	<img src="https://nihongosensei.s3.amazonaws.com/media/test_images/%E8%83%BD%E9%9D%A2%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3.png" alt="">
 </body>
 {% endblock %}

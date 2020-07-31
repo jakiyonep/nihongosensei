@@ -1,0 +1,34 @@
+{% extends 'sensei_app/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}お問い合わせ{% endblock %}
+{% block description %}
+
+{% endblock %}
+{% block content %}
+<head>
+	<link rel="stylesheet" href="{% static 'sensei_app/css/contact.min.css' %}">
+</head>
+<body>
+	{% include 'sensei_app/navbar.html' %}
+	<div class="wrapper contact_wrapper">
+		<main>
+			<h1 class="section_head">お問い合わせ</h1>
+    	<form class="contact_form" action="{% url 'sensei_app:contact_add' %}" method="POST" onsubmit="return confirm('送信してもよろしいでしょうか？');">
+				<section class="name">
+					{{form.name}}
+				</section>
+				{{form.email.errors}}
+				<section class="email">
+					{{form.email}}
+				</section>
+				<section class="content">
+					{{form.content}}
+				</section>
+				<button type="submit" name="button" class="strong_button">送信する</button>
+				{% csrf_token %}
+			</form>
+		</main>
+	</div>
+</body>
+{% endblock %}

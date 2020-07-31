@@ -8,16 +8,36 @@ from django.views.generic.base import TemplateView
 from . import forms
 from sensei_app.forms import AnswerForm
 
+
 from sensei_app.models import *
 
 
 class Toppage(TemplateView):
     template_name = 'sensei_app/toppage.html'
 
+def ContactAdd(request):
+    form = forms.ContactForm()
+
+    if request.method == 'POST':
+        form = forms.ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print("検証に成功しました。データを保存します")
+            return render(request, 'sensei_app/toppage.html')
+        else:
+            print("検証に失敗したので、データを保存しません。検証に失敗した理由を次に表示します。")
+            print(form.errors)
+
+
+    return render(request, 'sensei_app/Contact/contact_add.html', {'form': form})
+
+
 
 class QuestionList(ListView):
     model = Question
     template_name = 'sensei_app/Question/question_list.html'
+
+
 
 
 class QuestionDetail(DetailView):
