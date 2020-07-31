@@ -77,6 +77,80 @@ $link-color: rgb(3, 196, 214)
 		background-color: white
 		color: $strong-color
 
+.markdown_desc
+	.popup
+    display: none
+    height: 100%
+    width: 100%
+    background: white
+    opacity: 0.9
+	.popup_content
+		height: 100%
+		width: 100%
+    background-color: white
+    padding: 1rem
+		overflow-x: scroll
+
+
+.popup_content_row
+	display: flex
+	flex-direction: row
+	flex-wrap: wrap
+	justify-content: space-between
+	margin-bottom: 3rem
+	align-items: center
+	min-width: 700px
+
+	li
+		list-style: none
+	.popup_content_left
+		width: 45%
+	.popup_content_middle
+		width: 5%
+		font-size: 1.5rem
+	.popup_content_right
+		width: 45%
+		*
+			margin: 2rem 0
+		h1, h2, h3, h4, h5, h6
+			margin: 4rem 0
+		h1
+			font-size: 1.5rem
+		h2
+			font-size: 1.4rem
+		h3
+			font-size: 1.3rem
+		h4
+			font-size: 1.2rem
+		h5
+			font-size: 1.1rem
+		h6
+			font-size: 1rem
+		ul
+			li
+				list-style-type: 	disc
+				list-style-position: inside
+				padding-left: 1rem
+				margin: 1rem 0
+		ol
+			li
+				list-style: decimal
+				list-style-position: inside
+				padding-left: 1rem
+				margin: 1rem 0
+		strong
+			background: linear-gradient(transparent 90%, $strong-color 90%)
+		a
+			color: $link-color
+
+.show
+    display: flex!important
+    justify-content: center
+    align-items: center
+
+
+
+
 @media screen and (max-width:1100px)
 	.wrapper
 		width: 90vw

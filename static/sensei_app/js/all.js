@@ -1,17 +1,4 @@
 'use strict'
-function confirmation(){
-      ret = confirm("Are you sure you want to submit?");
-  }
-
-function color_change(pk){
-	document.getElementById('original-' + pk).classList.toggle('correction_visible')
-}
-
-$('.correction_btn').on('click', function(){
-    var id =  $(this).attr("id");
-    $('#desc-' + id).slideToggle('normal');
-		$('#' + id).toggleClass('correction_button')
-});
 
 
 var dropIs = 0;
@@ -42,59 +29,12 @@ window.onscroll = function() {
 
 }
 
-
-
-function openNav() {
-  document.getElementById("articles_sidebar").classList.toggle('open_nav')
+function markdown_popup(){
+	var target = document.getElementById('popup')
+	target.classList.toggle('show')
 }
 
-$(function(){
-	$('#sentence_casual_btn').on('click', function(){
-		$('.sentence_casual').slideToggle('normal');
-	})
-})
-
-$(function(){
-	$('#sentence_yomi_btn').on('click', function(){
-		$('.sentence_yomi').slideToggle('normal');
-	})
-})
-
-$(function(){
-	$('#sentence_en_btn').on('click', function(){
-		$('.sentence_en').slideToggle('normal');
-	})
-})
-
-$(function(){
-	$('#question_answer_btn').on('click', function(){
-		$('.question_answer').slideToggle('normal');
-	})
-})
-
-$(function(){
-	$('#question_yomi_btn').on('click', function(){
-		$('.question_yomi').slideToggle('normal');
-	})
-})
-
-$(function(){
-	$('#question_en_btn').on('click', function(){
-		$('.question_en').slideToggle('normal');
-	})
-})
-
-
-$(function(){
-	$('.answer_button_a').on('click', function() {
-		var target_id = $(this).attr('id');
-		$('#collapse-' + target_id).slideToggle('slow');
-})
-});
-
-$(function(){
-	$('#filter_button').on('click', function() {
-		$('.filter_collapse').slideToggle('normal	');
-
-})
-});
+function markdown_close(){
+	var target = document.getElementById('popup')
+	target.classList.remove('show')
+}

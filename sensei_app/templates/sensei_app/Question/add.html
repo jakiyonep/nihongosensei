@@ -27,6 +27,91 @@
 					<section class="category">
 						{{form.category}}
 					</section>
+					<div class="markdown_desc">
+						<p>「質問内容」のボックスはマークダウンに対応しています <i  onclick="markdown_popup()" class="fas fa-question-circle"></i></p>
+						<div class="popup" id="popup">
+					    <div class="popup_content">
+								<div class="popup_content_row">
+									<div class="popup_content_left">
+										<li># 見出しレベル１</li>
+										<li>## 見出しレベル2</li>
+										<li>### 見出しレベル3</li>
+										<li>#### 見出しレベル4</li>
+									</div>
+									<div class="popup_content_middle">
+										→
+									</div>
+									<div class="popup_content_right">
+										<h1>見出しレベル１</h1>
+										<h2>見出しレベル2</h2>
+										<h3>見出しレベル3</h3>
+										<h4>見出しレベル4</h4>
+									</div>
+								</div>
+								<div class="popup_content_row">
+									<div class="popup_content_left">
+										<li>これは[Googleのトップページ](https://www.google.com/?hl=ja)です</li>
+									</div>
+									<div class="popup_content_middle">
+										→
+									</div>
+									<div class="popup_content_right">
+										<li>これは<a href="https://www.google.com/?hl=ja">Googleのトップページ</a>です</li>
+									</div>
+								</div>
+								<div class="popup_content_row">
+									<div class="popup_content_left">
+										<ul>
+											<li>- 箇条書き1</li>
+											<li>- 箇条書き2</li>
+											<li>- 箇条書き3</li>
+										</ul>
+									</div>
+									<div class="popup_content_middle">
+										→
+									</div>
+									<div class="popup_content_right">
+										<ul>
+											<li>箇条書き1</li>
+											<li>箇条書き2</li>
+											<li>箇条書き3</li>
+										</ul>
+									</div>
+								</div>
+								<div class="popup_content_row">
+									<div class="popup_content_left">
+										<ol>
+											<li>1. リスト1</li>
+											<li>1. リスト2</li>
+											<li>1. リスト3</li>
+										</ol>
+									</div>
+									<div class="popup_content_middle">
+										→
+									</div>
+									<div class="popup_content_right">
+										<ol>
+											<li>リスト1</li>
+											<li>リスト2</li>
+											<li>リスト3</li>
+										</ol>
+									</div>
+								</div>
+								<div class="popup_content_row">
+									<div class="popup_content_left">
+										<li>これは**重要な部分**です</li>
+									</div>
+									<div class="popup_content_middle">
+										→
+									</div>
+									<div class="popup_content_right">
+										<li>これは<strong>重要な部分</strong>です</li>
+									</div>
+								</div>
+				        <p class="close_button"><i onclick="markdown_close()" class="fas fa-times-circle"></i></p>
+					    </div>
+						</div>
+					</div>
 					<section class="content">
 						{{form.content}}
 					</section>
