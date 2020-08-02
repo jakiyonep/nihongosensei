@@ -229,7 +229,6 @@ class UserCreate(generic.CreateView):
         subject = render_to_string('sensei_app/mail_template/create/subject.txt', context)
         subject = subject.strip()
         message = render_to_string('sensei_app/mail_template/create/message.txt', context)
-
         user.email_user(subject, message)
         return redirect('sensei_app:user_create_done')
 
