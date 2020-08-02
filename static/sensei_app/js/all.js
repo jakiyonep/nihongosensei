@@ -38,3 +38,7 @@ function markdown_close(){
 	var target = document.getElementById('popup')
 	target.classList.remove('show')
 }
+
+function answer_collapse(id){
+	$("#answer_collapse_" + id).toggle("fast");
+}

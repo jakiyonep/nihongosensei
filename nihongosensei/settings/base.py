@@ -123,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
 
 TIME_ZONE = 'Asia/Tokyo'
 
@@ -158,3 +158,24 @@ if DEBUG:
     STATIC_URL = '/static/'
 else:
     STATIC_URL = 'https://%s/%s/' % (AWS_S3_URL, 'static')
+
+
+AUTH_USER_MODEL = 'sensei_app.User'
+LOGIN_URL = 'sensei_app:login'
+LOGIN_REDIRECT_URL = 'sensei_app:toppage'
+
+#Email Test
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#Email Production
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+
+""" DON'T FORFET CONFIGURE THE FOLLOWING VALUES!!! """
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'atsumarenihongokyoushi@gmail.com'
+EMAIL_HOST_PASSWORD = 'oqyawezfhuvlqjav'
+EMAIL_USE_TLS = True

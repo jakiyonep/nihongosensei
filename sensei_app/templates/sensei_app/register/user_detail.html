@@ -1,0 +1,128 @@
+{% extends "sensei_app/base.html" %}
+{% block content %}
+{% load markdownify %}
+{% load static %}
+{% load humanize %}
+<head>
+	<link rel="stylesheet" href="{% static 'sensei_app/css/user_info.min.css' %}">
+		<link rel="stylesheet" href="{% static 'sensei_app/css/question.min.css' %}">
+</head>
+<body>
+	{% include 'sensei_app/navbar.html' %}
+	<div class="wrapper user_info_wrapper">
+		<p class="section_head">
+			{% if user.nickname %}
+				{{user.nickname}}さんのページ
+			{% endif %}
+		</p>
+		<div class="user_info_top">
+			<div class="user_info">
+				<div class="user_info_row">
+					<div class="user_info_left">
+						ユーザー名
+					</div>
+					<div class="user_info_right">
+						<p>{{user.email}}</p>
+					</div>
+				</div>
+				<div class="user_info_row">
+					<div class="user_info_left">
+						ニックネーム
+					</div>
+					<div class="user_info_right">
+						{{user.nickname}}
+					</div>
+				</div>
+				<div class="user_info_row">
+					<div class="user_info_left">
+						登録日
+					</div>
+					<div class="user_info_right">
+						{{user.date_joined|date:'Y-m-d'}}
+					</div>
+				</div>
+				<div class="user_info_row">
+					<div class="user_info_left">
+						質問数
+					</div>
+					<div class="user_info_right">
+						{{user.login_author.count}}
+					</div>
+				</div>
+				<div class="user_info_row">
+					<div class="user_info_left">
+						回答数
+					</div>
+					<div class="user_info_right">
+						{{user.login_author_answer.count}}
+					</div>
+				</div>
+			</div>
+			<div class="user_info_menu">
+				<li>
+					<a class="nav-item nav-link" href="{% url 'sensei_app:user_update' user.pk %}">ユーザー情報更新</a>
+				</li>
+				<li>
+					<a class="nav-item nav-link" href="{% url 'sensei_app:password_change' %}">パスワードの変更</a>
+				</li>
+				<li>
+					<a class="nav-item nav-link" href="{% url 'sensei_app:email_change' %}">メールアドレスの変更</a>
+				</li>
+			</div>
+		</div>
+
+		<div class="user_info_list question_list_wrapper">
+			<p class="section_head">
+				{% if user.nickname %}
+					{{user.nickname}}さんの質問
+				{% else %}
+					あなたの質問
+				{% endif %}
+			</p>
+			<div class="questions">
+				{% for question in questions %}
+					<article class="question_container">
+						<a class="question_link" href="{% url 'sensei_app:question_detail' question.pk %}">
+							<h2 class="question_title">{{ question.title }}</h2>
+							<span class="question_created_at">投稿日時:{{ question.created_at | naturaltime}}</span>
+							<a href="{% url 'sensei_app:question_category' question.category.category_slug %}" class="question_category question_category_{{ question.category.category_slug }}">{{ question.category }}</a>
+							<br>
+							<p class="question_answers"><span>{{question.answers.count}}</span>件の回答</p>
+						</a>
+					</article>
+				{% endfor %}
+				<a class="more_button" href="{% url 'sensei_app:all_questions_of_user' user.pk %}">もっとみる</a>
+			</div>
+			<div class="answers">
+				<p class="section_head">
+					{% if user.nickname %}
+						{{user.nickname}}さんの回答
+					{% else %}
+						あなたの回答
+					{% endif %}
+				</p>
+				{% for answer in answers %}
+					<article class="question_container">
+						<a class="question_link" href="{% url 'sensei_app:question_detail' answer.question.pk %}">
+							<h2 class="question_title">{{ answer.question }}</h2>
+							<span class="question_created_at">投稿日時:{{ answer.created_at | naturaltime}}</span>
+							<a href="{% url 'sensei_app:question_category' answer.question.category.category_slug %}" class="question_category question_category_{{ answer.question.category.category_slug }}">{{ answer.question.category }}</a>
+							<br>
+						</a>
+						<p class="answer_collapse" id="button_{{answer.pk}}" onclick="answer_collapse({{answer.pk}})">
+							{% if user.nickname %}
+								{{user.nickname}}さんの回答を見る
+							{% else %}
+								あなたの回答を見る
+							{% endif %}
+						</p>
+						<div class="content" id="answer_collapse_{{answer.pk}}" style="display:none">
+							{{answer.content|markdownify}}
+						</div>
+					</article>
+				{% endfor %}
+				<a class="more_button" href="{% url 'sensei_app:all_answers_of_user' user.pk %}">もっとみる</a>
+			</div>
+			</div>
+		</div>
+{% endblock %}

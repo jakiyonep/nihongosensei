@@ -1,6 +1,7 @@
 {% extends 'sensei_app/base.html' %}
 {% load static %}
 {% load humanize %}
+{% load markdownify %}
 {% block title %}質問する{% endblock %}
 {% block description %}
   日本語や日本語教育に関する質問をして、疑問を解決しましょう！
@@ -14,28 +15,20 @@
 	<div class="wrapper question_list_wrapper question_add_wrapper">
 		<section class="left_column">
 			<div class="left_top">
-				<h1 class="section_head">質問する</h1>
+				<h1 class="section_head">回答する</h1>
 			</div>
-
-
 			<main class="question_add">
-        <form class="question_form" action="{% url 'sensei_app:question_add' %}" onsubmit="return confirm('投稿してもよろしいでしょうか？');"  method="POST">
-					<section class="title">
-						{{form.title}}
-					</section>
+        <form class="question_form"  method="POST" onsubmit="return confirm('投稿してもよろしいでしょうか？');" >
 					{% if not user.is_authenticated %}
 						<section class="author">
 							{{form.author}}
 						</section>
 					{% endif %}
-
-					<section class="category">
-						{{form.category}}
-					</section>
+					{{form.answer}}
 					<div class="markdown_desc">
-						<p>「質問内容」のボックスはマークダウンに対応しています <i  onclick="markdown_popup()" class="fas fa-question-circle"></i></p>
+						<p>「回答内容」のボックスはマークダウンに対応しています <i  onclick="markdown_popup()" class="fas fa-question-circle"></i></p>
 						<div class="popup" id="popup">
-					    <div class="popup_content">
+							<div class="popup_content">
 								<div class="popup_content_row">
 									<div class="popup_content_left">
 										<li># 見出しレベル１</li>
@@ -113,18 +106,27 @@
 										<li>これは<strong>重要な部分</strong>です</li>
 									</div>
 								</div>
-				        <p class="close_button"><i onclick="markdown_close()" class="fas fa-times-circle"></i></p>
-					    </div>
+								<p class="close_button"><i onclick="markdown_close()" class="fas fa-times-circle"></i></p>
+							</div>
 						</div>
 					</div>
 					<section class="content">
 						{{form.content}}
 					</section>
-					<button type="submit" name="button" class="strong_button">投稿する</button>
+					<button type="submit" name="button" class="strong_button"><span>投稿する</span></button>
 					{% csrf_token %}
 				</form>
 			</main>
+			<section class="selected_question">
+				<h1 class="selected_question_title">{{question.title}}</h1>
+				<p class="selected_question_author">{{question.author}}さん</p>
+				<div class="content selected_question_content">{{question.content | markdownify}}</div>
+
+			</section>
 		</section>
+		<aside class="right_column">
+
+		</aside>
 	</div>
 </body>
 {% endblock %}

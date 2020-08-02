@@ -13,12 +13,31 @@
         みんなの質問
       </a>
     </li>
+
 		<li class="navbar_item">
 			<a href="{% url 'sensei_app:contact_add' %}">
 				お問い合わせ
 			</a>
 		</li>
+		{% if user.is_authenticated %}
+		<li class= "navbar_item">
+			<a class="nav-item nav-link" href="{% url 'sensei_app:user_detail' user.pk %}">
+				マイページ
+			</a>
+		</li>
 
+		<li class="navbar_item">
+			<a  href="{% url 'sensei_app:logout' %}">
+				ログアウト
+			</a>
+		</li>
+		{% else %}
+			<li class="navbar_item">
+				<a href="{% url 'sensei_app:login' %}">
+				 ログイン
+			 </a>
+		 </li>
+		{% endif %}
   </ul>
   <a class="navbar_button" href="#" onclick="drop()" ><i class="fas fa-bars"></i></a>
 </nav>
@@ -34,5 +53,24 @@
 			お問い合わせ
 		</a>
 	</li>
+	{% if user.is_authenticated %}
+	<li class= "navbar_item_collapse">
+		<a class="nav-item nav-link" href="{% url 'sensei_app:user_detail' user.pk %}">
+			マイページ
+		</a>
+	</li>
+
+	<li class="navbar_item_collapse">
+		<a  href="{% url 'sensei_app:logout' %}">
+			ログアウト
+		</a>
+	</li>
+	{% else %}
+		<li class="navbar_item_collapse">
+			<a href="{% url 'sensei_app:login' %}">
+			 ログイン
+		 </a>
+	 </li>
+	{% endif %}
 </ul>
 </body>

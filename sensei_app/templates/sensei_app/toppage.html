@@ -7,6 +7,31 @@
 <body>
 	{% include 'sensei_app/navbar.html' %}
 	<div class="wrapper toppage_wrapper">
+		{% if not user.is_authenticated %}
+		 <section>
+			 <a class="toppage_card" href="{% url 'sensei_app:login' %}">
+				 <div class="card_img">
+					 <img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/toppage_login.png" alt="">
+				 </div>
+				 <div class="card_right">
+					 <h1 class="card_top">ログイン</h1>
+					 <p class="card_desc">ログイン後に質問、回答をすると、あなたの過去の記録がマイページで確認できるようになります。</p>
+				 </div>
+			 </a>
+		 </section>
+	 {% else %}
+		 <section>
+			 <a class="toppage_card" href="{% url 'sensei_app:user_detail' user.pk %}">
+				 <div class="card_img">
+					 <img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/toppage_mypage.png" alt="">
+				 </div>
+				 <div class="card_right">
+					 <h1 class="card_top">マイページ</h1>
+					 <p class="card_desc">会員情報の変更、過去の質問、回答の確認ができます。</p>
+				 </div>
+			 </a>
+		 </section>
+	 {% endif %}
 
 		<section>
 			<a class="toppage_card" href="{% url 'sensei_app:question_list' %}">
@@ -19,7 +44,6 @@
 				</div>
 			</a>
 		</section>
-
 		<section>
 			<a class="toppage_card" href="{% url 'sensei_app:contact_add' %}">
 				<div class="card_img">
@@ -31,6 +55,21 @@
 				</div>
 			</a>
 		</section>
+		{% if user.is_authenticated %}
+		<section>
+			<a class="toppage_card" href="{% url 'sensei_app:logout' %}">
+				<div class="card_img">
+					<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/toppage_logout.png" alt="">
+				</div>
+				<div class="card_right">
+					<h1 class="card_top">ログアウト</h1>
+					<p class="card_desc">さようなら!</p>
+				</div>
+			</a>
+		</section>
+		{% endif %}
+
+
 	</div>
 </body>
 {% endblock %}
