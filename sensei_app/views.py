@@ -122,7 +122,7 @@ def AnswerAdd(request, pk):
             answer.question = get_object_or_404(Question, pk=pk)
             if request.user.is_authenticated:
                 answer.login_author = request.user
-                answer.save()
+            answer.save()
             return redirect('sensei_app:question_detail', pk=pk)
 
         else:
@@ -151,8 +151,8 @@ def ReplyAdd(request, pk):
             answer.answer = get_object_or_404(Answer, pk=pk)
             if request.user.is_authenticated:
                 answer.login_author = request.user
-                answer.save()
-            return render(request, 'sensei_app/toppage.html')
+            answer.save()
+            return redirect('sensei_app:question_detail', pk=question_pk)
 
         else:
             print("検証に失敗したので、データを保存しません。検証に失敗した理由を次に表示します。")
@@ -160,6 +160,7 @@ def ReplyAdd(request, pk):
 
     return render(request, 'sensei_app/Question/reply.html', {
         'form': form,
+        'question': reply_to,
     })
 
 

@@ -47,61 +47,40 @@
 				{% if object.answers.all %}
 					<div class="answers">
 						{% for answer in object.answers.all %}
-							{% if not answer.answer %}
-								{% if answer.question.login_author == answer.login_author %}
-									<div class="answer answer_same">
-											<p class="answer_author answer_login_author"><span>{{answer.login_author.nickname}}</span>さんのコメント</p>
-										<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
-										<a class="reply_button" href="{% url 'sensei_app:reply' answer.pk %}">返信する</a>
-										<div class="content answer_content">
-											{{answer.content|markdownify}}
-										</div>
-									</div>
-								{% else %}
-									<div class="answer">
-									{% if answer.login_author.nickname %}
-										<p class="answer_author answer_login_author"><span>{{answer.login_author.nickname}}</span>さんの回答</p>
+							{% if not answer.answer %}<!--if not a reply-->
+								<div class="answer answer_same">
+									{% if answer.author %}
+								<span  class="answer_author">{{answer.author}}</span>さんのコメント</span>
 									{% else %}
-										<p class="answer_author"><span>{{answer.author}}</span>さんの回答</p>
+									<span  class="answer_author">名無しさんさんのコメント</span>
 									{% endif %}
 									<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
 									<a class="reply_button" href="{% url 'sensei_app:reply' answer.pk %}">返信する</a>
-										<div class="content answer_content">
-											{{answer.content|markdownify}}
-										</div>
-								</div>
-								{% endif %}
-								{% for reply in answer.answer_answer.all %}
-								{% if reply.question.login_author == reply.login_author %}
-									<div class="answer reply answer_same">
-											<p class="answer_author answer_login_author"><span>{{reply.login_author.nickname}}</span>さんのコメント</p>
-										<p class="answer_date">回答日時: {{reply.created_at|naturaltime}}</p>
-											<div class="content answer_content">
-												{{reply.content|markdownify}}
-											</div>
+									<div class="content answer_content">
+										{{answer.content|markdownify}}
 									</div>
-								{% else %}
-									<div class="answer reply">
-									{% if answer.login_author.nickname %}
-										<p class="answer_author answer_login_author"><span>{{reply.login_author.nickname}}</span>さんのコメント</p>
-									{% else %}
-										<p class="answer_author"><span>{{reply.author}}</span>さんのコメント</p>
-									{% endif %}
-									<p class="answer_date">回答日時: {{reply.created_at|naturaltime}}</p>
-										<div class="content answer_content">
-											{{reply.content|markdownify}}
-										</div>
 								</div>
-								{% endif %}
+										{% for reply in answer.answer_answer.all %}
+												<div class="answer reply">
+													{% if reply.author %}
+														<span class="answer_author"><span>{{reply.author}}</span>さんのコメント</span>
+													{% else %}
+														<span class="answer_author"><span>{{reply.author}}</span>さんのコメント</span>
+													{% endif %}
+														<p class="answer_date">回答日時: {{reply.created_at|naturaltime}}</p>
+														<div class="content answer_content">
+															{{reply.content|markdownify}}
+														</div>
+													</div>
+											{% endfor %}
+										{% endif %}
 								{% endfor %}
-							{% endif %}
-						{% endfor %}
-					</div>
-					{% else %}
-						<p style="font-size: 1.3rem;">まだ回答がありません</p>
-				{% endif %}
-			</section>
-		</main>
+							</div>
+						{% else %}
+							<p style="font-size: 1.3rem;">まだ回答がありません</p>
+						{% endif %}
+					</section>
+				</main>
 		<aside class="right_column">
 			{% include 'sensei_app/Question/sidebar.html' %}
 		</aside>

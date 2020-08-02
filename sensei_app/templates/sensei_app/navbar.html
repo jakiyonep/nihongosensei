@@ -19,6 +19,7 @@
 				お問い合わせ
 			</a>
 		</li>
+		<!--
 		{% if user.is_authenticated %}
 		<li class= "navbar_item">
 			<a class="nav-item nav-link" href="{% url 'sensei_app:user_detail' user.pk %}">
@@ -38,7 +39,9 @@
 			 </a>
 		 </li>
 		{% endif %}
+	-->
   </ul>
+
   <a class="navbar_button" href="#" onclick="drop()" ><i class="fas fa-bars"></i></a>
 </nav>
 </div>
@@ -53,6 +56,7 @@
 			お問い合わせ
 		</a>
 	</li>
+	<!--
 	{% if user.is_authenticated %}
 	<li class= "navbar_item_collapse">
 		<a class="nav-item nav-link" href="{% url 'sensei_app:user_detail' user.pk %}">
@@ -72,5 +76,6 @@
 		 </a>
 	 </li>
 	{% endif %}
+-->
 </ul>
 </body>
