@@ -24,14 +24,13 @@
 						</a>
 							{% if not question.login_author %}
 								{% if question.author %}
-									<span class="question_author">{{ question.author }}さん</span>
+									<p class="question_author">{{ question.author }}<span class="san">さん</span>
+									</p>
 								{% else %}
-									<span class="question_author">名無しさん</span>
+									<span class="question_author"><span>名無しさん</span>さん</span>
 								{% endif %}
 							{% else %}
-								<span class="question_author login_author_link">
-									<a href="{% url 'sensei_app:activities_of_user' question.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{question.login_author.nickname}}</a>
-								</span>
+									<a class="question_author login_author_link" href="{% url 'sensei_app:activities_of_user' question.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{question.login_author.nickname}}<span class="san">さん</span></a>
 							{% endif %}
 							<span class="question_created_at">投稿日時:{{ question.created_at | naturaltime}}</span> <br>
 							<a href="{% url 'sensei_app:question_category' question.category.category_slug %}" class="question_category question_category_{{ question.category.category_slug }}">{{ question.category }}</a>

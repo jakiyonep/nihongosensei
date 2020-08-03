@@ -7,7 +7,7 @@
 <body>
 	{% include 'sensei_app/navbar.html' %}
 	<div class="wrapper toppage_wrapper">
-		<!--
+
 		{% if not user.is_authenticated %}
 		 <section>
 			 <a class="toppage_card" href="{% url 'sensei_app:login' %}">
@@ -33,7 +33,7 @@
 			 </a>
 		 </section>
 	 {% endif %}
- -->
+
 		<section>
 			<a class="toppage_card" href="{% url 'sensei_app:question_list' %}">
 				<div class="card_img">

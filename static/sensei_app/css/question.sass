@@ -32,9 +32,13 @@ $sub-strong-color: rgb(111, 181, 218)
 				border-bottom: 2px solid $strong-color
 				letter-spacing: 0.1rem
 		.question_author
-			color: $link-color
 			margin-bottom: 1rem
 			display: inline-block
+			font-weight: bold!important
+			font-size: 1.2rem
+		.login_author_link
+		.san
+			font-weight: normal
 		.question_created_at
 			margin-right: 1rem
 			margin-bottom: 0.5rem
@@ -107,6 +111,9 @@ $sub-strong-color: rgb(111, 181, 218)
 		margin: 1rem 0
 	.question_author
 		font-size: 1.4rem
+		font-weight: bold
+	.san
+		font-weight: normal
 	.question_content
 		border-top: 1px solid $border-primary
 		border-bottom: 1px solid $border-primary
@@ -123,13 +130,15 @@ $sub-strong-color: rgb(111, 181, 218)
 				border-radius: 1rem
 				margin-bottom: 3rem
 				.answer_author
-					display: inline-block
+					display: block
 					margin-bottom: 1rem
-					span
-						font-weight: bold
+					font-weight: bold
 				.answer_login_author
-					span
-						color: $link-color
+					color: $link-color
+				.san
+					font-weight: normal!important
+				.answer_date
+					display: inline-block!important
 				.answer_content
 					margin-top: 2rem
 				.answer_content_same
@@ -137,6 +146,7 @@ $sub-strong-color: rgb(111, 181, 218)
 				.reply_button
 					background-color: $border-primary
 					color: white
+					margin-left: 2rem
 					padding: 0.2rem 0.5rem
 					border-radius: 0.2rem
 					margin-top: 1rem
@@ -146,7 +156,6 @@ $sub-strong-color: rgb(111, 181, 218)
 						color: $border-primary
 						background-color: $question-bg
 						transition: 0.5s
-
 			.answer_same
 				background-color: rgb(215, 238, 255)
 		.reply

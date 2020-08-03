@@ -25,14 +25,12 @@
 				<br>
 				{% if not object.login_author %}
 					{% if object.author %}
-						<span class="question_author">{{ object.author }}さん</span>
+						<span class="question_author">{{ object.author }}<span class="san">さん</span></span>
 					{% else %}
 						<span class="question_author">名無しさん</span>
 					{% endif %}
 				{% else %}
-					<span class="question_author login_author_link">
-						<a href="{% url 'sensei_app:activities_of_user' object.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{object.login_author.nickname}}さん</a>
-					</span>
+					<a class="question_author login_author_link" href="{% url 'sensei_app:activities_of_user' object.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{object.login_author.nickname}}<span class="san">さん</span></a>
 				{% endif %}
 			</a>
 			</div>
@@ -44,43 +42,78 @@
 					<a class="strong_button" href="{% url 'sensei_app:answer' object.pk %}">回答する</a>
 				</div>
 				<p class="section_head">みんなの回答({{question.answers.count}}件)</p>
-				{% if object.answers.all %}
-					<div class="answers">
-						{% for answer in object.answers.all %}
-							{% if not answer.answer %}<!--if not a reply-->
-								<div class="answer answer_same">
-									{% if answer.author %}
-								<span  class="answer_author">{{answer.author}}</span>さんのコメント</span>
-									{% else %}
-									<span  class="answer_author">名無しさんさんのコメント</span>
-									{% endif %}
-									<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
-									<a class="reply_button" href="{% url 'sensei_app:reply' answer.pk %}">返信する</a>
-									<div class="content answer_content">
-										{{answer.content|markdownify}}
+				<div class="answers">
+					{% if object.answers.all %}<!-- if any answer -->
+						{% for answer in object.answers.all %}<!-- all answers-->
+							{% if not answer.answer %}<!-- excluding replies-->
+								{% if answer.login_author %}<!-- if the answerer is a member-->
+									{% if answer.login_author == object.login_author %}<!-- if quesioner and answerer are the same -->
+										<div class="answer answer_same">
+											<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
+											<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
+											<a class="reply_button" href="{% url 'sensei_app:reply' answer.pk %}">返信する</a>
+											<div class="content answer_content">
+												{{answer.content|markdownify}}
+											</div>
+										</div>
+									{% else %} <!--if questioner and answerer are different-->
+										<div class="answer">
+											<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
+											<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
+											<a class="reply_button" href="{% url 'sensei_app:reply' answer.pk %}">返信する</a>
+											<div class="content answer_content">
+												{{answer.content|markdownify}}
+											</div>
+										</div>
+									{% endif %}<!--same or different end-->
+								{% else %}<!-- if the answerer is not a member-->
+									<div class="answer">
+										<p class="answer_author">{{answer.author}}<span class="san">さん</span></p>
+										<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
+										<a class="reply_button" href="{% url 'sensei_app:reply' answer.pk %}">返信する</a>
+										<div class="content answer_content">
+											{{answer.content|markdownify}}
+										</div>
 									</div>
-								</div>
-										{% for reply in answer.answer_answer.all %}
-												<div class="answer reply">
-													{% if reply.author %}
-														<span class="answer_author"><span>{{reply.author}}</span>さんのコメント</span>
-													{% else %}
-														<span class="answer_author"><span>{{reply.author}}</span>さんのコメント</span>
-													{% endif %}
-														<p class="answer_date">回答日時: {{reply.created_at|naturaltime}}</p>
-														<div class="content answer_content">
-															{{reply.content|markdownify}}
-														</div>
-													</div>
-											{% endfor %}
-										{% endif %}
-								{% endfor %}
-							</div>
-						{% else %}
-							<p style="font-size: 1.3rem;">まだ回答がありません</p>
-						{% endif %}
-					</section>
-				</main>
+								{% endif %}<!-- member or not member end if-->
+							{% endif %}<!-- excluding replies end-->
+							{% for reply in answer.answer_answer.all|dictsort:'created_at' %}<!--replies-->
+								{% if reply.login_author %}<!-- if the answerer is a member-->
+									{% if reply.login_author == object.login_author %}<!-- if quesioner and answerer are the same -->
+										<div class="answer reply answer_same">
+											<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' reply.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{reply.login_author.nickname}}<span class="san">さん</span></a>
+											<p class="answer_date">回答日時: {{reply.created_at|naturaltime}}</p>
+											<div class="content answer_content">
+												{{reply.content|markdownify}}
+											</div>
+										</div>
+									{% else %} <!--if questioner and answerer are different-->
+										<div class="answer reply">
+											<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' reply.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{reply.login_author.nickname}}<span class="san">さん</span></a>
+											<p class="answer_date">回答日時: {{reply.created_at|naturaltime}}</p>
+											<div class="content answer_content">
+												{{reply.content|markdownify}}
+											</div>
+										</div>
+									{% endif %}<!--same or different end-->
+								{% else %}<!-- if the answerer is not a member-->
+									<div class="answer reply">
+										<p class="answer_author">{{reply.author}}<span class="san">さん</span></p>
+										<p class="answer_date">回答日時: {{reply.created_at|naturaltime}}</p>
+										<div class="content answer_content">
+											{{reply.content|markdownify}}
+										</div>
+									</div>
+								{% endif %}<!-- member or not member end if-->
+							{% endfor %}<!--replies-->
+						{% endfor %}<!-- all answers endfor -->
+					{% else %}<!-- if no answer-->
+						<p style="font-size:1.2rem; ">まだ回答がありません</p>
+					{% endif %}<!-- if any answer end-->
+				</div>
+
+			</section><!-- answer_section end-->
+		</main><!-- left column end -->
 		<aside class="right_column">
 			{% include 'sensei_app/Question/sidebar.html' %}
 		</aside>
