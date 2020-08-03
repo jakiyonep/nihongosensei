@@ -11,11 +11,11 @@
 	{% include 'sensei_app/navbar.html' %}
 	<div class="wrapper user_info_wrapper">
 		<div class="user_info_list question_list_wrapper">
-			
+
 			<div class="answers">
 				<p class="section_head">
 					{% if user.nickname %}
-						{{user.nickname}}さんの回答
+					<a class="login_author_link" href="{% url 'sensei_app:activities_of_user' user.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{user.nickname}}</a>さんの回答
 					{% else %}
 						あなたの回答
 					{% endif %}
@@ -40,6 +40,7 @@
 						</div>
 					</article>
 				{% endfor %}
+				{% include 'sensei_app/pagination.html' %}
 			</div>
 		</div>
 {% endblock %}

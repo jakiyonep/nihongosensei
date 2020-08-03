@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect, resolve_url
 from django.db.models import Count, Q
+from django.core.paginator import Paginator
+
 from django.views.generic.edit import CreateView
 from django.http import Http404
 from django.views.generic.list import ListView
@@ -53,6 +55,25 @@ def ContactAdd(request):
 class QuestionList(ListView):
     model = Question
     template_name = 'sensei_app/Question/question_list.html'
+    paginate_by = 15
+
+    def get_queryset(self):
+        query = self.request.GET.get('q', None)
+        lookups = (
+                Q(title__icontains=query) |
+                Q(content__icontains=query)
+        )
+        if query is not None:
+            qs = super().get_queryset().filter(lookups).distinct()
+            return qs
+        qs = super().get_queryset()
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('q')
+        context['query'] = query
+        return context
 
 
 class QuestionDetail(DetailView):
@@ -303,10 +324,10 @@ def UserDetail(request, pk):
 def ActivitiesOfUser(request, pk):
     login_author = get_object_or_404(User, pk=pk)
     all_questions = Question.objects.all()
-    questions = all_questions.filter(login_author=login_author)
+    questions = all_questions.filter(login_author=login_author)[:5]
 
     all_answers = Answer.objects.all()
-    answers = all_answers.filter(login_author=login_author)
+    answers = all_answers.filter(login_author=login_author)[:5]
 
     return render(request, 'sensei_app/activities_of_user.html', {
         'user': login_author,
@@ -320,9 +341,21 @@ def AllQuestionsofUser(request, pk):
     all_questions = Question.objects.all()
     questions = all_questions.filter(login_author=login_author)
 
+    # Create a paginator to split your products queryset
+    paginator = Paginator(questions, 15)  # Show 25 contacts per page
+    # Get the current page number
+    page = request.GET.get('page')
+    # Get the current slice (page) of products
+    answers = paginator.get_page(page)
+    num = request.GET.get('page')
+    page_obj = paginator.get_page(num)
+
     return render(request, 'sensei_app/Question/all_questions_of_user.html', {
         'user': login_author,
         'questions': questions,
+        'page_obj': page_obj,
+        'num': num,
+        'paginator': paginator,
     })
 
 
@@ -332,9 +365,21 @@ def AllAnswersofUser(request, pk):
     all_answers = Answer.objects.all()
     answers = all_answers.filter(login_author=login_author)
 
+    # Create a paginator to split your products queryset
+    paginator = Paginator(answers, 15)  # Show 25 contacts per page
+    # Get the current page number
+    page = request.GET.get('page')
+    # Get the current slice (page) of products
+    answers = paginator.get_page(page)
+    num = request.GET.get('page')
+    page_obj = paginator.get_page(num)
+
     return render(request, 'sensei_app/Question/all_answers_of_user.html', {
         'user': login_author,
         'answers': answers,
+        'page_obj': page_obj,
+        'num': num,
+        'paginator':paginator,
     })
 
 

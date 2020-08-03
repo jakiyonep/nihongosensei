@@ -1,0 +1,31 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'sensei_app/css/pagination.min.css' %}">
+<nav class="pagination">
+	{% if page_obj.has_next or page_obj.has_previous%}
+		<ul class="pagination_ul">
+			{% if page_obj.number|add:"-3" > 1 %}
+				<li class="page_item">
+					<a class="page_link page_side" href="?page=1">1&laquo;</a>
+				</li>
+			{% endif %}
+
+			{% for num in paginator.page_range %}
+				{% if  num == page_obj.number|add:"-1" or num == page_obj.number|add:"-2" or num == page_obj.number|add:"1" or num == page_obj.number|add:"2" or num == page_obj.number|add:"-3" or num == page_obj.number|add:"3"  %}
+					<li class="page_item "><a class="page_link other_num" href="?page={{num}}">{{num}}</a></li>
+				{% endif %}
+
+				{% if page_obj.number == num %}
+					<li class="page_item current_number"><a class="page-link">{{num}}</a></li>
+				{% endif %}
+			{% endfor %}
+
+			{% if page_obj.paginator.num_pages > page_obj.number|add:"3" %}
+				<li class="page_item">
+					<a class="page_link page_side" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Next">
+						&raquo;{{page_obj.paginator.num_pages}}
+					</a>
+				</li>
+			{% endif %}
+		</ul>
+	{% endif %}
+</nav>

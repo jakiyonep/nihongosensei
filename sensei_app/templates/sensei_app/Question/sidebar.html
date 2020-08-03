@@ -1,7 +1,12 @@
 <div class="sidebar">
 	<a class="sidebar_head strong_button" href="{% url 'sensei_app:question_add' %}">質問する</a>
-	<div class="sidebar_category_container">
 
+	<form class="search_form" action="{% url "sensei_app:question_list" %}" method="get" accept-charset="utf-8">
+		<input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}" placeholder="Search...">
+		<button class="search_form_button" type="submit"><span class="icon"><i class="fas fa-search"></i></span></button>
+	</form>
+
+	<div class="sidebar_category_container">
 	<p class="sidebar_head">カテゴリー</p>
 	<div class="sidebar_category">
 		{% for category in question_categories %}

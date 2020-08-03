@@ -13,7 +13,7 @@
 		<div class="wrapper question_list_wrapper all_wrapper">
 			<p class="section_head">
 				{% if user.nickname %}
-					{{user.nickname}}さんの質問
+					<a class="login_author_link" href="{% url 'sensei_app:activities_of_user' user.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{user.nickname}}</a>さんの質問
 				{% else %}
 					あなたの質問
 				{% endif %}
@@ -30,6 +30,7 @@
 						</a>
 					</article>
 				{% endfor %}
+				{% include 'sensei_app/pagination.html' %}
 			</div>
 		</div>
 {% endblock %}
