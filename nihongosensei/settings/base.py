@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'markdownify',
     'storages',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 ]
 
 MARKDOWNIFY_STRIP = False
@@ -179,3 +181,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'atsumarenihongokyoushi@gmail.com'
 EMAIL_USE_TLS = True
 
+SITE_ID = 1
