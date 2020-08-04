@@ -52,29 +52,33 @@ def ContactAdd(request):
     return render(request, 'sensei_app/Contact/contact_add.html', {'form': form})
 
 
-class QuestionList(ListView):
-    model = Question
-    template_name = 'sensei_app/Question/question_list.html'
-    paginate_by = 15
 
-    def get_queryset(self):
-        query = self.request.GET.get('q', None)
-        lookups = (
-                Q(title__icontains=query) |
-                Q(content__icontains=query)
-        )
-        if query is not None:
-            qs = super().get_queryset().filter(lookups).distinct()
-            return qs
-        qs = super().get_queryset()
-        return qs
+def QuestionList(request):
+    question_list = Question.objects.all()
+    query = request.GET.get('q')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        query = self.request.GET.get('q')
-        context['query'] = query
-        return context
+    if query:
+        question_list = Question.objects.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(author__icontains=query)
+        ).distinct()
 
+    # Create a paginator to split your products queryset
+    paginator = Paginator(question_list, 3)
+    # Get the current page number
+    page = request.GET.get('page')
+    # Get the current slice (page) of products
+    question_list = paginator.get_page(page)
+    num = request.GET.get('page')
+    page_obj = paginator.get_page(num)
+
+    return render(request, 'sensei_app/Question/question_list.html', {
+        'question_list': question_list,
+        'page_obj': page_obj,
+        'num': num,
+        'paginator': paginator,
+    })
 
 class QuestionDetail(DetailView):
     model = Question
@@ -187,29 +191,6 @@ def ReplyAdd(request, pk):
     })
 
 
-"""
-class AnswerFormView(CreateView):
-    model = Answer
-    form_class = AnswerForm
-    template_name = 'sensei_app/Question/answer.html'
-
-    def form_valid(self, form):
-        answer = form.save(commit=False)
-        question_pk = self.kwargs['pk']
-        answer.question = get_object_or_404(Question, pk=question_pk)
-        if self.request.user.is_authenticated:
-            answer.login_author = self.request.user
-            print("hello")
-        answer.save()
-        return redirect('sensei_app:question_detail', pk=question_pk)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        question_pk = self.kwargs['pk']
-        context['question'] = get_object_or_404(Question, pk=question_pk)
-        return context
-
-"""
 
 # USER REGISTRATION
 
@@ -346,7 +327,7 @@ def AllQuestionsofUser(request, pk):
     # Get the current page number
     page = request.GET.get('page')
     # Get the current slice (page) of products
-    answers = paginator.get_page(page)
+    questions = paginator.get_page(page)
     num = request.GET.get('page')
     page_obj = paginator.get_page(num)
 
