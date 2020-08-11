@@ -9,7 +9,7 @@ admin.site.register(Contact)
 admin.site.register(QuestionCategory)
 admin.site.register(Question)
 admin.site.register(Answer)
-
+admin.site.register(Reply)
 
 # USER REGISTRATION
 
@@ -18,12 +18,10 @@ class MyUserChangeForm(UserChangeForm):
         model = User
         fields = '__all__'
 
-
 class MyUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('email',)
-
 
 class MyUserAdmin(UserAdmin):
     fieldsets = (

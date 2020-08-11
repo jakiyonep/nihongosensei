@@ -42,3 +42,14 @@ function markdown_close(){
 function answer_collapse(id){
 	$("#answer_collapse_" + id).toggle("fast");
 }
+
+$(document).on('click', '.answer_button', function(event){
+	event.preventDefault();
+	$('.answer_form_wrapper').slideToggle()
+})
+
+$(document).on('click', '.reply_button', function(event){
+	event.preventDefault();
+	var answer_id = $(this).attr('name')
+	$('#reply_form_wrapper_' + answer_id).slideToggle()
+})

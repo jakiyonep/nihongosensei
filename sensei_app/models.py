@@ -118,7 +118,6 @@ class Question(models.Model):
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="answers", null=True, blank=True)
-    answer = models.ForeignKey('self', on_delete=models.CASCADE, related_name="answer_answer", null=True, blank=True)
     author = models.CharField(null=True, blank=True, max_length=50)
     login_author=models.ForeignKey(User, on_delete=models.CASCADE, related_name='login_author_answer', null=True, blank=True )
     content = models.TextField(null=True, blank=False)
@@ -132,6 +131,20 @@ class Answer(models.Model):
     class Meta:
         ordering=['-created_at']
 
+class Reply(models.Model):
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name="replies", null=True, blank=True)
+    author = models.CharField(null=True, blank=True, max_length=50)
+    login_author=models.ForeignKey(User, on_delete=models.CASCADE, related_name='login_author_reply', null=True, blank=True )
+    content = models.TextField(null=True, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_public = models.BooleanField(default=False)
+
+    def __str__(self):
+        sliced_content = self.content[:10]
+        return sliced_content
+    class Meta:
+        ordering=['-created_at']
 
 class Contact(models.Model):
     name = models.CharField(null=True, blank=False, max_length=100)

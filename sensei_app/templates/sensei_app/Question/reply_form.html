@@ -1,0 +1,12 @@
+<form class="answer_form reply_form "  method="POST">{% csrf_token %}
+	{% if not user.is_authenticated%}
+		<div class="author">
+			<label>名前(任意)</label>
+			<input type="text" name="author" id ="reply_author_id">
+		</div>
+	{% endif %}
+		<div class="answer_content">
+			<textarea id="reply_content_id" name="reply_content" rows="8" cols="80"></textarea>
+		</div>
+    <button type="submit" class="reply_submit_button" id="{{answer.pk}}" name="{{question.pk}}">送信</button>
+</form>

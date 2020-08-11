@@ -33,7 +33,6 @@ class ContactForm(forms.ModelForm):
             },
         }
 
-
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
@@ -64,7 +63,6 @@ class QuestionForm(forms.ModelForm):
             'content': '',
         }
 
-
 class AnswerForm(forms.ModelForm):
     class Meta:
         model = Answer
@@ -82,8 +80,6 @@ class AnswerForm(forms.ModelForm):
             }),
         }
 
-
-
 #USER REGISTRATION
 
 from django.contrib.auth.forms import (
@@ -93,7 +89,6 @@ from django.contrib.auth.forms import (
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
-
 
 class EmailChangeForm(forms.ModelForm):
     """メールアドレス変更フォーム"""
@@ -112,7 +107,6 @@ class EmailChangeForm(forms.ModelForm):
         User.objects.filter(email=email, is_active=False).delete()
         return email
 
-
 class LoginForm(AuthenticationForm):
     """ログインフォーム"""
 
@@ -121,7 +115,6 @@ class LoginForm(AuthenticationForm):
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
             field.widget.attrs['placeholder'] = field.label  # placeholderにフィールドのラベルを入れる
-
 
 class UserCreateForm(UserCreationForm):
     """ユーザー登録用フォーム"""
@@ -140,7 +133,6 @@ class UserCreateForm(UserCreationForm):
         User.objects.filter(email=email, is_active=False).delete()
         return email
 
-
 class UserUpdateForm(forms.ModelForm):
     """ユーザー情報更新フォーム"""
 
@@ -153,16 +145,13 @@ class UserUpdateForm(forms.ModelForm):
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
 
-
-class   MyPasswordChangeForm(PasswordChangeForm):
+class MyPasswordChangeForm(PasswordChangeForm):
     """パスワード変更フォーム"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
-
-
 
 class MyPasswordResetForm(PasswordResetForm):
     """パスワード忘れたときのフォーム"""
@@ -171,7 +160,6 @@ class MyPasswordResetForm(PasswordResetForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
-
 
 class MySetPasswordForm(SetPasswordForm):
     """パスワード再設定用フォーム(パスワード忘れて再設定)"""

@@ -16,100 +16,37 @@
 	<div class="wrapper question_list_wrapper question_detail_wrapper">
 		<main class="left_column">
 			<div class="left_top">
-				{% if object.answers == None %}
-					{{object.answers}}
+				{% if question.answers == None %}
+					{{question.answers}}
 				{% endif %}
-				<h1 class="section_head">{{object.title}}</h1>
-				<span class="question_created_at">投稿日時:{{ object.created_at | naturaltime}}</span><br>
-				<a href="{% url 'sensei_app:question_category' object.category.category_slug %}" class="question_category question_category_{{ object.category.category_slug }}">{{ question.category }}</a>
+				<h1 class="section_head">{{question.title}}</h1>
+				<span class="question_created_at">投稿日時:{{ question.created_at | naturaltime}}</span><br>
+				<a href="{% url 'sensei_app:question_category' question.category.category_slug %}" class="question_category question_category_{{ question.category.category_slug }}">{{ question.category }}</a>
 				<br>
-				{% if not object.login_author %}
-					{% if object.author %}
-						<span class="question_author">{{ object.author }}<span class="san">さん</span></span>
+				{% if not question.login_author %}
+					{% if question.author %}
+						<span class="question_author">{{ question.author }}<span class="san">さん</span></span>
 					{% else %}
 						<span class="question_author">名無しさん</span>
 					{% endif %}
 				{% else %}
-					<a class="question_author login_author_link" href="{% url 'sensei_app:activities_of_user' object.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{object.login_author.nickname}}<span class="san">さん</span></a>
+					<a class="question_author login_author_link" href="{% url 'sensei_app:activities_of_user' question.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{question.login_author.nickname}}<span class="san">さん</span></a>
 				{% endif %}
 			</a>
 			</div>
 			<article class="content question_content">
-				{{ object.content |markdownify}}
+				{{ question.content |markdownify}}
 			</article>
 			<section class="answer_section">
 				<div class="submit_answer">
-					<a class="strong_button" href="{% url 'sensei_app:answer' object.pk %}">回答する</a>
+					<button class="answer_button">回答する</button>
 				</div>
-				<p class="section_head">みんなの回答({{question.answers.count}}件)</p>
+				<div class="answer_form_wrapper" style="display:none;">
+					{% include 'sensei_app/Question/answer_form.html' %}
+				</div>
+				<p class="section_head_sub">みんなの回答({{question.answers.count}}件)</p>
 				<div class="answers">
-					{% if object.answers.all %}<!-- if any answer -->
-						{% for answer in object.answers.all %}<!-- all answers-->
-							{% if not answer.answer %}<!-- excluding replies-->
-								{% if answer.login_author %}<!-- if the answerer is a member-->
-									{% if answer.login_author == object.login_author %}<!-- if quesioner and answerer are the same -->
-										<div class="answer answer_same">
-											<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
-											<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
-											<a class="reply_button" href="{% url 'sensei_app:reply' answer.pk %}">返信する</a>
-											<div class="content answer_content">
-												{{answer.content|markdownify}}
-											</div>
-										</div>
-									{% else %} <!--if questioner and answerer are different-->
-										<div class="answer">
-											<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
-											<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
-											<a class="reply_button" href="{% url 'sensei_app:reply' answer.pk %}">返信する</a>
-											<div class="content answer_content">
-												{{answer.content|markdownify}}
-											</div>
-										</div>
-									{% endif %}<!--same or different end-->
-								{% else %}<!-- if the answerer is not a member-->
-									<div class="answer">
-										<p class="answer_author">{{answer.author}}<span class="san">さん</span></p>
-										<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
-										<a class="reply_button" href="{% url 'sensei_app:reply' answer.pk %}">返信する</a>
-										<div class="content answer_content">
-											{{answer.content|markdownify}}
-										</div>
-									</div>
-								{% endif %}<!-- member or not member end if-->
-							{% endif %}<!-- excluding replies end-->
-							{% for reply in answer.answer_answer.all|dictsort:'created_at' %}<!--replies-->
-								{% if reply.login_author %}<!-- if the answerer is a member-->
-									{% if reply.login_author == object.login_author %}<!-- if quesioner and answerer are the same -->
-										<div class="answer reply answer_same">
-											<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' reply.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{reply.login_author.nickname}}<span class="san">さん</span></a>
-											<p class="answer_date">回答日時: {{reply.created_at|naturaltime}}</p>
-											<div class="content answer_content">
-												{{reply.content|markdownify}}
-											</div>
-										</div>
-									{% else %} <!--if questioner and answerer are different-->
-										<div class="answer reply">
-											<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' reply.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{reply.login_author.nickname}}<span class="san">さん</span></a>
-											<p class="answer_date">回答日時: {{reply.created_at|naturaltime}}</p>
-											<div class="content answer_content">
-												{{reply.content|markdownify}}
-											</div>
-										</div>
-									{% endif %}<!--same or different end-->
-								{% else %}<!-- if the answerer is not a member-->
-									<div class="answer reply">
-										<p class="answer_author">{{reply.author}}<span class="san">さん</span></p>
-										<p class="answer_date">回答日時: {{reply.created_at|naturaltime}}</p>
-										<div class="content answer_content">
-											{{reply.content|markdownify}}
-										</div>
-									</div>
-								{% endif %}<!-- member or not member end if-->
-							{% endfor %}<!--replies-->
-						{% endfor %}<!-- all answers endfor -->
-					{% else %}<!-- if no answer-->
-						<p style="font-size:1.2rem; ">まだ回答がありません</p>
-					{% endif %}<!-- if any answer end-->
+					{% include 'sensei_app/Question/comments.html' %}
 				</div>
 
 			</section><!-- answer_section end-->
@@ -118,5 +55,64 @@
 			{% include 'sensei_app/Question/sidebar.html' %}
 		</aside>
 	</div>
+	<script>
+	$(document).on('click', '#answer_submit',function(event){
+		event.preventDefault();
+		var question_id = $(this).attr('name')
+		var answer_author = $('#answer_author_id').val()
+		var answer_content = $('#answer_content_id').val()
+		if(answer_author == undefined || answer_author == ""){
+			answer_author = '名無し'
+		}
+		$('.answer_form_wrapper').slideToggle()
+		$.ajax({
+			 type: "POST",
+			 url: "{% url 'sensei_app:answer_add' %}",
+			 data: {
+				'question_id': question_id,
+				'answer_author': answer_author,
+				'answer_content': answer_content,
+				'csrfmiddlewaretoken': '{{ csrf_token }}',
+		 },
+			 dataType: "json",
+			 success: function(response) {
+				 console.log('okay')
+					$('.answers').html(response['form'])
+					$('#answer_author_id').val('')
+					$('#answer_content_id').val('')
+				},
+
+		});
+
+			})
+	$(document).on('click', '.reply_submit_button',function(event){
+		event.preventDefault();
+		var answer_id = $(this).attr('id')
+		var reply_author = $('#reply_author_id').val()
+		var reply_content = $('#reply_content_id').val()
+		if(reply_author == undefined || reply_author == ""){
+			reply_author = '名無し'
+		}
+		$('#reply_form_wrapper_' + answer_id).slideToggle()
+		$.ajax({
+			 type: "POST",
+			 url: "{% url 'sensei_app:reply_add' %}",
+			 data: {
+				'answer_id': answer_id,
+				'reply_author': reply_author,
+				'reply_content': reply_content,
+				'csrfmiddlewaretoken': '{{ csrf_token }}',
+		 },
+			 dataType: "json",
+			 success: function(response) {
+					$('.replies_container').html(response['form'])
+					$('#reply_author_id').val('')
+					$('#reply_content_id').val('')
+				},
+
+		});
+
+			})
+		</script>
 </body>
 {% endblock %}

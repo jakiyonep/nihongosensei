@@ -11,9 +11,10 @@ urlpatterns =[
     path('question/<int:pk>/', QuestionDetail.as_view(), name="question_detail"),
     path('question/category/<str:question_category_slug>/', QuestionCategoryView.as_view(), name="question_category"),
     path('question/add/', QuestionAdd, name="question_add"),
-    path('question/answer/<int:pk>', AnswerAdd, name="answer"),
-    path('question/reply/<int:pk>', ReplyAdd, name='reply'),
+    path('question/answer', AnswerAdd, name="answer_add"),
+    path('question/reply', ReplyAdd, name="reply_add"),
     path('contact/add', ContactAdd, name='contact_add'),
+
     path('login/', views.Login.as_view(), name='login'),
     path('logout/', views.Logout.as_view(), name='logout'),
     path('user_create/', views.UserCreate.as_view(), name='user_create'),

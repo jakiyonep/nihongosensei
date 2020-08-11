@@ -139,6 +139,18 @@ $sub-strong-color: rgb(111, 181, 218)
 		margin: 3rem 0
 		.submit_answer
 			margin-bottom: 5rem
+			.answer_button
+				width: 100%
+				border: 1px solid $strong_color
+				border-radius: 0.5rem
+				text-align: center
+				color: $strong-color
+				padding: 0.5rem
+				transition: 0.5s
+				&:hover
+					transition: 0.5s
+					color: white
+					background-color: $strong-color
 		.answers
 			.answer
 				background-color: $question-bg
@@ -162,7 +174,6 @@ $sub-strong-color: rgb(111, 181, 218)
 				.reply_button
 					background-color: $border-primary
 					color: white
-					margin-left: 2rem
 					padding: 0.2rem 0.5rem
 					border-radius: 0.2rem
 					margin-top: 1rem
@@ -177,43 +188,49 @@ $sub-strong-color: rgb(111, 181, 218)
 		.reply
 			margin-left: 2rem!important
 
-.question_add_wrapper
-	.left_column
+
+
+.answer_form
+	div
 		width: 100%
-		margin: 0 auto
-	.question_add
-		.question_form
-			display: flex
-			flex-direction: column
-			justify-content: center
-			section
-				margin-bottom: 3rem
-				&>*
-					border: 1px solid $border-secondary
-				input
-					width: 100%
-				textarea
-					width: 100%
-					margin-top: 0
-				select
-					width: 100%
-	.selected_question
-		margin: 5rem 0
-		padding: 2rem 0
-		>*
-			margin-bottom: 1rem
-		.question_title
-			font-size: 1.5rem
-		.question_author
-			margin: 1rem 0
-			display: inline-block
-			span
-				font-weight: bold
-		.question_content
-			border-top: 1px solid $border-primary
-			border-bottom: 1px solid $border-primary
-			margin: 2rem 0
-			padding: 2rem 0
+		display: flex
+		flex-direction: column
+		&>*
+			width: 100%
+	.author
+		margin-bottom: 2rem
+		input
+			background-color: white
+			border: 1px solid $border-secondary
+	.answer_content
+		textarea
+			background-color: white
+			border: 1px solid $border-secondary
+	.answer_submit_button
+		margin-top: 2rem
+		background-color: $strong_color
+		padding: 0.3rem 0.7rem
+		border-radius: 5px
+		color: white
+		transition: 0.4s
+		&:hover
+			color: $strong_color
+			background-color: $border-secondary
+			transition: 0.4s
+.reply_form
+	margin-left: 0
+	margin-top: 3rem
+.reply_submit_button
+	margin-top: 2rem
+	background-color: rgb(107, 181, 200)
+	padding: 0.3rem 0.7rem
+	border-radius: 5px
+	color: white
+	transition: 0.4s
+	&:hover
+		color: rgb(107, 181, 200)
+		background-color: $border-secondary
+		transition: 0.4s
 
 .all_wrapper
 	.questions

@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect, resolve_url
 from django.db.models import Count, Q
 from django.core.paginator import Paginator
-
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
 from django.views.generic.edit import CreateView
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.base import TemplateView
@@ -65,7 +68,7 @@ def QuestionList(request):
         ).distinct()
 
     # Create a paginator to split your products queryset
-    paginator = Paginator(question_list, 3)
+    paginator = Paginator(question_list, 10)
     # Get the current page number
     page = request.GET.get('page')
     # Get the current slice (page) of products
@@ -132,63 +135,69 @@ def QuestionAdd(request):
 
     return render(request, 'sensei_app/Question/add.html', {
         'form': form,
-
     })
 
 
-def AnswerAdd(request, pk):
-    form = forms.AnswerForm()
-    user = request.user
-    question = get_object_or_404(Question, pk=pk)
+def AnswerAdd(request):
+    context={}
+    if request.is_ajax():
+        login_author = None
+        author = request.POST['answer_author']
+        answer_content = request.POST['answer_content']
+        question_id = request.POST['question_id']
+        question = get_object_or_404(Question, pk=question_id)
+        if request.user.is_authenticated:
+            login_author = request.user
+        answer = Answer(
+            question = question,
+            author = author,
+            content = answer_content,
+            created_at = timezone.now(),
+            login_author = login_author,
+        )
+        answer.save()
 
-    if request.method == 'POST':
-        form = forms.AnswerForm(request.POST)
-        if form.is_valid():
-            answer = form.save(commit=False)
-            print("検証に成功しました。データを保存します")
-            answer.question = get_object_or_404(Question, pk=pk)
-            if request.user.is_authenticated:
-                answer.login_author = request.user
-            answer.save()
-            return redirect('sensei_app:question_detail', pk=pk)
+        all_answers = Answer.objects.all()
+        answers = all_answers.filter(question=question)
+        context = {
+            'ajax_answers': answers,
+            'question': question,
+        }
 
-        else:
-            print("検証に失敗したので、データを保存しません。検証に失敗した理由を次に表示します。")
-            print(form.errors)
+        html = render_to_string('sensei_app/Question/comments.html', context, request=request)
 
-    return render(request, 'sensei_app/Question/answer.html', {
-        'form': form,
-        'question': question,
-    })
+        return JsonResponse({'form':html})
 
+def ReplyAdd(request):
+    context={}
+    if request.is_ajax():
+        login_author = None
+        author = request.POST['reply_author']
+        reply_content = request.POST['reply_content']
+        answer_id = request.POST['answer_id']
+        answer = get_object_or_404(Answer, pk=answer_id)
+        if request.user.is_authenticated:
+            login_author = request.user
+        reply = Reply(
+            answer = answer,
+            author = author,
+            content = reply_content,
+            created_at = timezone.now(),
+            login_author = login_author,
+        )
+        reply.save()
 
-def ReplyAdd(request, pk):
-    form = forms.AnswerForm()
-    user = request.user
-    reply_to = get_object_or_404(Answer, pk=pk)
-    question = reply_to.question
-    question_pk = question.pk
+        all_replies = Reply.objects.all()
+        replies = all_replies.filter(answer=answer)
+        context = {
+            'ajax_replies': replies,
+            'ajax_question':answer.question,
+        }
 
-    if request.method == 'POST':
-        form = forms.AnswerForm(request.POST)
-        if form.is_valid():
-            answer = form.save(commit=False)
-            print("検証に成功しました。データを保存します")
-            answer.question = get_object_or_404(Question, pk=question_pk)
-            answer.answer = get_object_or_404(Answer, pk=pk)
-            if request.user.is_authenticated:
-                answer.login_author = request.user
-            answer.save()
-            return redirect('sensei_app:question_detail', pk=question_pk)
+        html = render_to_string('sensei_app/Question/replies.html', context, request=request)
 
-        else:
-            print("検証に失敗したので、データを保存しません。検証に失敗した理由を次に表示します。")
-            print(form.errors)
+        return JsonResponse({'form':html})
 
-    return render(request, 'sensei_app/Question/reply.html', {
-        'form': form,
-        'question': reply_to,
-    })
 
 
 
