@@ -93,9 +93,6 @@ class QuestionDetail(DetailView):
             raise Http404
         return obj
 
-
-
-
 class QuestionCategoryView(ListView):
     model = Question
     template_name = 'sensei_app/Question/question_category_list.html'
