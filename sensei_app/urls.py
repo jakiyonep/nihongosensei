@@ -16,8 +16,8 @@ urlpatterns =[
 
     path('contact/add', ContactAdd, name='contact_add'),
 
-    path('jltct', JLTCTTop, name='jltct_top'),
-    path('jltct/note/<str:title_slug>', JLTCTNoteDetail, name="note_detail"),
+    #path('jltct', JLTCTTop, name='jltct_top'),
+    #path('jltct/note/<str:title_slug>', JLTCTNoteDetail, name="note_detail"),
 
     path('login/', views.Login.as_view(), name='login'),
     path('logout/', views.Logout.as_view(), name='logout'),
