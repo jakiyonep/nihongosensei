@@ -62,11 +62,7 @@ MARKDOWNIFY_WHITELIST_ATTRS = [
 ]
 
 MIDDLEWARE = [
-<<<<<<< HEAD
-    #'django.middleware.security.SecurityMiddleware'
-=======
     'django.middleware.security.SecurityMiddleware',
->>>>>>> 287a091a6babc61a039735628df9dc39e3fe3a9b
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -184,7 +180,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'atsumarenihongokyoushi@gmail.com'
 EMAIL_USE_TLS = True
 
 SITE_ID = 1

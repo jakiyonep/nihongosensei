@@ -30,6 +30,7 @@ import django_heroku
 django_heroku.settings(locals())
 
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 
 
 #AWS
