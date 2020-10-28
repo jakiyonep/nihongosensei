@@ -200,7 +200,7 @@ def ReplyAdd(request):
 
 
 def JLTCTTop(request):
-    all_exam = Jltct.objects.all()
+    all_exam = jltct.objects.all()
     society = all_exam.filter(section__section_slug="society")
     language_society = all_exam.filter(section__section_slug="languagesociety")
     language_psychology = all_exam.filter(section__section_slug="languagepsychology")
@@ -218,7 +218,7 @@ def JLTCTTop(request):
     return render(request, 'sensei_app/Exam/jltct_top.html', context)
 
 def JLTCTNoteDetail(request, title_slug):
-    note = get_object_or_404(Jltct,title_slug=title_slug)
+    note = get_object_or_404(jltct,title_slug=title_slug)
 
     context ={
         "note": note,

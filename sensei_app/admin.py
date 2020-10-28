@@ -12,9 +12,9 @@ admin.site.register(Answer)
 admin.site.register(Reply)
 
 admin.site.register(Exam)
-admin.site.register(Jltct)
-admin.site.register(Jltcttag)
-admin.site.register(Jltctsection)
+admin.site.register(jltct)
+admin.site.register(jltcttag)
+admin.site.register(jltctsection)
 
 # USER REGISTRATION
 
