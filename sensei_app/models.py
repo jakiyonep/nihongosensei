@@ -149,7 +149,7 @@ class Contact(models.Model):
     email = models.EmailField(null=True, blank=False,)
     content = models.TextField(null=True, blank=False)
 
-class Jltctsection(models.Model):
+"""class Jltctsection(models.Model):
     section = models.CharField(null=False, blank=False, max_length=200)
     section_slug = models.CharField(null=False, blank=False, max_length=200)
 
@@ -197,3 +197,4 @@ class Exam(models.Model):
     answer = models.IntegerField(choices=Answer.choices, null=True)
 
     updated = models.DateTimeField(auto_now=True)
+"""
