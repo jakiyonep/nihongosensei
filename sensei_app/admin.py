@@ -10,12 +10,12 @@ admin.site.register(QuestionCategory)
 admin.site.register(Question)
 admin.site.register(Answer)
 admin.site.register(Reply)
-"""
+
 admin.site.register(Exam)
 admin.site.register(Jltct)
 admin.site.register(Jltcttag)
 admin.site.register(Jltctsection)
-"""
+
 
 # USER REGISTRATION
 
