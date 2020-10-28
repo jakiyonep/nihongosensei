@@ -198,7 +198,7 @@ def ReplyAdd(request):
 
 # EXAM
 
-
+"""
 def JLTCTTop(request):
     all_exam = Jltct.objects.all()
     society = all_exam.filter(section__section_slug="society")
@@ -225,6 +225,8 @@ def JLTCTNoteDetail(request, title_slug):
     }
 
     return render(request, "sensei_app/Exam/jltct_note_detail.html", context)
+"""
+
 
 # USER REGISTRATION
 
