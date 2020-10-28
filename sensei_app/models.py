@@ -167,7 +167,7 @@ class jltct(models.Model):
     title = models.CharField(null=False, blank=False, max_length=200)
     title_slug = models.CharField(null=False, blank=False, max_length=200, unique=True)
     number = models.IntegerField(null=True, blank=True)
-    section = models.ForeignKey(jltctsection, on_delete=models.CASCADE, related_name="section_name", blank=False, null=False)
+    section = models.ForeignKey(jltctsection, on_delete=models.CASCADE, related_name="section_name", blank=False, null=True)
     tag = models.ManyToManyField(jltcttag, related_name="tags", blank=True, null=True)
     content = models.TextField(null=False, blank=False)
     public = models.BooleanField(default=False)
