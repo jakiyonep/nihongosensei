@@ -196,7 +196,35 @@ def ReplyAdd(request):
         return JsonResponse({'form':html})
 
 
+# EXAM
 
+
+def JLTCTTop(request):
+    all_exam = JLTCT.objects.all()
+    society = all_exam.filter(section__section_slug="society")
+    language_society = all_exam.filter(section__section_slug="languagesociety")
+    language_psychology = all_exam.filter(section__section_slug="languagepsychology")
+    language_education = all_exam.filter(section__section_slug="languageeducation")
+    language = all_exam.filter(section__section_slug="language")
+
+    context={
+        "society": society,
+        "language": language,
+        "language_society": language_society,
+        "language_psychology": language_psychology,
+        "language_education": language_education,
+    }
+
+    return render(request, 'sensei_app/Exam/jltct_top.html', context)
+
+def JLTCTNoteDetail(request, title_slug):
+    note = get_object_or_404(JLTCT,title_slug=title_slug)
+
+    context ={
+        "note": note,
+    }
+
+    return render(request, "sensei_app/Exam/jltct_note_detail.html", context)
 
 # USER REGISTRATION
 
@@ -368,6 +396,9 @@ def AllAnswersofUser(request, pk):
         'num': num,
         'paginator':paginator,
     })
+
+
+
 
 
 class UserUpdate(OnlyYouMixin, generic.UpdateView):

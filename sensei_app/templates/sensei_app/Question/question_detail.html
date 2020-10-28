@@ -32,8 +32,7 @@
 				{% else %}
 					<a class="question_author login_author_link" href="{% url 'sensei_app:activities_of_user' question.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{question.login_author.nickname}}<span class="san">さん</span></a>
 				{% endif %}
-			</a>
-			</div>
+					</div>
 			<article class="content question_content">
 				{{ question.content |markdownify}}
 			</article>

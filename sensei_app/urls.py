@@ -13,10 +13,15 @@ urlpatterns =[
     path('question/add/', QuestionAdd, name="question_add"),
     path('question/answer', AnswerAdd, name="answer_add"),
     path('question/reply', ReplyAdd, name="reply_add"),
+
     path('contact/add', ContactAdd, name='contact_add'),
+
+    path('jltct', JLTCTTop, name='jltct_top'),
+    path('jltct/note/<str:title_slug>', JLTCTNoteDetail, name="note_detail"),
 
     path('login/', views.Login.as_view(), name='login'),
     path('logout/', views.Logout.as_view(), name='logout'),
+
     path('user_create/', views.UserCreate.as_view(), name='user_create'),
     path('user_create/done/', views.UserCreateDone.as_view(), name='user_create_done'),
     path('user_create/complete/<token>/', views.UserCreateComplete.as_view(), name='user_create_complete'),

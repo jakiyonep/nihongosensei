@@ -1,0 +1,110 @@
+$nihongo-bg: rgb(251, 136, 74)
+$sensei-bg: rgb(52, 117, 242)
+$jltct-bg: rgb(76, 230, 118)
+$others-bg: rgb(41, 112, 129)
+$question-bg: rgb(230, 230, 230)
+$border-primary: rgb(121, 121, 121)
+$border-secondary: rgb(228, 228, 228)
+$strong-color: rgb(255, 112, 112)
+$link-color: rgb(3, 196, 214)
+$content-color: rgb(108, 108, 108)
+
+$society-color: rgb(244, 192, 91)
+$language-color: rgb(227, 81, 81)
+$languagesociety-color: rgb(114, 181, 62)
+$languagepsychology-color: rgb(85, 173, 201)
+$languageeducation-color: rgb(102, 24, 180)
+
+
+.jltct_wrapper
+  display: flex
+  justify-content: space-between
+  .left_column
+    width: 75%
+    section
+      width: 100%
+      margin-bottom: 7rem
+      .subsection_head
+        position: relative
+        padding: 0.5em
+        background: #a6d3c8
+        color: white
+        margin-bottom: 3rem
+        font-size: 1.3rem
+    /*jltct_top below*/
+    .subsection
+      .subsection_head
+    .subsection_note
+      .caution
+      .section_container
+        .section_name
+          font-size: 1.2rem
+          i
+            margin-right: 1rem
+        ul
+          margin: 3rem
+          li
+            font-size: 1.2rem
+            margin-bottom: 0.6rem
+            a
+              border-bottom: 1px solid $link-color
+      .society
+        color: $society-color
+      .language
+        color: $language-color
+      .languagesociety
+        color: $languagesociety-color
+      .languagepsychology
+        color: $languagepsychology-color
+      .languageeducation
+        color: $languageeducation-color
+    /*note_detail below*/
+    .note_info
+      margin-bottom: 15rem
+      .note_title
+        font-size: 3rem
+        margin-bottom: 2rem
+        line-height: 3rem
+      .meta_info
+        >*
+          display: block
+          margin-bottom: 1rem
+        .society
+          color: $society-color
+        .language
+          color: $language-color
+        .languagesociety
+          color: $languagesociety-color
+        .languagepsychology
+          color: $languagepsychology-color
+        .languageeducation
+          color: $languageeducation-color
+        .fa-clock
+          display: inline-block
+          font-size: 1.2rem
+          margin-right: 0.5rem
+        .meta_info_update
+          display: inline-block
+        .fa-circle
+          display: inline-block
+          margin-right: 0.5rem
+        .meta_info_section
+          font-size: 1.2rem
+          display: inline-block
+        .meta_info_tags
+          a
+            font-size: 1.1rem
+            display: inline-block
+            color: $link-color
+            padding: 0.2rem 0.6rem
+            border: 1px solid $link-color
+            border-radius: 0.3rem
+            transition: 0.4s
+            margin-right: 0.5rem
+            margin-bottom: 0.5rem
+            &:hover
+              background-color: $link-color
+              color: white
+              border-radius: 0
+  .right_column
+    width: 20%

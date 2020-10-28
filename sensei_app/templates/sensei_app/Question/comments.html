@@ -7,24 +7,24 @@
 					<div class="answer answer_same">
 						<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
 						<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
+						<div class="content answer_content">
+							{{answer.content|markdownify}}
+						</div>
 						<a class="reply_button" name="{{answer.pk}}">返信する</a>
 						<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
 							{% include 'sensei_app/Question/reply_form.html' %}
-						</div>
-						<div class="content answer_content">
-							{{answer.content|markdownify}}
 						</div>
 					</div>
 				{% else %} <!--if questioner and answerer are different-->
 					<div class="answer">
 						<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
 						<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
+						<div class="content answer_content">
+							{{answer.content|markdownify}}
+						</div>
 						<a class="reply_button" name="{{answer.pk}}">返信する</a>
 						<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
 							{% include 'sensei_app/Question/reply_form.html' %}
-						</div>
-						<div class="content answer_content">
-							{{answer.content|markdownify}}
 						</div>
 					</div>
 				{% endif %}<!--same or different end-->
@@ -32,18 +32,17 @@
 				<div class="answer">
 					<p class="answer_author">{{answer.author}}<span class="san">さん</span></p>
 					<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
+					<div class="content answer_content">
+						{{answer.content|markdownify}}
+					</div>
 					<a class="reply_button" name="{{answer.pk}}">返信する</a>
 					<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
 						{% include 'sensei_app/Question/reply_form.html' %}
-					</div>
-					<div class="content answer_content">
-						{{answer.content|markdownify}}
 					</div>
 				</div>
 			{% endif %}<!-- member or not member end if-->
 
 			<div class="replies_wrapper">
-				ajax replies below
 					{% include 'sensei_app/Question/replies.html' %}
 			</div>
 		{% endfor %}<!-- all answers endfor -->
@@ -79,12 +78,12 @@
 				<div class="answer">
 					<p class="answer_author">{{answer.author}}<span class="san">さん</span></p>
 					<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
+					<div class="content answer_content">
+						{{answer.content|markdownify}}
+					</div>
 					<a class="reply_button" name="{{answer.pk}}">返信する</a>
 					<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
 						{% include 'sensei_app/Question/reply_form.html' %}
-					</div>
-					<div class="content answer_content">
-						{{answer.content|markdownify}}
 					</div>
 				</div>
 			{% endif %}<!-- member or not member end if-->
