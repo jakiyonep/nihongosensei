@@ -25,6 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = []
 
 
@@ -61,7 +62,11 @@ MARKDOWNIFY_WHITELIST_ATTRS = [
 ]
 
 MIDDLEWARE = [
+<<<<<<< HEAD
     #'django.middleware.security.SecurityMiddleware'
+=======
+    'django.middleware.security.SecurityMiddleware',
+>>>>>>> 287a091a6babc61a039735628df9dc39e3fe3a9b
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
