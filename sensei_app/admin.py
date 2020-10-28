@@ -11,9 +11,9 @@ admin.site.register(Question)
 admin.site.register(Answer)
 admin.site.register(Reply)
 admin.site.register(Exam)
-admin.site.register(JLTCT)
-admin.site.register(JLTCTTag)
-admin.site.register(JLTCTSection)
+admin.site.register(Jltct)
+admin.site.register(Jltcttag)
+admin.site.register(Jltctsection)
 
 # USER REGISTRATION
 

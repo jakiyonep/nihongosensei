@@ -149,26 +149,26 @@ class Contact(models.Model):
     email = models.EmailField(null=True, blank=False,)
     content = models.TextField(null=True, blank=False)
 
-class JLTCTSection(models.Model):
+class Jltctsection(models.Model):
     section = models.CharField(null=False, blank=False, max_length=200)
     section_slug = models.CharField(null=False, blank=False, max_length=200)
 
     def __str__(self):
         return self.section
 
-class JLTCTTag(models.Model):
+class Jltcttag(models.Model):
     tag = models.CharField(null=False, blank=False, max_length=200)
     tag_slug = models.CharField(null=False, blank=False, max_length=200, unique=True)
 
     def __str__(self):
         return self.tag
 
-class JLTCT(models.Model):
+class Jltct(models.Model):
     title = models.CharField(null=False, blank=False, max_length=200)
     title_slug = models.CharField(null=False, blank=False, max_length=200, unique=True)
     number = models.IntegerField(null=True, blank=True)
-    section = models.ForeignKey(JLTCTSection, on_delete=models.CASCADE, related_name="section_name", blank=False, null=False)
-    tag = models.ManyToManyField(JLTCTTag, related_name="tags", blank=True, null=True)
+    section = models.ForeignKey(Jltctsection, on_delete=models.CASCADE, related_name="section_name", blank=False, null=False)
+    tag = models.ManyToManyField(Jltcttag, related_name="tags", blank=True, null=True)
     content = models.TextField(null=False, blank=False)
     public = models.BooleanField(default=False)
     update = models.DateTimeField(auto_now=True)
