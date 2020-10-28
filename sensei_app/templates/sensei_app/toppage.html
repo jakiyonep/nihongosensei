@@ -56,7 +56,18 @@
 				</div>
 			</a>
 		</section>
-		<!-- jltct here -->
+		<section>
+		  <a class="toppage_card" href="{% url 'sensei_app:jltct_top' %}">
+		    <div class="card_img">
+		      <img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/Toppage_Contact.png" alt="">
+		    </div>
+		    <div class="card_right">
+		      <h1 class="card_top">日本語教育能力検定試験</h1>
+		      <p class="card_desc">過去問</p>
+		    </div>
+		  </a>
+		</section>
+
 		{% if user.is_authenticated %}
 		<section>
 			<a class="toppage_card" href="{% url 'sensei_app:logout' %}">
