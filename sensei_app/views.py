@@ -200,12 +200,24 @@ def ReplyAdd(request):
 
 
 def JLTCTTop(request):
+    query = request.GET.get('q')
     all_exam = jltct.objects.all()
+
+    if query:
+        all_exam = jltct.objects.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(section__section__icontains=query) |
+            Q(tag__tag__icontains=query)
+        )
+
     society = all_exam.filter(section__section_slug="society")
     language_society = all_exam.filter(section__section_slug="languagesociety")
     language_psychology = all_exam.filter(section__section_slug="languagepsychology")
     language_education = all_exam.filter(section__section_slug="languageeducation")
     language = all_exam.filter(section__section_slug="language")
+
+
 
     context={
         "society": society,
@@ -213,6 +225,7 @@ def JLTCTTop(request):
         "language_society": language_society,
         "language_psychology": language_psychology,
         "language_education": language_education,
+        "query": query,
     }
 
     return render(request, 'sensei_app/Exam/jltct_top.html', context)
@@ -225,6 +238,30 @@ def JLTCTNoteDetail(request, title_slug):
     }
 
     return render(request, "sensei_app/Exam/jltct_note_detail.html", context)
+
+def JLTCTTagNotes(request,tag_slug):
+    selected_tag = get_object_or_404(jltcttag,tag_slug=tag_slug)
+    selected_notes = jltct.objects.filter(tag=selected_tag)
+
+    society = selected_notes.filter(section__section_slug="society")
+    language_society = selected_notes.filter(section__section_slug="languagesociety")
+    language_psychology = selected_notes.filter(section__section_slug="languagepsychology")
+    language_education = selected_notes.filter(section__section_slug="languageeducation")
+    language = selected_notes.filter(section__section_slug="language")
+
+    context = {
+        "selected_tag": selected_tag,
+        "selected_notes": selected_notes,
+        "society": society,
+        "language": language,
+        "language_society": language_society,
+        "language_psychology": language_psychology,
+        "language_education": language_education,
+    }
+
+    return render(request, "sensei_app/Exam/jltct_tag_notes.html", context)
+
+
 
 # USER REGISTRATION
 

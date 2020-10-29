@@ -8,7 +8,7 @@
 	{% include 'sensei_app/navbar.html' %}
 	<div class="wrapper toppage_wrapper">
 
-		{% if not user.is_authenticated %}
+		<!--{% if not user.is_authenticated %}
 		 <section>
 			 <a class="toppage_card" href="{% url 'sensei_app:login' %}">
 				 <div class="card_img">
@@ -44,6 +44,17 @@
 					<p class="card_desc">あなたが疑問に思っていることは皆さんも疑問に思っているはず!自分だけでなく皆さんのためにも質問をしてみましょう!</p>
 				</div>
 			</a>
+		</section>-->
+		<section>
+			<a class="toppage_card" href="{% url 'sensei_app:jltct_top' %}">
+				<div class="card_img">
+					<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/toppage_jltct.png.png" alt="">
+				</div>
+				<div class="card_right">
+					<h1 class="card_top">日本語教育能力検定試験</h1>
+					<p class="card_desc">検定試験に出題される知識や勉強テクニックを紹介します！</p>
+				</div>
+			</a>
 		</section>
 		<section>
 			<a class="toppage_card" href="{% url 'sensei_app:contact_add' %}">
@@ -52,21 +63,11 @@
 				</div>
 				<div class="card_right">
 					<h1 class="card_top">お問い合わせ</h1>
-					<p class="card_desc">「集まれ日本語教師!」をより良いコミュニティーにするためにあなたのご意見が必要です!疑問点、改善点、要望などなんでも受け付けております。</p>
+					<p class="card_desc">質問、問い合わせ等は全てこちらまで。</p>
 				</div>
 			</a>
 		</section>
-		<section>
-		  <a class="toppage_card" href="{% url 'sensei_app:jltct_top' %}">
-		    <div class="card_img">
-		      <img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/Toppage_Contact.png" alt="">
-		    </div>
-		    <div class="card_right">
-		      <h1 class="card_top">日本語教育能力検定試験</h1>
-		      <p class="card_desc">過去問</p>
-		    </div>
-		  </a>
-		</section>
+
 
 		{% if user.is_authenticated %}
 		<section>

@@ -8,6 +8,7 @@ $border-secondary: rgb(228, 228, 228)
 $strong-color: rgb(255, 112, 112)
 $link-color: rgb(3, 196, 214)
 $content-color: rgb(108, 108, 108)
+$light-bg-color: rgb(249, 249, 249)
 
 $society-color: rgb(244, 192, 91)
 $language-color: rgb(227, 81, 81)
@@ -19,6 +20,7 @@ $languageeducation-color: rgb(102, 24, 180)
 .jltct_wrapper
   display: flex
   justify-content: space-between
+  align-items: flex-start
   .left_column
     width: 75%
     section
@@ -34,6 +36,18 @@ $languageeducation-color: rgb(102, 24, 180)
     /*jltct_top below*/
     .subsection
       .subsection_head
+      .result
+        font-size: 1.2rem
+        margin-bottom: 3rem
+        span
+          border: 1px solid $content-color
+          padding: 0.2rem 0.4rem
+          border-radius: 0.2rem
+      .tag_result
+        span
+          color: $link-color
+          border: 1px solid $link-color
+
     .subsection_note
       .caution
       .section_container
@@ -108,3 +122,40 @@ $languageeducation-color: rgb(102, 24, 180)
               border-radius: 0
   .right_column
     width: 20%
+    height: inherit
+    background-color: $light-bg-color
+    padding: 2rem 1rem
+    border-radius: 1rem
+    .search_form
+      display: flex
+      margin-bottom: 5rem
+      width: 100%
+      input
+        border: 1px solid $content-color
+        background-color: white
+        border-radius: 0.5rem 0 0 0.5rem
+        width: 80%
+      button
+        width: 20%
+        color: white
+        background-color: $strong-color
+        padding: 0.1rem 0.5rem
+        border-radius: 0 0.5rem 0.5rem 0
+    .jltct_tags
+      width: 100%
+      p
+        margin-bottom: 2rem
+      a
+        font-size: 1.1rem
+        display: inline-block
+        color: $link-color
+        padding: 0.2rem 0.6rem
+        border: 1px solid $link-color
+        border-radius: 0.3rem
+        transition: 0.4s
+        margin-right: 0.5rem
+        margin-bottom: 0.5rem
+        &:hover
+          background-color: $link-color
+          color: white
+          border-radius: 0

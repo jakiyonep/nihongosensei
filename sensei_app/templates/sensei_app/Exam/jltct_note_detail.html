@@ -20,7 +20,7 @@
           <i class="fas fa-circle {{ note.section.section_slug }}"></i><span class="meta_info_section">{{note.section}}</span><br>
           <div class="meta_info_tags">
             {% for tag in note.tag.all %}
-              <a href="#">{{tag}}</a>
+              <a href="{% url 'sensei_app:tag_notes' tag.tag_slug %}">{{tag}}</a>
             {% endfor %}
           </div>
         </div>
@@ -30,8 +30,9 @@
       </div>
 		</section>
 		<section class="right_column">
-			right column here
+			{% include 'sensei_app/Exam/right_column.html' %}
 		</section>
+
   </div>
 </body>
 {% endblock %}

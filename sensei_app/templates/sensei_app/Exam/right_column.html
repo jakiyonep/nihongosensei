@@ -1,0 +1,12 @@
+
+<form class="search_form" action="{% url "sensei_app:jltct_top" %}" method="get" accept-charset="utf-8">
+	<input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}" placeholder="キーワード">
+	<button class="search_form_button" type="submit">検索</button>
+</form>
+
+<div class="jltct_tags">
+  <p>タグ一覧</p>
+  {% for tag in jltct_tags|dictsortreversed:"num_notes"%}
+  <a href="{% url 'sensei_app:tag_notes' tag.tag_slug %}">{{tag}} {{tag.num_notes}}</a>
+  {% endfor %}
+</div>
