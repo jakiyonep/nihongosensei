@@ -17,8 +17,11 @@
 				<h2 class="subsection_head">検定試験対策ノート</h2>
 				{% if query %}
 					<p class="result"><span>{{ query }}</span>に関連するノート</p>
+				{% else %}
+					<p class="caution">
+					以下のノートで解説している知識等は、管理人が検定試験対策のために勉強していたことをまとめたものなので、不完全なものがあるかと思われます。質問・指摘等ございましたら、<a href="{% url 'sensei_app:contact_add' %}">「お問い合わせ」</a>までお願いします。
+					</p>
 				{% endif %}
-				<p class="caution"></p>
 				<div class="section_container"><!--society-->
 					<h3 class="section_name"><i class="fas fa-circle society"></i>社会・文化・地域</h3>
 					<ul>

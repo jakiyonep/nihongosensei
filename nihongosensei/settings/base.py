@@ -44,9 +44,14 @@ INSTALLED_APPS = [
     'django_summernote',
     'django.contrib.humanize',
     'markdownify',
+    'markdownx',
     'storages',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+]
+
+MARKDOWNX_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.toc',
 ]
 
 MARKDOWNIFY_STRIP = False
@@ -87,6 +92,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'sensei_app.context_processors.common',
             ],
+            'libraries':{
+                'markdownx': 'sensei_app.templatetags.markdownx'
+            }
         },
     },
 ]

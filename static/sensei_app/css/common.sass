@@ -6,8 +6,19 @@ $question-bg: rgb(230, 230, 230)
 $border-primary: rgb(121, 121, 121)
 $border-secondary: rgb(228, 228, 228)
 $strong-color: rgb(255, 112, 112)
+$semi-strong-color: rgb(62, 98, 189)
 $link-color: rgb(3, 196, 214)
 $content-color: rgb(108, 108, 108)
+
+$light-bg-color: rgb(249, 249, 249)
+
+$society-color: rgb(244, 192, 91)
+$language-color: rgb(227, 81, 81)
+$languagesociety-color: rgb(114, 181, 62)
+$languagepsychology-color: rgb(85, 173, 201)
+$languageeducation-color: rgb(102, 24, 180)
+
+
 
 *
 	color: rgb(66, 66, 66)
@@ -38,9 +49,12 @@ $content-color: rgb(108, 108, 108)
 
 .content
 	overflow-x: auto
+	padding: 2rem 0
+	border-bottom: 1px solid $border-secondary
+	border-top: 1px solid $border-secondary
 	*
 		margin: 2rem 0
-		font-size: 1.2rem
+		font-size: 1.1rem
 		color: $content-color
 	h1, h2, h3, h4, h5, h6
 		margin: 4rem 0
@@ -48,10 +62,20 @@ $content-color: rgb(108, 108, 108)
 		font-size: 1.5rem
 	h2
 		font-size: 1.4rem
+		background-color: $semi-strong-color
+		color: white
+		padding: 1rem
+
 	h3
 		font-size: 1.3rem
+		border-left: 1rem double $semi-strong-color
+		border-right: 1rem double $semi-strong-color
+		padding: 0 1rem
+		display: inline-block
 	h4
 		font-size: 1.2rem
+		border-left: 0.5rem solid $semi-strong-color
+		padding: 0 1rem
 	h5
 		font-size: 1.1rem
 	h6
@@ -76,6 +100,19 @@ $content-color: rgb(108, 108, 108)
 		color: $link-color
 	img
 		width: 100%
+	.toc
+		border: 1px solid $border-secondary
+		border-radius: 0.5rem
+		ul
+			li
+				list-style-position: inside
+				ul
+					li
+						list-style-type: circle
+		&::before
+			content: '目次'
+			display: block
+			padding: 1rem 1rem 0 1rem
 
 
 .strong_button

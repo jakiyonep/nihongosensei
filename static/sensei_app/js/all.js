@@ -3,6 +3,7 @@
 
 var dropIs = 0;
 
+
 function drop (){
 	if (dropIs == 0) {
 		document.getElementById('navbar_collapse').classList.toggle('menu_drop')
@@ -12,6 +13,11 @@ function drop (){
 	}
 }
 
+/*
+$(document).on('click','#navbar_button', function(event){
+	$('#navbar_collapse').slideToggle('slow')
+})
+*/
 
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
@@ -26,7 +32,6 @@ window.onscroll = function() {
 	}
   }
   prevScrollpos = currentScrollPos;
-
 }
 
 function markdown_popup(){

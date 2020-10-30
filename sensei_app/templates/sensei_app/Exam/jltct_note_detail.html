@@ -1,6 +1,6 @@
 {% extends 'sensei_app/base.html' %}
 {% load static %}
-{% load markdownify %}
+{% load markdownx %}
 {% block title %}{{note.title}}{% endblock %}
 {% block content %}
 
@@ -26,10 +26,10 @@
         </div>
       </div>
       <div class="content">
-        {{ note.content|markdownify}}
+        {{ note.content|markdown_to_html}}
       </div>
 		</section>
-		<section class="right_column">
+		<section class="right_column jltct_detail_right_column">
 			{% include 'sensei_app/Exam/right_column.html' %}
 		</section>
 

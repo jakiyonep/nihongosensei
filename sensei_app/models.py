@@ -6,6 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.core.validators import EmailValidator
 
+from markdownx.models import MarkdownxField
+
 
 
 # USER REGISTRATION
@@ -169,7 +171,7 @@ class jltct(models.Model):
     number = models.IntegerField(null=True, blank=True)
     section = models.ForeignKey(jltctsection, on_delete=models.CASCADE, related_name="section_name", blank=False, null=True)
     tag = models.ManyToManyField(jltcttag, related_name="tags", blank=True, null=True)
-    content = models.TextField(null=False, blank=False)
+    content = MarkdownxField(null=False, blank=False)
     public = models.BooleanField(default=False)
     update = models.DateTimeField(auto_now=True)
     thumbnail = models.ImageField(upload_to="JLTCT_thumbnail", null=True, blank=True)

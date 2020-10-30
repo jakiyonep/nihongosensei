@@ -6,7 +6,9 @@
 
 <div class="jltct_tags">
   <p>タグ一覧</p>
-  {% for tag in jltct_tags|dictsortreversed:"num_notes"%}
-  <a href="{% url 'sensei_app:tag_notes' tag.tag_slug %}">{{tag}} {{tag.num_notes}}</a>
-  {% endfor %}
+	<div class="tag_list">
+	  {% for tag in jltct_tags|dictsortreversed:"num_notes"%}
+	  	<a href="{% url 'sensei_app:tag_notes' tag.tag_slug %}">{{tag}} {{tag.num_notes}}</a>
+	  {% endfor %}
+	</div>
 </div>
