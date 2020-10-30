@@ -175,6 +175,7 @@ class jltct(models.Model):
     public = models.BooleanField(default=False)
     update = models.DateTimeField(auto_now=True)
     thumbnail = models.ImageField(upload_to="JLTCT_thumbnail", null=True, blank=True)
+    related_note = models.ManyToManyField('self', blank=True, null=True)
 
     def __str__(self):
         return self.title

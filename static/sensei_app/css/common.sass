@@ -50,6 +50,7 @@ $languageeducation-color: rgb(102, 24, 180)
 .content
 	overflow-x: auto
 	padding: 2rem 0
+	margin: 6rem 0
 	border-bottom: 1px solid $border-secondary
 	border-top: 1px solid $border-secondary
 	*
@@ -72,9 +73,11 @@ $languageeducation-color: rgb(102, 24, 180)
 		border-right: 1rem double $semi-strong-color
 		padding: 0 1rem
 		display: inline-block
+		color: $semi-strong-color
 	h4
 		font-size: 1.2rem
 		border-left: 0.5rem solid $semi-strong-color
+		color: $semi-strong-color
 		padding: 0 1rem
 	h5
 		font-size: 1.1rem
@@ -83,10 +86,10 @@ $languageeducation-color: rgb(102, 24, 180)
 	p
 		line-height: 2rem
 	ul
+		margin-left: 1.5rem
 		li
 			list-style-type: 	disc
-			list-style-position: inside
-			padding-left: 1rem
+			list-style-position: outside
 			margin: 1rem 0
 	ol
 		li
@@ -94,6 +97,7 @@ $languageeducation-color: rgb(102, 24, 180)
 			list-style-position: inside
 			padding-left: 1rem
 			margin: 1rem 0
+			text-indent: -1rem
 	strong
 		background: linear-gradient(transparent 90%, $strong-color 90%)
 	a
@@ -105,7 +109,6 @@ $languageeducation-color: rgb(102, 24, 180)
 		border-radius: 0.5rem
 		ul
 			li
-				list-style-position: inside
 				ul
 					li
 						list-style-type: circle

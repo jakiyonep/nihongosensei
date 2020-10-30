@@ -28,6 +28,14 @@
       <div class="content">
         {{ note.content|markdown_to_html}}
       </div>
+			<div class="related">
+				<p>関連ノート</p>
+				{% for related in note.related_note.all %}
+					<li>
+						<a href="{% url 'sensei_app:note_detail' related.title_slug %}">{{related.title}}</a>
+					</li>
+				{% endfor %}
+			</div>
 		</section>
 		<section class="right_column jltct_detail_right_column">
 			{% include 'sensei_app/Exam/right_column.html' %}
