@@ -1,6 +1,7 @@
 {% extends 'sensei_app/base.html' %}
 {% load static %}
 {% load markdownx %}
+{% load markdownify %}
 {% block title %}{{note.title}}{% endblock %}
 {% block content %}
 
@@ -28,14 +29,26 @@
       <div class="content">
         {{ note.content|markdown_to_html}}
       </div>
-			<div class="related">
-				<p>関連ノート</p>
-				{% for related in note.related_note.all %}
-					<li>
-						<a href="{% url 'sensei_app:note_detail' related.title_slug %}">{{related.title}}</a>
-					</li>
-				{% endfor %}
-			</div>
+			{% if note.jltctreference_set.all %}
+				<div class="reference sub">
+					<p class="sub_head">参考</p>
+					{% for reference in note.jltctreference_set.all %}
+							<li>
+								<a href="{{reference.url}}">{{reference.name}}</a>
+							</li>
+					{% endfor %}
+				</div>
+			{% endif %}
+			{% if note.related_note.all %}
+				<div class="related sub">
+					<p class="sub_head">関連ノート</p>
+					{% for related in note.related_note.all %}
+						<li>
+							<a href="{% url 'sensei_app:note_detail' related.title_slug %}">{{related.title}}</a>
+						</li>
+					{% endfor %}
+				</div>
+			{% endif %}
 		</section>
 		<section class="right_column jltct_detail_right_column">
 			{% include 'sensei_app/Exam/right_column.html' %}

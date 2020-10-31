@@ -3,18 +3,23 @@ from sensei_app.models import *
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.utils.translation import ugettext_lazy as _
+from markdownx.admin import MarkdownxModelAdmin
 from .models import User
 
-admin.site.register(Contact)
-admin.site.register(QuestionCategory)
-admin.site.register(Question)
-admin.site.register(Answer)
-admin.site.register(Reply)
 
-admin.site.register(Exam)
-admin.site.register(jltct)
-admin.site.register(jltcttag)
-admin.site.register(jltctsection)
+
+class jltctReferences(admin.TabularInline):
+    model = jltctreference
+    extra = 1
+
+class jltctAdmin(MarkdownxModelAdmin):
+    list_display = ('title', 'number', 'public')
+    list_editable = ['number']
+    inlines = [
+        jltctReferences
+    ]
+
+
 
 # USER REGISTRATION
 
@@ -52,3 +57,13 @@ class MyUserAdmin(UserAdmin):
 
 admin.site.register(User, MyUserAdmin)
 
+admin.site.register(Contact)
+admin.site.register(QuestionCategory)
+admin.site.register(Question)
+admin.site.register(Answer)
+admin.site.register(Reply)
+
+admin.site.register(Exam)
+admin.site.register(jltct,jltctAdmin)
+admin.site.register(jltcttag)
+admin.site.register(jltctsection)

@@ -183,6 +183,11 @@ class jltct(models.Model):
     class Meta:
         ordering = ['section','number']
 
+class jltctreference(models.Model):
+    note = models.ForeignKey(jltct,on_delete=models.CASCADE)
+    name = models.CharField(max_length=500, null=True, blank=True)
+    url = models.CharField(max_length=500, null=True, blank=True)
+
 class Exam(models.Model):
     year = models.IntegerField(null=True, blank=True)
     section = models.IntegerField(null=True, blank=True)
