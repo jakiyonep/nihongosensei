@@ -7,8 +7,8 @@
 <body>
 	{% include 'sensei_app/navbar.html' %}
 	<div class="wrapper toppage_wrapper">
-
-		<!--{% if not user.is_authenticated %}
+		<!--
+		{% if not user.is_authenticated %}
 		 <section>
 			 <a class="toppage_card" href="{% url 'sensei_app:login' %}">
 				 <div class="card_img">
@@ -16,7 +16,7 @@
 				 </div>
 				 <div class="card_right">
 					 <h1 class="card_top">ログイン</h1>
-					 <p class="card_desc">ログイン後に質問、回答をすると、あなたの過去の記録がマイページで確認できるようになります。</p>
+					 <p class="card_desc">ログインした状態で質問や回答をすると、マイページに記録が残り、いつでも確認できるようになります。</p>
 				 </div>
 			 </a>
 		 </section>

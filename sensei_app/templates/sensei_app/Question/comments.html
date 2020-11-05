@@ -6,7 +6,7 @@
 				{% if answer.login_author == question.login_author %}<!-- if quesioner and answerer are the same -->
 					<div class="answer answer_same">
 						<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
-						<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
+						<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
 						<div class="content answer_content">
 							{{answer.content|markdownify}}
 						</div>
@@ -18,7 +18,7 @@
 				{% else %} <!--if questioner and answerer are different-->
 					<div class="answer">
 						<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
-						<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
+						<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
 						<div class="content answer_content">
 							{{answer.content|markdownify}}
 						</div>
@@ -31,7 +31,7 @@
 			{% else %}<!-- if the answerer is not a member-->
 				<div class="answer">
 					<p class="answer_author">{{answer.author}}<span class="san">さん</span></p>
-					<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
+					<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
 					<div class="content answer_content">
 						{{answer.content|markdownify}}
 					</div>
@@ -52,7 +52,7 @@
 				{% if answer.login_author == question.login_author %}<!-- if quesioner and answerer are the same -->
 					<div class="answer answer_same">
 						<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{	answer.login_author.nickname}}<span class="san">さん</span></a>
-						<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
+						<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
 						<div class="content answer_content">
 							{{answer.content|markdownify}}
 						</div>
@@ -64,7 +64,7 @@
 				{% else %} <!--if questioner and answerer are different-->
 					<div class="answer">
 						<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
-						<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
+						<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
 						<div class="content answer_content">
 							{{answer.content|markdownify}}
 						</div>
@@ -77,7 +77,7 @@
 			{% else %}<!-- if the answerer is not a member-->
 				<div class="answer">
 					<p class="answer_author">{{answer.author}}<span class="san">さん</span></p>
-					<p class="answer_date">回答日時: {{answer.created_at|naturaltime}}</p>
+					<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
 					<div class="content answer_content">
 						{{answer.content|markdownify}}
 					</div>

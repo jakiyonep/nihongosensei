@@ -56,7 +56,7 @@ $languageeducation-color: rgb(102, 24, 180)
 		font-size: 1.1rem
 		color: $content-color
 	h1, h2, h3, h4, h5, h6
-		margin: 4rem 0
+		margin: 3rem 0
 	h1
 		font-size: 1.5rem
 	h2
@@ -67,11 +67,10 @@ $languageeducation-color: rgb(102, 24, 180)
 
 	h3
 		font-size: 1.3rem
-		border-left: 1rem double $semi-strong-color
-		border-right: 1rem double $semi-strong-color
-		padding: 0 1rem
+		padding: 1rem
 		display: inline-block
-		color: $semi-strong-color
+		color: white
+		background-color: $semi-strong-color
 	h4
 		font-size: 1.2rem
 		border-left: 0.5rem solid $semi-strong-color
@@ -88,13 +87,13 @@ $languageeducation-color: rgb(102, 24, 180)
 		li
 			list-style-type: 	disc
 			list-style-position: outside
-			margin: 1rem 0
+			margin: 0.5rem 0
 	ol
 		li
 			list-style: decimal
 			list-style-position: inside
 			padding-left: 1rem
-			margin: 1rem 0
+			margin: 0.5rem 0
 			text-indent: -1rem
 	strong
 		background: linear-gradient(transparent 90%, $strong-color 90%)
@@ -105,22 +104,50 @@ $languageeducation-color: rgb(102, 24, 180)
 	.toc
 		border: 1px solid $border-secondary
 		border-radius: 0.5rem
+		padding-right: 0.7rem
 		ul
 			li
+				margin: 0.5rem 0
 				ul
+					margin-top: 0.5rem
+					margin-bottom: 0.5rem
 					li
 						list-style-type: circle
 		&::before
 			content: '目次'
 			display: block
 			padding: 1rem 1rem 0 1rem
-
+	.table
+	  display: block
+	  overflow-x: auto
+	  white-space: nowrap
+	  -webkit-overflow-scrolling: touch
+	.table
+		max-width: 100%
+		tr
+			&>*
+				vertical-align: middle
+				border: 1px solid $border-secondary
+				padding: 1rem 3rem 1rem 0.5rem
+			th
+				background-color: $light-bg-color
+	blockquote
+		background-color: $border-secondary
+		padding: 1rem
+		&::before
+			content: "\f10d"
+			font-family: "Font Awesome 5 Free"
+			width: 1rem
+			height: 1rem
+			font-weight: 900
+			display: inline-block
+		p
+			margin: 0
 
 .strong_button
 	color: white
 	background-color: $strong-color
 	padding: 1rem
-	border-radius: .5rem
 	margin-bottom: 7rem
 	display: block
 	text-align: center

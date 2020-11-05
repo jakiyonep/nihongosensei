@@ -10,6 +10,8 @@ $strong-color: rgb(255, 112, 112)
 $link-color: rgb(3, 196, 214)
 $sub-strong-color: rgb(111, 181, 218)
 
+$light-bg-color: rgb(249, 249, 249)
+
 .question_list_wrapper
 	justify-content: space-between
 	.left_column
@@ -17,51 +19,50 @@ $sub-strong-color: rgb(111, 181, 218)
 		.questions
 	.question_container
 		margin-bottom: 3rem
-		background-color: $question-bg
+		border: 1px solid $border-secondary
 		padding: 2rem 1rem
 		border-radius: 1rem
-		.question_link
-			width: 100%
-			height: 100%
-		.question_title
-			font-size: 1.4rem
-			margin-bottom: 1rem
-			border-bottom: 1px solid $border-primary
-			transition: 0.5s
-			&:hover
-				border-bottom: 2px solid $strong-color
-				letter-spacing: 0.1rem
-		.question_author
-			margin-bottom: 1rem
-			display: inline-block
-			font-weight: bold!important
-			font-size: 1.2rem
-		.login_author_link
-		.san
-			font-weight: normal
-		.question_created_at
-			margin-right: 1rem
-			margin-bottom: 0.5rem
-			display: inline-block
-		.question_category
-			margin-bottom: 1rem
-		.question_answers
-			margin-top: 0.5rem
-			span
-				color: $strong-color
-				font-size: 1.1rem
+	.question_link
+		width: 100%
+		height: 100%
+	.question_title
+		font-size: 1.2rem
+		margin-bottom: 1rem
+		border-bottom: 1px solid $border-primary
+		transition: 0.5s
 
+		&:hover
+			border-bottom: 2px solid $strong-color
+	.question_info
+		display: flex
+		flex-direction: row
+		flex-wrap: wrap
+		align-items: center
+		margin-bottom: 1rem
+		>div
+			i
+				margin-right: .5rem
+		.author_container
+			width: 100%
+		.time_container
+			width: 20%
+		.answers_num
+			width: 20%
+		.category_container
+			width: 60%
+	.content_beginning
+		.fas
+			color: grey
 	.right_column
 		width: 20%
 
 
 .question_category
 	display: inline-block
-	padding: 0.5rem 1rem
-	border: 2px solid $nihongo-bg
+	padding: 0.3rem 1rem
+	border: 1px solid $nihongo-bg
 	color: $nihongo-bg
-	font-weight: bold
-	border-radius: 1rem
+	border-radius: 0.4rem
 	transition: 0.5s
 	&:hover
 		transition: 0.5s
@@ -69,22 +70,22 @@ $sub-strong-color: rgb(111, 181, 218)
 		color: white
 .question_category_nihongo
 .question_category_sensei
-	border: 2px solid $sensei-bg
+	border: 1px solid $sensei-bg
 	color: $sensei-bg
 	&:hover
 		background-color: $sensei-bg
 .question_category_jltct
-	border: 2px solid $jltct-bg
+	border: 1px solid $jltct-bg
 	color: $jltct-bg
 	&:hover
 		background-color: $jltct-bg
 .question_category_others
-	border: 2px solid $others-bg
+	border: 1px solid $others-bg
 	color: $others-bg
 	&:hover
 		background-color: $others-bg
 .question_category_culture-society
-	border: 2px solid $culture-society-bg
+	border: 1px solid $culture-society-bg
 	color: $culture-society-bg
 	&:hover
 		background-color: $culture-society-bg
@@ -110,9 +111,8 @@ $sub-strong-color: rgb(111, 181, 218)
 			i
 				color: white
 	.sidebar_category_container
-		border: 2px solid $border-secondary
+		background-color: $light-bg-color
 		padding: 1rem
-		border-radius: 1rem
 	.question_category
 		display: inline-block
 		margin-bottom: 1rem
@@ -126,8 +126,7 @@ $sub-strong-color: rgb(111, 181, 218)
 	.question_category
 		margin: 1rem 0
 	.question_author
-		font-size: 1.4rem
-		font-weight: bold
+		font-size: 1.1rem
 	.san
 		font-weight: normal
 	.question_content
@@ -249,9 +248,18 @@ $sub-strong-color: rgb(111, 181, 218)
 		.question_link
 			display: flex
 			flex-direction: column
-		.question_author
-			margin-top: 1rem
-			display: inline-block
+		.question_info
+			.author_container
+			.time_container
+				width: 80%!important
+			.answers_num
+				width: 20%!important
+			.category_container
+				width: 100%!important
+				margin: 0.5rem 0
+				.question_category
+					width: 100%
+					text-align: center
 
 
 		.sidebar
