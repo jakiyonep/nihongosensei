@@ -4,8 +4,8 @@
 {% load static %}
 {% load humanize %}
 <head>
-	<link rel="stylesheet" href="{% static 'sensei_app/css/user_info.min.css' %}">
 	<link rel="stylesheet" href="{% static 'sensei_app/css/question.min.css' %}">
+	<link rel="stylesheet" href="{% static 'sensei_app/css/user_info.min.css' %}">
 </head>
 <body>
 	{% include 'sensei_app/navbar.html' %}
@@ -13,128 +13,77 @@
 		<p class="section_head">
 			{% if user.nickname %}
 				{{user.nickname}}さんのページ
+			{% else %}
+				名無しさんのページ
 			{% endif %}
 		</p>
-		<div class="user_info_top">
-			<div class="user_info">
-			<div class="user_info_row">
-				<div class="user_info_left">
-					ニックネーム
-				</div>
-				<div class="user_info_right">
-					{{user.nickname}}
-				</div>
-			</div>
-			<div class="user_info_row">
-				<div class="user_info_left">
-					登録日
-				</div>
-				<div class="user_info_right">
-					{{user.date_joined|date:'Y-m-d'}}
-				</div>
-			</div>
-			<div class="user_info_row">
-				<div class="user_info_left">
-					質問数
-				</div>
-				<div class="user_info_right">
-					{{user.login_author.count}}
-				</div>
-			</div>
-			<div class="user_info_row">
-				<div class="user_info_left">
-					回答数
-				</div>
-				<div class="user_info_right">
-					{{user.login_author_answer.count}}
-				</div>
-			</div>
-		</div>
-		</div>
+		<div class="left_column user_info_left_column">
 
-		<div class="user_info_list question_list_wrapper">
-			<p class="section_head">
-				{% if user.nickname %}
-					{{user.nickname}}さんの質問
-				{% else %}
-				{% endif %}
-			</p>
-			<div class="questions">
-				{% for question in questions %}
-					<article class="question_container">
-						<a class="question_link" href="{% url 'sensei_app:question_detail' question.pk %}">
-							<h2 class="question_title">{{ question.title }}</h2>
-							<div class="question_info">
-								<div class="author_container">
-									{% if not question.login_author %}
-										{% if question.author %}
-										<i class="fas fa-chalkboard-teacher"></i><span class="question_author">{{ question.author }}<span class="san">さん</span></span>
-										{% else %}
-											<i class="fas fa-chalkboard-teacher"></i><span class="question_author">名無しさん</span>
-										{% endif %}
-									{% else %}
-										<a class="question_author login_author_link" href="{% url 'sensei_app:activities_of_user' question.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{question.login_author.nickname}}<span class="san">さん</span></a>
-									{% endif %}
-								</div>
-								<div class="time_container">
-									<i class="far fa-clock"></i><span class="question_created_at">{{ question.created_at|date:"Y/m/d f"}}</span>
-								</div>
-								<div class="answers_num">
-									<i class="fas fa-comment"></i><span class="question_answers">{{question.answers.count}}</span>
-								</div>
-								<div class="category_container">
-									<a href="{% url 'sensei_app:question_category' question.category.category_slug %}" class="question_category question_category_{{ question.category.category_slug }}">{{ question.category }}</a>
-								</div>
-							</div>
-							<div class="content_beginning">
-								{{question.content|slice:":100"}} <i class="fas fa-ellipsis-h"></i>
-							</div>
-						</a>
-					</article>
-				{% endfor %}
-				<a class="more_button" href="{% url 'sensei_app:all_questions_of_user' user.pk %}">もっとみる</a>
+			<div class="user_info_top">
+				<div class="user_info">
+				<div class="user_info_row">
+					<div class="user_info_left">
+						ニックネーム
+					</div>
+					<div class="user_info_right">
+						{{user.nickname}}
+					</div>
+				</div>
+				<div class="user_info_row">
+					<div class="user_info_left">
+						登録日
+					</div>
+					<div class="user_info_right">
+						{{user.date_joined|date:'Y-m-d'}}
+					</div>
+				</div>
+				<div class="user_info_row">
+					<div class="user_info_left">
+						質問数
+					</div>
+					<div class="user_info_right">
+						{{user.login_author.count}}
+					</div>
+				</div>
+				<div class="user_info_row">
+					<div class="user_info_left">
+						回答数
+					</div>
+					<div class="user_info_right">
+						{{user.login_author_answer.count}}
+					</div>
+				</div>
 			</div>
-			<div class="questions">
+			</div>
+			<div class="user_info_list question_list_wrapper">
+				<p class="section_head">
+					{% if user.nickname %}
+						{{user.nickname}}さんの質問
+					{% else %}
+						名無しさんの質問
+					{% endif %}
+				</p>
+				<div class="questions">
+					{% include "sensei_app/Question/question_list_snippet.html" %}
+					<a class="more_button" href="{% url 'sensei_app:all_questions_of_user' user.pk %}">もっとみる</a>
+				</div>
+			</div>
+			<div class="user_info_list question_list_wrapper">
 				<p class="section_head">
 					{% if user.nickname %}
 						{{user.nickname}}さんの回答
 					{% else %}
-						あなたの回答
+						名無しさんの回答
 					{% endif %}
 				</p>
-				{% for answer in answers %}
-					<article class="question_container">
-						<a class="question_link" href="{% url 'sensei_app:question_detail' answer.question.pk %}">
-							<h2 class="question_title">{{ answer.question }}</h2>
-							<div class="question_info">
-								<div class="author_container">
-									{% if not question.login_author %}
-										{% if question.author %}
-										<i class="fas fa-chalkboard-teacher"></i><span class="question_author">{{ answer.question.author }}<span class="san">さん</span></span>
-										{% else %}
-											<i class="fas fa-chalkboard-teacher"></i><span class="question_author">名無しさん</span>
-										{% endif %}
-									{% else %}
-										<a class="question_author login_author_link" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
-									{% endif %}
-								</div>
-								<div class="time_container">
-									<i class="far fa-clock"></i><span class="question_created_at">{{ answer.created_at|date:"Y/m/d f"}}</span>
-								</div>
-								<div class="answers_num">
-									<i class="fas fa-comment"></i><span class="question_answers">{{answer.question.answers.count}}</span>
-								</div>
-								<div class="category_container">
-									<a href="{% url 'sensei_app:question_category' answer.question.category.category_slug %}" class="question_category question_category_{{ answer.question.category.category_slug }}">{{ answer.question.category }}</a>
-								</div>
-							</div>
-							<div class="content_beginning">
-								{{answer.content|slice:":100"}} <i class="fas fa-ellipsis-h"></i>
-							</div>
-						</a>
-					</article>
-				{% endfor %}
-				<a class="more_button" href="{% url 'sensei_app:all_answers_of_user' user.pk %}">もっとみる</a>
+				<div class="questions">
+					{% include "sensei_app/Question/answer_list_snippet.html" %}
+				</div>
+					<a class="more_button" href="{% url 'sensei_app:all_answers_of_user' user.pk %}">もっとみる</a>
+				</div>
 			</div>
+		<div class="right_column user_info_right_column">
+			{% include "sensei_app/Question/sidebar.html" %}
 		</div>
+	</div>
 {% endblock %}

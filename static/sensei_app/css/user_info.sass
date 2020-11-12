@@ -16,11 +16,11 @@ $link-color: rgb(3, 196, 214)
 		margin-bottom: 5rem
 		flex-direction: row
 		width: 100%
+		flex-wrap: wrap
 		justify-content: space-between
 
-		padding: 1rem
 		.user_info
-			width: 50%
+			width: 100%
 			font-size: 1.2rem
 			.user_info_row
 				display: flex
@@ -33,12 +33,15 @@ $link-color: rgb(3, 196, 214)
 					font-weight: bold
 
 		.user_info_menu
-			width: 40%
+			margin-top: 2rem
+			width: 100%
 			display: flex
 			flex-direction: column
 			justify-content: space-between
 			li
 				list-style: none
+				width: 100%
+				margin-bottom: 1rem
 				a
 					background-color: $sub-strong-color
 					color: white
@@ -47,6 +50,8 @@ $link-color: rgb(3, 196, 214)
 					display: inline-block
 					margin-bottom: 0.5rem
 					transition: 0.5s
+					width: 100%
+					text-align: center
 					&:hover
 						transition: 0.5s
 						color: $sub-strong-color
@@ -88,4 +93,9 @@ $link-color: rgb(3, 196, 214)
 				a
 					width: 100%
 					text-align: center
-			
+	.secton_head
+		order: 1!important
+	.left_column
+		order: 2!important
+	.right_column
+		order: 3!important

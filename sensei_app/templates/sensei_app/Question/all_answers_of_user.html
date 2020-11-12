@@ -4,43 +4,28 @@
 {% load static %}
 {% load humanize %}
 <head>
+	<link rel="stylesheet" href="{% static 'sensei_app/css/question.min.css' %}">
 	<link rel="stylesheet" href="{% static 'sensei_app/css/user_info.min.css' %}">
-		<link rel="stylesheet" href="{% static 'sensei_app/css/question.min.css' %}">
 </head>
 <body>
 	{% include 'sensei_app/navbar.html' %}
-	<div class="wrapper user_info_wrapper">
-		<div class="user_info_list question_list_wrapper">
-
-			<div class="answers">
-				<p class="section_head">
-					{% if user.nickname %}
-					<a class="login_author_link" href="{% url 'sensei_app:activities_of_user' user.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{user.nickname}}</a>さんの回答
-					{% else %}
-						あなたの回答
-					{% endif %}
-				</p>
-				{% for answer in answers %}
-					<article class="question_container">
-						<a class="question_link" href="{% url 'sensei_app:question_detail' answer.question.pk %}">
-							<h2 class="question_title">{{ answer.question }}</h2>
-							<span class="question_created_at">投稿日時:{{ answer.created_at | naturaltime}}</span>
-							<a href="{% url 'sensei_app:question_category' answer.question.category.category_slug %}" class="question_category question_category_{{ answer.question.category.category_slug }}">{{ answer.question.category }}</a>
-							<br>
-						</a>
-						<p class="answer_collapse" id="button_{{answer.pk}}" onclick="answer_collapse({{answer.pk}})">
-							{% if user.nickname %}
-								{{user.nickname}}さんの回答を見る
-							{% else %}
-								あなたの回答を見る
-							{% endif %}
-						</p>
-						<div class="content" id="answer_collapse_{{answer.pk}}" style="display:none">
-							{{answer.content|markdownify}}
-						</div>
-					</article>
-				{% endfor %}
+	<div class="wrapper question_list_wrapper all_wrapper">
+		<p class="section_head">
+			{% if user.nickname %}
+				<a class="login_author_link" href="{% url 'sensei_app:activities_of_user' user.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{user.nickname}}</a>さんの回答
+			{% else %}
+				あなたの回答
+			{% endif %}
+		</p>
+		<div class="left_column">
+			<div class="questions">
+				{% include "sensei_app/Question/answer_list_snippet.html" %}
 				{% include 'sensei_app/pagination.html' %}
 			</div>
 		</div>
+		<div class="right_column">
+			{% include "sensei_app/Question/sidebar.html" %}
+		</div>
+	</div>
+</body>
 {% endblock %}

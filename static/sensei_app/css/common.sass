@@ -20,6 +20,7 @@ $languageeducation-color: rgb(102, 24, 180)
 
 
 
+
 *
 	color: rgb(66, 66, 66)
 	line-height: 1.8rem
@@ -31,6 +32,7 @@ $languageeducation-color: rgb(102, 24, 180)
 	margin-bottom: 10rem
 	flex-direction: row
 	flex-wrap: wrap
+	justify-content: space-between
 
 .section_head
 	font-size: 2rem
@@ -59,23 +61,26 @@ $languageeducation-color: rgb(102, 24, 180)
 		margin: 3rem 0
 	h1
 		font-size: 1.5rem
+
 	h2
 		font-size: 1.4rem
 		background-color: $semi-strong-color
 		color: white
 		padding: 1rem
-
+		margin: 10rem 0 2rem 0
 	h3
 		font-size: 1.3rem
 		padding: 1rem
 		display: inline-block
-		color: white
-		background-color: $semi-strong-color
+		color: $semi-strong-color
+		border: 2px solid $semi-strong-color
+		margin: 6rem 0 0 0
 	h4
 		font-size: 1.2rem
 		border-left: 0.5rem solid $semi-strong-color
 		color: $semi-strong-color
 		padding: 0 1rem
+		margin: 5rem 0 0 0
 	h5
 		font-size: 1.1rem
 	h6
@@ -83,12 +88,13 @@ $languageeducation-color: rgb(102, 24, 180)
 	p
 		line-height: 2rem
 	ul
-		margin-left: 1.5rem
+		margin-left: 4rem
 		li
 			list-style-type: 	disc
 			list-style-position: outside
 			margin: 0.5rem 0
 	ol
+		margin-left: 4rem
 		li
 			list-style: decimal
 			list-style-position: inside
@@ -143,6 +149,10 @@ $languageeducation-color: rgb(102, 24, 180)
 			display: inline-block
 		p
 			margin: 0
+		ol
+			margin-left: 0!important
+		ul
+			margin-left: 0!important
 
 .strong_button
 	color: white
@@ -231,9 +241,26 @@ $languageeducation-color: rgb(102, 24, 180)
 .login_author_link
 	color: $link-color
 
+.left_column
+	width: 75%
+.right_column
+	width: 20%
 
 
 @media screen and (max-width:1100px)
 	.wrapper
 		width: 90vw
 		flex-direction: column
+		.section_head
+			order: 1
+		.left_column
+			width: 100%!important
+			order: 3
+		.right_column
+			width: 100%!important
+			order: 2
+		.content
+			ul
+				margin-left: 2rem
+			ol
+				margin-left: 2rem

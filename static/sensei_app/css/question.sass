@@ -14,9 +14,7 @@ $light-bg-color: rgb(249, 249, 249)
 
 .question_list_wrapper
 	justify-content: space-between
-	.left_column
-		width: 75%
-		.questions
+
 	.question_container
 		margin-bottom: 3rem
 		border: 1px solid $border-secondary
@@ -32,7 +30,7 @@ $light-bg-color: rgb(249, 249, 249)
 		transition: 0.5s
 
 		&:hover
-			border-bottom: 2px solid $strong-color
+			border-bottom: 1px solid $strong-color
 	.question_info
 		display: flex
 		flex-direction: row
@@ -53,8 +51,7 @@ $light-bg-color: rgb(249, 249, 249)
 	.content_beginning
 		.fas
 			color: grey
-	.right_column
-		width: 20%
+
 
 
 .question_category
@@ -237,14 +234,7 @@ $light-bg-color: rgb(249, 249, 249)
 
 @media screen and (max-width:1100px)
 	.question_list_wrapper
-		.section_head
-			order: 1
-		.left_column
-			width: 100%!important
-			order: 3
-		.right_column
-			width: 100%!important
-			order: 2
+
 		.question_link
 			display: flex
 			flex-direction: column

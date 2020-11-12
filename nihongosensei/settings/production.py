@@ -31,7 +31,9 @@ django_heroku.settings(locals())
 
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-
+EMAIL_HOST = os.environ.get('smtp.gmail.com')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_USE_TLS = True
 
 #AWS
 from nihongosensei.aws.conf import *

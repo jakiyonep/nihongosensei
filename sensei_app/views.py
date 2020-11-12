@@ -368,8 +368,8 @@ def UserDetail(request, pk):
 
     return render(request, 'sensei_app/register/user_detail.html', {
         'user': login_author,
-        'questions': questions,
-        'answers': answers,
+        'question_list': questions,
+        'answer_list': answers,
     })
 
 
@@ -383,8 +383,8 @@ def ActivitiesOfUser(request, pk):
 
     return render(request, 'sensei_app/activities_of_user.html', {
         'user': login_author,
-        'questions': questions,
-        'answers': answers,
+        'question_list': questions,
+        'answer_list': answers,
     })
 
 
@@ -404,7 +404,7 @@ def AllQuestionsofUser(request, pk):
 
     return render(request, 'sensei_app/Question/all_questions_of_user.html', {
         'user': login_author,
-        'questions': questions,
+        'question_list': questions,
         'page_obj': page_obj,
         'num': num,
         'paginator': paginator,
@@ -428,7 +428,7 @@ def AllAnswersofUser(request, pk):
 
     return render(request, 'sensei_app/Question/all_answers_of_user.html', {
         'user': login_author,
-        'answers': answers,
+        'answer_list': answers,
         'page_obj': page_obj,
         'num': num,
         'paginator':paginator,
