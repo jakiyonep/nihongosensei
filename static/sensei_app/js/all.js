@@ -13,11 +13,7 @@ function drop (){
 	}
 }
 
-/*
-$(document).on('click','#navbar_button', function(event){
-	$('#navbar_collapse').slideToggle('slow')
-})
-*/
+
 
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
@@ -57,4 +53,36 @@ $(document).on('click', '.reply_button', function(event){
 	event.preventDefault();
 	var answer_id = $(this).attr('name')
 	$('#reply_form_wrapper_' + answer_id).slideToggle()
+})
+
+
+$(document).on('input', '#question_form_id [name=content]', function(event){
+	event.preventDefault();
+	var content = $("#question_form_id [name=content]").val()
+	document.getElementById('markdowned_content').innerHTML = marked(content)
+})
+
+$(document).on('input', '#answer_form_id [name=answer_content]', function(event){
+	event.preventDefault();
+	var content = $("#answer_form_id [name=answer_content]").val()
+	document.getElementById('markdowned_content').innerHTML = marked(content)
+})
+
+
+$(document).on('input', '.answer_form [name=reply_content]', function(event){
+	event.preventDefault();
+	var id = $(this).parent().attr('id');
+	var content = $(this).val()
+	document.getElementById('markdowned_' + id).innerHTML = marked(content)
+})
+
+
+$(document).on('click', '.question_check_button', function(event){
+	$("#markdowned_content").toggle("fast");
+})
+
+$(document).on('click', '.question_check_button', function(event){
+	var id = $(this).attr('id')
+	console.log(id)
+	$("#markdowned_reply_" + id).toggle("fast");
 })

@@ -39,7 +39,6 @@ class CustomUserManager(UserManager):
             raise ValueError('Superuser must have is_superuser=True.')
         return self._create_user(email, password, **extra_fields)
 
-
 class User(AbstractBaseUser, PermissionsMixin):
     """カスタムユーザーモデル."""
 
@@ -85,7 +84,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         メールアドレスを返す
         """
         return self.email
-
 
 class QuestionCategory(models.Model):
     category_name = models.CharField(null=True, blank=False, max_length=100)
@@ -205,3 +203,12 @@ class Exam(models.Model):
     answer = models.IntegerField(choices=Answer.choices, null=True)
 
     updated = models.DateTimeField(auto_now=True)
+
+class MarkdownExpModel(models.Model):
+    htmltag = models.CharField(null=True, blank=True, max_length=100)
+    exp = models.TextField(null=True, blank=True)
+    before = models.TextField(null=True, blank=True)
+    after = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.htmltag

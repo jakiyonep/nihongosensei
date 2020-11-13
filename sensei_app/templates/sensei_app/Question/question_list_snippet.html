@@ -1,3 +1,4 @@
+{% load markdownify %}
 {% for question in question_list %}
   <article class="question_container">
     <a class="question_link" href="{% url 'sensei_app:question_detail' question.pk %}">
@@ -28,7 +29,8 @@
       </div>
     </div>
     <div class="content_beginning">
-      {{question.content|slice:":100"}} <i class="fas fa-ellipsis-h"></i>
+      {% with question.content|markdownify as markdown_content %}
+      {{markdown_content|slice:":100"}}{% endwith %} <i class="fas fa-ellipsis-h"></i>
     </div>
   </article>
 {% endfor %}

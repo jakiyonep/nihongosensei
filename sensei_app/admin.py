@@ -67,3 +67,5 @@ admin.site.register(Exam)
 admin.site.register(jltct,jltctAdmin)
 admin.site.register(jltcttag)
 admin.site.register(jltctsection)
+
+admin.site.register(MarkdownExpModel)

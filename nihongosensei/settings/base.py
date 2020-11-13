@@ -56,15 +56,17 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
 
 MARKDOWNIFY_STRIP = False
 MARKDOWNIFY_WHITELIST_TAGS = {
-    'a', 'p',
+    'p','a',
     'h1', 'h2', 'h3','h4', 'h5', 'h6', 'h7',
     'ul', 'li', 'span', 'ol',
     'strong', 'img',
+    'blockquote',
 
 }
 MARKDOWNIFY_WHITELIST_ATTRS = [
-    'src',
+    'src', 'href'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

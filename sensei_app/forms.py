@@ -50,7 +50,7 @@ class QuestionForm(forms.ModelForm):
             'login_author': forms.HiddenInput(),
             'category': Select(attrs={
                 'class': 'form-control',
-                'placeholder': '名前',
+                'placeholder': 'カテゴリー',
             }),
             'content': Textarea(attrs={
                 'class': 'form-control',

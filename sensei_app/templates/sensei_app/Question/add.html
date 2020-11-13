@@ -12,119 +12,37 @@
 <body>
 	{% include 'sensei_app/navbar.html' %}
 	<div class="wrapper question_list_wrapper question_add_wrapper">
-		<section class="left_column">
-			<div class="left_top">
-				<h1 class="section_head">質問する</h1>
-			</div>
-
-
-			<main class="question_add">
-        <form class="question_form" action="{% url 'sensei_app:question_add' %}" onsubmit="return confirm('投稿してもよろしいでしょうか？');"  method="POST">
-					<section class="title">
-						{{form.title}}
-					</section>
-					{% if not user.is_authenticated %}
-						<section class="author">
-							{{form.author}}
-						</section>
-					{% endif %}
-
-					<section class="category">
-						{{form.category}}
-					</section>
-					<div class="markdown_desc">
-						<p>「質問内容」のボックスはマークダウンに対応しています <i  onclick="markdown_popup()" class="fas fa-question-circle"></i></p>
-						<div class="popup" id="popup">
-					    <div class="popup_content">
-								<div class="popup_content_row">
-									<div class="popup_content_left">
-										<li># 見出しレベル１</li>
-										<li>## 見出しレベル2</li>
-										<li>### 見出しレベル3</li>
-										<li>#### 見出しレベル4</li>
-									</div>
-									<div class="popup_content_middle">
-										→
-									</div>
-									<div class="popup_content_right">
-										<h1>見出しレベル１</h1>
-										<h2>見出しレベル2</h2>
-										<h3>見出しレベル3</h3>
-										<h4>見出しレベル4</h4>
-									</div>
-								</div>
-								<div class="popup_content_row">
-									<div class="popup_content_left">
-										<li>これは[Googleのトップページ](https://www.google.com/?hl=ja)です</li>
-									</div>
-									<div class="popup_content_middle">
-										→
-									</div>
-									<div class="popup_content_right">
-										<li>これは<a href="https://www.google.com/?hl=ja">Googleのトップページ</a>です</li>
-									</div>
-								</div>
-								<div class="popup_content_row">
-									<div class="popup_content_left">
-										<ul>
-											<li>- 箇条書き1</li>
-											<li>- 箇条書き2</li>
-											<li>- 箇条書き3</li>
-										</ul>
-									</div>
-									<div class="popup_content_middle">
-										→
-									</div>
-									<div class="popup_content_right">
-										<ul>
-											<li>箇条書き1</li>
-											<li>箇条書き2</li>
-											<li>箇条書き3</li>
-										</ul>
-									</div>
-								</div>
-								<div class="popup_content_row">
-									<div class="popup_content_left">
-										<ol>
-											<li>1. リスト1</li>
-											<li>1. リスト2</li>
-											<li>1. リスト3</li>
-										</ol>
-									</div>
-									<div class="popup_content_middle">
-										→
-									</div>
-									<div class="popup_content_right">
-										<ol>
-											<li>リスト1</li>
-											<li>リスト2</li>
-											<li>リスト3</li>
-										</ol>
-									</div>
-								</div>
-								<div class="popup_content_row">
-									<div class="popup_content_left">
-										<li>これは**重要な部分**です</li>
-									</div>
-									<div class="popup_content_middle">
-										→
-									</div>
-									<div class="popup_content_right">
-										<li>これは<strong>重要な部分</strong>です</li>
-									</div>
-								</div>
-				        <p class="close_button"><i onclick="markdown_close()" class="fas fa-times-circle"></i></p>
-					    </div>
-						</div>
-					</div>
-					<section class="content">
-						{{form.content}}
-					</section>
-					<button type="submit" name="button" class="strong_button">投稿する</button>
-					{% csrf_token %}
-				</form>
-			</main>
+		<h1 class="section_head">質問する</h1>
+    <section class="left_column">
+  		<main class="question_add">
+        <form class="question_form" id="question_form_id" action="{% url 'sensei_app:question_add' %}"  method="POST" onsubmit="return confirm('投稿してもよろしいでしょうか？');">
+  				<section class="title">
+  					{{form.title}}
+  				</section>
+  				{% if not user.is_authenticated %}
+  					<section class="author">
+  						{{form.author}}
+  					</section>
+  				{% endif %}
+  				<section class="category">
+  					{{form.category}}
+  				</section>
+            {% include "sensei_app/markdown_exp.html" %}
+  				<section>
+  					{{form.content}}
+  				</section>
+      		<p class="check_button question_check_button">プレビュー画面</p>
+          <div class="content_check question_check content user_content" id="markdowned_content">
+          </div>
+  				<button type="submit" name="button" class="strong_button submit_button">質問を投稿する</button>
+  				{% csrf_token %}
+  			</form>
+  		</main>
 		</section>
+    <section class="right_column">
+      {% include "sensei_app/Question/sidebar.html" %}
+    </section>
 	</div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 {% endblock %}

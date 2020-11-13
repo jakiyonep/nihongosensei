@@ -28,16 +28,18 @@ from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views import generic
 from .forms import (
-    LoginForm, UserCreateForm, UserUpdateForm, MyPasswordChangeForm,
-    MyPasswordResetForm, MySetPasswordForm, EmailChangeForm
+    LoginForm, UserCreateForm, UserUpdateForm, MyPasswordChangeForm, MyPasswordResetForm, MySetPasswordForm, EmailChangeForm,
+    QuestionForm, AnswerForm,
 )
 
 from sensei_app.models import *
 
-
 class Toppage(TemplateView):
     template_name = 'sensei_app/toppage.html'
 
+
+
+# Contact
 
 def ContactAdd(request):
     form = forms.ContactForm()
@@ -54,7 +56,18 @@ def ContactAdd(request):
 
     return render(request, 'sensei_app/Contact/contact_add.html', {'form': form})
 
+# Markdown
 
+def Markdown_Exp(request):
+    htmltags = MarkdownExpModel.objects.all()
+
+    context={
+        "htmltags": htmltags
+    }
+
+    return render(request, 'sensei_app/MarkdownExp.html', context)
+
+# Question
 
 def QuestionList(request):
     question_list = Question.objects.all()
@@ -109,30 +122,28 @@ class QuestionCategoryView(ListView):
         context['question_category_slug'] = self.category
         return context
 
-
 def QuestionAdd(request):
     form = forms.QuestionForm()
     user = request.user
 
     if request.method == 'POST':
         form = forms.QuestionForm(request.POST)
-        if form.is_valid():
-            form.save()
-            print("検証に成功しました。データを保存します")
-            print(user)
-            if request.user.is_authenticated:
-                question = form.save(commit=False)
-                question.login_author = request.user
-                question.save()
-            return redirect('sensei_app:question_list')
+        if "button" in request.POST:
+            if form.is_valid():
+                if request.user.is_authenticated:
+                    question = form.save(commit=False)
+                    question.login_author = request.user
+                    question.save()
+                return redirect('sensei_app:question_list')
 
-        else:
-            print("検証に失敗したので、データを保存しません。検証に失敗した理由を次に表示します。")
-            print(form.errors)
+            else:
+                print(form.errors)
+
 
     return render(request, 'sensei_app/Question/add.html', {
         'form': form,
     })
+
 
 
 def AnswerAdd(request):
@@ -195,9 +206,7 @@ def ReplyAdd(request):
 
         return JsonResponse({'form':html})
 
-
 # EXAM
-
 
 def JLTCTTop(request):
     query = request.GET.get('q')
@@ -261,23 +270,18 @@ def JLTCTTagNotes(request,tag_slug):
 
     return render(request, "sensei_app/Exam/jltct_tag_notes.html", context)
 
-
-
 # USER REGISTRATION
 
 User = get_user_model()
-
 
 class Login(LoginView):
     """ログインページ"""
     form_class = LoginForm
     template_name = 'sensei_app/register/login.html'
 
-
 class Logout(LogoutView):
     """ログアウトページ"""
     template_name = 'sensei_app/toppage.html'
-
 
 class UserCreate(generic.CreateView):
     """ユーザー仮登録"""
@@ -308,11 +312,9 @@ class UserCreate(generic.CreateView):
         user.email_user(subject, message)
         return redirect('sensei_app:user_create_done')
 
-
 class UserCreateDone(generic.TemplateView):
     """ユーザー仮登録したよ"""
     template_name = 'sensei_app/register/user_create_done.html'
-
 
 class UserCreateComplete(generic.TemplateView):
     """メール内URLアクセス後のユーザー本登録"""
@@ -348,7 +350,6 @@ class UserCreateComplete(generic.TemplateView):
 
         return HttpResponseBadRequest()
 
-
 class OnlyYouMixin(UserPassesTestMixin):
     """本人か、スーパーユーザーだけユーザーページアクセスを許可する"""
     raise_exception = True
@@ -356,7 +357,6 @@ class OnlyYouMixin(UserPassesTestMixin):
     def test_func(self):
         user = self.request.user
         return user.pk == self.kwargs['pk'] or user.is_superuser
-
 
 def UserDetail(request, pk):
     login_author = get_object_or_404(User, pk=pk)
@@ -372,7 +372,6 @@ def UserDetail(request, pk):
         'answer_list': answers,
     })
 
-
 def ActivitiesOfUser(request, pk):
     login_author = get_object_or_404(User, pk=pk)
     all_questions = Question.objects.all()
@@ -386,7 +385,6 @@ def ActivitiesOfUser(request, pk):
         'question_list': questions,
         'answer_list': answers,
     })
-
 
 def AllQuestionsofUser(request, pk):
     login_author = get_object_or_404(User, pk=pk)
@@ -409,7 +407,6 @@ def AllQuestionsofUser(request, pk):
         'num': num,
         'paginator': paginator,
     })
-
 
 def AllAnswersofUser(request, pk):
     login_author = get_object_or_404(User, pk=pk)
@@ -435,9 +432,6 @@ def AllAnswersofUser(request, pk):
     })
 
 
-
-
-
 class UserUpdate(OnlyYouMixin, generic.UpdateView):
     """ユーザー情報更新ページ"""
     model = User
@@ -447,18 +441,15 @@ class UserUpdate(OnlyYouMixin, generic.UpdateView):
     def get_success_url(self):
         return resolve_url('sensei_app:user_detail', pk=self.kwargs['pk'])
 
-
 class PasswordChange(PasswordChangeView):
     """パスワード変更ビュー"""
     form_class = MyPasswordChangeForm
     success_url = reverse_lazy('sensei_app:password_change_done')
     template_name = 'sensei_app/register/password_change.html'
 
-
 class PasswordChangeDone(PasswordChangeDoneView):
     """パスワード変更しました"""
     template_name = 'sensei_app/register/password_change_done.html'
-
 
 class PasswordReset(PasswordResetView):
     """パスワード変更用URLの送付ページ"""
@@ -468,11 +459,9 @@ class PasswordReset(PasswordResetView):
     form_class = MyPasswordResetForm
     success_url = reverse_lazy('sensei_app:password_reset_done')
 
-
 class PasswordResetDone(PasswordResetDoneView):
     """パスワード変更用URLを送りましたページ"""
     template_name = 'sensei_app/register/password_reset_done.html'
-
 
 class PasswordResetConfirm(PasswordResetConfirmView):
     """新パスワード入力ページ"""
@@ -480,11 +469,9 @@ class PasswordResetConfirm(PasswordResetConfirmView):
     success_url = reverse_lazy('sensei_app:password_reset_complete')
     template_name = 'sensei_app/register/password_reset_confirm.html'
 
-
 class PasswordResetComplete(PasswordResetCompleteView):
     """新パスワード設定しましたページ"""
     template_name = 'sensei_app/register/password_reset_complete.html'
-
 
 class EmailChange(LoginRequiredMixin, generic.FormView):
     """メールアドレスの変更"""
@@ -512,11 +499,9 @@ class EmailChange(LoginRequiredMixin, generic.FormView):
 
         return redirect('sensei_app:email_change_done')
 
-
 class EmailChangeDone(LoginRequiredMixin, generic.TemplateView):
     """メールアドレスの変更メールを送ったよ"""
     template_name = 'sensei_app/register/email_change_done.html'
-
 
 class EmailChangeComplete(LoginRequiredMixin, generic.TemplateView):
     """リンクを踏んだ後に呼ばれるメアド変更ビュー"""

@@ -5,39 +5,51 @@
 			{% if answer.login_author %}<!-- if the answerer is a member-->
 				{% if answer.login_author == question.login_author %}<!-- if quesioner and answerer are the same -->
 					<div class="answer answer_same">
-						<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
-						<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
-						<div class="content answer_content">
-							{{answer.content|markdownify}}
+						<div class="answer_info">
+							<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
+							<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
 						</div>
-						<a class="reply_button" name="{{answer.pk}}">返信する</a>
-						<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
+						<div class="answer_main">
+							<div class="content answer_content user_content">
+								{{answer.content|markdownify}}
+							</div>
+							<a class="reply_button" name="{{answer.pk}}">返信する</a>
+							<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
 							{% include 'sensei_app/Question/reply_form.html' %}
+							</div>
 						</div>
 					</div>
 				{% else %} <!--if questioner and answerer are different-->
 					<div class="answer">
-						<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
-						<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
-						<div class="content answer_content">
-							{{answer.content|markdownify}}
+						<div class="answer_info">
+							<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
+							<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
 						</div>
-						<a class="reply_button" name="{{answer.pk}}">返信する</a>
-						<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
-							{% include 'sensei_app/Question/reply_form.html' %}
+						<div class="answer_main">
+							<div class="content answer_content user_content">
+								{{answer.content|markdownify}}
+							</div>
+							<a class="reply_button" name="{{answer.pk}}">返信する</a>
+							<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
+								{% include 'sensei_app/Question/reply_form.html' %}
+							</div>
 						</div>
 					</div>
 				{% endif %}<!--same or different end-->
 			{% else %}<!-- if the answerer is not a member-->
 				<div class="answer">
-					<p class="answer_author">{{answer.author}}<span class="san">さん</span></p>
-					<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
-					<div class="content answer_content">
-						{{answer.content|markdownify}}
+					<div class="answer_info">
+						<p class="answer_author">{{answer.author}}<span class="san">さん</span></p>
+						<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
 					</div>
-					<a class="reply_button" name="{{answer.pk}}">返信する</a>
-					<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
-						{% include 'sensei_app/Question/reply_form.html' %}
+					<div class="answer_main">
+						<div class="content answer_content user_content">
+							{{answer.content|markdownify}}
+						</div>
+						<a class="reply_button" name="{{answer.pk}}">返信する</a>
+						<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
+							{% include 'sensei_app/Question/reply_form.html' %}
+						</div>
 					</div>
 				</div>
 			{% endif %}<!-- member or not member end if-->
@@ -51,39 +63,51 @@
 			{% if answer.login_author %}<!-- if the answerer is a member-->
 				{% if answer.login_author == question.login_author %}<!-- if quesioner and answerer are the same -->
 					<div class="answer answer_same">
-						<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{	answer.login_author.nickname}}<span class="san">さん</span></a>
-						<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
-						<div class="content answer_content">
-							{{answer.content|markdownify}}
+						<div class="answer_info">
+							<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{	answer.login_author.nickname}}<span class="san">さん</span></a>
+							<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
 						</div>
-						<a class="reply_button" name="{{answer.pk}}">返信する</a>
-						<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
-							{% include 'sensei_app/Question/reply_form.html' %}
+						<div class="answer_main">
+							<div class="content answer_content user_content">
+								{{answer.content|markdownify}}
+							</div>
+							<a class="reply_button" name="{{answer.pk}}">返信する</a>
+							<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
+								{% include 'sensei_app/Question/reply_form.html' %}
+							</div>
 						</div>
 					</div>
 				{% else %} <!--if questioner and answerer are different-->
 					<div class="answer">
-						<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
-						<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
-						<div class="content answer_content">
-							{{answer.content|markdownify}}
+						<div class="answer_info">
+							<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.login_author.nickname}}<span class="san">さん</span></a>
+							<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
 						</div>
-						<a class="reply_button" name="{{answer.pk}}">返信する</a>
-						<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
-							{% include 'sensei_app/Question/reply_form.html' %}
+						<div class="answer_main">
+							<div class="content answer_content user_content">
+								{{answer.content|markdownify}}
+							</div>
+							<a class="reply_button" name="{{answer.pk}}">返信する</a>
+							<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
+								{% include 'sensei_app/Question/reply_form.html' %}
+							</div>
 						</div>
 					</div>
 				{% endif %}<!--same or different end-->
 			{% else %}<!-- if the answerer is not a member-->
 				<div class="answer">
-					<p class="answer_author">{{answer.author}}<span class="san">さん</span></p>
-					<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
-					<div class="content answer_content">
-						{{answer.content|markdownify}}
+					<div class="answer_info">
+						<p class="answer_author">{{answer.author}}<span class="san">さん</span></p>
+						<p class="answer_date"><i class="far fa-clock"></i>{{answer.created_at|date:"Y/m/d f"}}</p>
 					</div>
-					<a class="reply_button" name="{{answer.pk}}">返信する</a>
-					<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
-						{% include 'sensei_app/Question/reply_form.html' %}
+					<div class="answer_main">
+						<div class="content answer_content user_content">
+							{{answer.content|markdownify}}
+						</div>
+						<a class="reply_button" name="{{answer.pk}}">返信する</a>
+						<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
+							{% include 'sensei_app/Question/reply_form.html' %}
+						</div>
 					</div>
 				</div>
 			{% endif %}<!-- member or not member end if-->

@@ -19,7 +19,7 @@
 				{% if question.answers == None %}
 					{{question.answers}}
 				{% endif %}
-				<h1 class="section_head">{{question.title}}</h1>
+				<h1 class="question_title">{{question.title}}</h1>
         {% if not question.login_author %}
           {% if question.author %}
             <span class="question_author">{{ question.author }}<span class="san">さん</span></span>
@@ -31,9 +31,9 @@
         {% endif %}<br>
 				<span class="question_created_at"><i class="far fa-clock"></i>{{ question.created_at | date:"Y/m/d f"}}</span><br>
 				<a href="{% url 'sensei_app:question_category' question.category.category_slug %}" class="question_category question_category_{{ question.category.category_slug }}">{{ question.category }}</a>
-				
-					</div>
-			<article class="content question_content">
+
+			</div>
+			<article class="content question_content user_content">
 				{{ question.content |markdownify}}
 			</article>
 			<section class="answer_section">
@@ -43,7 +43,7 @@
 				<div class="answer_form_wrapper" style="display:none;">
 					{% include 'sensei_app/Question/answer_form.html' %}
 				</div>
-				<p class="section_head_sub">みんなの回答({{question.answers.count}}件)</p>
+				<p class="section_head">みんなの回答({{question.answers.count}}件)</p>
 				<div class="answers">
 					{% include 'sensei_app/Question/comments.html' %}
 				</div>
@@ -113,5 +113,7 @@
 
 			})
 		</script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 </body>
 {% endblock %}

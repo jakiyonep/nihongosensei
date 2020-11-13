@@ -34,6 +34,12 @@ $languageeducation-color: rgb(102, 24, 180)
 	flex-wrap: wrap
 	justify-content: space-between
 
+.left_column
+	width: 75%
+.right_column
+	width: 20%
+
+
 .section_head
 	font-size: 2rem
 	margin-bottom: 5rem
@@ -70,11 +76,11 @@ $languageeducation-color: rgb(102, 24, 180)
 		margin: 10rem 0 2rem 0
 	h3
 		font-size: 1.3rem
-		padding: 1rem
+		padding: 0.5rem 1rem
 		display: inline-block
 		color: $semi-strong-color
 		border: 2px solid $semi-strong-color
-		margin: 6rem 0 0 0
+		margin: 2rem 0 0 0
 	h4
 		font-size: 1.2rem
 		border-left: 0.5rem solid $semi-strong-color
@@ -167,71 +173,31 @@ $languageeducation-color: rgb(102, 24, 180)
 		background-color: white
 		color: $strong-color
 
-.markdown_desc
-	.popup
-    display: none
-    height: 100%
-    width: 100%
-    background: white
-    opacity: 0.9
-	.popup_content
-		height: 100%
-		width: 100%
-    background-color: white
-    padding: 1rem
-		overflow-x: scroll
+.content_check_button
+	margin: 1rem 0
+	background-color: $content-color
+	padding: 0.3rem 0.7rem
+	color: white
+	transition: 0.4s
+	width: 100%
+	text-align: center
+	&:hover
+		color: $content-color
+		background-color: white
+		transition: 0.4s
 
-
-.popup_content_row
-	display: flex
-	flex-direction: row
-	flex-wrap: wrap
-	justify-content: space-between
-	margin-bottom: 3rem
-	align-items: center
-	min-width: 700px
-
-	li
-		list-style: none
-	.popup_content_left
-		width: 45%
-	.popup_content_middle
-		width: 5%
-		font-size: 1.5rem
-	.popup_content_right
-		width: 45%
-		*
-			margin: 2rem 0
-		h1, h2, h3, h4, h5, h6
-			margin: 4rem 0
-		h1
-			font-size: 1.5rem
-		h2
-			font-size: 1.4rem
-		h3
-			font-size: 1.3rem
-		h4
-			font-size: 1.2rem
-		h5
-			font-size: 1.1rem
-		h6
-			font-size: 1rem
-		ul
-			li
-				list-style-type: 	disc
-				list-style-position: inside
-				padding-left: 1rem
-				margin: 1rem 0
-		ol
-			li
-				list-style: decimal
-				list-style-position: inside
-				padding-left: 1rem
-				margin: 1rem 0
-		strong
-			background: linear-gradient(transparent 90%, $strong-color 90%)
-		a
-			color: $link-color
+.user_content
+	h2, h3, h4
+		background-color: inherit
+		color: inherit
+	h2
+		margin-top: 2rem
+		border-bottom: 1px double $border-primary
+		border-top: 1px double $border-primary
+	h3
+		border: 1px solid $border-primary
+	h4
+		border-left: 0.5rem solid $border-primary
 
 .show
     display: flex!important
@@ -241,11 +207,70 @@ $languageeducation-color: rgb(102, 24, 180)
 .login_author_link
 	color: $link-color
 
-.left_column
-	width: 75%
-.right_column
-	width: 20%
+.check_button
+	width: 100%
+	text-align: center
+	background-color: $border-secondary
+	padding: 0.5rem
+	margin: 2rem 0
+	transition: 0.5s
+	&:hover
+		color: grey
+		background-color: white
+		transition: 0.5s
+		cursor: pointer
 
+.markdownexp_link
+	span
+		display: inline-block!important
+	a
+		display: inline-block!important
+	i
+		display: inline-block!important
+.markdownexp
+	.markdownexp_container
+		width: 100%
+		.markdown_explanation
+			margin-bottom: 5rem
+		.htmltags_container
+			display: flex
+			flex-wrap: wrap
+			.htmltag
+				width: 100%
+				margin-bottom: 4rem
+				.upper
+					.htmltag_name
+						margin-bottom: 1rem
+						span
+							border: 1px solid $border-primary
+							padding: 0.4rem
+					.htmltag_exp
+						margin-left: 2rem
+						margin-bottom: 1rem
+				.bottom
+					display: flex
+					flex-direction: row
+					justify-content: space-between
+					align-items: center
+					background-color: $light-bg-color
+					padding: 0 1rem
+					margin-left: 2rem
+					.left
+						width: 45%
+					.middle
+						width: 5%
+						text-align: center
+						.fa-arrow-down
+							display: none
+					.right
+						width: 40%
+						margin: 0
+						padding: 0
+
+.content_check
+	margin: 0 !important
+	padding: 0 !important
+	overflow-x: hidden
 
 @media screen and (max-width:1100px)
 	.wrapper
@@ -264,3 +289,30 @@ $languageeducation-color: rgb(102, 24, 180)
 				margin-left: 2rem
 			ol
 				margin-left: 2rem
+
+
+
+	.markdownexp
+		.markdownexp_container
+			.htmltags_container
+				.htmltag
+					.upper
+						.htmltag_name
+							span
+						.htmltag_exp
+							margin-left: 1rem
+					.bottom
+						flex-direction: column
+						margin-left: 1rem
+						.left
+							width: 100%
+							word-break: break-all
+						.middle
+							width: 100%
+							margin: 2rem 0 1rem 0
+							.fa-arrow-right
+								display: none
+							.fa-arrow-down
+								display: block
+						.right
+							width: 100%

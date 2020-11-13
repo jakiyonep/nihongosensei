@@ -1,5 +1,5 @@
 <div class="sidebar">
-	<a class="sidebar_head strong_button" href="{% url 'sensei_app:question_add' %}">質問する</a>
+	<a class="sidebar_head strong_button ask_button" href="{% url 'sensei_app:question_add' %}">質問する</a>
 
 	<form class="search_form" action="{% url "sensei_app:question_list" %}" method="get" accept-charset="utf-8">
 		<input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}" placeholder="Search...">

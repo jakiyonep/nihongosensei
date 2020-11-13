@@ -1,12 +1,16 @@
-<form class="answer_form reply_form "  method="POST">{% csrf_token %}
+<form class="answer_form reply_form" id="answer_form_id_{{answer.pk}}"  method="POST"　onsubmit="return confirm('投稿してもよろしいでしょうか？');">{% csrf_token %}
 	{% if not user.is_authenticated%}
 		<div class="author">
 			<label>名前(任意)</label>
 			<input type="text" name="author" id ="reply_author_id">
 		</div>
 	{% endif %}
-		<div class="answer_content">
+	{% include "sensei_app/markdown_exp.html" %}
+		<div class="answer_content " id="reply_content_{{answer.pk}}">
 			<textarea id="reply_content_id" name="reply_content" rows="8" cols="80"></textarea>
 		</div>
-    <button type="submit" class="reply_submit_button" id="{{answer.pk}}" name="{{question.pk}}">送信</button>
+		<p class="check_button question_check_button" id="content_{{answer.pk}}">プレビュー画面</p>
+		<div class="content_check question_check content user_content" id="markdowned_reply_content_{{answer.pk}}">
+		</div>
+    <button type="submit" class="reply_submit_button" id="{{answer.pk}}" name="{{question.pk}}">返信を投稿する</button>
 </form>

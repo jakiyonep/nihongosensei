@@ -7,6 +7,7 @@ app_name = 'sensei_app'
 
 urlpatterns =[
     path('', Toppage.as_view(), name='toppage'),
+
     path('questions/', QuestionList, name='question_list'),
     path('question/<int:pk>/', QuestionDetail.as_view(), name="question_detail"),
     path('question/category/<str:question_category_slug>/', QuestionCategoryView.as_view(), name="question_category"),
@@ -15,6 +16,8 @@ urlpatterns =[
     path('question/reply', ReplyAdd, name="reply_add"),
 
     path('contact/add', ContactAdd, name='contact_add'),
+
+    path('markdownexp/', Markdown_Exp, name='markdownexp'),
 
     path('jltct', JLTCTTop, name='jltct_top'),
     path('jltct/note/<str:title_slug>', JLTCTNoteDetail, name="note_detail"),

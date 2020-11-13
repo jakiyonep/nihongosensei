@@ -11,6 +11,8 @@ $link-color: rgb(3, 196, 214)
 $sub-strong-color: rgb(111, 181, 218)
 
 $light-bg-color: rgb(249, 249, 249)
+$super-light-bg-color: rgb(252, 252, 252)
+
 
 .question_list_wrapper
 	justify-content: space-between
@@ -19,7 +21,6 @@ $light-bg-color: rgb(249, 249, 249)
 		margin-bottom: 3rem
 		border: 1px solid $border-secondary
 		padding: 2rem 1rem
-		border-radius: 1rem
 	.question_link
 		width: 100%
 		height: 100%
@@ -120,17 +121,23 @@ $light-bg-color: rgb(249, 249, 249)
 
 .question_detail_wrapper
 	display: flex
-	.question_category
-		margin: 1rem 0
-	.question_author
-		font-size: 1.1rem
-	.san
-		font-weight: normal
+	.left_top
+		background-color: $light-bg-color
+		border: 2px solid $border-secondary
+		padding: 1rem
+		.question_title
+			border-bottom: none
+			font-size: 2rem
+		.question_category
+			margin: 1rem 0
+		.question_author
+			font-size: 1.1rem
+		.san
+			font-weight: normal
 	.question_content
-		border-top: 1px solid $border-primary
-		border-bottom: 1px solid $border-primary
-		margin: 2rem 0
-		padding: 2rem 0
+		background-color: $light-bg-color
+		padding: 1rem
+		margin: 0
 	.answer_section
 		margin: 3rem 0
 		.submit_answer
@@ -150,43 +157,65 @@ $light-bg-color: rgb(249, 249, 249)
 		.answers
 			.answer
 				background-color: $question-bg
-				padding: 3rem 1rem
-				border-radius: 1rem
 				margin-bottom: 3rem
-				.answer_author
-					display: block
-					margin-bottom: 1rem
-					font-weight: bold
-				.answer_login_author
-					color: $link-color
-				.san
-					font-weight: normal!important
-				.answer_date
-					display: inline-block!important
-				.answer_content
-					margin-top: 2rem
-				.answer_content_same
-					margin-left: 1rem
-				.reply_button
-					background-color: $border-primary
-					color: white
-					padding: 0.2rem 0.5rem
-					border-radius: 0.2rem
-					margin-top: 1rem
-					display: inline-block
-					transition: 0.5s
-					&:hover
-						color: $border-primary
-						background-color: $question-bg
+				.answer_info
+					border: 2px solid $border-secondary
+					padding: 1rem
+					.answer_author
+						display: block
+						font-weight: bold
+					.answer_login_author
+						color: $link-color
+					.san
+						font-weight: normal!important
+					.answer_date
+						display: inline-block!important
+				.answer_main
+					padding: 1rem
+					.answer_content
+						margin: 0
+						padding: 0
+					.answer_content_same
+						margin-left: 1rem
+					.reply_button
+						background-color: $border-primary
+						color: white
+						padding: 0.2rem 0.5rem
+						border-radius: 0.2rem
+						margin-top: 1rem
+						display: inline-block
 						transition: 0.5s
+						&:hover
+							color: $border-primary
+							background-color: $question-bg
+							transition: 0.5s
+							cursor: pointer
 			.answer_same
-				background-color: rgb(215, 238, 255)
+				border: 2px solid $sub-strong-color
 		.reply
 			margin-left: 2rem!important
 
+.question_add_wrapper
+	.question_add
+		.question_form
+			section
+				border: 1px solid $border-secondary
+				margin-bottom: 1rem
+				input
+					width: 100%
+				select
+					width: 100%
+				textarea
+					width: 100%
+			button
+				width: 100%
+	.right_column
+		.ask_button
+			display: none
 
 
 .answer_form
+	margin-bottom: 1rem
 	div
 		width: 100%
 		display: flex
@@ -203,12 +232,13 @@ $light-bg-color: rgb(249, 249, 249)
 			background-color: white
 			border: 1px solid $border-secondary
 	.answer_submit_button
-		margin-top: 2rem
 		background-color: $strong_color
 		padding: 0.3rem 0.7rem
 		border-radius: 5px
 		color: white
 		transition: 0.4s
+		width: 100%
+		text-align: center
 		&:hover
 			color: $strong_color
 			background-color: $border-secondary
@@ -217,16 +247,18 @@ $light-bg-color: rgb(249, 249, 249)
 	margin-left: 0
 	margin-top: 3rem
 .reply_submit_button
-	margin-top: 2rem
 	background-color: rgb(107, 181, 200)
 	padding: 0.3rem 0.7rem
 	border-radius: 5px
 	color: white
 	transition: 0.4s
+	width: 100%
+	text-align: center
 	&:hover
 		color: rgb(107, 181, 200)
 		background-color: $border-secondary
 		transition: 0.4s
+		cursor: pointer
 
 .all_wrapper
 	.questions
@@ -265,8 +297,18 @@ $light-bg-color: rgb(249, 249, 249)
 				.question_category
 					overflow-x: scroll
 
+	.question_add_wrapper
+		.question_add
+		.left_column
+			order: 1!important
+		.right_column
+			order: 2!important
+			.ask_button
+				display: none
+			.sidebar
+				border-bottom: none
 
-		.question_add_wrapper
+
 	.question_detail_wrapper
 		.left_column
 			order: 1

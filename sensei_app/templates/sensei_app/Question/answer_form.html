@@ -1,4 +1,4 @@
-<form class="answer_form" method="POST">{% csrf_token %}
+<form class="answer_form" id="answer_form_id" method="POST">{% csrf_token %}
 	{% if not user.is_authenticated%}
 		<div class="author">
 			<label>名前(任意)</label>
@@ -7,7 +7,11 @@
 	{% endif %}
 		<div class="answer_content">
 			<label>回答</label>
+				{% include "sensei_app/markdown_exp.html" %}
 			<textarea id="answer_content_id" name="answer_content" rows="8" cols="80"></textarea>
 		</div>
-    <button type="submit" class="answer_submit_button" id="answer_submit" name="{{question.pk}}">Submit</button>
+		<p class="check_button question_check_button">プレビュー画面</p>
+		<div class="content_check question_check content user_content" id="markdowned_content">
+		</div>
+    <button type="submit" class="answer_submit_button" id="answer_submit" name="{{question.pk}}">回答を投稿する</button>
 </form>
