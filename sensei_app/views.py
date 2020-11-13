@@ -362,28 +362,40 @@ def UserDetail(request, pk):
     login_author = get_object_or_404(User, pk=pk)
     all_questions = Question.objects.all()
     questions = all_questions.filter(login_author=login_author)[:5]
+    all_questions_num = all_questions.filter(login_author=login_author).count()
+
 
     all_answers = Answer.objects.all()
     answers = all_answers.filter(login_author=login_author)[:5]
+    all_answers_num = all_answers.filter(login_author=login_author).count()
 
     return render(request, 'sensei_app/register/user_detail.html', {
         'user': login_author,
         'question_list': questions,
         'answer_list': answers,
+        'all_questions_num': all_questions_num,
+        'all_answers_num': all_answers_num,
     })
 
 def ActivitiesOfUser(request, pk):
     login_author = get_object_or_404(User, pk=pk)
     all_questions = Question.objects.all()
+    all_questions_num = all_questions.filter(login_author=login_author).count()
     questions = all_questions.filter(login_author=login_author)[:5]
 
+
     all_answers = Answer.objects.all()
+    all_answers_num = all_answers.filter(login_author=login_author).count()
     answers = all_answers.filter(login_author=login_author)[:5]
+
+
 
     return render(request, 'sensei_app/activities_of_user.html', {
         'user': login_author,
         'question_list': questions,
         'answer_list': answers,
+        "all_questions_num": all_questions_num,
+        "all_answers_num": all_answers_num,
     })
 
 def AllQuestionsofUser(request, pk):

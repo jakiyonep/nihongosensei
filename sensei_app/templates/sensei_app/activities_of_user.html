@@ -64,8 +64,14 @@
 					{% endif %}
 				</p>
 				<div class="questions">
-					{% include "sensei_app/Question/question_list_snippet.html" %}
-					<a class="more_button" href="{% url 'sensei_app:all_questions_of_user' user.pk %}">もっとみる</a>
+					{% if all_questions_num == 0 %}
+						まだ質問をしていません
+					{% else %}
+						{% include "sensei_app/Question/question_list_snippet.html" %}
+					{% endif %}
+					{% if all_questions_num > 5 %}
+						<a class="more_button" href="{% url 'sensei_app:all_questions_of_user' user.pk %}">もっとみる</a>
+					{% endif %}
 				</div>
 			</div>
 			<div class="user_info_list question_list_wrapper">
@@ -77,9 +83,15 @@
 					{% endif %}
 				</p>
 				<div class="questions">
-					{% include "sensei_app/Question/answer_list_snippet.html" %}
+					{% if all_answers_num == 0 %}
+						まだ回答をしていません
+					{% else %}
+						{% include "sensei_app/Question/answer_list_snippet.html" %}
+					{% endif %}
+					{% if all_answers_num > 5 %}
+						<a class="more_button" href="{% url 'sensei_app:all_answers_of_user' user.pk %}">もっとみる</a>
+					{% endif %}
 				</div>
-					<a class="more_button" href="{% url 'sensei_app:all_answers_of_user' user.pk %}">もっとみる</a>
 				</div>
 			</div>
 		<div class="right_column user_info_right_column">

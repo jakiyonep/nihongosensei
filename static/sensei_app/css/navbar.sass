@@ -7,13 +7,13 @@ $border-primary: rgb(121, 121, 121)
 $border-secondary: rgb(228, 228, 228)
 $strong-color: rgb(255, 112, 112)
 $link-color: rgb(3, 196, 214)
-
+$navbar-bg: rgb(251, 251, 251)
 
 
 
 
 .navbar_wrapper
-	background-color: rgba(208, 208, 208, 0.78)
+	background-color: $navbar-bg
 	overflow-x: hidden
 	z-index: 2
 	position: relative
@@ -41,6 +41,10 @@ $link-color: rgb(3, 196, 214)
 				display: flex
 				align-items: center
 				justify-content: space-between
+				border: 2px solid $navbar-bg
+				transition: 0.7s
+				&:hover
+					border: 2px solid $strong-color
 				.logo_img
 					object-fit: contain
 					max-height: 100%
@@ -65,6 +69,7 @@ $link-color: rgb(3, 196, 214)
 					border-bottom: 1px solid rgba(5, 71, 54, 0)
 				a:hover
 					background-color: white
+					border-bottom: 1px solid $strong-color
 					transition: 0.2s
 					border-radius: 0
 		.navbar_button
@@ -110,4 +115,3 @@ $link-color: rgb(3, 196, 214)
 	.navbar_logo
 		width: 80%!important
 	.navbar_list_collapse
-		

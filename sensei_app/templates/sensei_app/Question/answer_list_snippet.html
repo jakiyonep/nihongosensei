@@ -6,7 +6,6 @@
       <h2 class="question_title">
         {{ answer.question.title }}
       </h2>
-    </a>
     <div class="question_info">
       <div class="author_container">
         {% if not answer.question.login_author %}
@@ -32,7 +31,7 @@
     <div class="content_beginning">
       {% with answer.question.content|markdownify as markdown_content %}
       {{markdown_content|slice:":100"}}{% endwith %} <i class="fas fa-ellipsis-h"></i>
-
     </div>
+  </a>
   </article>
 {% endfor %}

@@ -10,7 +10,8 @@ $semi-strong-color: rgb(62, 98, 189)
 $link-color: rgb(3, 196, 214)
 $content-color: rgb(108, 108, 108)
 
-$light-bg-color: rgb(249, 249, 249)
+$light-bg-color: rgb(252, 252, 252)
+$quote-bg-color: rgb(242, 242, 242)
 
 $society-color: rgb(244, 192, 91)
 $language-color: rgb(227, 81, 81)
@@ -25,6 +26,7 @@ $languageeducation-color: rgb(102, 24, 180)
 	color: rgb(66, 66, 66)
 	line-height: 1.8rem
 	box-sizing: border-box
+	word-break: break-all
 .wrapper
 	width: 80vw
 	margin: 0 auto
@@ -64,7 +66,7 @@ $languageeducation-color: rgb(102, 24, 180)
 		font-size: 1.1rem
 		color: $content-color
 	h1, h2, h3, h4, h5, h6
-		margin: 3rem 0
+		margin: 2.5rem 0
 	h1
 		font-size: 1.5rem
 
@@ -73,20 +75,17 @@ $languageeducation-color: rgb(102, 24, 180)
 		background-color: $semi-strong-color
 		color: white
 		padding: 1rem
-		margin: 10rem 0 2rem 0
 	h3
 		font-size: 1.3rem
 		padding: 0.5rem 1rem
 		display: inline-block
 		color: $semi-strong-color
 		border: 2px solid $semi-strong-color
-		margin: 2rem 0 0 0
 	h4
 		font-size: 1.2rem
 		border-left: 0.5rem solid $semi-strong-color
 		color: $semi-strong-color
 		padding: 0 1rem
-		margin: 5rem 0 0 0
 	h5
 		font-size: 1.1rem
 	h6
@@ -144,7 +143,8 @@ $languageeducation-color: rgb(102, 24, 180)
 			th
 				background-color: $light-bg-color
 	blockquote
-		background-color: $border-secondary
+		background-color: $quote-bg-color
+		border: 2px solid $border-secondary
 		padding: 1rem
 		&::before
 			content: "\f10d"
@@ -190,8 +190,8 @@ $languageeducation-color: rgb(102, 24, 180)
 	h2, h3, h4
 		background-color: inherit
 		color: inherit
+		margin: 2rem 0
 	h2
-		margin-top: 2rem
 		border-bottom: 1px double $border-primary
 		border-top: 1px double $border-primary
 	h3
@@ -260,6 +260,7 @@ $languageeducation-color: rgb(102, 24, 180)
 					.middle
 						width: 5%
 						text-align: center
+						font-size: 2rem
 						.fa-arrow-down
 							display: none
 					.right
@@ -271,6 +272,8 @@ $languageeducation-color: rgb(102, 24, 180)
 	margin: 0 !important
 	padding: 0 !important
 	overflow-x: hidden
+
+
 
 @media screen and (max-width:1100px)
 	.wrapper
