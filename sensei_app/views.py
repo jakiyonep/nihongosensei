@@ -65,7 +65,7 @@ def Markdown_Exp(request):
         "htmltags": htmltags
     }
 
-    return render(request, 'sensei_app/Markdownexp.html', context)
+    return render(request, 'sensei_app/markdownexp.html', context)
 
 # Question
 
