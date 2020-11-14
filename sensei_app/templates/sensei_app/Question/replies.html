@@ -1,87 +1,56 @@
 {% load humanize %}
 {% load markdownify %}
-{% if ajax_replies %}
-	{% for reply in ajax_replies|dictsort:'created_at' %}<!--replies-->
-		{% if reply.login_author %}<!-- if the answerer is a member-->
-			{% if reply.login_author == ajax_question.login_author %}<!-- if quesioner and answerer are the same -->
-				<div class="answer reply answer_same">
-					<div class="answer_info">
-						<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' reply.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{reply.login_author.nickname}}<span class="san">さん</span></a>
-						<p class="answer_date"><i class="far fa-clock"></i> {{reply.created_at|date:"Y/m/d f"}}</p>
-					</div>
-					<div class="answer_main">
-						<div class="content answer_content user_content">
-							{{reply.content|markdownify}}
+
+	<div id="ajax_replies_{{answer.pk}}">
+		{% if ajax_replies %}
+			{% include "sensei_app/Question/ajax_replies.html" %}
+		{% elif not ajax_replies %}
+			{% for reply in answer.replies.all|dictsort:'created_at' %}<!--replies-->
+				{% if reply.login_author %}<!-- if the answerer is a member-->
+					{% if reply.login_author == question.login_author %}<!-- if quesioner and answerer are the same -->
+						<div class="answer reply answer_same">
+							<div class="answer_info">
+								<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' reply.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{reply.login_author.nickname}}<span class="san">さん</span></a>
+								<p class="answer_date"><i class="far fa-clock"></i> {{reply.created_at|date:"Y/m/d f"}}</p>
+							</div>
+							<div class="answer_main">
+								<div class="content answer_content user_content">
+									{{reply.content|markdownify}}
+								</div>
+								{% if request.user == reply.login_author %}
+									<a class="delete_button answer_delete_button reply_delete_button" href="{% url 'sensei_app:reply_delete' reply.pk  %}" onclick="return confirm('削除してもよろしいですか？');">この返信を削除する</a>
+								{% endif %}
+							</div>
+						</div>
+					{% else %} <!--if questioner and answerer are different-->
+						<div class="answer reply">
+							<div class="answer_info">
+								<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' reply.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{reply.login_author.nickname}}<span class="san">さん</span></a>
+								<p class="answer_date"><i class="far fa-clock"></i> {{reply.created_at|date:"Y/m/d f"}}</p>
+							</div>
+							<div class="answer_main">
+								<div class="content answer_content user_content">
+									{{reply.content|markdownify}}
+								</div>
+								{% if request.user == reply.login_author %}
+									<a class="delete_button answer_delete_button reply_delete_button" href="{% url 'sensei_app:reply_delete' reply.pk  %}" onclick="return confirm('削除してもよろしいですか？');">この返信を削除する</a>
+								{% endif %}
+							</div>
+						</div>
+					{% endif %}<!--same or different end-->
+				{% else %}<!-- if the answerer is not a member-->
+					<div class="answer reply">
+						<div class="answer_info">
+							<p class="answer_author">{{reply.author}}<span class="san">さん</span></p>
+							<p class="answer_date"><i class="far fa-clock"></i> {{reply.created_at|date:"Y/m/d f"}}</p>
+						</div>
+						<div class="answer_main">
+							<div class="content answer_content user_content">
+								{{reply.content|markdownify}}
+							</div>
 						</div>
 					</div>
-				</div>
-			{% else %} <!--if questioner and answerer are different-->
-				<div class="answer reply">
-					<div class="answer_info">
-						<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' reply.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{reply.login_author.nickname}}<span class="san">さん</span></a>
-						<p class="answer_date"><i class="far fa-clock"></i> 	{{reply.created_at|date:"Y/m/d f"}}</p>
-					</div>
-					<div class="answer_main">
-						<div class="content answer_content user_content">
-							{{reply.content|markdownify}}
-						</div>
-					</div>
-				</div>
-			{% endif %}<!--same or different end-->
-		{% else %}<!-- if the answerer is not a member-->
-			<div class="answer reply">
-				<div class="answer_info">
-					<p class="answer_author">{{reply.author}}<span class="san">さん</span></p>
-					<p class="answer_date"><i class="far fa-clock"></i> 	{{reply.created_at|date:"Y/m/d f"}}</p>
-				</div>
-				<div class="answer_main">
-					<div class="content answer_content user_content">
-						{{reply.content|markdownify}}
-					</div>
-				</div>
-			</div>
-		{% endif %}<!-- member or not member end if-->
-	{% endfor %}<!--replies-->
-{% else %}
-	{% for reply in answer.replies.all|dictsort:'created_at' %}<!--replies-->
-		{% if reply.login_author %}<!-- if the answerer is a member-->
-			{% if reply.login_author == question.login_author %}<!-- if quesioner and answerer are the same -->
-				<div class="answer reply answer_same">
-					<div class="answer_info">
-						<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' reply.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{reply.login_author.nickname}}<span class="san">さん</span></a>
-						<p class="answer_date"><i class="far fa-clock"></i> {{reply.created_at|date:"Y/m/d f"}}</p>
-					</div>
-					<div class="answer_main">
-						<div class="content answer_content user_content">
-							{{reply.content|markdownify}}
-						</div>
-					</div>
-				</div>
-			{% else %} <!--if questioner and answerer are different-->
-				<div class="answer reply">
-					<div class="answer_info">
-						<a class="answer_author answer_login_author" href="{% url 'sensei_app:activities_of_user' reply.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{reply.login_author.nickname}}<span class="san">さん</span></a>
-						<p class="answer_date"><i class="far fa-clock"></i> {{reply.created_at|date:"Y/m/d f"}}</p>
-					</div>
-					<div class="answer_main">
-						<div class="content answer_content user_content">
-							{{reply.content|markdownify}}
-						</div>
-					</div>
-				</div>
-			{% endif %}<!--same or different end-->
-		{% else %}<!-- if the answerer is not a member-->
-			<div class="answer reply">
-				<div class="answer_info">
-					<p class="answer_author">{{reply.author}}<span class="san">さん</span></p>
-					<p class="answer_date"><i class="far fa-clock"></i> {{reply.created_at|date:"Y/m/d f"}}</p>
-				</div>
-				<div class="answer_main">
-					<div class="content answer_content user_content">
-						{{reply.content|markdownify}}
-					</div>
-				</div>
-			</div>
-		{% endif %}<!-- member or not member end if-->
-	{% endfor %}<!--replies-->
-{% endif %}
+				{% endif %}<!-- member or not member end if-->
+			{% endfor %}<!--replies-->
+		{% endif %}
+	</div>

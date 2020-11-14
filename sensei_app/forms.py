@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm, TextInput, Textarea, Select, EmailInput
-from .models import Question, Answer, Contact
+from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -45,7 +45,7 @@ class QuestionForm(forms.ModelForm):
             }),
             'author': TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '名前',
+                'placeholder': '名前(空欄にすると、自動的に「名無し」になります)',
             }),
             'login_author': forms.HiddenInput(),
             'category': Select(attrs={
@@ -66,6 +66,23 @@ class QuestionForm(forms.ModelForm):
 class AnswerForm(forms.ModelForm):
     class Meta:
         model = Answer
+        fields = ('author','login_author', 'content')
+        widgets = {
+            'author': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '名前',
+            }),
+            'answer': forms.HiddenInput(),
+            'login_author': forms.HiddenInput(),
+            'content': Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': '回答内容',
+            }),
+        }
+
+class ReplyForm(forms.ModelForm):
+    class Meta:
+        model = Reply
         fields = ('author','login_author', 'content')
         widgets = {
             'author': TextInput(attrs={

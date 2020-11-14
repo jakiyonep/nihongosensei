@@ -14,6 +14,9 @@
 								{{answer.content|markdownify}}
 							</div>
 							<a class="reply_button" name="{{answer.pk}}">返信する</a>
+							{% if request.user == answer.login_author %}
+								<a class="delete_button answer_delete_button" href="{% url 'sensei_app:answer_delete' answer.pk  %}" onclick="return confirm('削除してもよろしいですか？');">この回答を削除する</a>
+							{% endif %}
 							<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
 							{% include 'sensei_app/Question/reply_form.html' %}
 							</div>
@@ -30,6 +33,9 @@
 								{{answer.content|markdownify}}
 							</div>
 							<a class="reply_button" name="{{answer.pk}}">返信する</a>
+							{% if request.user == answer.login_author %}
+								<a class="delete_button answer_delete_button" href="{% url 'sensei_app:answer_delete' answer.pk  %}" onclick="return confirm('削除してもよろしいですか？');">この回答を削除する</a>
+							{% endif %}
 							<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
 								{% include 'sensei_app/Question/reply_form.html' %}
 							</div>
@@ -47,6 +53,9 @@
 							{{answer.content|markdownify}}
 						</div>
 						<a class="reply_button" name="{{answer.pk}}">返信する</a>
+						{% if request.user == answer.login_author %}
+							<a class="delete_button answer_delete_button" href="{% url 'sensei_app:answer_delete' answer.pk  %}" onclick="return confirm('削除してもよろしいですか？');">この回答を削除する</a>
+						{% endif %}
 						<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
 							{% include 'sensei_app/Question/reply_form.html' %}
 						</div>
@@ -72,6 +81,9 @@
 								{{answer.content|markdownify}}
 							</div>
 							<a class="reply_button" name="{{answer.pk}}">返信する</a>
+							{% if request.user == answer.login_author %}
+								<a class="delete_button answer_delete_button" href="{% url 'sensei_app:answer_delete' answer.pk  %}" onclick="return confirm('削除してもよろしいですか？');">この回答を削除する</a>
+							{% endif %}
 							<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
 								{% include 'sensei_app/Question/reply_form.html' %}
 							</div>
@@ -88,6 +100,9 @@
 								{{answer.content|markdownify}}
 							</div>
 							<a class="reply_button" name="{{answer.pk}}">返信する</a>
+							{% if request.user == answer.login_author %}
+								<a class="delete_button answer_delete_button" href="{% url 'sensei_app:answer_delete' answer.pk  %}" onclick="return confirm('削除してもよろしいですか？');">この回答を削除する</a>
+							{% endif %}
 							<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
 								{% include 'sensei_app/Question/reply_form.html' %}
 							</div>

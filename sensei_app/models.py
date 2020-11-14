@@ -109,6 +109,15 @@ class Question(models.Model):
     class Meta:
         ordering=['-created_at']
 
+    def answer_reply_num(self):
+        answer_num = self.answers.count()
+        reply_num = 0
+        for answer in self.answers.all():
+            reply_num = reply_num + answer.replies.count()
+        total = answer_num + reply_num
+
+        return total
+
     def save(self, *args, **kwargs):
         if self.is_public and not self.updated_at:
             self.updated_at = timezone.now()

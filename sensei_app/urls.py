@@ -14,6 +14,9 @@ urlpatterns =[
     path('question/add/', QuestionAdd, name="question_add"),
     path('question/answer', AnswerAdd, name="answer_add"),
     path('question/reply', ReplyAdd, name="reply_add"),
+    path('question/delete/<int:pk>/', QuestionDelete, name="question_delete"),
+    path('question/answer/delete/<int:pk>', AnswerDelete, name="answer_delete"),
+    path('question/reply/delete/<int:pk>', ReplyDelete, name="reply_delete"),
 
     path('contact/add', ContactAdd, name='contact_add'),
 

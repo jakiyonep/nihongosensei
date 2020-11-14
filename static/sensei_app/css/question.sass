@@ -9,9 +9,9 @@ $border-secondary: rgb(228, 228, 228)
 $strong-color: rgb(255, 112, 112)
 $link-color: rgb(3, 196, 214)
 $sub-strong-color: rgb(111, 181, 218)
+$semi-strong-color: rgb(62, 98, 189)
+$light-bg-color: rgb(250, 250, 250)
 
-$light-bg-color: rgb(252, 252, 252)
-$super-light-bg-color: rgb(252, 252, 252)
 
 
 .question_list_wrapper
@@ -124,23 +124,24 @@ $super-light-bg-color: rgb(252, 252, 252)
 
 .question_detail_wrapper
 	display: flex
-	.left_top
-		border: 2px solid $border-secondary
-		padding: 1rem
-		margin-bottom: 1rem
-		.question_title
-			border-bottom: none
-			font-size: 2rem
-		.question_category
-			margin: 1rem 0
-		.question_author
-			font-size: 1.1rem
-		.san
-			font-weight: normal
-	.question_content
-		background-color: $light-bg-color
-		padding: 1rem
-		margin: 0
+	.question_deteil_container
+		border: 1px solid $border-secondary
+		.left_top
+			border: 1px solid $border-secondary
+			padding: 1rem
+			.question_title
+				border-bottom: none
+				font-size: 2rem
+			.question_category
+				margin: 1rem 0
+			.question_author
+				font-size: 1.1rem
+			.san
+				font-weight: normal
+		.question_content
+			background-color: $light-bg-color
+			padding: 1rem
+			margin: 0
 	.answer_section
 		margin: 3rem 0
 		.submit_answer
@@ -148,7 +149,6 @@ $super-light-bg-color: rgb(252, 252, 252)
 			.answer_button
 				width: 100%
 				border: 1px solid $strong_color
-				border-radius: 0.5rem
 				text-align: center
 				color: $strong-color
 				padding: 0.5rem
@@ -158,11 +158,13 @@ $super-light-bg-color: rgb(252, 252, 252)
 					color: white
 					background-color: $strong-color
 		.answers
+			margin-top: 15rem
 			.answer
 				background-color: $light-bg-color
 				margin-bottom: 3rem
+				border: 1px solid $border-secondary
 				.answer_info
-					border: 2px solid $border-secondary
+					border: 1px solid $border-secondary
 					padding: 1rem
 					background-color: white
 					.answer_author
@@ -213,6 +215,7 @@ $super-light-bg-color: rgb(252, 252, 252)
 					width: 100%
 			button
 				width: 100%
+				margin-top: 0.5rem
 	.right_column
 		.ask_button
 			display: none
@@ -237,12 +240,13 @@ $super-light-bg-color: rgb(252, 252, 252)
 			border: 1px solid $border-secondary
 	.answer_submit_button
 		background-color: $strong_color
-		padding: 0.3rem 0.7rem
-		border-radius: 5px
 		color: white
 		transition: 0.4s
 		width: 100%
 		text-align: center
+		padding: 0.5rem
+		margin: 0.5rem 0
+		n
 		&:hover
 			color: $strong_color
 			background-color: $border-secondary
@@ -252,17 +256,39 @@ $super-light-bg-color: rgb(252, 252, 252)
 	margin-top: 3rem
 .reply_submit_button
 	background-color: rgb(107, 181, 200)
-	padding: 0.3rem 0.7rem
+	padding: 0.5rem
 	border-radius: 5px
 	color: white
 	transition: 0.4s
 	width: 100%
 	text-align: center
+	margin: 0.5rem 0
 	&:hover
 		color: rgb(107, 181, 200)
 		background-color: $border-secondary
 		transition: 0.4s
 		cursor: pointer
+
+.delete_button
+	width: 100%
+	background-color: $semi-strong-color
+	text-align: center
+	display: block
+	padding: 0.5rem
+	color: white
+	margin-bottom: 1rem
+	transition: 1s
+	&:hover
+		background-color: red
+		transition: 0.3s
+.answer_delete_button
+	width: auto
+	display: inline-block
+	border-radius: 5px
+	padding: 0.2rem 0.5rem
+	margin-top: 1rem
+
+
 
 .all_wrapper
 	.questions

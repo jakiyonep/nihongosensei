@@ -9,3 +9,34 @@
     </div>
   </a>
 </section>
+
+
+
+$(document).on('click', '.reply_submit_button',function(event){
+  event.preventDefault();
+  var answer_id = $(this).attr('id')
+  var reply_author = $('#reply_author_id').val()
+  var reply_content = $('#reply_content_id').val()
+  if(reply_author == undefined || reply_author == ""){
+    reply_author = '名無し'
+  }
+  $('#reply_form_wrapper_' + answer_id).slideToggle()
+  $.ajax({
+     type: "POST",
+     url: "{% url 'sensei_app:reply_add' %}",
+     data: {
+      'answer_id': answer_id,
+      'reply_author': reply_author,
+      'reply_content': reply_content,
+      'csrfmiddlewaretoken': '{{ csrf_token }}',
+   },
+     dataType: "json",
+     success: function(response) {
+        $('.ajax_replies').html(response['form'])
+        $('#reply_author_id').val('')
+        $('#reply_content_id').val('')
+      },
+
+  });
+
+    })

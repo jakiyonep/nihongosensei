@@ -31,6 +31,7 @@ from .forms import (
     LoginForm, UserCreateForm, UserUpdateForm, MyPasswordChangeForm, MyPasswordResetForm, MySetPasswordForm, EmailChangeForm,
     QuestionForm, AnswerForm,
 )
+from django.contrib.auth.decorators import login_required
 
 from sensei_app.models import *
 
@@ -134,6 +135,8 @@ def QuestionAdd(request):
                     question = form.save(commit=False)
                     question.login_author = request.user
                     question.save()
+                else:
+                    form.save()
                 return redirect('sensei_app:question_list')
 
             else:
@@ -144,7 +147,13 @@ def QuestionAdd(request):
         'form': form,
     })
 
+@login_required
+def QuestionDelete(request,pk):
+    comment = get_object_or_404(Question, pk=pk)
+    comment.delete()
+    print("heelo")
 
+    return redirect('sensei_app:question_list')
 
 def AnswerAdd(request):
     context={}
@@ -176,6 +185,16 @@ def AnswerAdd(request):
 
         return JsonResponse({'form':html})
 
+@login_required()
+def AnswerDelete(request,pk):
+    answer = get_object_or_404(Answer, pk=pk)
+    question = answer.question
+    question_pk = question.pk
+
+    answer.delete()
+
+    return redirect("sensei_app:question_detail", pk=question_pk )
+
 def ReplyAdd(request):
     context={}
     if request.is_ajax():
@@ -184,6 +203,9 @@ def ReplyAdd(request):
         reply_content = request.POST['reply_content']
         answer_id = request.POST['answer_id']
         answer = get_object_or_404(Answer, pk=answer_id)
+        replies = Reply.objects.all()
+        replies = replies.filter(answer=answer)
+        request_user = request.user
         if request.user.is_authenticated:
             login_author = request.user
         reply = Reply(
@@ -196,15 +218,30 @@ def ReplyAdd(request):
         reply.save()
 
         all_replies = Reply.objects.all()
-        replies = all_replies.filter(answer=answer)
+        ajax_replies = all_replies.filter(answer=answer)
         context = {
-            'ajax_replies': replies,
+            'ajax_replies': ajax_replies,
+            'replies': replies,
             'ajax_question':answer.question,
+            'answer_id': answer_id,
+            'request_user': request_user,
+            'reply_author': author,
+            'answer_author': answer.author,
+            'answer_login_author': answer.login_author,
         }
 
-        html = render_to_string('sensei_app/Question/replies.html', context, request=request)
+        html = render_to_string('sensei_app/Question/ajax_replies.html', context)
 
         return JsonResponse({'form':html})
+
+@login_required()
+def ReplyDelete(request, pk):
+    reply = get_object_or_404(Reply, pk=pk)
+    question = reply.answer.question
+    question_pk = question.pk
+    question.delete()
+
+    return redirect("sensei_app:question_detail", pk=question_pk)
 
 # EXAM
 
