@@ -52,7 +52,7 @@
               {% include "sensei_app/Question/addition.html" %}
             </div>
             {% if request.user == question.login_author %}
-              <a class="addition_button addition_open_button">補足</a>
+              <a class="addition_button addition_open_button">質問の補足</a>
             {% endif %}
           </div>
           {% if request.user == question.login_author %}

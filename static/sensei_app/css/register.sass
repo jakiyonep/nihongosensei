@@ -90,10 +90,12 @@ $perk-bg-color: rgb(244, 135, 34)
 	a
 		color: $link-color
 .register_perk_wrapper
-	.general_desc
+	.section_head
+		order: 1
 	.register_perk_list
 		width: 100%
 		margin: 5rem auto!important
+		order: 2
 		.register_perk_container
 			margin-bottom: 5rem
 			.perk
@@ -125,3 +127,10 @@ $perk-bg-color: rgb(244, 135, 34)
 				flex-direction: column!important
 				*
 					width: 100%!important
+	.register_perk_wrapper
+		.section_head
+		.register_perk_list
+			.register_perk_container
+				.perk
+				.perk_desc
+					margin-left: 0

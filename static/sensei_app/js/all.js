@@ -100,3 +100,19 @@ $(document).on('input', '#addition_content_textarea', function(event){
 	var content = $("#addition_content_textarea").val()
 	document.getElementById('markdowned_addition_content').innerHTML = marked(content)
 })
+
+$(document).on('click', '#addition_content_preview', function(event){
+	$("#markdowned_addition_content").toggle("fast");
+})
+
+/* answer submit confirm */
+
+$(document).on('click', '.answer_submit_button', function(event){
+	confirm("投稿してもよろしでしょうか？")
+})
+
+/* reply submit confirm */
+
+$(document).on('click', '.reply_submit_button', function(event){
+	confirm("投稿してもよろしでしょうか？")
+})

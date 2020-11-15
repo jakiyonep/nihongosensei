@@ -12,5 +12,5 @@
 		<p class="check_button question_check_button" id="content_{{answer.pk}}">プレビュー画面</p>
 		<div class="content_check question_check content user_content" id="markdowned_reply_content_{{answer.pk}}">
 		</div>
-    <button type="submit" class="reply_submit_button" id="{{answer.pk}}" name="{{question.pk}}">返信を投稿する</button>
+    <button type="submit" class="reply_submit_button" id="{{answer.pk}}" name="{{question.pk}}"　onclick="return confirm('投稿してもよろしいでしょうか？');">返信を投稿する</button>
 </form>
