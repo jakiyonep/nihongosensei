@@ -102,6 +102,7 @@ class Question(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_public = models.BooleanField(default=True)
     image = models.ImageField(upload_to='test_images', null=True, blank=True)
+    addition = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -221,3 +222,10 @@ class MarkdownExpModel(models.Model):
 
     def __str__(self):
         return self.htmltag
+
+class RegisterPerk(models.Model):
+    perk = models.CharField(null=True, blank=True, max_length=100)
+    desc = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.perk

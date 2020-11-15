@@ -86,3 +86,17 @@ $(document).on('click', '.question_check_button', function(event){
 	console.log(id)
 	$("#markdowned_reply_" + id).toggle("fast");
 })
+
+/*addition*/
+
+
+$(document).on('click', '.addition_open_button', function(event){
+	event.preventDefault();
+	$('.addition').slideToggle('fast')
+})
+
+$(document).on('input', '#addition_content_textarea', function(event){
+	event.preventDefault();
+	var content = $("#addition_content_textarea").val()
+	document.getElementById('markdowned_addition_content').innerHTML = marked(content)
+})

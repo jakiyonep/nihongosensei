@@ -30,15 +30,31 @@
           <a class="question_author login_author_link" href="{% url 'sensei_app:activities_of_user' question.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{question.login_author.nickname}}<span class="san">さん</span></a>
         {% endif %}<br>
 				<span class="question_created_at"><i class="far fa-clock"></i>{{ question.created_at | date:"Y/m/d f"}}</span><br>
-				<a href="{% url 'sensei_app:question_category' question.category.category_slug %}" class="question_category question_category_{{ question.category.category_slug }}">{{ question.category }}</a>
-
+        {% if addition_content %}
+			    <a href="{% url 'sensei_app:question_category' question_category_slug %}" class="question_category question_category_{{ question.category.category_slug }}">{{ question.category }}</a>
+        {% else %}
+			    <a href="{% url 'sensei_app:question_category' question.category.category_slug %}" class="question_category question_category_{{ question.category.category_slug }}">{{ question.category }}</a>
+        {% endif %}
 			</div>
   			<article class="content question_content user_content">
-  				{{ question.content |markdownify}}
+          <div class="content_main">
+            {{ question.content |markdownify}}
+          </div>
+          <div class="content_addition">
+            {% include "sensei_app/Question/content_addition.html" %}
+          </div>
   			</article>
       </div>
 			<section class="answer_section">
 				<div class="submit_answer">
+          <div class="addition_wrapper">
+            <div class="addition">
+              {% include "sensei_app/Question/addition.html" %}
+            </div>
+            {% if request.user == question.login_author %}
+              <a class="addition_button addition_open_button">補足</a>
+            {% endif %}
+          </div>
           {% if request.user == question.login_author %}
             <a class="delete_button" href="{% url 'sensei_app:question_delete' question.pk  %}" onclick="return confirm('削除してもよろしいですか？');">この質問を削除する</a>
           {% endif %}
@@ -115,7 +131,30 @@
 
 		});
 
-			})
+		})
+/*addition*/
+	$(document).on('click', '#addition_submit_button',function(event){
+		event.preventDefault();
+		var question_id = $(this).attr('name')
+		var addition_content = $('#addition_content_textarea').val()
+    $('.addition').toggle('fast')
+		$.ajax({
+			 type: "POST",
+			 url: "{% url 'sensei_app:question_addition' %}",
+			 data: {
+				'addition_question_id': question_id,
+				'addition_content': addition_content,
+				'csrfmiddlewaretoken': '{{ csrf_token }}',
+		 },
+			 dataType: "json",
+			 success: function(response) {
+					$('.content_addition').html(response['addition'])
+          $('#addition_content_textarea').val('')
+				},
+
+		});
+
+		})
 		</script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 

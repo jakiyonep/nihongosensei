@@ -69,3 +69,4 @@ admin.site.register(jltcttag)
 admin.site.register(jltctsection)
 
 admin.site.register(MarkdownExpModel)
+admin.site.register(RegisterPerk)

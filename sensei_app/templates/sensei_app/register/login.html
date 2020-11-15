@@ -7,7 +7,7 @@
 {% include 'sensei_app/navbar.html' %}
 <div class="wrapper register_wrapper login_wrapper">
 	<section class="form_container">
-		<p class="form_head">Log in</p>
+		<p class="form_head">ログイン</p>
     <form class="form" action="{% url 'sensei_app:login' %}" method="POST">
       {{ form.non_field_errors }}
       {% for field in form %}
@@ -18,9 +18,12 @@
       <input type="hidden" name="next" value="{{ next }}" />
       {% csrf_token %}
     </form>
-		<div class="login_form_bottom">			
+		<div class="login_form_bottom">
 			<a href="{% url 'sensei_app:user_create' %}" class="form_button register_button" >会員登録</a>
 			<a href="{% url 'sensei_app:password_reset' %}" class="form_button password_forget_button" >パスワードを忘れた方</a>
+		</div>
+		<div class="register_perk">
+			<a href="{% url 'sensei_app:register_perk' %}">会員になると？</a>
 		</div>
 	</section>
 </div>

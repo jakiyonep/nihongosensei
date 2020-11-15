@@ -68,6 +68,17 @@ def Markdown_Exp(request):
 
     return render(request, 'sensei_app/markdownexp.html', context)
 
+# RegisterPerk
+
+def RegisterPerkList(request):
+    perks = RegisterPerk.objects.all()
+
+    context = {
+        "perks": perks
+    }
+
+    return render(request, "sensei_app/register/register_perk.html", context)
+
 # Question
 
 def QuestionList(request):
@@ -146,6 +157,24 @@ def QuestionAdd(request):
     return render(request, 'sensei_app/Question/add.html', {
         'form': form,
     })
+
+def QuestionAddition(request):
+    context={}
+    if request.is_ajax():
+        addition_content = request.POST['addition_content']
+        question_id = request.POST['addition_question_id']
+        question = get_object_or_404(Question, pk=question_id)
+        question.addition = addition_content
+        question.save()
+        question_category_slug = question.category.category_slug
+        context = {
+            'addition_content': addition_content,
+            'question_category_slug': question_category_slug,
+        }
+
+        html = render_to_string('sensei_app/Question/content_addition.html', context, request=request)
+
+        return JsonResponse({'addition':html})
 
 @login_required
 def QuestionDelete(request,pk):

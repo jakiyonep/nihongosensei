@@ -12,6 +12,7 @@ urlpatterns =[
     path('question/<int:pk>/', QuestionDetail.as_view(), name="question_detail"),
     path('question/category/<str:question_category_slug>/', QuestionCategoryView.as_view(), name="question_category"),
     path('question/add/', QuestionAdd, name="question_add"),
+    path('question/addition/', QuestionAddition, name="question_addition"),
     path('question/answer', AnswerAdd, name="answer_add"),
     path('question/reply', ReplyAdd, name="reply_add"),
     path('question/delete/<int:pk>/', QuestionDelete, name="question_delete"),
@@ -22,12 +23,15 @@ urlpatterns =[
 
     path('markdownexp/', Markdown_Exp, name='markdownexp'),
 
+
     path('jltct', JLTCTTop, name='jltct_top'),
     path('jltct/note/<str:title_slug>', JLTCTNoteDetail, name="note_detail"),
     path('jltct/tag/<str:tag_slug>', JLTCTTagNotes, name="tag_notes"),
 
     path('login/', views.Login.as_view(), name='login'),
     path('logout/', views.Logout.as_view(), name='logout'),
+
+    path('register/perk/', RegisterPerkList, name="register_perk"),
 
     path('user_create/', views.UserCreate.as_view(), name='user_create'),
     path('user_create/done/', views.UserCreateDone.as_view(), name='user_create_done'),

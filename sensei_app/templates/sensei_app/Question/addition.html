@@ -1,0 +1,11 @@
+<form class="answer_form addition_form" method="POST">
+	{% csrf_token %}
+	{% include "sensei_app/markdown_exp.html" %}
+		<div class="answer_content" id="reply_content_{{answer.pk}}">
+			<textarea id="addition_content_textarea" rows="8" cols="80">{% if question.addition %}{{question.addition}}{% endif %}</textarea>
+		</div>
+		<p class="check_button question_check_button" id="addition_content_preview">プレビュー画面</p>
+		<div class="content_check question_check content user_content" id="markdowned_addition_content">
+		</div>
+    <button type="submit" class="addition_submit_button" id="addition_submit_button" name="{{question.pk}}">補足を投稿する</button>
+</form>

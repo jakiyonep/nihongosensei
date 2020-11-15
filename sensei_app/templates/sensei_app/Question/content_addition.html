@@ -1,0 +1,9 @@
+{% load markdownify %}
+{% if addition_content %}
+	<p class="addition_head">回答者による補足</p>
+  <div class="hosoku">{{addition_content|markdownify}}</div>
+{% elif question.addition %}
+	<p class="addition_head">回答者による補足</p>
+  <div class="hosoku">{{question.addition|markdownify}}</div>
+{% else %}
+{% endif %}
