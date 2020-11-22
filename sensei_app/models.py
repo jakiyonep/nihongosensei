@@ -9,7 +9,6 @@ from django.core.validators import EmailValidator
 from markdownx.models import MarkdownxField
 
 
-
 # USER REGISTRATION
 
 class CustomUserManager(UserManager):
@@ -43,7 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     """カスタムユーザーモデル."""
 
     email = models.EmailField(_('メールアドレス'), unique=True)
-    nickname = models.CharField(_('ニックネーム'), max_length=150, blank=True, unique=False)
+    nickname = models.CharField(_('ニックネーム'), max_length=150, blank=True, unique=True)
 
     is_staff = models.BooleanField(
         _('staff status'),
@@ -103,6 +102,17 @@ class Question(models.Model):
     is_public = models.BooleanField(default=True)
     image = models.ImageField(upload_to='test_images', null=True, blank=True)
     addition = models.TextField(null=True, blank=True)
+    poll = models.BooleanField(default=False)
+    poll_question = models.TextField(null=True, blank=True)
+    option_1 = models.CharField(null=True, blank=True, max_length=100)
+    option_2 = models.CharField(null=True, blank=True, max_length=100)
+    option_3 = models.CharField(null=True, blank=True, max_length=100)
+    option_4 = models.CharField(null=True, blank=True, max_length=100)
+    answered_user = models.ManyToManyField(User, null=True, blank=True, related_name="answered_polls")
+    option_1_count = models.IntegerField(default=0)
+    option_2_count = models.IntegerField(default=0)
+    option_3_count = models.IntegerField(default=0)
+    option_4_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -123,6 +133,38 @@ class Question(models.Model):
         if self.is_public and not self.updated_at:
             self.updated_at = timezone.now()
         super().save(*args, **kwargs)
+
+    def poll_result(self):
+        context={}
+        option_1_count = self.option_1_count
+        option_2_count = self.option_2_count
+        option_3_count = self.option_3_count
+        option_4_count = self.option_4_count
+        count_dict = [option_1_count, option_2_count, option_3_count, option_4_count]
+        option_1_percentage = 0
+        option_2_percentage = 0
+        option_3_percentage = 0
+        option_4_percentage = 0
+        total = option_1_count + option_2_count + option_3_count + option_4_count
+
+        if not option_1_count == 0:
+            option_1_percentage = round(option_1_count / total * 100)
+        if not option_2_count == 0:
+            option_2_percentage = round(option_2_count / total * 100)
+        if not option_3_count == 0:
+            option_3_percentage = round(option_3_count / total * 100)
+        if not option_4_count == 0:
+            option_4_percentage = round(option_4_count / total * 100)
+
+
+        context["poll_total"] = total
+
+        context["option_1_percentage"] = option_1_percentage
+        context["option_2_percentage"] = option_2_percentage
+        context["option_3_percentage"] = option_3_percentage
+        context["option_4_percentage"] = option_4_percentage
+
+        return context
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="answers", null=True, blank=True)

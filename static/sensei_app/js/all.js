@@ -4,22 +4,20 @@
 var dropIs = 0;
 
 
-function drop (){
-	if (dropIs == 0) {
-		document.getElementById('navbar_collapse').classList.toggle('menu_drop')
-		dropIs = 1;
-	} else{
-		dropIs = 0;
-	}
-}
+$(document).on('click', '#navbar_button', function(event){
+	$('#navbar_collapse').css('transform', 'translateY(0)')
+})
 
-
+$(document).scroll(function(){
+	$('#navbar_collapse').css('transform', 'translateY(-100%)')
+})
 
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
   var currentScrollPos = window.pageYOffset;
   if (prevScrollpos > currentScrollPos) {
     document.getElementById("navbar").style.top = "0";
+
   } else {
     document.getElementById("navbar").style.top = "-200px";
 		if (dropIs == 1){
@@ -116,3 +114,16 @@ $(document).on('click', '.answer_submit_button', function(event){
 $(document).on('click', '.reply_submit_button', function(event){
 	confirm("投稿してもよろしでしょうか？")
 })
+
+
+/*poll open*/
+$(document).on('click', '.poll_open_button', function(event){
+	$('.poll_collapse').toggle("fast");
+})
+
+function poll_bar_toggle(){
+	$(document).ready(function(){
+		$(document).on('click', '.poll_option_button', function(event){
+		$('.poll_bar').show("slow");
+	})})
+}

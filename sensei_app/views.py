@@ -32,13 +32,14 @@ from .forms import (
     QuestionForm, AnswerForm,
 )
 from django.contrib.auth.decorators import login_required
-
 from sensei_app.models import *
+
+
+
+
 
 class Toppage(TemplateView):
     template_name = 'sensei_app/toppage.html'
-
-
 
 # Contact
 
@@ -91,12 +92,8 @@ def QuestionList(request):
             Q(content__icontains=query) |
             Q(author__icontains=query)
         ).distinct()
-
-    # Create a paginator to split your products queryset
-    paginator = Paginator(question_list, 10)
-    # Get the current page number
+    paginator = Paginator(question_list, 15)
     page = request.GET.get('page')
-    # Get the current slice (page) of products
     question_list = paginator.get_page(page)
     num = request.GET.get('page')
     page_obj = paginator.get_page(num)
@@ -106,33 +103,40 @@ def QuestionList(request):
         'page_obj': page_obj,
         'num': num,
         'paginator': paginator,
+        'query': query,
     })
 
-class QuestionDetail(DetailView):
-    model = Question
-    template_name = 'sensei_app/Question/question_detail.html'
+def QuestionDetail(request, pk):
+    context = {}
+    question = get_object_or_404(Question,pk=pk)
+    user = request.user
+    if question.answered_user.filter(pk=user.pk).exists():
+        context['already_voted'] = 1
+        print('already voted')
+    context['question'] = question
 
-    def get_object(self, queryset=None):
-        obj = super().get_object(queryset=queryset)
-        if not obj.is_public and not self.request.user.is_authenticated:
-            raise Http404
-        return obj
+    return render(request, 'sensei_app/Question/question_detail.html', context)
 
-class QuestionCategoryView(ListView):
-    model = Question
-    template_name = 'sensei_app/Question/question_category_list.html'
-    paginate_by = 15
+def QuestionCategoryView(request, question_category_slug):
+    category_slug = question_category_slug
+    selected_category = get_object_or_404(QuestionCategory, category_slug=category_slug)
+    all_question = Question.objects.all()
+    question_list = all_question.filter(category__category_name=selected_category)
 
-    def get_queryset(self):
-        question_category_slug = self.kwargs['question_category_slug']
-        self.category = get_object_or_404(QuestionCategory, category_slug=question_category_slug)
-        qs = super().get_queryset().filter(category=self.category)
-        return qs
+    paginator = Paginator(question_list, 15)
+    page = request.GET.get('page')
+    question_list = paginator.get_page(page)
+    num = request.GET.get('page')
+    page_obj = paginator.get_page(num)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['question_category_slug'] = self.category
-        return context
+    return render(request, 'sensei_app/Question/question_list.html', {
+        'question_list': question_list,
+        'page_obj': page_obj,
+        'num': num,
+        'paginator': paginator,
+        'selected_category': selected_category
+
+    })
 
 def QuestionAdd(request):
     form = forms.QuestionForm()
@@ -175,6 +179,75 @@ def QuestionAddition(request):
         html = render_to_string('sensei_app/Question/content_addition.html', context, request=request)
 
         return JsonResponse({'addition':html})
+
+def QuestionPollVote(request):
+    context = {}
+    user = request.user
+    if user.is_authenticated:
+        if request.is_ajax():
+            question_id = request.POST['question_id']
+            selected_option = request.POST['selected_option']
+            question = get_object_or_404(Question, pk=question_id)
+            if not question.answered_user.filter(pk=user.pk).exists():
+                question.answered_user.add(user)
+                print('first time')
+                if selected_option == "1":
+                    question.option_1_count += 1
+                if selected_option == "2":
+                    question.option_2_count += 1
+                if selected_option == "3":
+                    question.option_3_count += 1
+                if selected_option == "4":
+                    question.option_4_count += 1
+
+                question.save()
+                question_category_slug = question.category.category_slug
+                context = {
+                    'question': question,
+                    'question_category_slug': question_category_slug,
+                    'ajax_requested': 1,
+                }
+
+                option_1_count = question.option_1_count
+                option_2_count = question.option_2_count
+                option_3_count = question.option_3_count
+                option_4_count = question.option_4_count
+                option_1_percentage = 0
+                option_2_percentage = 0
+                option_3_percentage = 0
+                option_4_percentage = 0
+                total = option_1_count + option_2_count + option_3_count + option_4_count
+
+                if not option_1_count == 0:
+                    option_1_percentage = round(option_1_count / total * 100)
+                if not option_2_count == 0:
+                    option_2_percentage = round(option_2_count / total * 100)
+                if not option_3_count == 0:
+                    option_3_percentage = round(option_3_count / total * 100)
+                if not option_4_count == 0:
+                    option_4_percentage = round(option_4_count / total * 100)
+
+                context["poll_total"] = total
+                context["option_1_percentage"] = option_1_percentage
+                context["option_2_percentage"] = option_2_percentage
+                context["option_3_percentage"] = option_3_percentage
+                context["option_4_percentage"] = option_4_percentage
+
+                html = render_to_string('sensei_app/Question/content_poll.html', context, request=request)
+                already_answered = 1
+
+                return JsonResponse({
+                    'poll_vote': html,
+                    "option_1_percentage": option_1_percentage,
+                    "option_2_percentage": option_2_percentage,
+                    "option_3_percentage": option_3_percentage,
+                    "option_4_percentage": option_4_percentage,
+                })
+            else:
+                return redirect('https://google.co.jp')
+
+    else:
+        return redirect('https://google.co.jp')
 
 @login_required
 def QuestionDelete(request,pk):
@@ -430,7 +503,6 @@ def UserDetail(request, pk):
     questions = all_questions.filter(login_author=login_author)[:5]
     all_questions_num = all_questions.filter(login_author=login_author).count()
 
-
     all_answers = Answer.objects.all()
     answers = all_answers.filter(login_author=login_author)[:5]
     all_answers_num = all_answers.filter(login_author=login_author).count()
@@ -449,12 +521,9 @@ def ActivitiesOfUser(request, pk):
     all_questions_num = all_questions.filter(login_author=login_author).count()
     questions = all_questions.filter(login_author=login_author)[:5]
 
-
     all_answers = Answer.objects.all()
     all_answers_num = all_answers.filter(login_author=login_author).count()
     answers = all_answers.filter(login_author=login_author)[:5]
-
-
 
     return render(request, 'sensei_app/activities_of_user.html', {
         'user': login_author,
@@ -469,11 +538,8 @@ def AllQuestionsofUser(request, pk):
     all_questions = Question.objects.all()
     questions = all_questions.filter(login_author=login_author)
 
-    # Create a paginator to split your products queryset
-    paginator = Paginator(questions, 15)  # Show 25 contacts per page
-    # Get the current page number
+    paginator = Paginator(questions, 15)
     page = request.GET.get('page')
-    # Get the current slice (page) of products
     questions = paginator.get_page(page)
     num = request.GET.get('page')
     page_obj = paginator.get_page(num)
@@ -492,11 +558,8 @@ def AllAnswersofUser(request, pk):
     all_answers = Answer.objects.all()
     answers = all_answers.filter(login_author=login_author)
 
-    # Create a paginator to split your products queryset
-    paginator = Paginator(answers, 15)  # Show 25 contacts per page
-    # Get the current page number
+    paginator = Paginator(answers, 15)
     page = request.GET.get('page')
-    # Get the current slice (page) of products
     answers = paginator.get_page(page)
     num = request.GET.get('page')
     page_obj = paginator.get_page(num)
@@ -508,7 +571,6 @@ def AllAnswersofUser(request, pk):
         'num': num,
         'paginator':paginator,
     })
-
 
 class UserUpdate(OnlyYouMixin, generic.UpdateView):
     """ユーザー情報更新ページ"""

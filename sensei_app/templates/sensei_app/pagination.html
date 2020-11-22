@@ -16,7 +16,7 @@
 				{% endif %}
 
 				{% if page_obj.number == num %}
-					<li class="page_item current_number{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"><a class="page-link">{{num}}</a></li>
+					<li class="page_item current_number"><a class="page-link">{{num}}</a></li>
 				{% endif %}
 			{% endfor %}
 

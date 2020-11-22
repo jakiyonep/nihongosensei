@@ -15,7 +15,7 @@
 		<h1 class="section_head">{{question_category_slug}}</h1>
 		<section class="left_column">
 			<main class="questions">
-				{% for question in object_list %}
+				{% for question in question_list %}
 					<article class="question_container">
 						<a class="question_link" href="{% url 'sensei_app:question_detail' question.pk %}">
 							<h2 class="question_title">

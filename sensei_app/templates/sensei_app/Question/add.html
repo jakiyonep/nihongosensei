@@ -34,6 +34,50 @@
       		<p class="check_button question_check_button">プレビュー画面</p>
           <div class="content_check question_check content user_content" id="markdowned_content">
           </div>
+          {% if user.is_authenticated %}
+            <div class="poll">
+            <p class="poll_open_button">投票を追加する{{form.poll}}</p>
+            <div class="poll_collapse">
+              <div class="poll_question">
+                {{form.poll_question}}
+              </div>
+              <div class="poll_options">
+                <div class="poll_option">
+                  <div class="left">
+                    <span>1.</span>
+                  </div>
+                  <div class="right">
+                    {{form.option_1}}
+                  </div>
+                </div>
+                <div class="poll_option">
+                  <div class="left">
+                    <span>2.</span>
+                  </div>
+                  <div class="right">
+                    {{form.option_2}}
+                  </div>
+                </div>
+                <div class="poll_option">
+                  <div class="left">
+                    <span>3.</span>
+                  </div>
+                  <div class="right">
+                    {{form.option_3}}
+                  </div>
+                </div>
+                <div class="poll_option">
+                  <div class="left">
+                    <span>4.</span>
+                  </div>
+                  <div class="right">
+                    {{form.option_4}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
   				<button type="submit" name="button" class="strong_button submit_button">質問を投稿する</button>
   				{% csrf_token %}
   			</form>

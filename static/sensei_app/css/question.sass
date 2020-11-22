@@ -16,7 +16,6 @@ $light-bg-color: rgb(250, 250, 250)
 
 .question_list_wrapper
 	justify-content: space-between
-
 	.question_container
 		margin-bottom: 3rem
 		border: 1px solid $border-secondary
@@ -29,7 +28,6 @@ $light-bg-color: rgb(250, 250, 250)
 		margin-bottom: 1rem
 		border-bottom: 1px solid $border-primary
 		transition: 0.5s
-
 		&:hover
 			border-bottom: 1px solid $strong-color
 	.question_info
@@ -44,7 +42,9 @@ $light-bg-color: rgb(250, 250, 250)
 		.author_container
 			width: 100%
 		.time_container
-			width: 22%
+			width: 20%
+		.poll_container
+			width: 5%
 		.answers_num
 			width: 7%
 		.category_container
@@ -120,8 +120,6 @@ $light-bg-color: rgb(250, 250, 250)
 
 	.category_num_posts
 
-
-
 .question_detail_wrapper
 	display: flex
 	.question_deteil_container
@@ -150,6 +148,79 @@ $light-bg-color: rgb(250, 250, 250)
 					margin: 0
 					font-size: 1.3rem
 					padding: 0.5rem 0.2rem
+			.content_poll
+				.poll_head
+					background-color: $link-color
+					padding: 0.5rem 0.3rem
+					color: white
+				.poll_vote
+					.poll_question
+						font-weight: bold
+					.poll_sub_div
+						display: flex
+						align-items: center
+						height: 3rem
+						.poll_result_open_button
+							border: 2px solid $link-color
+							padding: 0.5rem
+							transition: 0.5s
+							margin-right: 1rem
+							&:hover
+								transition: 0.5s
+								color: white
+								background-color: $link-color
+						.poll_total
+							border: 2px solid $border-primary
+							display: inline-block
+							padding: 0.5rem
+							display: none
+							&>*
+								margin: 0
+							i
+							span
+								margin-left: 0.5rem
+					.poll_options
+						.poll_option
+							.poll_option_button, .poll_option_button_non_member
+								position: relative
+								z-index: 1
+								display: flex
+								margin: 1rem 0
+								background-color: $border-secondary
+								padding: 0.5rem
+								transition: 0.6s
+								width: 100%
+								flex-wrap: wrap
+								margin-bottom: 0
+								&:hover
+									background: $link-color
+									transition: 0.5s
+								&:hover .left>span
+									color: white
+									transition: 0.5s
+								&:hover .right
+									color: white
+									transition: 0.5s
+								&>*
+									margin: 0
+								.left
+									margin-right: 1rem
+									span
+										transition: 0.5s
+								.right
+									transition: 0.5s
+							.poll_bar
+								background-color: $sub-strong-color
+								width: 0px
+								margin-top: 0
+								text-align: right
+								height: 1.7rem
+								span
+									color: white
+								.percentage
+									margin-right: 0.5rem
+									font-size: 1rem
+									word-break: keep-all
 
 	.answer_section
 		margin: 3rem 0
@@ -225,6 +296,42 @@ $light-bg-color: rgb(250, 250, 250)
 			button
 				width: 100%
 				margin-top: 0.5rem
+			.poll
+				margin: 1rem 0
+				.poll_open_button
+					width: 100%
+					padding: 0.5rem
+					text-align: center
+					border: 1px solid $link-color
+					color: $link-color
+					transition: 0.5s
+					&:hover
+						background-color: $link-color
+						color: white
+						transition: 0.2s
+						cursor: pointer
+				.poll_collapse
+					margin-top: 2rem
+					display: none
+					.poll_question
+						textarea
+							box-shadow: 0 0 0.1rem $link-color
+							width: 100%
+							height: 1.8rem
+							margin-bottom: 2rem
+					.poll_options
+						.poll_option
+							display: flex
+							flex-wrap: nowrap
+							justify-content: flex-end
+							.left
+								margin-right: 1rem
+							.right
+								width: 90%
+								input
+									width: 100%
+									box-shadow: 0 0 0.1rem $link-color
+									margin-bottom: 1rem
 	.right_column
 		.ask_button
 			display: none
@@ -290,6 +397,7 @@ $light-bg-color: rgb(250, 250, 250)
 	&:hover
 		background-color: $semi-strong-color
 		transition: 0.3s
+		cursor: pointer
 .delete_button
 	width: 100%
 	background: $border-primary
@@ -337,7 +445,7 @@ $light-bg-color: rgb(250, 250, 250)
 	.questions
 		width: 100%
 
-@media screen and (max-width:1100px)
+@media screen and (max-width:800px)
 	.question_list_wrapper
 
 		.question_link
@@ -360,7 +468,6 @@ $light-bg-color: rgb(250, 250, 250)
 		.sidebar
 			margin-bottom: 5rem
 			padding-bottom: 5rem
-			border-bottom: 2px solid $border-primary
 			.sidebar_head
 				width: 100%
 			.sidebar_category
@@ -368,7 +475,7 @@ $light-bg-color: rgb(250, 250, 250)
 				overflow-x: scroll
 				white-space: nowrap
 				.question_category
-					overflow-x: scroll
+
 
 	.question_add_wrapper
 		.question_add

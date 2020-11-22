@@ -21,6 +21,11 @@
       <div class="time_container">
         <i class="far fa-clock"></i><span class="question_created_at">{{ question.created_at|date:"Y/m/d f"}}</span>
       </div>
+      {% if question.poll_question %}
+        <div class="poll_container">
+          <i class="fas fa-poll-h"></i>
+        </div>
+      {% endif %}
       <div class="answers_num">
         <i class="fas fa-comment"></i><span class="question_answers">{{question.answer_reply_num}}</span>
       </div>

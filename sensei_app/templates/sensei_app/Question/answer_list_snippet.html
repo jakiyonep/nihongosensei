@@ -6,13 +6,16 @@
       <h2 class="question_title">
         {{ answer.question.title }}
       </h2>
+      </a>
     <div class="question_info">
       <div class="author_container">
         {% if not answer.question.login_author %}
           {% if answer.question.author %}
-          <i class="fas fa-chalkboard-teacher"></i><span class="question_author">{{ answer.question.author }}<span class="san">さん</span></span>
+          <a class="question_author">
+            {{ answer.question.author }}<span class="san">さん</span>
+          </span>
           {% else %}
-            <i class="fas fa-chalkboard-teacher"></i><span class="question_author">名無しさん</span>
+          <span class="question_author">名無しさん</span>
           {% endif %}
         {% else %}
           <a class="question_author login_author_link" href="{% url 'sensei_app:activities_of_user' answer.question.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.question.login_author.nickname}}<span class="san">さん</span></a>
@@ -21,6 +24,11 @@
       <div class="time_container">
         <i class="far fa-clock"></i><span class="question_created_at">{{ answer.question.created_at|date:"Y/m/d f"}}</span>
       </div>
+      {% if answer.question.poll_question %}
+        <div class="poll_container">
+          <i class="fas fa-poll-h"></i>
+        </div>
+      {% endif %}
       <div class="answers_num">
         <i class="fas fa-comment"></i><span class="question_answers">{{answer.question.answers.count}}</span>
       </div>
@@ -32,6 +40,5 @@
       {% with answer.question.content|markdownify as markdown_content %}
       {{markdown_content|slice:":100"}}{% endwith %} <i class="fas fa-ellipsis-h"></i>
     </div>
-  </a>
   </article>
 {% endfor %}

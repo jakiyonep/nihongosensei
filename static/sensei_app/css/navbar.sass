@@ -2,11 +2,23 @@ $nihongo-bg: rgb(251, 136, 74)
 $sensei-bg: rgb(52, 117, 242)
 $jltct-bg: rgb(76, 230, 118)
 $others-bg: rgb(41, 112, 129)
+$culture-society-bg: rgb(226, 217, 7)
 $question-bg: rgb(230, 230, 230)
 $border-primary: rgb(121, 121, 121)
 $border-secondary: rgb(228, 228, 228)
 $strong-color: rgb(255, 112, 112)
+$semi-strong-color: rgb(62, 98, 189)
 $link-color: rgb(3, 196, 214)
+$content-color: rgb(108, 108, 108)
+
+$light-bg-color: rgb(250, 250, 250)
+$quote-bg-color: rgb(242, 242, 242)
+
+$society-color: rgb(244, 192, 91)
+$language-color: rgb(227, 81, 81)
+$languagesociety-color: rgb(114, 181, 62)
+$languagepsychology-color: rgb(85, 173, 201)
+$languageeducation-color: rgb(102, 24, 180)
 $navbar-bg: rgb(251, 251, 251)
 
 
@@ -15,6 +27,7 @@ $navbar-bg: rgb(251, 251, 251)
 .navbar_wrapper
 	background-color: $navbar-bg
 	overflow-x: hidden
+	overflow-y: hidden
 	z-index: 2
 	position: relative
 	position: fixed
@@ -81,10 +94,12 @@ $navbar-bg: rgb(251, 251, 251)
 			font-size: 1.6rem
 
 .navbar_list_collapse
-	transform: translateY(-100%)
 	transition: 0.5s
 	z-index: 3
-	position: relative
+	position: fixed
+	top: 0
+	transform: translateY(-100%)
+	width: 100%
 	padding-top: 3em
 	padding-bottom: 3em
 	background-color: rgb(255, 255, 255)
@@ -104,7 +119,29 @@ $navbar-bg: rgb(251, 251, 251)
 	transition: 0.5s
 	display: block
 
+.back_top_button
+	position: fixed
+	bottom: 3rem
+	right: 3rem
+	font-size: 2rem
+	padding: 0.2rem 0.5rem
+	border-radius: 0.5rem
+	transition: 0.5s
+	i
+		color: $border-primary
+	&:hover
+		background-color: $border-secondary
+		transition: 0.5s
+		cursor: pointer
 
+@media screen and (max-width:1400px)
+	.navbar_item
+		margin-right: 0.3rem !important
+		a
+			font-size: 0.8rem!important
+	.back_top_button
+		right: 0.5rem!important
+		bottom: 0.5rem !important
 @media screen and (max-width:800px)
 	.navbar
 		height: 4em!important
@@ -112,6 +149,8 @@ $navbar-bg: rgb(251, 251, 251)
 		display: none!important
 	.navbar_button
 		display: inline-block!important
+		i
+			color: $border-primary !important
 	.navbar_logo
 		width: 80%!important
 	.navbar_list_collapse

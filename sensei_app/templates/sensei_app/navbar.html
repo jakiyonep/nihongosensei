@@ -46,7 +46,7 @@
 
   </ul>
 
-  <a class="navbar_button" href="#" onclick="drop()" id="navbar_button"><i class="fas fa-bars"></i></a>
+  <p class="navbar_button" href="#"  id="navbar_button"><i class="fas fa-bars"></i></p>
 </nav>
 </div>
 <ul class="navbar_list_collapse" id="navbar_collapse">
@@ -85,4 +85,41 @@
 		</a>
 	</li>
 </ul>
+
+<span class="back_top_button back_top_button_move"><i class="fas fa-angle-up fas_move"></i></span>
+
+
 </body>
+
+
+<!-- back_top_button -->
+<script type="text/javascript">
+$(function () {
+	$(".back_top_button").hide();
+	$(window).scroll(function () {
+			if ($(window).scrollTop() > 800) {
+					$(".back_top_button").fadeIn(1000);
+			} else {
+					$(".back_top_button").fadeOut();
+			}
+	});
+	$(".back_top_button").click(function () {
+			$("body,html").animate({scrollTop: 0}, 500);
+			return false;
+	});
+});
+
+	$('.back_top_button').hover(
+		function(){
+			$('.fas_move').stop().animate({
+				"margin-bottom": "1.5rem"
+			})
+		},
+		function(){
+			$('.fas_move').stop().animate({
+				"margin-bottom": '0'
+			})
+		}
+	)
+
+</script>

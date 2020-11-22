@@ -9,10 +9,11 @@ urlpatterns =[
     path('', Toppage.as_view(), name='toppage'),
 
     path('questions/', QuestionList, name='question_list'),
-    path('question/<int:pk>/', QuestionDetail.as_view(), name="question_detail"),
-    path('question/category/<str:question_category_slug>/', QuestionCategoryView.as_view(), name="question_category"),
+    path('question/<int:pk>/', QuestionDetail, name="question_detail"),
+    path('question/category/<str:question_category_slug>/', QuestionCategoryView, name="question_category"),
     path('question/add/', QuestionAdd, name="question_add"),
     path('question/addition/', QuestionAddition, name="question_addition"),
+    path('question/pollvote/', QuestionPollVote, name="question_vote_poll"),
     path('question/answer', AnswerAdd, name="answer_add"),
     path('question/reply', ReplyAdd, name="reply_add"),
     path('question/delete/<int:pk>/', QuestionDelete, name="question_delete"),
@@ -22,7 +23,6 @@ urlpatterns =[
     path('contact/add', ContactAdd, name='contact_add'),
 
     path('markdownexp/', Markdown_Exp, name='markdownexp'),
-
 
     path('jltct', JLTCTTop, name='jltct_top'),
     path('jltct/note/<str:title_slug>', JLTCTNoteDetail, name="note_detail"),

@@ -9,7 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
-        fields = ('name', 'email', 'content')
+        fields = ('name', 'email', 'content',)
         widgets = {
             'name': TextInput(attrs={
                 'class': 'form-control',
@@ -36,7 +36,7 @@ class ContactForm(forms.ModelForm):
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ('title', 'author', 'login_author','category', 'content')
+        fields = ('title', 'author', 'login_author','category', 'content', 'poll_question', 'option_1', 'option_2', 'option_3', 'option_4', 'answered_user')
 
         widgets = {
             'title': TextInput(attrs={
@@ -55,6 +55,27 @@ class QuestionForm(forms.ModelForm):
             'content': Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': '質問内容',
+            }),
+            'poll_question': Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': '日本語は難しい？簡単？',
+                'row': 2,
+            }),
+            'option_1': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '難しい...',
+            }),
+            'option_2': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '簡単!',
+            }),
+            'option_3': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '(任意)',
+            }),
+            'option_4': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '(任意)',
             }),
         }
         labels = {

@@ -2,7 +2,7 @@
 {% load static %}
 {% load humanize %}
 {% load markdownify %}
-{% block title %}質問一覧{% endblock %}
+{% block title %}{{question.title}}{% endblock %}
 {% block description %}
   質問一覧のページです
 {% endblock %}
@@ -42,6 +42,9 @@
           </div>
           <div class="content_addition">
             {% include "sensei_app/Question/content_addition.html" %}
+          </div>
+          <div class="content_poll">
+            {% include "sensei_app/Question/content_poll.html" %}
           </div>
   			</article>
       </div>
@@ -155,6 +158,42 @@
 		});
 
 		})
+
+/*poll_vote*/
+	$(document).on('click', '.poll_option_button',function(event){
+		event.preventDefault();
+		var question_id = $(this).attr('id')
+    var selected_option = $(this).attr('name')
+		$.ajax({
+			 type: "POST",
+			 url: "{% url 'sensei_app:question_vote_poll' %}",
+			 data: {
+				'question_id': question_id,
+        'selected_option': selected_option,
+				'csrfmiddlewaretoken': '{{ csrf_token }}',
+		 },
+			 dataType: "json",
+			 success: function(response) {
+					$('.content_poll').html(response['poll_vote'])
+          poll_bar_toggle()
+				},
+
+
+		});
+		})
+
+  /* poll submit
+  var option_1_width = {{question.poll_result.option_1_percentage}}
+  var option_2_width = {{question.poll_result.option_2_percentage}}
+  var option_3_width = {{question.poll_result.option_3_percentage}}
+  var option_4_width = {{question.poll_result.option_4_percentage}}
+
+  $('#poll_bar_1').width(option_1_width + "%")
+  $('#poll_bar_2').width(option_2_width + "%")
+  $('#poll_bar_3').width(option_3_width + "%")
+  $('#poll_bar_4').width(option_4_width + "%")
+*/
+
 		</script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
