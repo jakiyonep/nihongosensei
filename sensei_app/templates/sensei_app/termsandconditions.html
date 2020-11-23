@@ -1,0 +1,38 @@
+{% extends 'sensei_app/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load markdownify %}
+{% block title %}
+	利用規約
+{% endblock %}
+
+{% block content %}
+<head>
+	<link rel="stylesheet" href="{% static 'sensei_app/css/termsconditions.min.css' %}">
+</head>
+<body>
+	{% include 'sensei_app/navbar.html' %}
+	<div class="wrapper">
+		<p class="exp">会員登録するには、以下の利用規約をお読みいただき、同意していただくようお願いいたします。</p>
+		<div class="termsconditions">
+				{{terms.content|markdownify}}
+				<div class="terms_date">
+					{% if terms.content %}
+						<p class="terms_date_update">{{terms.update_at}}<span>更新</span>
+						</p>
+					{% endif %}
+					<p class="terms_date_create">{{terms.create_at}}<span>作成</span></p>
+				</div>
+		</div>
+		<div class="agree_container">
+			<div class="agree_check">
+				<input type="checkbox" name="terms_check">
+				<label for="check">同意する</label>
+			</div>
+			<div class="register_collapse">
+				<a href="{% url 'sensei_app:user_create' %}" type="button" class="register_button_hidden">会員登録へ</a>
+			</div>
+		</div>
+	</div>
+</body>
+{% endblock %}

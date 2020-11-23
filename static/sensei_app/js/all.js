@@ -127,3 +127,16 @@ function poll_bar_toggle(){
 		$('.poll_bar').show("slow");
 	})})
 }
+
+/* termsconditions */
+$(function(){
+	$(document).on('click', '[name="terms_check"]', function(event){
+			if($('[name="terms_check"]').prop('checked')){
+				$('.register_collapse').slideDown('fast')
+
+			}
+			else{
+				$('.register_collapse').slideUp('fast')
+			}
+	})
+})

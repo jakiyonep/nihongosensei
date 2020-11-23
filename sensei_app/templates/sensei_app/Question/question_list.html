@@ -26,14 +26,18 @@
       </h1>
     {% elif selected_category %}
       <h1 class="search_result_head">
-        <span class="question_category_{{selected_category.category_slug}}">{{selected_category}}</span>に関する質問
+        <span class="question_category">{{selected_category}}</span>に関する質問
       </h1>
     {% else %}
 		  <h1 class="section_head">みんなの質問</h1>
     {% endif %}
 		<section class="left_column">
 			<main class="questions">
-	      {% include "sensei_app/Question/question_list_snippet.html" %}
+        {% if question_list %}
+          {% include "sensei_app/Question/question_list_snippet.html" %}
+        {% else %}
+          条件に合う質問はまだありません
+        {% endif %}
 			</main>
 			{% include 'sensei_app/pagination.html' %}
 		</section>

@@ -24,6 +24,9 @@ urlpatterns =[
 
     path('markdownexp/', Markdown_Exp, name='markdownexp'),
 
+    path('termsandconditions/', TermsConditionsView, name="termsandconditions"),
+    path('privacypolicy/', PrivacyPolicyView, name="privacypolicy"),
+
     path('jltct', JLTCTTop, name='jltct_top'),
     path('jltct/note/<str:title_slug>', JLTCTNoteDetail, name="note_detail"),
     path('jltct/tag/<str:tag_slug>', JLTCTTagNotes, name="tag_notes"),
@@ -39,7 +42,7 @@ urlpatterns =[
     path('user_detail/<int:pk>/', views.UserDetail, name='user_detail'),
     path('user_detail/<int:pk>/questions', AllQuestionsofUser, name="all_questions_of_user"),
     path('user_detail/<int:pk>/answers', AllAnswersofUser, name='all_answers_of_user'),
-    path('user_detail/<int:pk>/question_list', ActivitiesOfUser, name='activities_of_user'),
+    path('user_detail/<int:pk>/activities', ActivitiesOfUser, name='activities_of_user'),
     path('user_update/<int:pk>/', views.UserUpdate.as_view(), name='user_update'),
     path('password_change/', views.PasswordChange.as_view(), name='password_change'),
     path('password_change/done/', views.PasswordChangeDone.as_view(), name='password_change_done'),

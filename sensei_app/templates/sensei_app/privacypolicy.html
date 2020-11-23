@@ -1,0 +1,29 @@
+{% extends 'sensei_app/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load markdownify %}
+{% block title %}
+	プライバシーポリシー
+{% endblock %}
+
+{% block content %}
+<head>
+	<link rel="stylesheet" href="{% static 'sensei_app/css/termsconditions.min.css' %}">
+</head>
+<body>
+	{% include 'sensei_app/navbar.html' %}
+	<div class="wrapper">
+		<div class="termsconditions">
+				{{policy.content|markdownify}}
+				<div class="terms_date">
+					{% if terms.content %}
+						<p class="terms_date_update">{{policy.update_at}}<span>更新</span>
+						</p>
+					{% endif %}
+					<p class="terms_date_create">{{policy.create_at}}<span>作成</span></p>
+				</div>
+		</div>
+
+	</div>
+</body>
+{% endblock %}

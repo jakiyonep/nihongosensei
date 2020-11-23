@@ -80,6 +80,24 @@ def RegisterPerkList(request):
 
     return render(request, "sensei_app/register/register_perk.html", context)
 
+def TermsConditionsView(request):
+    selected_terms = get_object_or_404(TermsConditions, number=1)
+
+
+    context = {
+        'terms':selected_terms
+    }
+
+    return render(request, "sensei_app/termsandconditions.html", context)
+
+def PrivacyPolicyView(request):
+    selected_terms = get_object_or_404(TermsConditions, number=2)
+    context = {
+        'policy': selected_terms
+    }
+
+    return render(request, "sensei_app/privacypolicy.html", context)
+
 # Question
 
 def QuestionList(request):
@@ -92,7 +110,7 @@ def QuestionList(request):
             Q(content__icontains=query) |
             Q(author__icontains=query)
         ).distinct()
-    paginator = Paginator(question_list, 15)
+    paginator = Paginator(question_list, 14)
     page = request.GET.get('page')
     question_list = paginator.get_page(page)
     num = request.GET.get('page')
@@ -123,7 +141,7 @@ def QuestionCategoryView(request, question_category_slug):
     all_question = Question.objects.all()
     question_list = all_question.filter(category__category_name=selected_category)
 
-    paginator = Paginator(question_list, 15)
+    paginator = Paginator(question_list, 14)
     page = request.GET.get('page')
     question_list = paginator.get_page(page)
     num = request.GET.get('page')
@@ -519,11 +537,11 @@ def ActivitiesOfUser(request, pk):
     login_author = get_object_or_404(User, pk=pk)
     all_questions = Question.objects.all()
     all_questions_num = all_questions.filter(login_author=login_author).count()
-    questions = all_questions.filter(login_author=login_author)[:5]
+    questions = all_questions.filter(login_author=login_author)[:6]
 
     all_answers = Answer.objects.all()
     all_answers_num = all_answers.filter(login_author=login_author).count()
-    answers = all_answers.filter(login_author=login_author)[:5]
+    answers = all_answers.filter(login_author=login_author)[:6]
 
     return render(request, 'sensei_app/activities_of_user.html', {
         'user': login_author,
@@ -538,7 +556,7 @@ def AllQuestionsofUser(request, pk):
     all_questions = Question.objects.all()
     questions = all_questions.filter(login_author=login_author)
 
-    paginator = Paginator(questions, 15)
+    paginator = Paginator(questions, 14)
     page = request.GET.get('page')
     questions = paginator.get_page(page)
     num = request.GET.get('page')
@@ -558,7 +576,7 @@ def AllAnswersofUser(request, pk):
     all_answers = Answer.objects.all()
     answers = all_answers.filter(login_author=login_author)
 
-    paginator = Paginator(answers, 15)
+    paginator = Paginator(answers, 14)
     page = request.GET.get('page')
     answers = paginator.get_page(page)
     num = request.GET.get('page')

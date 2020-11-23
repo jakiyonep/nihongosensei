@@ -35,7 +35,7 @@
     </div>
     <div class="content_beginning">
       {% with question.content|markdownify as markdown_content %}
-      {{markdown_content|slice:":100"}}{% endwith %} <i class="fas fa-ellipsis-h"></i>
+      {{markdown_content|slice:":100"}}{% endwith %}<i class="fas fa-ellipsis-h content_slice"></i>
     </div>
   </article>
 {% endfor %}

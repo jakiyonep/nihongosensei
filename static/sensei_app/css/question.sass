@@ -1,8 +1,4 @@
-$nihongo-bg: rgb(251, 136, 74)
-$sensei-bg: rgb(52, 117, 242)
-$jltct-bg: rgb(76, 230, 118)
-$others-bg: rgb(41, 112, 129)
-$culture-society-bg: rgb(226, 217, 7)
+$category-color: rgb(129, 233, 61)
 $question-bg: rgb(246, 246, 246)
 $border-primary: rgb(121, 121, 121)
 $border-secondary: rgb(228, 228, 228)
@@ -12,14 +8,17 @@ $sub-strong-color: rgb(111, 181, 218)
 $semi-strong-color: rgb(62, 98, 189)
 $light-bg-color: rgb(250, 250, 250)
 
-
-
+.questions
+	display: flex
+	flex-wrap: wrap
+	justify-content: space-between
 .question_list_wrapper
 	justify-content: space-between
 	.question_container
 		margin-bottom: 3rem
 		border: 1px solid $border-secondary
 		padding: 2rem 1rem
+		width: 48%
 	.question_link
 		width: 100%
 		height: 100%
@@ -42,53 +41,34 @@ $light-bg-color: rgb(250, 250, 250)
 		.author_container
 			width: 100%
 		.time_container
-			width: 20%
+			width: 50%
 		.poll_container
-			width: 5%
+			width: 15%
 		.answers_num
-			width: 7%
+			width: 15%
 		.category_container
-			width: 60%
+			width: 100%
 	.content_beginning
 		background-color: $light-bg-color
 		padding: 0.5rem
-		.fas
+		.content_slice
 			color: grey
+			font-size: 1rem
 
 
 
 .question_category
 	display: inline-block
 	padding: 0.3rem 1rem
-	border: 1px solid $nihongo-bg
-	color: $nihongo-bg
+	border: 1px solid $category-color
+	color: $category-color
 	border-radius: 0.4rem
 	transition: 0.5s
 	&:hover
 		transition: 0.5s
-		background-color: $nihongo-bg
+		background-color: $category-color
 		color: white
-.question_category_nihongo
-.question_category_sensei
-	border: 1px solid $sensei-bg
-	color: $sensei-bg
-	&:hover
-		background-color: $sensei-bg
-.question_category_jltct
-	border: 1px solid $jltct-bg
-	color: $jltct-bg
-	&:hover
-		background-color: $jltct-bg
-.question_category_others
-	border: 1px solid $others-bg
-	color: $others-bg
-	&:hover
-		background-color: $others-bg
-.question_category_youseikouza
-	border: 1px solid $culture-society-bg
-	color: $culture-society-bg
-	&:hover
-		background-color: $culture-society-bg
+
 
 .sidebar
 	background-color: $light-bg-color
@@ -141,21 +121,14 @@ $light-bg-color: rgb(250, 250, 250)
 			margin: 0
 			padding: 1rem
 			.content_main
-			.content_addition
-				margin-top: 5rem
-				.addition_head
-					background-color: $border-secondary
-					margin: 0
-					font-size: 1.3rem
-					padding: 0.5rem 0.2rem
 			.content_poll
 				.poll_head
-					background-color: $link-color
+					border: 1px solid $link-color
+					font-size: 1.3rem
 					padding: 0.5rem 0.3rem
-					color: white
+					color: $link-color
 				.poll_vote
 					.poll_question
-						font-weight: bold
 					.poll_sub_div
 						display: flex
 						align-items: center
@@ -181,12 +154,13 @@ $light-bg-color: rgb(250, 250, 250)
 								margin-left: 0.5rem
 					.poll_options
 						.poll_option
+							margin: 0 auto 0.5rem auto 0
 							.poll_option_button, .poll_option_button_non_member
 								position: relative
 								z-index: 1
 								display: flex
-								margin: 1rem 0
-								background-color: $border-secondary
+								margin: 0.5rem 0
+								border: 1px solid $border-primary
 								padding: 0.5rem
 								transition: 0.6s
 								width: 100%
@@ -215,13 +189,20 @@ $light-bg-color: rgb(250, 250, 250)
 								margin-top: 0
 								text-align: right
 								height: 1.7rem
+								margin-bottom: 0
 								span
 									color: white
 								.percentage
 									margin-right: 0.5rem
 									font-size: 1rem
 									word-break: keep-all
-
+			.content_addition
+				margin-top: 5rem
+				.addition_head
+					border: 1px solid $link-color
+					font-size: 1.3rem
+					padding: 0.5rem 0.3rem
+					color: $link-color
 	.answer_section
 		margin: 3rem 0
 		.submit_answer
@@ -362,7 +343,6 @@ $light-bg-color: rgb(250, 250, 250)
 		text-align: center
 		padding: 0.5rem
 		margin: 0.5rem 0
-		n
 		&:hover
 			color: $strong_color
 			background-color: $border-secondary
@@ -446,17 +426,22 @@ $light-bg-color: rgb(250, 250, 250)
 		width: 100%
 
 @media screen and (max-width:800px)
+	.questions
+		display: block !important
 	.question_list_wrapper
-
+		.question_container
+			width: 100% !important
 		.question_link
 			display: flex
 			flex-direction: column
 		.question_info
 			.author_container
 			.time_container
-				width: 80%!important
+				width: 60%!important
+			.poll_container
+				width: 15%!important
 			.answers_num
-				width: 20%!important
+				width: 15%!important
 			.category_container
 				width: 100%!important
 				margin: 0.5rem 0
@@ -495,3 +480,20 @@ $light-bg-color: rgb(250, 250, 250)
 			margin-bottom: 7rem
 		.right_column
 			order: 2
+
+@media screen and (max-width:400px)
+	.questions
+	.question_list_wrapper
+		.question_container
+		.question_link
+		.question_info
+			.author_container
+			.time_container
+				width: 100%!important
+			.poll_container
+				width: 25%!important
+			.answers_num
+				width: 60%!important
+			.category_container
+				width: 100%!important
+				margin: 0.5rem 0

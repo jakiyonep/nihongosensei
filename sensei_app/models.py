@@ -84,6 +84,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         """
         return self.email
 
+# Question
+
 class QuestionCategory(models.Model):
     category_name = models.CharField(null=True, blank=False, max_length=100)
     category_slug = models.CharField(null=True, blank=False, max_length=100)
@@ -102,7 +104,6 @@ class Question(models.Model):
     is_public = models.BooleanField(default=True)
     image = models.ImageField(upload_to='test_images', null=True, blank=True)
     addition = models.TextField(null=True, blank=True)
-    poll = models.BooleanField(default=False)
     poll_question = models.TextField(null=True, blank=True)
     option_1 = models.CharField(null=True, blank=True, max_length=100)
     option_2 = models.CharField(null=True, blank=True, max_length=100)
@@ -196,10 +197,14 @@ class Reply(models.Model):
     class Meta:
         ordering=['-created_at']
 
+# Contact
+
 class Contact(models.Model):
     name = models.CharField(null=True, blank=False, max_length=100)
     email = models.EmailField(null=True, blank=False,)
     content = models.TextField(null=True, blank=False)
+
+# JLTCT
 
 class jltctsection(models.Model):
     section = models.CharField(null=False, blank=False, max_length=200)
@@ -256,6 +261,8 @@ class Exam(models.Model):
 
     updated = models.DateTimeField(auto_now=True)
 
+# Others
+
 class MarkdownExpModel(models.Model):
     htmltag = models.CharField(null=True, blank=True, max_length=100)
     exp = models.TextField(null=True, blank=True)
@@ -271,3 +278,12 @@ class RegisterPerk(models.Model):
 
     def __str__(self):
         return self.perk
+
+class TermsConditions(models.Model):
+    number = models.IntegerField(null=False, blank=True, default=0)
+    content = models.TextField(null=False, blank=False)
+    create_at = models.DateField(auto_created=True)
+    update_at = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return str(self.number)

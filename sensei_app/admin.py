@@ -70,3 +70,4 @@ admin.site.register(jltctsection)
 
 admin.site.register(MarkdownExpModel)
 admin.site.register(RegisterPerk)
+admin.site.register(TermsConditions)

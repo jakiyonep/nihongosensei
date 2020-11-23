@@ -1,7 +1,7 @@
 
 <form class="search_form" action="{% url "sensei_app:jltct_top" %}" method="get" accept-charset="utf-8">
 	<input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}" placeholder="キーワード">
-	<button class="search_form_button" type="submit">検索</button>
+	<button class="search_form_button" type="submit"><span class="icon"><i class="fas fa-search"></i></span></button>
 </form>
 
 <div class="jltct_tags">
