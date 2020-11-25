@@ -12,7 +12,7 @@
 	<div class="wrapper question_list_wrapper all_wrapper">
 		<p class="section_head">
 			{% if user.nickname %}
-				<a class="login_author_link" href="{% url 'sensei_app:activities_of_user' user.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{user.nickname}}</a>さんの回答
+				<a class="login_author_link" href="{% url 'sensei_app:activities_of_user' user.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{user.nickname}}</a>さんが回答した質問
 			{% else %}
 				あなたの回答
 			{% endif %}

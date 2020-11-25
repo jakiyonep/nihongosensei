@@ -16,14 +16,14 @@ $link-color: rgb(3, 196, 214)
 			.toppage_card
 				transition: 0.5s
 				&:hover
-					transform: translateX(1rem)
+					transform: translateX(0.5rem)
 					transition: 0.5s
 		&:nth-of-type(even)
 			margin: 0 0 0 auto
 			.toppage_card
 				transition: 0.5s
 				&:hover
-					transform: translateX(-1rem)
+					transform: translateX(-0.5rem)
 					transition: 0.5s
 	.toppage_card
 		width: 100%
@@ -45,12 +45,14 @@ $link-color: rgb(3, 196, 214)
 				max-width: 100%
 		.card_right
 			width: 65%
+			display: flex
+			align-items: center
 			.card_top
 				font-size: 1.7rem
 				color: $strong-color
 				margin-bottom: 2rem
 			.card_desc
-
+				display: none
 
 
 
@@ -76,7 +78,12 @@ $link-color: rgb(3, 196, 214)
 				.card_img
 					width: 100%
 					margin-bottom: 3rem
+					img
+						height: 20vh
 				.card_right
 					width: 100%
+					display: flex
+					justify-content: flex-end
 					.card_top
+						font-size: 1.1rem
 					.card_desc

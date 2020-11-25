@@ -9,6 +9,17 @@
 	<div class="wrapper toppage_wrapper">
 
 		{% if not user.is_authenticated %}
+		<section>
+			<a class="toppage_card" href="{% url 'sensei_app:site_desc' %}">
+				<div class="card_img">
+					<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/undraw_teacher_35j2.png" alt="">
+				</div>
+				<div class="card_right">
+					<h1 class="card_top">「集まれ日本語教師!」とは？</h1>
+					<p class="card_desc"></p>
+				</div>
+			</a>
+		</section>
 		 <section>
 			 <a class="toppage_card" href="{% url 'sensei_app:login' %}">
 				 <div class="card_img">

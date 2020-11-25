@@ -11,15 +11,15 @@
 	{% include 'sensei_app/navbar.html' %}
 	<div class="wrapper user_info_wrapper">
 		<p class="section_head">
-			{% if user.nickname %}
-				{{user.nickname}}さんのページ
-			{% endif %}
+			マイページ
 		</p>
 		<div class="left_column">
 			<div class="user_info_top">
 				<div class="user_info">
 				<div class="user_info_row">
 					<div class="user_info_left">
+						登録メールアドレス <br>
+						(非公開)
 					</div>
 					<div class="user_info_right">
 						<p>{{user.email}}</p>
@@ -60,7 +60,7 @@
 			</div>
 				<div class="user_info_menu">
 					<li>
-						<a class="nav-item nav-link" href="{% url 'sensei_app:user_update' user.pk %}">ユーザー情報更新</a>
+						<a class="nav-item nav-link" href="{% url 'sensei_app:user_update' user.pk %}">ニックネーム変更</a>
 					</li>
 					<li>
 						<a class="nav-item nav-link" href="{% url 'sensei_app:password_change' %}">パスワードの変更</a>

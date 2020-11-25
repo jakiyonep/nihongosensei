@@ -8,6 +8,8 @@ app_name = 'sensei_app'
 urlpatterns =[
     path('', Toppage.as_view(), name='toppage'),
 
+    path('sitedesc/', SiteDescView.as_view(), name="site_desc"),
+
     path('questions/', QuestionList, name='question_list'),
     path('question/<int:pk>/', QuestionDetail, name="question_detail"),
     path('question/category/<str:question_category_slug>/', QuestionCategoryView, name="question_category"),

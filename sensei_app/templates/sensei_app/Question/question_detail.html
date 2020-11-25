@@ -77,64 +77,75 @@
 			{% include 'sensei_app/Question/sidebar.html' %}
 		</aside>
 	</div>
+
+
 	<script>
 	$(document).on('click', '#answer_submit',function(event){
 		event.preventDefault();
-		var question_id = $(this).attr('name')
-		var answer_author = $('#answer_author_id').val()
-		var answer_content = $('#answer_content_id').val()
-		if(answer_author == undefined || answer_author == ""){
-			answer_author = '名無し'
-		}
-		$('.answer_form_wrapper').slideToggle()
-		$.ajax({
-			 type: "POST",
-			 url: "{% url 'sensei_app:answer_add' %}",
-			 data: {
-				'question_id': question_id,
-				'answer_author': answer_author,
-				'answer_content': answer_content,
-				'csrfmiddlewaretoken': '{{ csrf_token }}',
-		 },
-			 dataType: "json",
-			 success: function(response) {
-				 console.log('okay')
-					$('.answers').html(response['form'])
-					$('#answer_author_id').val('')
-					$('#answer_content_id').val('')
-				},
+    	var checked = confirm("投稿してもよろしいでしょうか？")
+    	if (checked == true){
+    		var question_id = $(this).attr('name')
+    		var answer_author = $('#answer_author_id').val()
+    		var answer_content = $('#answer_content_id').val()
+    		if(answer_author == undefined || answer_author == ""){
+    			answer_author = '名無し'
+    		}
+    		$('.answer_form_wrapper').slideToggle()
+    		$.ajax({
+    			 type: "POST",
+    			 url: "{% url 'sensei_app:answer_add' %}",
+    			 data: {
+    				'question_id': question_id,
+    				'answer_author': answer_author,
+    				'answer_content': answer_content,
+    				'csrfmiddlewaretoken': '{{ csrf_token }}',
+    		 },
+    			 dataType: "json",
+    			 success: function(response) {
+    				 console.log('okay')
+    					$('.answers').html(response['form'])
+    					$('#answer_author_id').val('')
+    					$('#answer_content_id').val('')
+    				},
 
-		});
+    		});
+    	} else{
+    		return false;
+    	}
+    })
 
-			})
+
 	$(document).on('click', '.reply_submit_button',function(event){
 		event.preventDefault();
-		var answer_id = $(this).attr('id')
-		var reply_author = $('#reply_author_input' + answer_id).val()
-		var reply_content = $('#reply_content_textarea_' + answer_id).val()
-		if(reply_author == undefined || reply_author == ""){
-			reply_author = '名無し'
-		}
-		$('#reply_form_wrapper_' + answer_id).slideToggle()
-		$.ajax({
-			 type: "POST",
-			 url: "{% url 'sensei_app:reply_add' %}",
-			 data: {
-				'answer_id': answer_id,
-				'reply_author': reply_author,
-				'reply_content': reply_content,
-				'csrfmiddlewaretoken': '{{ csrf_token }}',
-		 },
-			 dataType: "json",
-			 success: function(response) {
-					$('#ajax_replies_' + answer_id).html(response['form'])
-					$('#reply_author_id').val('')
-					$('#reply_content_id').val('')
-				},
-
-		});
-
-		})
+    var checked = confirm("投稿してもよろしいでしょうか？")
+    if (checked == true){
+  		var answer_id = $(this).attr('id')
+  		var reply_author = $('#reply_author_input' + answer_id).val()
+  		var reply_content = $('#reply_content_textarea_' + answer_id).val()
+  		if(reply_author == undefined || reply_author == ""){
+  			reply_author = '名無し'
+  		}
+  		$('#reply_form_wrapper_' + answer_id).slideToggle()
+  		$.ajax({
+  			 type: "POST",
+  			 url: "{% url 'sensei_app:reply_add' %}",
+  			 data: {
+  				'answer_id': answer_id,
+  				'reply_author': reply_author,
+  				'reply_content': reply_content,
+  				'csrfmiddlewaretoken': '{{ csrf_token }}',
+  		 },
+  			 dataType: "json",
+  			 success: function(response) {
+  					$('#ajax_replies_' + answer_id).html(response['form'])
+  					$('#reply_author_id').val('')
+  					$('#reply_content_id').val('')
+  			},
+  		});
+    } else{
+      return false
+    }
+	})
 /*addition*/
 	$(document).on('click', '#addition_submit_button',function(event){
 		event.preventDefault();

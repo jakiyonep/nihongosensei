@@ -36,7 +36,10 @@ from sensei_app.models import *
 
 
 
+# SiteDesc
 
+class SiteDescView(TemplateView):
+    template_name = "sensei_app/sitedesc.html"
 
 class Toppage(TemplateView):
     template_name = 'sensei_app/toppage.html'
@@ -359,7 +362,7 @@ def ReplyDelete(request, pk):
     reply = get_object_or_404(Reply, pk=pk)
     question = reply.answer.question
     question_pk = question.pk
-    question.delete()
+    reply.delete()
 
     return redirect("sensei_app:question_detail", pk=question_pk)
 

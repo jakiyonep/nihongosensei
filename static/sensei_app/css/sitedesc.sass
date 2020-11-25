@@ -1,0 +1,76 @@
+$category-color: rgb(129, 233, 61)
+$question-bg: rgb(246, 246, 246)
+$border-primary: rgb(121, 121, 121)
+$border-secondary: rgb(228, 228, 228)
+$strong-color: rgb(255, 112, 112)
+$link-color: rgb(3, 196, 214)
+$sub-strong-color: rgb(111, 181, 218)
+$semi-strong-color: rgb(62, 98, 189)
+$light-bg-color: rgb(250, 250, 250)
+$service-name-color: rgb(46, 139, 75)
+
+.sitedesc_wrapper
+	.section_head
+	.sitedesc_container
+		.top_desc
+			margin-bottom: 5rem
+		.services_container
+			.service_container
+				.service_name
+					position: relative
+					padding: 0.5rem
+					font-size: 1.1rem
+					text-align: center
+					border-top: solid 2px $service-name-color
+					border-bottom: solid 2px $service-name-color
+					color: $service-name-color
+					margin-bottom: 3rem
+					&::before, &::after
+						content: ''
+						position: absolute
+						top: -10px
+						width: 2px
+						height: calc(100% + 20px)
+						background-color: $service-name-color
+					&::before
+						left: 0.5rem
+					&::after
+						right: 0.5rem
+				.service_desc_container
+					display: flex
+					.service_desc
+						p
+							margin-bottom: 1rem
+						.login_user
+							margin-top: 3rem
+							border: 1px solid $link-color
+							position: relative
+							padding: 3rem 0 1rem 0
+							border-radius: 0.5rem
+							background-color: $light-bg-color
+							li
+								list-style: none
+								list-style-position: outside
+								margin-left: 2rem
+								&::before
+								  font-family: "Font Awesome 5 Free"
+								  font-weight: 900
+								  content: "\f00c"
+								&::before
+									color: $link-color
+									margin-right: 1rem
+
+
+							&::before
+								content: '会員になると？'
+								background-color: $link-color
+								color: white
+								padding: 0.5rem 1rem
+								border-radius: 0.5rem
+								position: absolute
+								top: 0px
+								left: 0px
+					.service_img
+						img
+							object-fit: contain
+							max-width: 100%
