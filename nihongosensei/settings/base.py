@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'storages',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'django_countries',
 ]
 
 MARKDOWNX_MARKDOWN_EXTENSIONS = [

@@ -1,0 +1,37 @@
+{% load markdownify %}
+{% load humanize %}
+{% if note.note_comments.all %}
+	<div class="comments_container">
+		{% for comment in note.note_comments.all %}
+			<div class="comment_container">
+				<div class="comment_info">
+					<div class="comment_author">
+						<a href="{% url 'sensei_app:activities_of_user' comment.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{comment.login_author.nickname}}<span>さん</span></a>
+					</div>
+					<div class="comment_date">
+						<i class="far fa-clock"></i>{{comment.created_at}}
+					</div>
+				</div>
+				<div class="comment_content">
+					{{comment.content|markdownify}}
+				</div>
+				<div class="comment_reply">
+					{% if user.is_authenticated %}
+						<a class="note_reply_open_button" type="button" name="reply_add_container_{{comment.pk}}">返信する</a>
+					{% endif %}
+					{% if request.user == comment.login_author %}
+						<a href="{% url 'sensei_app:note_comment_delete' comment.pk %}" class="note_reply_open_button note_comment_delete" type="button"  onclick="return confirm('削除してもよろしいですか？');">このコメントを削除する</a>
+					{% endif %}
+					<div class="reply_add_container" id="reply_add_container_{{comment.pk}}">
+						{% include "sensei_app/Exam/reply_add.html" %}
+					</div>
+				</div>
+			</div>
+			<div class="replies" id="replies_{{comment.pk}}">
+				{% include "sensei_app/Exam/replies.html" %}
+			</div>
+		{% endfor %}
+	</div>
+{% else %}
+	まだコメントがありません
+{% endif %}

@@ -1,0 +1,53 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'sensei_app/css/jltct_note_list_snippet.min.css' %}">
+<div class="section_container"><!--society-->
+	<h3 class="section_name"><i class="fas fa-circle society"></i>社会・文化・地域</h3>
+	<ul>
+		{% for note in society %}
+			{% if note.public %}
+				{% if request.user in note.likes %}Liked{% endif %}<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+</div>
+<div class="section_container"><!--languagesociety-->
+	<h3 class="section_name"><i class="fas fa-circle languagesociety"></i>言語と社会</h3>
+	<ul>
+		{% for note in languagesociety %}
+			{% if note.public %}
+				<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+</div>
+<div class="section_container"><!--languagepsychology-->
+	<h3 class="section_name"><i class="fas fa-circle languagepsychology"></i>言語と心理</h3>
+	<ul>
+		{% for note in languagepsychology %}
+			{% if note.public %}
+				<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+</div>
+<div class="section_container"><!--languageeducation-->
+	<h3 class="section_name"><i class="fas fa-circle languageeducation"></i>言語と教育</h3>
+	<ul>
+		{% for note in languageeducation %}
+			{% if note.public %}
+				<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+</div>
+<div class="section_container"><!--language-->
+	<h3 class="section_name"><i class="fas fa-circle language"></i>言語一般</h3>
+	<ul>
+		{% for note in language %}
+			{% if note.public %}
+				<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+</div>

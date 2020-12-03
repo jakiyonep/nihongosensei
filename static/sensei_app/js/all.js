@@ -74,6 +74,12 @@ $(document).on('input', '.answer_form [name=reply_content]', function(event){
 	document.getElementById('markdowned_' + id).innerHTML = marked(content)
 })
 
+$(document).on('input', '.note_comment_form [name=content]', function(event){
+	event.preventDefault();
+	var content = $(this).val()
+	document.getElementById('markdowned_content').innerHTML = marked(content)
+})
+
 
 $(document).on('click', '.question_check_button', function(event){
 	$("#markdowned_content").toggle("fast");
@@ -81,8 +87,19 @@ $(document).on('click', '.question_check_button', function(event){
 
 $(document).on('click', '.question_check_button', function(event){
 	var id = $(this).attr('id')
-	console.log(id)
 	$("#markdowned_reply_" + id).toggle("fast");
+})
+
+$(document).on('click', '.note_reply_check_button', function(event){
+	var comment_id = $(this).parent().attr('id')
+	$("#markdowned_reply_content_" + comment_id).toggle("fast");
+})
+
+$(document).on('input', '.note_reply_input', function(event){
+	event.preventDefault();
+	var reply_id = $(this).attr('id')
+	var reply_content = $(this).val()
+	document.getElementById('markdowned_' + reply_id).innerHTML = marked(reply_content)
 })
 
 /*addition*/
@@ -129,4 +146,19 @@ $(function(){
 				$('.register_collapse').slideUp('fast')
 			}
 	})
+})
+
+
+/* note_comment_open_button */
+
+$(document).on('click', '#login_note_comment', function(event){
+	$('.comment_add_container').slideToggle('slow')
+})
+
+
+/* note_reply_open_button */
+
+$(document).on('click', '.note_reply_open_button', function(event){
+	var target_container = $(this).attr('name')
+	$('#' + target_container).slideToggle('fast')
 })

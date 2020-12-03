@@ -10,10 +10,10 @@
 <body>
 	{% include 'sensei_app/navbar.html' %}
 	<div class="wrapper user_info_wrapper">
-		<p class="section_head">
-			マイページ
-		</p>
 		<div class="left_column">
+			<p class="section_head">
+				マイページ
+			</p>
 			<div class="user_info_top">
 				<div class="user_info">
 				<div class="user_info_row">
@@ -57,6 +57,14 @@
 						{{user.login_author_answer.count}}
 					</div>
 				</div>
+				<div class="user_info_row">
+					<div class="user_info_left">
+						いいねした検定試験ノート
+					</div>
+					<div class="user_info_right">
+						{{user.liked_notes.count}}
+					</div>
+				</div>
 			</div>
 				<div class="user_info_menu">
 					<li>
@@ -71,46 +79,67 @@
 				</div>
 			</div>
 			<div class="user_info_list question_list_wrapper">
-			<p class="section_head">
-				{% if user.nickname %}
-					{{user.nickname}}さんの質問
-				{% else %}
-					あなたの質問
-				{% endif %}
-			</p>
-			<div class="questions">
-				{% if all_questions_num == 0 %}
-					まだ質問をしていません
-				{% else %}
-					{% include "sensei_app/Question/question_list_snippet.html" %}
-				{% endif %}
-				{% if all_questions_num > 5 %}
-					<a class="more_button" href="{% url 'sensei_app:all_questions_of_user' user.pk %}">もっとみる</a>
-				{% endif %}
-			</div>
-		</div>
-			<div class="user_info_list question_list_wrapper">
 				<p class="section_head">
 					{% if user.nickname %}
-						{{user.nickname}}さんが回答した質問
+						{{user.nickname}}さんの質問・回答
 					{% else %}
-						あなたの回答
+						あなたの質問
 					{% endif %}
 				</p>
-				<div class="questions">
+				<div class="question_answer_container">
+					<button type="button" class="question_answer_button button_active" id="question_active">投稿した質問</button>
+					<button type="button" class="question_answer_button button_inactive" id="answer_active">回答した質問</button>
+				</div>
+				<div class="questions question_collapse">
+					{% if all_questions_num == 0 %}
+						まだ質問をしていません
+					{% else %}
+						{% include "sensei_app/Question/question_list_snippet.html" %}
+					{% endif %}
+					{% if all_questions_num > 6 %}
+						<a class="more_button" href="{% url 'sensei_app:all_questions_of_user' user.pk %}">もっとみる</a>
+					{% endif %}
+				</div>
+				<div class="questions answer_collapse">
 					{% if all_answers_num == 0 %}
 						まだ回答をしていません
 					{% else %}
 						{% include "sensei_app/Question/answer_list_snippet.html" %}
 					{% endif %}
-					{% if all_answers_num > 5 %}
+					{% if all_answers_num > 6 %}
 						<a class="more_button" href="{% url 'sensei_app:all_answers_of_user' user.pk %}">もっとみる</a>
 					{% endif %}
+				</div>
 			</div>
+			<div class="liked_jltct_note">
+				<p class="section_head">
+					いいねした検定試験ノート
+				</p>
+				{% include "sensei_app/Exam/jltct_note_list_snippet.html" %}
 			</div>
-		</div>
+		</div><!-- left_column end -->
 		<div class="right_column">
-			{% include "sensei_app/Question/sidebar.html" %}
+
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(document).on('click', '.button_inactive', function(event){
+			$('.button_active').addClass('button_inactive')
+			$('.button_active').removeClass('button_active')
+			$(this).addClass('button_active')
+			$(this).removeClass('button_inactive')
+
+			var question_or_answer = $(this).attr('id')
+
+			if(question_or_answer == 'question_active'){
+				$('.answer_collapse').css('display', 'none')
+				$('.question_collapse').css('display', 'flex')
+			}else if(question_or_answer == "answer_active"){
+				$('.question_collapse').css('display', 'none')
+				$('.answer_collapse').css('display', 'flex')
+			}
+		})
+	</script>
+
+</body>
 {% endblock %}

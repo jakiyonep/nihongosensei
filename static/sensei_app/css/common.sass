@@ -24,7 +24,9 @@ html.wf-active
   visibility: visible
 
 html
-  font-size: 1.1rem
+  font-size: 1.05rem
+textarea, input
+  font-family: 'sans-serif'
 
 *
 	color: rgb(66, 66, 66)
@@ -88,11 +90,11 @@ p
 	padding: 2rem 0
 	margin: 6rem 0
 	*
-		margin: 2rem 0
+		margin: 1rem 0
 		font-size: 1.1rem
 		color: $content-color
 	h1, h2, h3, h4, h5, h6
-		margin: 2.5rem 0
+		margin: 2rem 0
 	h1
 		font-size: 1.5rem
 
@@ -104,7 +106,7 @@ p
 	h3
 		font-size: 1.3rem
 		padding: 0.5rem 1rem
-		display: inline-block
+		display: block
 		color: $semi-strong-color
 		border: 2px solid $semi-strong-color
 	h4
@@ -308,9 +310,21 @@ p
 	width: 100%
 	display: none
 	background-color: $light-bg-color
+  font-family: 'sans-serif'
 
 
-
+.like_container
+  .note_like_button, .answer_like_button, .non_user_answer_like_button, .non_user_note_like_button
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.4)
+    padding: 0.2rem 0.5rem
+    border-radius: 0.5rem
+    i
+    .like_num
+      margin-left: 0.2rem
+  .note_like_button_liked
+    box-shadow: 1px 1px 1px 1px $semi-strong-color
+    &>*
+      color: $semi-strong-color
 
 @media screen and (max-width:800px)
 	.wrapper
@@ -318,6 +332,7 @@ p
 		flex-direction: column
 		.section_head
 			order: 1
+
 		.left_column
 			width: 100%!important
 			order: 3
@@ -329,9 +344,8 @@ p
 				margin-left: 2rem
 			ol
 				margin-left: 2rem
-
-
-
+  .section_head
+    font-size: 1.2rem
 	.markdownexp
 		.markdownexp_container
 			.htmltags_container

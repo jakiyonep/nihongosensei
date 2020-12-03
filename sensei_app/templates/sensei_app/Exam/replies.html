@@ -1,0 +1,23 @@
+{% load markdownify %}
+<div class="comments_container replies_container">
+	{% for reply in comment.note_replies.all %}
+	<div class="comment_container reply_container">
+		<div class="comment_info reply_info">
+			<div class="comment_author reply_info">
+				<a href="{% url 'sensei_app:activities_of_user' reply.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{reply.login_author.nickname}}<span>さん</span></a>
+			</div>
+			<div class="comment_date reply_date">
+				<i class="far fa-clock"></i>{{reply.created_at}}
+			</div>
+		</div>
+		<div class="comment_content reply_content">
+			{{reply.content|markdownify}}
+		</div>
+		<div class="delete_button">
+			{% if request.user == reply.login_author %}
+				<a href="{% url 'sensei_app:note_comment_delete' comment.pk %}" class="note_reply_delete" type="button"  onclick="return confirm('削除してもよろしいですか？');">このコメントを削除する</a>
+			{% endif %}
+		</div>
+	</div>
+	{% endfor %}
+</div>

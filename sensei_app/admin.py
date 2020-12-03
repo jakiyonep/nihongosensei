@@ -19,7 +19,9 @@ class jltctAdmin(MarkdownxModelAdmin):
         jltctReferences
     ]
 
-
+class ExamExpAdmin(admin.ModelAdmin):
+    list_display = ('year', 'section', 'question_num', 'question_num_small')
+    list_editable = ('section', 'question_num', 'question_num_small')
 
 # USER REGISTRATION
 
@@ -63,10 +65,14 @@ admin.site.register(Question)
 admin.site.register(Answer)
 admin.site.register(Reply)
 
-admin.site.register(Exam)
+admin.site.register(ExamExp, ExamExpAdmin)
 admin.site.register(jltct,jltctAdmin)
+admin.site.register(JltctComment)
+admin.site.register(JltctReply)
 admin.site.register(jltcttag)
 admin.site.register(jltctsection)
+
+admin.site.register(JobListing)
 
 admin.site.register(MarkdownExpModel)
 admin.site.register(RegisterPerk)

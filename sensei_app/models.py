@@ -5,6 +5,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.core.validators import EmailValidator
+from django_countries.fields import CountryField
 
 from markdownx.models import MarkdownxField
 
@@ -94,7 +95,7 @@ class QuestionCategory(models.Model):
         return self.category_name
 
 class Question(models.Model):
-    title = models.CharField(null=True, blank=False, max_length=150)
+    title = models.CharField(null=True, blank=False, max_length=30)
     category = models.ForeignKey(QuestionCategory, on_delete=models.CASCADE, null=True, blank=False)
     author = models.CharField(null=True, blank=True, max_length=50)
     login_author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='login_author', null=True, blank=True)
@@ -175,12 +176,17 @@ class Answer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_public = models.BooleanField(default=False)
+    likes = models.ManyToManyField(User, blank=True, null=True, related_name="liked_answers")
 
     def __str__(self):
         sliced_content = self.content[:10]
         return sliced_content
+
     class Meta:
         ordering=['-created_at']
+
+    def total_likes(self):
+        return self.likes.count()
 
 class Reply(models.Model):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name="replies", null=True, blank=True)
@@ -231,6 +237,7 @@ class jltct(models.Model):
     update = models.DateTimeField(auto_now=True)
     thumbnail = models.ImageField(upload_to="JLTCT_thumbnail", null=True, blank=True)
     related_note = models.ManyToManyField('self', blank=True, null=True)
+    likes = models.ManyToManyField(User, blank=True, null=True, related_name="liked_notes")
 
     def __str__(self):
         return self.title
@@ -238,15 +245,45 @@ class jltct(models.Model):
     class Meta:
         ordering = ['section','number']
 
+    def total_likes(self):
+        return self.likes.count()
+
 class jltctreference(models.Model):
     note = models.ForeignKey(jltct,on_delete=models.CASCADE)
     name = models.CharField(max_length=500, null=True, blank=True)
     url = models.CharField(max_length=500, null=True, blank=True)
 
-class Exam(models.Model):
+class JltctComment(models.Model):
+    note = models.ForeignKey(jltct, on_delete=models.CASCADE, related_name="note_comments", null=True, blank=True)
+    login_author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='note_comments_login_author', null=True, blank=True )
+    content = models.TextField(null=True, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_public = models.BooleanField(default=True)
+
+    def __str__(self):
+        sliced_content = self.content[:10]
+        return sliced_content
+    class Meta:
+        ordering=['-created_at']
+
+class JltctReply(models.Model):
+    comment = models.ForeignKey(JltctComment, on_delete=models.CASCADE, related_name='note_replies', null=True, blank=True)
+    login_author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='note_replies_login_author', null=True, blank=True )
+    content = models.TextField(null=True, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_public = models.BooleanField(default=True)
+
+    def __str__(self):
+        sliced_content = self.content[:10]
+        return sliced_content
+    class Meta:
+        ordering=['-created_at']
+
+class ExamExp(models.Model):
     year = models.IntegerField(null=True, blank=True)
     section = models.IntegerField(null=True, blank=True)
     question_num = models.IntegerField(null=True, blank=True)
+    question_num_small = models.IntegerField(null=True, blank=True)
     question_head = models.CharField(null=True, blank=True, max_length=200)
     explanation = models.TextField(null=True, blank=True)
 
@@ -257,10 +294,46 @@ class Exam(models.Model):
         choice4 = 4
         choice5 = 5
 
-    answer = models.IntegerField(choices=Answer.choices, null=True)
+    answer = models.IntegerField(choices=Answer.choices, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.question_head
+
+    class Meta:
+        ordering = ['year', 'section', 'question_num', 'question_num_small']
+
+# job listing
+
+class JobListing(models.Model):
+    listing_id = models.CharField(blank=False, null=True, max_length=20)
+    organization_name = models.CharField(blank=False, null=True, max_length=50)
+    job_title = models.CharField(blank=False, null=True, max_length=50)
+    contract_type = models.CharField(blank=False, null=True, max_length=50)
+    workplace = CountryField()
+    job_desc = models.TextField(blank=False, null=True)
+    application_condition = models.TextField(blank=False, null=True)
+    treatment = models.TextField(blank=False, null=True)
+    deadline = models.DateField
+    deadline_supplement = models.TextField(blank=False, null=True)
+    notes = models.TextField(blank=False, null=True)
+    contact_person = models.CharField(blank=False, null=True, max_length=40)
+    email = models.EmailField(blank=False, null=True)
+    tel = models.IntegerField(blank=False, null=True)
+    postal_code = models.IntegerField
+    address = models.TextField(blank=False, null=True, default=1)
+    contact_person_private = models.CharField(blank=False, null=True, max_length=40)
+    email_private = models.EmailField
+
+    def __str__(self):
+        return self.organization_name + self.job_title
+
+    def japan_or_not(self):
+        if not self.workplace == 'JP':
+            return 'not_japan'
+        else:
+            return 'japan'
 # Others
 
 class MarkdownExpModel(models.Model):

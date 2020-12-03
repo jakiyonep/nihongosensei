@@ -10,12 +10,14 @@ $semi-strong-color: rgb(62, 98, 189)
 $link-color: rgb(3, 196, 214)
 $content-color: rgb(108, 108, 108)
 $light-bg-color: rgb(250, 250, 250)
-
+$semi-strong-color: rgb(62, 98, 189)
 $society-color: rgb(244, 192, 91)
 $language-color: rgb(227, 81, 81)
 $languagesociety-color: rgb(114, 181, 62)
 $languagepsychology-color: rgb(85, 173, 201)
 $languageeducation-color: rgb(102, 24, 180)
+$sub-strong-color: rgb(111, 181, 218)
+
 
 $point-bg-color: rgba(238, 181, 169, 1)
 $point-border-color: rgb(255, 139, 139)
@@ -56,33 +58,7 @@ $point-border-color: rgb(255, 139, 139)
         margin-bottom: 3rem
         a
           color: $link-color
-      .section_container
-        .section_name
-          font-size: 1.2rem
-          i
-            margin-right: 1rem
-        ul
-          margin: 3rem
-          li
-            font-size: 1.2rem
-            margin-bottom: 0.6rem
-            a
-              border-bottom: 1px solid $link-color
-              transition: 0.2s
-              &:hover
-                color: $link-color
-                border-bottom: 1px solid white
-                transition: 0.2s
-      .society
-        color: $society-color
-      .language
-        color: $language-color
-      .languagesociety
-        color: $languagesociety-color
-      .languagepsychology
-        color: $languagepsychology-color
-      .languageeducation
-        color: $languageeducation-color
+        /* continued in 'jltct_note_list_snippet.sass' */
     /*note_detail below*/
     .note_info
       margin-bottom: 15rem
@@ -106,12 +82,17 @@ $point-border-color: rgb(255, 139, 139)
           color: $languagepsychology-color
         .languageeducation
           color: $languageeducation-color
-        .fa-clock
+        .info_time
+          .fa-clock
+            display: inline-block
+            font-size: 1.2rem
+            margin-right: 0.5rem
+          .meta_info_update
+            display: inline-block
+        .info_like
           display: inline-block
-          font-size: 1.2rem
-          margin-right: 0.5rem
-        .meta_info_update
-          display: inline-block
+          margin-left: 2rem
+        .info_section
         .fa-circle
           display: inline-block
           margin-right: 0.5rem
@@ -150,6 +131,7 @@ $point-border-color: rgb(255, 139, 139)
           &:hover
             color: $link-color
             transition: 0.3s
+
   .right_column
     width: 20%
     height: inherit
@@ -191,7 +173,6 @@ $point-border-color: rgb(255, 139, 139)
           background-color: $link-color
           color: white
           border-radius: 0
-
 .point
 	border: 2px solid $point-border-color
 .point
@@ -228,6 +209,114 @@ $point-border-color: rgb(255, 139, 139)
 
 
 
+.note_comment_section
+  border-top: 1px solid $border-secondary
+  padding-top: 3rem
+  margin-top: 10rem
+  margin-bottom: 15rem
+  .comment_add_open_button
+    display: block
+    margin-bottom: 1rem
+    border: 1px solid $strong-color
+    width: 100%
+    padding: 0.5rem
+    text-align: center
+    color: $strong-color
+    transition: 0.5s
+    margin-bottom: 3rem
+    &:hover
+      background-color: $strong-color
+      transition: 0.5s
+      color: white
+      cursor: pointer
+  .comment_add_container
+    display: none
+    .note_comment_form
+      textarea
+        border: 1px solid $border-secondary
+        width: 100%
+      .note_comment_submit_button
+        width: 100%
+        text-align: center
+        background-color: $strong-color
+        color: white
+        padding: 0.5rem
+        transition: 0.5s
+        &:hover
+          background-color: inherit
+          color: $strong-color
+          transition: 0.5s
+  .note_comments
+    margin-top: 5rem
+    .comments_container
+      .comment_container
+        background-color: $light-bg-color
+        border: 1px solid $border-secondary
+        margin-bottom: 2rem
+        .comment_info
+          background-color: white
+          padding: 1rem
+          padding-bottom: 0.5rem
+          border: 1px solid $border-secondary
+          .comment_author
+            a
+              color: $link-color
+              font-size: 1.1rem
+          .comment_date
+            margin-bottom: 1rem
+        .comment_content
+          padding: 1rem
+        .comment_reply
+          padding: 1rem
+          .note_reply_open_button,
+            background-color: $border-primary
+            color: white
+            padding: 0.5rem
+            border-radius: 0.2rem
+            transition: 0.5s
+            &:hover
+              transition: 0.5s
+              background-color: $light-bg-color
+              color: $border-primary
+          .reply_add_container
+            display: none
+            .note_reply_form
+              margin-top: 3rem
+              .note_reply_input
+                border: 1px solid $border-secondary
+                width: 100%
+                background-color: white
+              .note_reply_check_button
+              .note_reply_submit_button
+                background-color: rgb(107, 181, 200)
+                color: white
+                width: 100%
+                text-align: center
+                padding: 0.5rem
+                transition: 0.5s
+                &:hover
+                  transition: 0.5s
+                  color: rgb(107, 181, 200)
+                  background-color: $light-bg-color
+      .replies
+        margin-bottom: 5rem
+        display: flex
+        justify-content: flex-end
+        .replies_container
+          width: 95%
+          margin-right: 0
+          .delete_button
+            padding: 1rem
+            .note_reply_delete
+              background-color: $border-primary
+              color: white
+              padding: 0.5rem
+              border-radius: 0.2rem
+              transition: 0.5s
+              &:hover
+                transition: 0.5s
+                background-color: $light-bg-color
+                color: $border-primary
 @media screen and (max-width:1100px)
   .left_column
     width: 100%!important
@@ -258,3 +347,17 @@ $point-border-color: rgb(255, 139, 139)
   .jltct_detail_right_column
     order: 3
     margin-top: 6rem
+  .info_time
+    display: flex
+    flex-wrap: wrap
+    .meta_info_update
+      margin-right: 2rem
+    .like_container
+      margin-left: 0 !important
+      margin-top: 0.5rem
+  .comments_container
+    .comment_reply
+      display: flex
+      flex-wrap: wrap
+      .note_reply_open_button
+        margin-bottom: 1rem

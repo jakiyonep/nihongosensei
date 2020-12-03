@@ -68,8 +68,20 @@
 				</div>
         <div class="answers">
 		      <p class="section_head">みんなの回答({{question.answer_reply_num}}件)</p>
-	         {% include 'sensei_app/Question/comments.html' %}
-				</div>
+          {% if question.answers.all %}
+            <div class="sort_container">
+              <span>並び順</span>
+              <select class="answer_sort">
+                <option value="new">新しい順</option>
+                <option value="old">古い順</option>
+                <option value="likes">いいねの多い順</option>
+              </select>
+            </div>
+          {% endif %}
+          <div class="answers_container">
+            {% include 'sensei_app/Question/comments.html' %}
+		     </div>
+      </div>
 
 			</section><!-- answer_section end-->
 		</main><!-- left column end -->
@@ -87,6 +99,7 @@
     		var question_id = $(this).attr('name')
     		var answer_author = $('#answer_author_id').val()
     		var answer_content = $('#answer_content_id').val()
+        var selected_sort = $('.answer_sort').val()
     		if(answer_author == undefined || answer_author == ""){
     			answer_author = '名無し'
     		}
@@ -98,12 +111,13 @@
     				'question_id': question_id,
     				'answer_author': answer_author,
     				'answer_content': answer_content,
+            'ajax_selected_sort': selected_sort,
     				'csrfmiddlewaretoken': '{{ csrf_token }}',
     		 },
     			 dataType: "json",
     			 success: function(response) {
     				 console.log('okay')
-    					$('.answers').html(response['form'])
+    					$('.answers_container').html(response['form'])
     					$('#answer_author_id').val('')
     					$('#answer_content_id').val('')
     				},
@@ -193,19 +207,48 @@
 		});
 		})
 
-  /* poll submit
-  var option_1_width = {{question.poll_result.option_1_percentage}}
-  var option_2_width = {{question.poll_result.option_2_percentage}}
-  var option_3_width = {{question.poll_result.option_3_percentage}}
-  var option_4_width = {{question.poll_result.option_4_percentage}}
-
-  $('#poll_bar_1').width(option_1_width + "%")
-  $('#poll_bar_2').width(option_2_width + "%")
-  $('#poll_bar_3').width(option_3_width + "%")
-  $('#poll_bar_4').width(option_4_width + "%")
-*/
-
 		</script>
+  	<!--answer_like -->
+  	<script type="text/javascript">
+  			$(document).on('click', '.answer_like_button',function(event){
+  				event.preventDefault();
+  	    		var answer_id = $(this).attr('name')
+  	    		$.ajax({
+  	    			 type: "POST",
+  	    			 url: "{% url 'sensei_app:answer_like' %}",
+  	    			 data: {
+  	    				'answer_id': answer_id,
+  	    				'csrfmiddlewaretoken': '{{ csrf_token }}',
+  	    		 },
+  	    			 dataType: "json",
+  	    			 success: function(response) {
+  	    					$('#like_container_' + answer_id).html(response['form'])
+  	    				},
+  	    		});
+  		  	})
+  	</script>
+
+    <!--answer_sort -->
+    <script type="text/javascript">
+  		$(document).on('change', '.answer_sort',function(event){
+  			event.preventDefault();
+      		var selected_sort = $(this).val()
+      		$.ajax({
+      			 type: "POST",
+      			 url: "{% url 'sensei_app:question_detail' question.pk %}",
+      			 data: {
+      				'selected_sort': selected_sort,
+      				'csrfmiddlewaretoken': '{{ csrf_token }}',
+      		 },
+      			 dataType: "json",
+      			 success: function(response) {
+      					$('.answers_container').html(response['answers_sort'])
+      				},
+      		});
+  	  	})
+    </script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 </body>

@@ -1,0 +1,9 @@
+<form class="note_comment_form" method="POST" id="{{note.pk}}">
+  {% include "sensei_app/markdown_exp.html" %}
+	<textarea name="content" rows="8" cols="80" placeholder="コメント内容" id="comment_content"></textarea>
+	<p class="check_button question_check_button">プレビュー画面</p>
+  <div class="content_check question_check content user_content" id="markdowned_content">
+  </div>
+	<button class="note_comment_submit_button" type="button" name="button">コメント投稿する</button>
+</form>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>

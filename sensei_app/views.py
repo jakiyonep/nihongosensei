@@ -131,10 +131,38 @@ def QuestionDetail(request, pk):
     context = {}
     question = get_object_or_404(Question,pk=pk)
     user = request.user
+    answers = Answer.objects.all()
+    answers = answers.filter(question=question)
+
     if question.answered_user.filter(pk=user.pk).exists():
         context['already_voted'] = 1
-        print('already voted')
-    context['question'] = question
+
+    if request.method == 'POST':
+        selected_sort = request.POST['selected_sort']
+
+        if selected_sort == 'likes':
+            answers = answers\
+                    .annotate(num_likes=Count('likes'))\
+                    .order_by('-num_likes')
+        elif selected_sort == 'new':
+            answers = answers.order_by('-created_at')
+        elif selected_sort == 'old':
+            answers = answers.order_by('created_at')
+
+
+        context = {
+            'question': question,
+            'answers': answers,
+        }
+
+        html = render_to_string('sensei_app/Question/comments.html', context, request=request)
+
+        return JsonResponse({'answers_sort': html})
+
+    context ={
+        'question': question,
+        'answers': answers,
+    }
 
     return render(request, 'sensei_app/Question/question_detail.html', context)
 
@@ -299,13 +327,46 @@ def AnswerAdd(request):
 
         all_answers = Answer.objects.all()
         answers = all_answers.filter(question=question)
+        ajax_selected_sort = request.POST['ajax_selected_sort']
+
+        if ajax_selected_sort == 'likes':
+            answers = answers\
+                    .annotate(num_likes=Count('likes'))\
+                    .order_by('-num_likes')
+        elif ajax_selected_sort == 'new':
+            answers = answers.order_by('-created_at')
+        elif ajax_selected_sort == 'old':
+            answers = answers.order_by('created_at')
+
         context = {
-            'ajax_answers': answers,
+            'answers': answers,
             'question': question,
         }
 
         html = render_to_string('sensei_app/Question/comments.html', context, request=request)
 
+        return JsonResponse({'form':html})
+
+@login_required
+def AnswerLike(request):
+    context ={}
+    user = request.user
+    answer_id = request.POST['answer_id']
+    answer = get_object_or_404(Answer, pk=answer_id)
+    if request.method == 'POST':
+        if answer.likes.filter(pk=user.pk).exists():
+            answer.likes.remove(user)
+            is_liked = False
+        else:
+            answer.likes.add(user)
+            is_liked = True
+        context = {
+            'answer': answer,
+            'is_liked': is_liked,
+            'total_likes': answer.total_likes()
+        }
+    if request.is_ajax():
+        html = render_to_string('sensei_app/Question/answer_like.html', context, request=request)
         return JsonResponse({'form':html})
 
 @login_required()
@@ -386,6 +447,15 @@ def JLTCTTop(request):
     language_education = all_exam.filter(section__section_slug="languageeducation")
     language = all_exam.filter(section__section_slug="language")
 
+    all_exam_exp = ExamExp.objects.all()
+    list_2020 = all_exam_exp.filter(year=2020)
+    list_2019 = all_exam_exp.filter(year=2019)
+
+    list_2020_1_1 = list_2020.filter(section=1).filter(question_num=1)
+    list_2020_1_2 = list_2020.filter(section=1).filter(question_num=2)
+    list_2020_1_3 = list_2020.filter(section=1).filter(question_num=3)
+    list_2020_1_rest = list_2020.filter(section=1).exclude(question_num=1).exclude(question_num=2).exclude(question_num=3)
+
 
 
     context={
@@ -395,7 +465,12 @@ def JLTCTTop(request):
         "language_psychology": language_psychology,
         "language_education": language_education,
         "query": query,
-    }
+        'list_2020_1_1': list_2020_1_1,
+        'list_2020_1_2': list_2020_1_2,
+        'list_2020_1_3': list_2020_1_3,
+        'list_2020_1_rest': list_2020_1_rest,
+
+     }
 
     return render(request, 'sensei_app/Exam/jltct_top.html', context)
 
@@ -407,6 +482,100 @@ def JLTCTNoteDetail(request, title_slug):
     }
 
     return render(request, "sensei_app/Exam/jltct_note_detail.html", context)
+
+@login_required
+def NoteLike(request):
+    user = request.user
+    note_id = request.POST['note_id']
+    note = get_object_or_404(jltct, pk=note_id)
+    if request.method == 'POST':
+        if note.likes.filter(pk=user.pk).exists():
+            note.likes.remove(user)
+            is_liked = False
+        else:
+            note.likes.add(user)
+            is_liked = True
+        context = {
+            'note': note,
+            'is_liked': is_liked,
+            'total_likes': note.total_likes()
+        }
+    if request.is_ajax():
+        html = render_to_string('sensei_app/Exam/like.html', context, request=request)
+        return JsonResponse({'form':html})
+
+@login_required
+def JltctCommentAdd(request):
+    context={}
+    if request.is_ajax():
+        comment_content = request.POST['comment_content']
+        note_id = request.POST['note_id']
+        note = get_object_or_404(jltct, pk=note_id)
+        comments = JltctComment.objects.all()
+        comments = comments.filter(note=note)
+        login_author = request.user
+        comment = JltctComment(
+            note = note,
+            login_author=login_author,
+            content = comment_content,
+            created_at = timezone.now(),
+        )
+        comment.save()
+        all_comments = JltctComment.objects.all()
+        ajax_comments = all_comments.filter(note=note)
+        context = {
+            'ajax_comments': ajax_comments,
+            'note': note
+        }
+
+        html = render_to_string('sensei_app/Exam/comments.html', context)
+
+        return JsonResponse({'form':html})
+
+@login_required
+def JltctCommentDelete(request, pk):
+    comment = get_object_or_404(JltctComment, pk=pk)
+    note = comment.note
+    note_title_slug = note.title_slug
+    comment.delete()
+
+    return redirect("sensei_app:note_detail", title_slug=note_title_slug)
+
+@login_required
+def JltctReplyDelete(request, pk):
+    reply = get_object_or_404(JltctReply, pk=pk)
+    note = reply.comment.note
+    note_title_slug = note.title_slug
+    reply.delete()
+
+    return redirect("sensei_app:note_detail", title_slug=note_title_slug)
+
+@login_required
+def JltctReplyAdd(request):
+    context={}
+    if request.is_ajax():
+        reply_content = request.POST['reply_content']
+        comment_id = request.POST['comment_id']
+        comment = get_object_or_404(JltctComment, pk=comment_id)
+        login_author = request.user
+        reply = JltctReply(
+            comment = comment,
+            login_author=login_author,
+            content = reply_content,
+            created_at = timezone.now(),
+        )
+        reply.save()
+        all_replies = JltctReply.objects.all()
+        ajax_replies = all_replies.filter(comment=comment)
+        context = {
+            'ajax_replies': ajax_replies,
+            'reply': reply,
+            'comment': comment,
+        }
+
+        html = render_to_string('sensei_app/Exam/replies.html', context)
+
+        return JsonResponse({'form':html})
 
 def JLTCTTagNotes(request,tag_slug):
     selected_tag = get_object_or_404(jltcttag,tag_slug=tag_slug)
@@ -429,6 +598,7 @@ def JLTCTTagNotes(request,tag_slug):
     }
 
     return render(request, "sensei_app/Exam/jltct_tag_notes.html", context)
+
 
 # USER REGISTRATION
 
@@ -521,20 +691,37 @@ class OnlyYouMixin(UserPassesTestMixin):
 def UserDetail(request, pk):
     login_author = get_object_or_404(User, pk=pk)
     all_questions = Question.objects.all()
-    questions = all_questions.filter(login_author=login_author)[:5]
+    questions = all_questions.filter(login_author=login_author)[:6]
     all_questions_num = all_questions.filter(login_author=login_author).count()
 
     all_answers = Answer.objects.all()
-    answers = all_answers.filter(login_author=login_author)[:5]
+    answers = all_answers.filter(login_author=login_author)[:6]
     all_answers_num = all_answers.filter(login_author=login_author).count()
 
-    return render(request, 'sensei_app/register/user_detail.html', {
+    all_exam = jltct.objects.all()
+
+    society = all_exam.filter(section__section_slug="society").filter(likes=request.user)
+    language_society = all_exam.filter(section__section_slug="languagesociety").filter(likes=request.user)
+    language_psychology = all_exam.filter(section__section_slug="languagepsychology").filter(likes=request.user)
+    language_education = all_exam.filter(section__section_slug="languageeducation").filter(likes=request.user)
+    language = all_exam.filter(section__section_slug="language").filter(likes=request.user)
+
+
+
+    context={
+        "society": society,
+        "language": language,
+        "language_society": language_society,
+        "language_psychology": language_psychology,
+        "language_education": language_education,
         'user': login_author,
         'question_list': questions,
         'answer_list': answers,
         'all_questions_num': all_questions_num,
         'all_answers_num': all_answers_num,
-    })
+    }
+
+    return render(request, 'sensei_app/register/user_detail.html', context)
 
 def ActivitiesOfUser(request, pk):
     login_author = get_object_or_404(User, pk=pk)
@@ -546,13 +733,28 @@ def ActivitiesOfUser(request, pk):
     all_answers_num = all_answers.filter(login_author=login_author).count()
     answers = all_answers.filter(login_author=login_author)[:6]
 
-    return render(request, 'sensei_app/activities_of_user.html', {
+    all_exam = jltct.objects.all()
+
+    society = all_exam.filter(section__section_slug="society")
+    language_society = all_exam.filter(section__section_slug="languagesociety")
+    language_psychology = all_exam.filter(section__section_slug="languagepsychology")
+    language_education = all_exam.filter(section__section_slug="languageeducation")
+    language = all_exam.filter(section__section_slug="language")
+
+    context = {
+        "society": society,
+        "language": language,
+        "language_society": language_society,
+        "language_psychology": language_psychology,
+        "language_education": language_education,
         'user': login_author,
         'question_list': questions,
         'answer_list': answers,
-        "all_questions_num": all_questions_num,
-        "all_answers_num": all_answers_num,
-    })
+        'all_questions_num': all_questions_num,
+        'all_answers_num': all_answers_num,
+    }
+
+    return render(request, 'sensei_app/activities_of_user.html', context)
 
 def AllQuestionsofUser(request, pk):
     login_author = get_object_or_404(User, pk=pk)

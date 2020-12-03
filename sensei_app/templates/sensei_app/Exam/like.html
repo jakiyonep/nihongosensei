@@ -1,0 +1,15 @@
+{% if user.is_authenticated %}
+	{% if request.user in note.likes.all %}
+		<button type="button" name="{{note.pk}}" class="note_like_button note_like_button_liked">
+			<i class="fas fa-thumbs-up"></i><span class="like_num">{{note.total_likes}}</span>
+		</button>
+	{% else %}
+		<button type="button" name="{{note.pk}}" class="note_like_button note_like_button_unliked">
+			<i class="fas fa-thumbs-up"></i><span class="like_num">{{note.total_likes}}</span>
+		</button>
+	{% endif %}
+{% else %}
+		<a class="non_user_note_like_button" href="{% url 'sensei_app:login' %}">
+			<i class="fas fa-thumbs-up"></i><span class="like_num">{{note.total_likes}}</span>
+		</a>
+{% endif %}
