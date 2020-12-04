@@ -5,7 +5,7 @@
 	<a href="{% url 'sensei_app:login' %}" class="comment_add_open_button">コメントする</a>
 {% endif %}
 <div class="comment_add_container">
-{% include "sensei_app\Exam\comment_add.html" %}
+	{% include "sensei_app/Exam/comment_add.html" %}
 </div>
 <div class="note_comments">
 	{% include "sensei_app/Exam/comments.html" %}
