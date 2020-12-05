@@ -62,6 +62,7 @@ MARKDOWNIFY_WHITELIST_TAGS = {
     'ul', 'li', 'span', 'ol',
     'strong', 'img',
     'blockquote',
+    'table', 'th', 'td'
 
 }
 MARKDOWNIFY_WHITELIST_ATTRS = [

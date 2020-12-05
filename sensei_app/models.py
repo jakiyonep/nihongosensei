@@ -256,7 +256,7 @@ class jltctreference(models.Model):
 class JltctComment(models.Model):
     note = models.ForeignKey(jltct, on_delete=models.CASCADE, related_name="note_comments", null=True, blank=True)
     login_author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='note_comments_login_author', null=True, blank=True )
-    content = models.TextField(null=True, blank=False)
+    content = MarkdownxField(null=True, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     is_public = models.BooleanField(default=True)
 
@@ -286,6 +286,12 @@ class ExamExp(models.Model):
     question_num_small = models.IntegerField(null=True, blank=True)
     question_head = models.CharField(null=True, blank=True, max_length=200)
     explanation = models.TextField(null=True, blank=True)
+    answer_1 = models.TextField(null=True, blank=True)
+    answer_2 = models.TextField(null=True, blank=True)
+    answer_3 = models.TextField(null=True, blank=True)
+    answer_4 = models.TextField(null=True, blank=True)
+    answer_5 = models.TextField(null=True, blank=True)
+    answer_abc = models.BooleanField(default=False)
 
     class Answer(models.IntegerChoices):
         choice1 = 1
@@ -295,8 +301,9 @@ class ExamExp(models.Model):
         choice5 = 5
 
     answer = models.IntegerField(choices=Answer.choices, null=True, blank=True)
-
+    public = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return self.question_head

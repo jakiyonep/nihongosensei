@@ -20,8 +20,8 @@ class jltctAdmin(MarkdownxModelAdmin):
     ]
 
 class ExamExpAdmin(admin.ModelAdmin):
-    list_display = ('year', 'section', 'question_num', 'question_num_small')
-    list_editable = ('section', 'question_num', 'question_num_small')
+    list_display = ('year', 'section', 'question_num', 'question_num_small', 'public')
+    list_editable = ('section', 'question_num', 'question_num_small', 'public')
 
 # USER REGISTRATION
 

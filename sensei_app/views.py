@@ -447,17 +447,6 @@ def JLTCTTop(request):
     language_education = all_exam.filter(section__section_slug="languageeducation")
     language = all_exam.filter(section__section_slug="language")
 
-    all_exam_exp = ExamExp.objects.all()
-    list_2020 = all_exam_exp.filter(year=2020)
-    list_2019 = all_exam_exp.filter(year=2019)
-
-    list_2020_1_1 = list_2020.filter(section=1).filter(question_num=1)
-    list_2020_1_2 = list_2020.filter(section=1).filter(question_num=2)
-    list_2020_1_3 = list_2020.filter(section=1).filter(question_num=3)
-    list_2020_1_rest = list_2020.filter(section=1).exclude(question_num=1).exclude(question_num=2).exclude(question_num=3)
-
-
-
     context={
         "society": society,
         "language": language,
@@ -465,10 +454,6 @@ def JLTCTTop(request):
         "language_psychology": language_psychology,
         "language_education": language_education,
         "query": query,
-        'list_2020_1_1': list_2020_1_1,
-        'list_2020_1_2': list_2020_1_2,
-        'list_2020_1_3': list_2020_1_3,
-        'list_2020_1_rest': list_2020_1_rest,
 
      }
 
@@ -482,6 +467,68 @@ def JLTCTNoteDetail(request, title_slug):
     }
 
     return render(request, "sensei_app/Exam/jltct_note_detail.html", context)
+
+def ExamExpDetail(request, year, section, question_num):
+    exp_list = ExamExp.objects.filter(year=year, section=section, question_num=question_num)
+    year = year
+    section = section
+    section_roman = None
+    section_beginning = 0
+    section_end = 0
+
+
+    if section == 1:
+        section_roman = 'I'
+    elif section == 2:
+        section_roman = 'II'
+    elif section == 3:
+        section_roman = 'III'
+
+    question_num = question_num
+
+    section_previous = section - 1
+    section_next = section + 1
+    question_num_previous = question_num - 1
+    question_num_next = question_num + 1
+
+    if section == 1:
+        if question_num == 1:
+            section_beginning = 1
+        if question_num == 15:
+            section_end = 1
+    elif section == 2:
+        if question_num == 1:
+            section_beginning = 1
+        if question_num == 6:
+            section_end = 1
+    elif section == 3:
+        if question_num == 1:
+            section_beginning = 1
+        if question_num == 16:
+            section_end = 1
+
+    print('------------------------------------------')
+    print(section_beginning)
+    print('------------------------------------------')
+    print(section_end)
+    print('------------------------------------------')
+    context = {
+        "exp_list": exp_list,
+        'year': year,
+        'section': section,
+        'section_roman': section_roman,
+        'question_num': question_num,
+        'section_previous': section_previous,
+        'section_next': section_next,
+        'question_num_next': question_num_next,
+        'question_num_previous':question_num_previous,
+        'section_beginning': section_beginning,
+        'section_end': section_end,
+    }
+
+    if len(exp_list) == 0:
+        context['none'] = 1
+    return render(request, 'sensei_app/Exam/Exp/exp_detail.html', context)
 
 @login_required
 def NoteLike(request):

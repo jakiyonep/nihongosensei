@@ -1,0 +1,80 @@
+
+{% extends 'sensei_app/base.html' %}
+{% load static %}
+{% load markdownx %}
+{% load markdownify %}
+{% block title %}{{note.title}}{% endblock %}
+{% block content %}
+
+
+<head>
+	<link rel="stylesheet" href="{% static 'sensei_app/css/common.min.css' %}">
+	<link rel="stylesheet" href="{% static 'sensei_app/css/jltct.min.css' %}">
+	<link rel="stylesheet" href="{% static 'sensei_app/css/exam.min.css' %}">
+</head>
+<body>
+  {% include 'sensei_app/navbar.html' %}
+  <div class="wrapper jltct_wrapper exam_exp_wrapper">
+		<section class="left_column">
+			<div class="back_button">
+				<a href="{% url 'sensei_app:jltct_top' %}#exp_section">問題一覧に戻る</a>
+			</div>
+			<div class="exp_head">
+				{{year}}年度/試験{{section_roman}}/問題{{question_num}}
+			</div>
+			{% if none == 1 %}
+				<p>ごめんなさい。もう少々お待ちください。</p>
+			{% else %}
+				<div class="question_num_smalls_container">
+					{% for exp in exp_list %}
+						<div class="question_num_small_container">
+							{% if exp.question_num_small == 1 %}
+							<h3 class="question_head"><span class="toi">問1</span><span class="head">{{exp.question_head}}</span></h3>
+								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
+							{% endif %}
+
+							{% if exp.question_num_small == 2 %}
+							<h3 class="question_head"><span class="toi">問2</span><span class="head">{{exp.question_head}}</span></h3>
+								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
+							{% endif %}
+						</div>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="related_exp">
+				<div class="related_exp_container">
+					<div class="left">
+						{% if section_beginning == 0 %}
+							<a href="{% url 'sensei_app:exp_detail' year=year section=section question_num=question_num_previous %}" class="exam_question_num_head">
+								<i class="fas fa-arrow-left"></i><span>{{year}}/試験{{section_roman}}/問題{{question_num_previous}}</span>
+							</a>
+						{% else %}
+							<div class="none">
+								<span>---</span>
+							</div>
+						{% endif %}
+					</div>
+					<div class="right">
+						{% if section_end == 0 %}
+							<a href="{% url 'sensei_app:exp_detail' year=year section=section question_num=question_num_next %}" class="exam_question_num_head">
+								<i class="fas fa-arrow-right"></i><span>{{year}}/試験{{section_roman}}/問題{{question_num_next}}</span>
+							</a>
+						{% else %}
+							<div class="none">
+								<span>---</span>
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="right_column jltct_detail_right_column">
+			{% include 'sensei_app/Exam/right_column.html' %}
+		</section>
+  </div>
+
+
+</script>
+
+</body>
+{% endblock %}

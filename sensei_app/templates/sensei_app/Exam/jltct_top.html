@@ -5,8 +5,9 @@
 
 
 <head>
-	<link rel="stylesheet" href="{% static 'sensei_app/css/jltct.min.css' %}">
 	<link rel="stylesheet" href="{% static 'sensei_app/css/common.min.css' %}">
+	<link rel="stylesheet" href="{% static 'sensei_app/css/jltct.min.css' %}">
+	<link rel="stylesheet" href="{% static 'sensei_app/css/exam.min.css' %}">
 </head>
 <body>
   {% include 'sensei_app/navbar.html' %}
@@ -25,7 +26,7 @@
 				{% include "sensei_app/Exam/jltct_note_list_snippet.html" %}
 			</section>
 			<section class="subsection_exam_exp">
-				<h2 class="subsection_head">過去問解説</h2>
+				<h2 class="subsection_head" id="exp_section">過去問解説</h2>
 				{% include "sensei_app/Exam/Exp/exp_list_snippet.html" %}
 			</section>
 		</section>
