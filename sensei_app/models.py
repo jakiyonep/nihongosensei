@@ -300,6 +300,11 @@ class ExamExp(models.Model):
         choice4 = 4
         choice5 = 5
 
+    class Difficulty(models.IntegerChoices):
+        easy = 1
+        normal = 2
+        difficult = 3
+    difficulty = models.IntegerField(choices=Difficulty.choices, null=True, blank=True)
     answer = models.IntegerField(choices=Answer.choices, null=True, blank=True)
     public = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)

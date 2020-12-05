@@ -24,6 +24,9 @@ $subsection-bg-color: #a6d3c8
 $point-bg-color: rgba(238, 181, 169, 1)
 $point-border-color: rgb(255, 139, 139)
 
+$easy-color: $point-border-color
+$normal-color: rgb(172, 217, 137)
+$difficult-color: rgb(123, 190, 228)
 
 
 
@@ -93,7 +96,7 @@ $point-border-color: rgb(255, 139, 139)
 				.question_head
 	        padding: 0.5em
 	        background: $subsection-bg-color
-	        margin-bottom: 1rem
+	        margin-bottom: 0.5rem
 	        font-size: 1.3rem
 				.question_head
 					display: flex
@@ -105,14 +108,32 @@ $point-border-color: rgb(255, 139, 139)
 					.head
 						margin-left: 1rem
 						font-size: 1.1rem
-				.update
-					font-size: 0.9rem
-					border: 1px solid $border-secondary
-					display: inline-block
-					padding: 0.2rem
-					i
-						margin-right: 0.5rem
+				.info
+					display: flex
+					flex-wrap: nowrap
+					align-items: center
+					.update
 						font-size: 0.9rem
+
+						display: inline-block
+						padding: 0.4rem
+						i
+							margin-right: 0.5rem
+							font-size: 0.9rem
+					.difficulty
+						margin-right: 1rem
+						span
+							color: white
+							padding: 0.4rem
+						.difficulty_1
+							color: $easy-color
+							border: 1px solid $easy-color
+						.difficulty_2
+							color: $normal-color
+							border: 1px solid $normal-color
+						.difficulty_3
+							color: $difficult-color
+							border: 1px solid $difficult-color
 				.explanation
 					margin: 2rem 0
 				.answer_exp_container
@@ -275,6 +296,19 @@ $point-border-color: rgb(255, 139, 139)
 					.exam_question_num_container
 						.exam_question_num_head
 							width: 33%
+	.info
+		flex-wrap: wrap!important
+		.update
+			width: 100%!important
+		.difficulty
+			margin-right: 0!important
+			width: 100%!important
+
+			span
+				width: 100%!important
+				display: block
+
+
 	.related_exp
 		.related_exp_container
 			flex-wrap: wrap

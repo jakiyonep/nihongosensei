@@ -1,8 +1,19 @@
 {% load markdownify %}
 {% load markdownx %}
 
-<div class="update">
-	<i class="far fa-clock"></i>{{exp.updated}}
+<div class="info">
+	<div class="difficulty">
+		{% if exp.difficulty == 1 %}
+			<span class="difficulty_{{exp.difficulty}}">絶対落とせない!</span>
+		{% elif exp.difficulty == 2 %}
+			<span class="difficulty_{{exp.difficulty}}">落としたくない</span>
+		{% elif exp.difficulty == 3 %}
+			<span class="difficulty_{{exp.difficulty}}">出来なくてもOK</span>
+		{% endif %}
+	</div>
+	<div class="update">
+		<i class="far fa-clock"></i>{{exp.updated}}
+	</div>
 </div>
 <div class="explanation exp_content">
 	{{ exp.explanation|markdown_to_html }}

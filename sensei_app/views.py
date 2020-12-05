@@ -507,11 +507,7 @@ def ExamExpDetail(request, year, section, question_num):
         if question_num == 16:
             section_end = 1
 
-    print('------------------------------------------')
-    print(section_beginning)
-    print('------------------------------------------')
-    print(section_end)
-    print('------------------------------------------')
+
     context = {
         "exp_list": exp_list,
         'year': year,
