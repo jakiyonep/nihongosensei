@@ -14,6 +14,11 @@
 	<div class="update">
 		<i class="far fa-clock"></i>{{exp.updated}}
 	</div>
+	<div class="tag">
+		{% for tag in exp.tag.all %}
+			<a href="#">{{tag}}</a>
+		{% endfor %}
+	</div>
 </div>
 <div class="explanation exp_content">
 	{{ exp.explanation|markdown_to_html }}
@@ -109,3 +114,9 @@
 		{% endif %}
 	</div>
 {% endif %}
+
+<div class="after_exp exp_content">
+	{% if exp.after_exp %}
+		{{ exp.after_exp|markdown_to_html }}
+	{% endif %}
+</div>

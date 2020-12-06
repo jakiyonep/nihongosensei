@@ -3,7 +3,7 @@
 {% load static %}
 {% load markdownx %}
 {% load markdownify %}
-{% block title %}{{note.title}}{% endblock %}
+{% block title %}{{year}}年度/試験{{section_roman}}/問題{{question_num}}の解説{% endblock %}
 {% block content %}
 
 
@@ -29,77 +29,72 @@
 					{% for exp in exp_list %}
 						<div class="question_num_small_container">
 							{% if exp.question_num_small == 1 %}
-							<h3 class="question_head"><span class="toi">問1</span><span class="head">{{exp.question_head}}</span></h3>
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問1</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 
 							{% if exp.question_num_small == 2 %}
-							<h3 class="question_head"><span class="toi">問2</span><span class="head">{{exp.question_head}}</span></h3>
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問2</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 
 							{% if exp.question_num_small == 3 %}
-							<h3 class="question_head"><span class="toi">問3</span><span class="head">{{exp.question_head}}</span></h3>
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問3</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 
 							{% if exp.question_num_small == 4 %}
-							<h3 class="question_head"><span class="toi">問4</span><span class="head">{{exp.question_head}}</span></h3>
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問4</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 
 							{% if exp.question_num_small == 5 %}
-							<h3 class="question_head"><span class="toi">問5</span><span class="head">{{exp.question_head}}</span></h3>
-								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
-							{% endif %}
-
-							{% if exp.question_num_small == 5 %}
-							<h3 class="question_head"><span class="toi">問5</span><span class="head">{{exp.question_head}}</span></h3>
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問5</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 
 							{% if exp.question_num_small == 6 %}
-							<h3 class="question_head"><span class="toi">問6</span><span class="head">{{exp.question_head}}</span></h3>
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問6</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 
 							{% if exp.question_num_small == 7 %}
-							<h3 class="question_head"><span class="toi">問7</span><span class="head">{{exp.question_head}}</span></h3>
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問7</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 
 							{% if exp.question_num_small == 8 %}
-							<h3 class="question_head"><span class="toi">問8</span><span class="head">{{exp.question_head}}</span></h3>
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問8</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 
 							{% if exp.question_num_small == 9 %}
-							<h3 class="question_head"><span class="toi">問9</span><span class="head">{{exp.question_head}}</span></h3>
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問9</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 
 							{% if exp.question_num_small == 11 %}
-							<h3 class="question_head"><span class="toi">問11</span><span class="head">{{exp.question_head}}</span></h3>
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問11</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 
 							{% if exp.question_num_small == 12 %}
-							<h3 class="question_head"><span class="toi">問12</span><span class="head">{{exp.question_head}}</span></h3>
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問12</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 
 							{% if exp.question_num_small == 13 %}
-							<h3 class="question_head"><span class="toi">問13</span><span class="head">{{exp.question_head}}</span></h3>
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問13</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 
 							{% if exp.question_num_small == 14 %}
-							<h3 class="question_head"><span class="toi">問14</span><span class="head">{{exp.question_head}}</span></h3>
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問14</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 
 							{% if exp.question_num_small == 15 %}
-							<h3 class="question_head"><span class="toi">問15</span><span class="head">{{exp.question_head}}</span></h3>
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問15</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 						</div>

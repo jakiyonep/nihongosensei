@@ -85,18 +85,17 @@ $light-bg-color: rgb(250, 250, 250)
 		.search_form_input
 			border: 1px solid $border-secondary
 			width: 85%
-			border-radius: 0.5rem 0 0 0.5rem
 			background-color: white
 		.search_form_button
 			width: 15%
 			text-align: center
 			border: 1px solid $border-secondary
 			background-color: $strong-color
-			border-radius: 0 0.5rem 0.5rem 0
 			i
 				color: white
 	.sidebar_category_container
 		padding: 1rem
+
 	.question_category
 		display: inline-block
 		margin-bottom: 1rem
@@ -450,14 +449,17 @@ $light-bg-color: rgb(250, 250, 250)
 .replies_container
 	display: none
 
-@media screen and (max-width:800px)
+@media screen and (max-width:1000px)
+	.question_list_wrapper
+		.left_column
+			order: 3!important
+		.right_column
+			order: 2!important
+			margin-bottom: 5rem
+		.section_he
 	.questions
 	.question_container
 		width: 100%!important
-		.left_column
-			order: 1
-		.right_column
-			order: 2
 		.question_container
 			width: 100% !important
 		.question_link
@@ -478,17 +480,20 @@ $light-bg-color: rgb(250, 250, 250)
 					text-align: center
 
 
-		.sidebar
-			margin-bottom: 5rem
-			padding-bottom: 5rem
-			.sidebar_head
-				width: 100%
-			.sidebar_category
-				width: 100%
-				overflow-x: scroll
-				white-space: nowrap
-				.question_category
-
+	.sidebar
+		margin-bottom: 5rem
+		.sidebar_head
+			width: 100%
+		.sidebar_category
+			width: 100%
+			overflow-x: scroll
+			white-space: nowrap
+			.question_category
+				.category_scroll
+					overflow-x: auto
+					width: 100%
+					white-space: nowrap
+					overflow-scrolling: touch
 
 	.question_add_wrapper
 		.question_add

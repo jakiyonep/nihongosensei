@@ -33,6 +33,7 @@ urlpatterns =[
     path('jltct', JLTCTTop, name='jltct_top'),
     path('jltct/note/<str:title_slug>', JLTCTNoteDetail, name="note_detail"),
     path('jltct/exp/<int:year>/<int:section>/<int:question_num>', ExamExpDetail, name="exp_detail"),
+    path('jltct/exp/tag/<str:tag_slug>', ExamTagList, name="exp_tag_list"),
     path('jltct/tag/<str:tag_slug>', JLTCTTagNotes, name="tag_notes"),
     path('jltct/like', views.NoteLike, name="note_like"),
     path('jltct/comment', JltctCommentAdd, name="jltct_comment_add"),

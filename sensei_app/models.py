@@ -279,6 +279,14 @@ class JltctReply(models.Model):
     class Meta:
         ordering=['-created_at']
 
+class ExamTags(models.Model):
+    tag = models.CharField(null=True, blank=True, max_length=20)
+    tag_slug = models.CharField(null=True, blank=True, max_length=20)
+
+    def __str__(self):
+        return self.tag
+
+
 class ExamExp(models.Model):
     year = models.IntegerField(null=True, blank=True)
     section = models.IntegerField(null=True, blank=True)
@@ -306,6 +314,8 @@ class ExamExp(models.Model):
         difficult = 3
     difficulty = models.IntegerField(choices=Difficulty.choices, null=True, blank=True)
     answer = models.IntegerField(choices=Answer.choices, null=True, blank=True)
+    after_exp = MarkdownxField(null=True, blank=True)
+    tag = models.ManyToManyField(ExamTags, related_name="tags", blank=True, null=True)
     public = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
 
@@ -314,7 +324,17 @@ class ExamExp(models.Model):
         return self.question_head
 
     class Meta:
-        ordering = ['year', 'section', 'question_num', 'question_num_small']
+        ordering = ['-year', 'section', 'question_num', 'question_num_small']
+
+    def convert_section_roman(self):
+        if self.section == 1:
+            section_roman = 'I'
+        elif self.section == 2:
+            section_roman = 'II'
+        elif self.section == 3:
+            section_roman = 'III'
+
+        return section_roman
 
 # job listing
 

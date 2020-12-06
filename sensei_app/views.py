@@ -455,7 +455,24 @@ def JLTCTTop(request):
         "language_education": language_education,
         "query": query,
 
-     }
+      }
+
+    exp_query = request.GET.get('exp_q')
+    exp_list = ExamExp.objects.all()
+    if exp_query:
+        exp_list = exp_list.filter(
+            Q(question_head__icontains=exp_query) |
+            Q(explanation__icontains=exp_query) |
+            Q(answer_1__icontains=exp_query) |
+            Q(answer_2__icontains=exp_query) |
+            Q(answer_3__icontains=exp_query) |
+            Q(answer_4__icontains=exp_query) |
+            Q(answer_5__icontains=exp_query) |
+            Q(after_exp__icontains=exp_query)
+        )
+
+        context['exp_query'] = exp_query
+        context['exp_list'] = exp_list
 
     return render(request, 'sensei_app/Exam/jltct_top.html', context)
 
@@ -467,6 +484,17 @@ def JLTCTNoteDetail(request, title_slug):
     }
 
     return render(request, "sensei_app/Exam/jltct_note_detail.html", context)
+
+def ExamTagList(request,tag_slug):
+    selected_tag = get_object_or_404(ExamTags,tag_slug=tag_slug)
+    exp_list = ExamExp.objects.filter(tag=selected_tag)
+
+    context = {
+        "selected_tag": selected_tag,
+        "exp_list": exp_list,
+    }
+
+    return render(request, "sensei_app/Exam/Exp/tag_list.html", context)
 
 def ExamExpDetail(request, year, section, question_num):
     exp_list = ExamExp.objects.filter(year=year, section=section, question_num=question_num)
@@ -521,9 +549,13 @@ def ExamExpDetail(request, year, section, question_num):
         'section_beginning': section_beginning,
         'section_end': section_end,
     }
-
     if len(exp_list) == 0:
         context['none'] = 1
+    else:
+        for exp in exp_list:
+            if exp.public == False:
+                context['none'] = 1
+
     return render(request, 'sensei_app/Exam/Exp/exp_detail.html', context)
 
 @login_required

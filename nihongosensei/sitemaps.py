@@ -7,10 +7,8 @@ from sensei_app.models import *
 
 
 class QuestionSitemap(Sitemap):
-    """
-    ブログ記事のサイトマップ
-    """
-    changefreq = "never"
+
+    changefreq = "daily"
     priority = 0.8
 
     def items(self):
@@ -23,6 +21,35 @@ class QuestionSitemap(Sitemap):
     def lastmod(self, obj):
         return obj.created_at
 
+class JltctNoteSitemap(Sitemap):
+
+    changefreq = "daily"
+    priority = 0.8
+
+    def items(self):
+        return jltct.objects.all()
+
+    # モデルに get_absolute_url() が定義されている場合は不要
+    def location(self, obj):
+        return resolve_url('sensei_app:note_detail', title_slug=obj.title_slug)
+
+    def lastmod(self, obj):
+        return obj.update
+
+class ExamSitemap(Sitemap):
+
+    changefreq = "daily"
+    priority = 0.8
+
+    def items(self):
+        return ExamExp.objects.all()
+
+    # モデルに get_absolute_url() が定義されている場合は不要
+    def location(self, obj):
+        return resolve_url('sensei_app:exp_detail', year=obj.year, section=obj.section, question_num=obj.question_num)
+
+    def lastmod(self, obj):
+        return obj.updated
 
 class UserSitemap(Sitemap):
     """

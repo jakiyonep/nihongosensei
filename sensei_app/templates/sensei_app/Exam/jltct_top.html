@@ -14,21 +14,28 @@
   <div class="wrapper jltct_wrapper">
     <h1 class="section_head">日本語教育能力検定試験</h1>
 		<section class="left_column">
-			<section class="subsection subsection_note">
-				<h2 class="subsection_head">検定試験対策ノート</h2>
-				{% if query %}
-					<p class="result"><span>{{ query }}</span>に関連するノート</p>
-				{% else %}
-					<p class="caution">
-					以下のノートで解説している知識等は、管理人が検定試験対策のために勉強していたことをまとめたものなので、不完全なものがあるかと思われます。質問・指摘等ございましたら、<a href="{% url 'sensei_app:contact_add' %}">「お問い合わせ」</a>までお願いします。
-					</p>
-				{% endif %}
-				{% include "sensei_app/Exam/jltct_note_list_snippet.html" %}
-			</section>
-			<section class="subsection_exam_exp">
-				<h2 class="subsection_head" id="exp_section">過去問解説</h2>
-				{% include "sensei_app/Exam/Exp/exp_list_snippet.html" %}
-			</section>
+			{% if not exp_query %}
+				<section class="subsection subsection_note">
+					<h2 class="subsection_head">検定試験対策ノート</h2>
+					{% if query %}
+						<p class="result"><span>{{ query }}</span>に関連するノート</p>
+					{% else %}
+						<p class="caution">
+						以下のノートで解説している知識等は、管理人が検定試験対策のために勉強していたことをまとめたものなので、不完全なものがあるかと思われます。質問・指摘等ございましたら、<a href="{% url 'sensei_app:contact_add' %}">「お問い合わせ」</a>までお願いします。
+						</p>
+					{% endif %}
+					{% include "sensei_app/Exam/jltct_note_list_snippet.html" %}
+				</section>
+				<section class="subsection_exam_exp">
+					<h2 class="subsection_head" id="exp_section">過去問解説</h2>
+					{% include "sensei_app/Exam/Exp/exp_list_snippet.html" %}
+				</section>
+			{% else %}
+				<section class="subsection subsecton_exa_exp">
+					<h2 class="subsection_head">過去問解説</h2>
+					{% include "sensei_app/Exam/Exp/exp_search_snippet.html" %}
+				</section>
+			{% endif %}
 		</section>
 		<section class="right_column">
 			{% include 'sensei_app/Exam/right_column.html' %}

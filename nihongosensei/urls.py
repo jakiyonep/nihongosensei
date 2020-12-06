@@ -22,6 +22,8 @@ from django.contrib.sitemaps.views import sitemap
 
 from .sitemaps import (
     QuestionSitemap,
+    JltctNoteSitemap,
+    ExamSitemap,
     UserSitemap,
     StaticViewSitemap,
 )
@@ -30,6 +32,8 @@ sitemaps = {
     'question': QuestionSitemap,
     'user': UserSitemap,
     'static': StaticViewSitemap,
+    'jltct': JltctNoteSitemap,
+    'exam': ExamSitemap,
 }
 
 urlpatterns = [

@@ -8,12 +8,14 @@
 
 	<div class="sidebar_category_container">
 	<p class="sidebar_head">カテゴリー</p>
-	<div class="sidebar_category">
-		{% for category in question_categories %}
-			{% if not category.num_posts == 0 %}
-				<a class="question_category question_category_{{category.category_slug}}" href="{% url 'sensei_app:question_category' category.category_slug %}">{{ category }} <span class="category_num_posts">{{category.num_posts}}</span></a>
-			{% endif %}
-		{% endfor %}
+		<div class="category_scroll">
+			<div class="sidebar_category">
+				{% for category in question_categories %}
+					{% if not category.num_posts == 0 %}
+						<a class="question_category question_category_{{category.category_slug}}" href="{% url 'sensei_app:question_category' category.category_slug %}">{{ category }} <span class="category_num_posts">{{category.num_posts}}</span></a>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
 	</div>
-</div>
 </div>

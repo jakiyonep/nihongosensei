@@ -18,56 +18,7 @@
 			<section class="subsection subsection_note">
 				<h2 class="subsection_head">検定試験対策ノート</h2>
 				<p class="result tag_result"><span>{{ selected_tag.tag }}</span>に関連するノート</p>
-				<div class="section_container"><!--society-->
-					<h3 class="section_name"><i class="fas fa-circle society"></i>社会・文化・地域</h3>
-					<ul>
-						{% for note in society %}
-							{% if note.public %}
-								<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
-							{% endif %}
-						{% endfor %}
-					</ul>
-				</div>
-				<div class="section_container"><!--languagesociety-->
-					<h3 class="section_name"><i class="fas fa-circle languagesociety"></i>言語と社会</h3>
-					<ul>
-						{% for note in languagesociety %}
-							{% if note.public %}
-								<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
-							{% endif %}
-						{% endfor %}
-					</ul>
-				</div>
-				<div class="section_container"><!--languagepsychology-->
-					<h3 class="section_name"><i class="fas fa-circle languagepsychology"></i>言語と心理</h3>
-					<ul>
-						{% for note in languagepsychology %}
-							{% if note.public %}
-								<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
-							{% endif %}
-						{% endfor %}
-					</ul>
-				</div>
-				<div class="section_container"><!--languageeducation-->
-					<h3 class="section_name"><i class="fas fa-circle languageeducation"></i>言語と教育</h3>
-					<ul>
-						{% for note in languageeducation %}
-							{% if note.public %}
-								<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
-							{% endif %}
-						{% endfor %}
-					</ul>
-				</div>
-				<div class="section_container"><!--language-->
-					<h3 class="section_name"><i class="fas fa-circle language"></i>言語一般</h3>
-					<ul>
-						{% for note in language %}
-							{% if note.public %}
-								<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
-							{% endif %}
-						{% endfor %}
-					</ul>
-				</div>
+				{% include "sensei_app/Exam/jltct_note_list_snippet.html" %}
 			</section>
 		</section>
 		<section class="right_column">

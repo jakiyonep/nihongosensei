@@ -110,11 +110,11 @@ $difficult-color: rgb(123, 190, 228)
 						font-size: 1.1rem
 				.info
 					display: flex
-					flex-wrap: nowrap
+					flex-wrap: wrap
 					align-items: center
+					border-bottom: 1px solid $border-secondary
 					.update
 						font-size: 0.9rem
-
 						display: inline-block
 						padding: 0.4rem
 						i
@@ -134,6 +134,24 @@ $difficult-color: rgb(123, 190, 228)
 						.difficulty_3
 							color: $difficult-color
 							border: 1px solid $difficult-color
+					.tag
+						width: 100%
+						margin-top: 0.5rem
+						a
+							font-size: 1.1rem
+							display: inline-block
+							color: $link-color
+							padding: 0.2rem 0.6rem
+							border: 1px solid $link-color
+							border-radius: 0.3rem
+							transition: 0.4s
+							margin-right: 0.5rem
+							margin-bottom: 0.5rem
+							&:hover
+								background-color: $link-color
+								color: white
+								border-radius: 0
+
 				.explanation
 					margin: 2rem 0
 				.answer_exp_container
@@ -161,6 +179,8 @@ $difficult-color: rgb(123, 190, 228)
 								display: inline-block
 								left: -1.2rem
 								color: $strong-color
+				.after_exp
+					margin-top: 2rem
 	.related_exp
 		margin-top: 10rem
 		.related_exp_container
@@ -211,8 +231,17 @@ $difficult-color: rgb(123, 190, 228)
 	.exp_content
 		*
 			margin-bottom: 1rem
+		a
+			color: $link-color
+		h2
+			border-bottom: 1px solid $border-primary
+			margin-top: 1.5rem
+		h3
+			border: 1px solid $border-primary
+			width: fit-content
+			padding: 0.2rem 0.5rem
 		strong
-			background: linear-gradient(transparent 70%, $sub-strong-color 90%)
+			background: linear-gradient(transparent 70%, $strong-color 90%)
 		ul, ol
 			margin: 1.5rem 0 1.5rem 3rem
 			li
@@ -224,7 +253,7 @@ $difficult-color: rgb(123, 190, 228)
 				list-style: decimal
 		.table
 		  display: block
-		  overflow-x: scroll
+		  overflow-x: auto
 		  white-space: nowrap
 		  -webkit-overflow-scrolling: touch
 		.table
@@ -257,7 +286,12 @@ $difficult-color: rgb(123, 190, 228)
 				margin-left: 0!important
 		img
 			width: 100%
-
+		.bun
+			background-color: $light-bg-color
+			padding: 1rem 0.5rem
+		.point
+			padding: 0.5rem
+			margin: 2rem 0
 
 
 
@@ -326,3 +360,6 @@ $difficult-color: rgb(123, 190, 228)
 				a
 					i
 					span
+	.exp_content
+		ul,ol
+			margin-left: 2rem!important

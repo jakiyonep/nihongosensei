@@ -30,7 +30,7 @@ $point-border-color: rgb(255, 139, 139)
     width: 75%
     section
       width: 100%
-      margin-bottom: 7rem
+      margin-bottom: 3rem
       .subsection_head
         position: relative
         padding: 0.5em
@@ -52,13 +52,41 @@ $point-border-color: rgb(255, 139, 139)
         span
           color: $link-color
           border: 1px solid $link-color
-
+          padding: 0.2rem 0.5rem
+          border-radius: 0.3rem
     .subsection_note
       .caution
         margin-bottom: 3rem
         a
           color: $link-color
         /* continued in 'jltct_note_list_snippet.sass' */
+
+    .search_result
+      margin-bottom: 2rem
+    .exp_list_container
+      .exp_container
+        a
+          display: flex
+          flex-wrap: wrap
+          margin-bottom: 1rem
+          padding: 0.5rem 0.2rem
+          border: 2px solid $border-secondary
+          transition: 0.5s
+          &:hover
+            transition: 0.5s
+            background-color: $link-color
+          &:hover .head
+            color: white
+            transition: 0.5s
+          &>*
+            width: 100%
+          .head
+            transition: 0.5s
+          .info
+            text-align: right
+            color: $border-primary
+
+
     /*note_detail below*/
     .note_info
       margin-bottom: 15rem
@@ -133,46 +161,54 @@ $point-border-color: rgb(255, 139, 139)
             transition: 0.3s
 
   .right_column
-    width: 20%
+    width: 22%
     height: inherit
     background-color: $light-bg-color
-    padding: 2rem 0
-    .search_form
-      display: flex
+    .right_column_section
       margin-bottom: 5rem
-      width: 100%
-      input
-        border: 1px solid $border-secondary
-        background-color: white
-        border-radius: 0.5rem 0 0 0.5rem
-        width: 85%
-      button
-        width: 15%
-        background-color: $strong-color
-        text-align: center
-        border-radius: 0 0.5rem 0.5rem 0
-        i
-          color: white
-    .jltct_tags
-      width: 100%
-      padding: 1rem
-      padding-bottom: 0
-      p
-        margin-bottom: 2rem
-      a
-        font-size: 1.1rem
-        display: inline-block
-        color: $link-color
-        padding: 0.2rem 0.6rem
-        border: 1px solid $link-color
-        border-radius: 0.3rem
-        transition: 0.4s
-        margin-right: 0.5rem
-        margin-bottom: 0.5rem
-        &:hover
-          background-color: $link-color
-          color: white
-          border-radius: 0
+      .right_column_section_head
+        margin-bottom: 1rem
+        padding: 0.5em
+        background: $border-secondary
+        color: black
+        font-size: 1.3rem
+      .search_form
+        display: flex
+        margin-bottom: 1rem
+        width: 100%
+        input
+          border: 1px solid $border-secondary
+          background-color: white
+          width: 85%
+        button
+          width: 15%
+          background-color: $strong-color
+          text-align: center
+
+          i
+            color: white
+      .tags
+        width: 100%
+        padding: 1rem
+        padding-bottom: 0
+        p
+          margin-bottom: 2rem
+        a
+          font-size: 1.1rem
+          display: inline-block
+          color: $link-color
+          padding: 0.2rem 0.6rem
+          border: 1px solid $link-color
+          border-radius: 0.3rem
+          transition: 0.4s
+          margin-right: 0.5rem
+          margin-bottom: 0.5rem
+          &:hover
+            background-color: $link-color
+            color: white
+            border-radius: 0
+
+
 .point
 	border: 2px solid $point-border-color
 .point
@@ -338,6 +374,7 @@ $point-border-color: rgb(255, 139, 139)
     width: 100%!important
     order: 2
     margin-bottom: 3rem
+    margin-top: 13rem
     .search_form
     .tag_list
       overflow-x: auto
