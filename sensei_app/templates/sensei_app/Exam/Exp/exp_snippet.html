@@ -16,7 +16,7 @@
 	</div>
 	<div class="tag">
 		{% for tag in exp.tag.all %}
-			<a href="#">{{tag}}</a>
+			<a href="{% url 'sensei_app:exp_tag_list' tag.tag_slug %}">{{tag}}</a>
 		{% endfor %}
 	</div>
 </div>
