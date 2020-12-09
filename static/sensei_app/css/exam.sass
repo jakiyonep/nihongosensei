@@ -90,6 +90,27 @@ $difficult-color: rgb(123, 190, 228)
 			font-size: 1.2rem
 			border-bottom: 1px solid $border-primary
 			display: inline-block
+		.table_of_contents
+			margin-bottom: 5rem
+			padding: 1rem
+			border: 1px solid $border-primary
+			.table_of_contents_head
+				i
+					margin-left: 1rem
+			.table_of_contents_collapse
+				display: none
+				border-top: 1px solid $border-secondary
+				.table_of_contents_item
+					display: flex
+					margin-left: 1rem
+					margin-bottom: 0.8rem
+					span
+						color: $link-color
+					.toi
+						margin-right: 1rem
+						word-break: keep-all
+					.head
+
 		.question_num_smalls_container
 			.question_num_small_container
 				margin-bottom: 4rem
@@ -235,11 +256,17 @@ $difficult-color: rgb(123, 190, 228)
 			color: $link-color
 		h2
 			border-bottom: 1px solid $border-primary
-			margin-top: 1.5rem
+			margin: 2rem 0
+			font-size: 1.2rem
+			font-weight: bold
 		h3
 			border: 1px solid $border-primary
 			width: fit-content
-			padding: 0.2rem 0.5rem
+			padding: 0.1rem 0.6rem
+			margin: 1.5rem 0
+		em
+			font-style: normal
+			border-bottom: 2px solid grey
 		strong
 			background: linear-gradient(transparent 70%, $strong-color 90%)
 		ul, ol
