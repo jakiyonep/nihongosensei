@@ -100,6 +100,7 @@ $difficult-color: rgb(123, 190, 228)
 			.table_of_contents_collapse
 				display: none
 				border-top: 1px solid $border-secondary
+				padding-top: 1rem
 				.table_of_contents_item
 					display: flex
 					margin-left: 1rem
@@ -113,7 +114,7 @@ $difficult-color: rgb(123, 190, 228)
 
 		.question_num_smalls_container
 			.question_num_small_container
-				margin-bottom: 4rem
+				margin-bottom: 10rem
 				.question_head
 	        padding: 0.5em
 	        background: $subsection-bg-color
@@ -256,19 +257,25 @@ $difficult-color: rgb(123, 190, 228)
 			color: $link-color
 		h2
 			border-bottom: 1px solid $border-primary
+			border-top: 1px solid $border-primary
 			margin: 2rem 0
-			font-size: 1.2rem
+			font-size: 1.3rem
 			font-weight: bold
+			margin-top: 4rem
 		h3
 			border: 1px solid $border-primary
 			width: fit-content
 			padding: 0.1rem 0.6rem
 			margin: 1.5rem 0
+			font-size: 1.2rem
 		em
 			font-style: normal
 			border-bottom: 2px solid grey
+			margin: 0
+			padding: 0
 		strong
-			background: linear-gradient(transparent 70%, $strong-color 90%)
+			background: linear-gradient(transparent 90%, $strong-color 90%)
+			font-weight: 700
 		ul, ol
 			margin: 1.5rem 0 1.5rem 3rem
 			li
@@ -315,7 +322,12 @@ $difficult-color: rgb(123, 190, 228)
 			width: 100%
 		.bun
 			background-color: $light-bg-color
-			padding: 1rem 0.5rem
+			padding: 0.5rem 1.5rem
+			em
+				margin: 0
+				padding: 0
+		.dame
+			background-color: rgb(255, 241, 241)
 		.point
 			padding: 0.5rem
 			margin: 2rem 0
