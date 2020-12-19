@@ -1,5 +1,5 @@
 $quote-bg-color: rgb(242, 242, 242)
-
+$bun-color: rgb(249, 249, 249)
 $nihongo-bg: rgb(251, 136, 74)
 $sensei-bg: rgb(52, 117, 242)
 $jltct-bg: rgb(76, 230, 118)
@@ -183,11 +183,13 @@ $difficult-color: rgb(123, 190, 228)
 						display: flex
 						flex-wrap: nowrap
 						margin-bottom: 2rem
+						justify-content: space-between
 						&:last-child
 							margin-bottom: 0
 						.answer_exp_left
-							margin-right: 0.7rem
+							width: 4%
 						.answer_exp_right
+							width: 96%
 					.correct_answer
 						.answer_exp_left
 							position: relative
@@ -321,7 +323,7 @@ $difficult-color: rgb(123, 190, 228)
 		img
 			width: 100%
 		.bun
-			background-color: $light-bg-color
+			background-color: $bun-color
 			padding: 0.5rem 1.5rem
 			em
 				margin: 0

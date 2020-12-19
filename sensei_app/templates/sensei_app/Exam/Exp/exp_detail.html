@@ -82,6 +82,11 @@
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
 
+							{% if exp.question_num_small == 10 %}
+							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問10</span><span class="head">{{exp.question_head}}</span></h3>
+								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
+							{% endif %}
+
 							{% if exp.question_num_small == 11 %}
 							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問11</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
@@ -131,8 +136,6 @@
 							<h3 class="question_head" id="{{exp.question_num_small}}"><span class="toi">問20</span><span class="head">{{exp.question_head}}</span></h3>
 								{% include "sensei_app/Exam/Exp/exp_snippet.html" %}
 							{% endif %}
-
-
 
 						</div>
 					{% endfor %}

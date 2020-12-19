@@ -26,10 +26,19 @@ $point-border-color: rgb(255, 139, 139)
 .section_container
   .section_name
     font-size: 1.2rem
+    margin-bottom: 1.5rem
+    color: inherit
+    transition: 0.5s
+    padding: 0.2rem 0
+    &:hover
+      cursor: pointer
+      transition: 0.5s
+      color: white
     i
       margin-right: 1rem
-  ul
-    margin: 3rem
+  .note_collapse
+    margin: 2rem
+    display: none
     li
       font-size: 1.2rem
       margin-bottom: 1.5rem
@@ -50,3 +59,19 @@ $point-border-color: rgb(255, 139, 139)
   color: $languagepsychology-color
 .languageeducation
   color: $languageeducation-color
+
+#society
+  &:hover
+    background-color: $society-color
+#language
+  &:hover
+    background-color: $language-color
+#languagesociety
+  &:hover
+    background-color: $languagesociety-color
+#languagepsychology
+  &:hover
+    background-color: $languagepsychology-color
+#languageeducation
+  &:hover
+    background-color: $languageeducation-color
