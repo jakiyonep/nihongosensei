@@ -27,7 +27,7 @@
 					{% endif %}
 					{% include "sensei_app/Exam/jltct_note_list_snippet.html" %}
 				</section>
-				<section class="subsection_exam_exp">
+				<section class="subsection subsection_exam_exp">
 					<h2 class="subsection_head" id="exp_section">過去問解説</h2>
 					<p class="caution">
 						私自身のアウトプットの場として、また検定試験に向けて勉強している方の応援のために、過去の検定試験の私なりの解説を公開します。試験勉強を始めたばかりの方でも分かるように、ほとんどが、基礎的な用語・概念を説明してからの設問解説という構造になっています。勉強が進んでいる方にとっては多少くどいかもしれませんが、ご容赦ください。
@@ -52,11 +52,41 @@
 					{% include "sensei_app/Exam/Exp/exp_search_snippet.html" %}
 				</section>
 			{% endif %}
+			<section class="subsection subsection_countdown">
+				<h2 class="subsection_head">試験日カウントダウン(おまけ)</h2>
+				<div class="countdown_container">
+					<p class="rest_days_p">2021年の試験まで<span id="rest_days"></span>日です。</p>
+					<p class="hourly">1週間に、<input id="hour_input"></input>時間勉強すると、<br>試験日まで<span id="rest_hours">--</span>時間勉強できます。</p>
+				</div>
+			</section>
+
+
 		</section>
 		<section class="right_column">
 			{% include 'sensei_app/Exam/right_column.html' %}
 		</section>
   </div>
+<script type="text/javascript">
+	var now_date_sec = Date.now();
+
+	var exam_date = new Date('2021/10/31');
+	var exam_date_sec = exam_date.getTime();
+
+	var rest_days_sec = exam_date_sec - now_date_sec
+	var rest_days = Math.ceil(rest_days_sec/(1000*60*60*24))
+
+	var rest_weeks = rest_days/7
+
+
+	$("#rest_days").html(rest_days)
+
+	$(document).on('input', "#hour_input", function(event){
+		var hour = $("#hour_input").val()
+		var calculated_hours = rest_weeks*hour
+		$("#rest_hours").html(calculated_hours)
+	})
+</script>
+
 </body>
 
 {% endblock %}

@@ -14,6 +14,62 @@
 </head>
 <body>
   {% include 'sensei_app/navbar.html' %}
+	<div class="left_side_menu_wrapper">
+		<div class="left_side_menu">
+			<p class="exam_year_head">{{year}}年度</p>
+			<p class="exam_section_head" id="section_1">試験I</p>
+			<div class="exam_question_num_container" id="year_section_1_collapse">
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=1 %}" class="exam_question_num_head">問題1</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=2 %}" class="exam_question_num_head">問題2</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=3 %}" class="exam_question_num_head">問題3</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=4 %}" class="exam_question_num_head">問題4</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=5 %}" class="exam_question_num_head">問題5</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=6 %}" class="exam_question_num_head">問題6</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=7 %}" class="exam_question_num_head">問題7</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=8 %}" class="exam_question_num_head">問題8</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=9 %}" class="exam_question_num_head">問題9</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=10 %}" class="exam_question_num_head">問題10</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=11 %}" class="exam_question_num_head">問題11</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=12 %}" class="exam_question_num_head">問題12</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=13 %}" class="exam_question_num_head">問題13</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=14 %}" class="exam_question_num_head">問題14</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=15 %}" class="exam_question_num_head">問題15</a>
+			</div>
+
+			<p class="exam_section_head" id="section_2">試験II</p>
+			<div class="exam_question_num_container" id="year_section_2_collapse">
+				<a href="{% url 'sensei_app:exp_detail' year=year section=2 question_num=1 %}" class="exam_question_num_head">問題1</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=2 question_num=2 %}" class="exam_question_num_head">問題2</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=2 question_num=3 %}" class="exam_question_num_head">問題3</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=2 question_num=4 %}" class="exam_question_num_head">問題4</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=2 question_num=5 %}" class="exam_question_num_head">問題5</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=2 question_num=6 %}" class="exam_question_num_head">問題6</a>
+			</div>
+
+			<p class="exam_section_head" id="section_3">試験III</p>
+			<div class="exam_question_num_container" id="year_section_3_collapse">
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=1 %}" class="exam_question_num_head">問題1</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=2 %}" class="exam_question_num_head">問題2</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=3 %}" class="exam_question_num_head">問題3</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=4 %}" class="exam_question_num_head">問題4</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=5 %}" class="exam_question_num_head">問題5</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=6 %}" class="exam_question_num_head">問題6</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=7 %}" class="exam_question_num_head">問題7</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=8 %}" class="exam_question_num_head">問題8</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=9 %}" class="exam_question_num_head">問題9</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=10 %}" class="exam_question_num_head">問題10</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=11 %}" class="exam_question_num_head">問題11</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=12 %}" class="exam_question_num_head">問題12</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=13 %}" class="exam_question_num_head">問題13</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=14 %}" class="exam_question_num_head">問題14</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=15 %}" class="exam_question_num_head">問題15</a>
+				<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=16 %}" class="exam_question_num_head">問題16</a>
+			</div>
+		</div>
+		<div class="side_menu_button">
+			<i class="fas fa-chevron-right"></i>
+		</div>
+	</div>
   <div class="wrapper jltct_wrapper exam_exp_wrapper">
 		<section class="left_column">
 			<div class="back_button">
@@ -174,12 +230,38 @@
   </div>
 
 
+
 <script type="text/javascript">
 	$(document).on('click', '.table_of_contents_head', function(event){
 		$('.table_of_contents_collapse').slideToggle('fast')
 		$('.table_of_contents_head_plus').slideToggle('fast')
-
 	})
 </script>
+
+<script type="text/javascript">
+	$(document).on('click', '.exam_section_head', function(event){
+		var target = $(this).attr('id')
+		$('#year_' + target + '_collapse').slideToggle('fast')
+	})
+</script>
+
+<script type="text/javascript">
+	var is_open = 1
+	$(document).on('click', '.side_menu_button', function(event){
+		$('.left_side_menu').animate({width:'toggle'},300)
+		if(is_open == 0){
+			$(this).animate({left: '0rem'}, 300)
+			$(this).children().removeClass('fa-arrow-left')
+			$(this).children().addClass('fa-chevron-right')
+			is_open	= 1
+		} else{
+			$(this).animate({left: '8rem'}, 300)
+			$(this).children().addClass('fa-chevron-left')
+			$(this).children().removeClass('fa-chevron-right')
+			is_open	= 0
+		}
+	})
+</script>
+
 </body>
 {% endblock %}

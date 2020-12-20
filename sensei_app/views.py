@@ -781,6 +781,7 @@ def UserDetail(request, pk):
     language_education = all_exam.filter(section__section_slug="languageeducation").filter(likes=request.user)
     language = all_exam.filter(section__section_slug="language").filter(likes=request.user)
 
+    liked_notes = all_exam.filter(likes=request.user)
 
 
     context={
@@ -794,6 +795,7 @@ def UserDetail(request, pk):
         'answer_list': answers,
         'all_questions_num': all_questions_num,
         'all_answers_num': all_answers_num,
+        'liked_notes': liked_notes,
     }
 
     return render(request, 'sensei_app/register/user_detail.html', context)

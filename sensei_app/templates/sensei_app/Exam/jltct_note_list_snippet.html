@@ -1,76 +1,92 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'sensei_app/css/jltct_note_list_snippet.min.css' %}">
-<div class="section_container"><!--society-->
-	<h3 class="section_name" id="society"><i class="fas fa-circle society"></i>社会・文化・地域</h3>
-	<ul class="society_collapse note_collapse">
-		{% if not society %}
-			まだノートがありません
-		{% else %}
-			{% for note in society %}
-				{% if note.public %}
-					{% if request.user in note.likes %}Liked{% endif %}<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
-				{% endif %}
-		{% endfor %}
-		{% endif %}
-	</ul>
-</div>
-<div class="section_container"><!--languagesociety-->
-	<h3 class="section_name" id="languagesociety"><i class="fas fa-circle languagesociety"></i>言語と社会</h3>
-	<ul class="languagesociety_collapse note_collapse">
-		{% if not languagesociety %}
-			まだノートがありません
-		{% else %}
-			{% for note in languagesociety %}
-				{% if note.public %}
-					<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
-				{% endif %}
+
+
+{% if not liked_notes %}
+	<div class="section_container"><!--society-->
+		<h3 class="section_name" id="society"><i class="fas fa-circle society"></i>社会・文化・地域</h3>
+		<ul class="society_collapse note_collapse">
+			{% if not society %}
+				まだノートがありません
+			{% else %}
+				{% for note in society %}
+					{% if note.public %}
+						{% if request.user in note.likes %}Liked{% endif %}<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
+					{% endif %}
 			{% endfor %}
-		{% endif %}
-	</ul>
-</div>
-<div class="section_container"><!--languagepsychology-->
-	<h3 class="section_name" id="languagepsychology"><i class="fas fa-circle languagepsychology"></i>言語と心理</h3>
-	<ul class="languagepsychology_collapse note_collapse">
-		{% if not languagepsychology %}
-			まだノートがありません
-		{% else %}
-			{% for note in languagepsychology %}
-				{% if note.public %}
-					<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
-				{% endif %}
+			{% endif %}
+		</ul>
+	</div>
+	<div class="section_container"><!--languagesociety-->
+		<h3 class="section_name" id="languagesociety"><i class="fas fa-circle languagesociety"></i>言語と社会</h3>
+		<ul class="languagesociety_collapse note_collapse">
+			{% if not languagesociety %}
+				まだノートがありません
+			{% else %}
+				{% for note in languagesociety %}
+					{% if note.public %}
+						<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</ul>
+	</div>
+	<div class="section_container"><!--languagepsychology-->
+		<h3 class="section_name" id="languagepsychology"><i class="fas fa-circle languagepsychology"></i>言語と心理</h3>
+		<ul class="languagepsychology_collapse note_collapse">
+			{% if not languagepsychology %}
+				まだノートがありません
+			{% else %}
+				{% for note in languagepsychology %}
+					{% if note.public %}
+						<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</ul>
+	</div>
+	<div class="section_container"><!--languageeducation-->
+		<h3 class="section_name" id="languageeducation"><i class="fas fa-circle languageeducation"></i>言語と教育</h3>
+		<ul class="languageeducation_collapse note_collapse">
+			{% if not languageeducation %}
+				まだノートがありません
+			{% else %}
+				{% for note in languageeducation %}
+					{% if note.public %}
+						<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</ul>
+	</div>
+	<div class="section_container"><!--language-->
+		<h3 class="section_name" id="language"><i class="fas fa-circle language"></i>言語一般</h3>
+		<ul class="language_collapse note_collapse">
+			{% if not language %}
+				まだノートがありません
+			{% else %}
+				{% for note in language %}
+					{% if note.public %}
+						<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</ul>
+	</div>
+{% else %}
+	<div class="section_container">
+		<ul class="note_collapse" style="display:block;">
+				{% for note in liked_notes %}
+					{% if note.public %}
+						{% if request.user in note.likes %}Liked{% endif %}<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
+					{% endif %}
 			{% endfor %}
-		{% endif %}
-	</ul>
-</div>
-<div class="section_container"><!--languageeducation-->
-	<h3 class="section_name" id="languageeducation"><i class="fas fa-circle languageeducation"></i>言語と教育</h3>
-	<ul class="languageeducation_collapse note_collapse">
-		{% if not languageeducation %}
-			まだノートがありません
-		{% else %}
-			{% for note in languageeducation %}
-				{% if note.public %}
-					<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
-				{% endif %}
-			{% endfor %}
-		{% endif %}
-	</ul>
-</div>
-<div class="section_container"><!--language-->
-	<h3 class="section_name" id="language"><i class="fas fa-circle language"></i>言語一般</h3>
-	<ul class="language_collapse note_collapse">
-		{% if not language %}
-			まだノートがありません
-		{% else %}
-			{% for note in language %}
-				{% if note.public %}
-					<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
-				{% endif %}
-			{% endfor %}
-		{% endif %}
-	</ul>
-</div>
+		</ul>
+	</div>
+{% endif %}
+
+
 
 
 <script type="text/javascript">

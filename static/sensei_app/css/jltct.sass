@@ -45,6 +45,10 @@ $point-border-color: rgb(255, 139, 139)
     /*jltct_top below*/
     .subsection
       .subsection_head
+        margin-top: 8rem
+      &:first-child
+        .subsection_head
+          margin-top: 0
       .result
         font-size: 1.2rem
         margin-bottom: 3rem
@@ -87,6 +91,20 @@ $point-border-color: rgb(255, 139, 139)
             text-align: right
             color: $border-primary
 
+    .subsection_countdown
+      .countdown_container
+        p
+          span
+            font-size: 1.5rem
+            padding: 0 0.5rem
+            height: 2rem
+            border-bottom: 2px solid $border-primary
+        .rest_days_p
+          margin-bottom: 2rem
+        .hourly
+          input
+            border: 1px solid $border-secondary
+            width: 3rem
 
     /*note_detail below*/
     .note_info
@@ -169,13 +187,14 @@ $point-border-color: rgb(255, 139, 139)
       margin-bottom: 5rem
       .right_column_section_head
         margin-bottom: 2rem
-        padding: 0.5em
         background-color: $border-secondary
         font-size: 1.3rem
+        padding: 0 0.5rem
       .search_form
         display: flex
         margin-bottom: 1rem
         width: 100%
+        padding: 0.5rem
         input
           border: 1px solid $border-secondary
           background-color: white
@@ -189,8 +208,7 @@ $point-border-color: rgb(255, 139, 139)
             color: white
       .tags
         width: 100%
-        padding: 1rem
-        padding-bottom: 0
+        padding: 0.5rem
         p
           margin-bottom: 2rem
         a
@@ -213,6 +231,7 @@ $point-border-color: rgb(255, 139, 139)
 	border: 2px solid $point-border-color
 .point
   position: relative
+  z-index: -1
   border-radius: 1rem 0 0 0
   padding-right: 1rem
   &::before
@@ -220,6 +239,7 @@ $point-border-color: rgb(255, 139, 139)
     width: auto
     height: auto
     position: absolute
+    z-index: 1
     top: -1rem
     left: -0.1rem
     background-color: $point-border-color

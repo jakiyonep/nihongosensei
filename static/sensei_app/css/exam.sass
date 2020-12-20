@@ -287,6 +287,10 @@ $difficult-color: rgb(123, 190, 228)
 		ol
 			li
 				list-style: decimal
+		img
+			max-height: 50vh
+			object-fit: contain
+			box-shadow: 0.3rem 0.3rem 0.5rem 0.1rem $border-secondary
 		.table
 		  display: block
 		  overflow-x: auto
@@ -333,8 +337,61 @@ $difficult-color: rgb(123, 190, 228)
 		.point
 			padding: 0.5rem
 			margin: 2rem 0
-
-
+.left_side_menu_wrapper
+	z-index: 199
+	.left_side_menu
+		position: fixed
+		box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem $border-secondary
+		border: 2px solid $border-primary
+		background-color: $light-bg-color
+		height: fit-content
+		max-height: 80%
+		width: 8rem
+		top: 7rem
+		overflow-y: scroll
+		white-space: nowrap
+		padding-left: 0.7rem
+		display: none
+		&::-webkit-scrollbar
+			width: 0.5rem
+			height: 1rem
+		&::-webkit-scrollbar-track
+			background-color: $border-primary
+		&::-webkit-scrollbar-thumb
+			background-color: $sub-strong-color
+		.exam_year_head
+			margin-bottom: 1rem
+		.exam_section_head
+			&:hover
+				cursor: pointer
+		.exam_question_num_container
+			border-top: 1px solid $border-secondary
+			margin-bottom: 1rem
+			display: none
+			.exam_question_num_head
+				display: block
+				margin-left: 1rem
+				transition: 0.5s
+				width: fit-content
+				padding: 0 0.2rem
+				&:hover
+					transition: 0.5s
+					background-color: $link-color
+					color: white
+	.side_menu_button
+		position: fixed
+		top: 7rem
+		left: 0
+		i
+			color: $border-primary
+			transition: 0.3s
+			font-size: 2rem
+			font-weight: 900
+			&:hover
+				transition: 0.3s
+				cursor: pointer
+			&:hover + .side_menu_button
+				background-color: $border-primary
 
 @media only screen and (max-width:1200px)
 	.subsection_exam_exp
