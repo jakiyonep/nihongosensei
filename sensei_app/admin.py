@@ -23,6 +23,18 @@ class ExamExpAdmin(admin.ModelAdmin):
     list_display = ('question_head','year', 'section', 'question_num', 'question_num_small', 'public')
     list_editable = ('section', 'question_num', 'question_num_small', 'public')
 
+# BLOG
+
+class BlogReferenceInline(admin.TabularInline):
+    model = BlogReference
+    extra = 1
+
+class BlogAdmin(MarkdownxModelAdmin):
+    list_display = ('title', 'category', 'public')
+    inlines = [
+        BlogReferenceInline
+    ]
+
 # USER REGISTRATION
 
 class MyUserChangeForm(UserChangeForm):
@@ -73,7 +85,15 @@ admin.site.register(JltctReply)
 admin.site.register(jltcttag)
 admin.site.register(jltctsection)
 
+admin.site.register(Material)
+admin.site.register(MaterialCategory)
+admin.site.register(MaterialTag)
+
 admin.site.register(JobListing)
+
+admin.site.register(Blog, BlogAdmin)
+admin.site.register(BlogCategory)
+admin.site.register(BlogTag)
 
 admin.site.register(MarkdownExpModel)
 admin.site.register(RegisterPerk)

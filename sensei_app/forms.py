@@ -118,6 +118,25 @@ class ReplyForm(forms.ModelForm):
             }),
         }
 
+class MaterialUploadForm(forms.ModelForm):
+    class Meta:
+        model = Material
+        fields = ('title', 'file', 'category', 'tag', 'description',)
+        labels = {
+            'title': 'タイトル',
+            'file': 'ファイル',
+            'category': 'カテゴリー',
+            'tag': 'タグ',
+            'description': '説明',
+        }
+
+        widgets = {
+            'description': Textarea(attrs={
+                'placeholder': '辞書形からテ形を作る練習のワークシートです。',
+            })
+        }
+
+
 #USER REGISTRATION
 
 from django.contrib.auth.forms import (

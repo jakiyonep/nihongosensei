@@ -20,16 +20,9 @@
 <body>
 	{% include 'sensei_app/navbar.html' %}
 	<div class="wrapper question_list_wrapper">
-    {% if query %}
-      <h1 class="search_result_head">
-        <span class="query">{{query}}</span>に関する質問
-      </h1>
-    {% elif selected_category %}
-      <h1 class="search_result_head">
-        <span class="question_category">{{selected_category}}</span>に関する質問
-      </h1>
-    {% else %}
-		  <h1 class="section_head">みんなの質問</h1>
+	  <h1 class="section_head">みんなの質問</h1>
+    {% if result == 1 %}
+      {% include "sensei_app/result.html" %}
     {% endif %}
 		<section class="left_column">
 			<main class="questions">

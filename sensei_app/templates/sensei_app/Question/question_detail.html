@@ -33,7 +33,7 @@
         {% if addition_content %}
 			    <a href="{% url 'sensei_app:question_category' question_category_slug %}" class="question_category question_category_{{ question.category.category_slug }}">{{ question.category }}</a>
         {% else %}
-			    <a href="{% url 'sensei_app:question_category' question.category.category_slug %}" class="question_category question_category_{{ question.category.category_slug }}">{{ question.category }}</a>
+			    <a href="{% url 'sensei_app:question_category' question.category.category_slug %}" class="category ">{{ question.category }}</a>
         {% endif %}
 			</div>
   			<article class="content question_content user_content">

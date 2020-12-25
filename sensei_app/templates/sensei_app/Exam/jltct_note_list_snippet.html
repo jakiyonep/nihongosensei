@@ -2,8 +2,17 @@
 
 <link rel="stylesheet" href="{% static 'sensei_app/css/jltct_note_list_snippet.min.css' %}">
 
-
-{% if not liked_notes %}
+{% if query or selected_tag %}
+	<div class="section_container">
+		<ul class="note_collapse" style="display:block;">
+				{% for note in note_list %}
+					{% if note.public %}
+						{% if request.user in note.likes %}Liked{% endif %}<li><a href="{% url 'sensei_app:note_detail' note.title_slug%}">{{ note.title }}</a></li>
+					{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+{% elif not liked_notes %}
 	<div class="section_container"><!--society-->
 		<h3 class="section_name" id="society"><i class="fas fa-circle society"></i>社会・文化・地域</h3>
 		<ul class="society_collapse note_collapse">

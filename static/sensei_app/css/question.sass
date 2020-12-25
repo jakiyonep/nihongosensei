@@ -42,12 +42,16 @@ $light-bg-color: rgb(250, 250, 250)
 			width: 100%
 		.time_container
 			width: 50%
-		.poll_container
-			width: 15%
-		.answers_num
-			width: 15%
-		.category_container
-			width: 100%
+		.answer_poll
+			width: 50%
+			display: flex
+			flex-wrap: nowrap
+			.poll_container
+				width: 50%
+			.answers_num
+				width: 50%
+			.category_container
+				width: 100%
 	.content_beginning
 		background-color: $light-bg-color
 		padding: 0.5rem
@@ -56,52 +60,6 @@ $light-bg-color: rgb(250, 250, 250)
 			font-size: 1rem
 
 
-
-.question_category
-	display: inline-block
-	padding: 0.3rem 1rem
-	border: 1px solid $category-color
-	color: $category-color
-	border-radius: 0.4rem
-	transition: 0.5s
-	&:hover
-		transition: 0.5s
-		background-color: $category-color
-		color: white
-	&:hover .category_num_posts
-		transition: 0.8s
-		background-color: $category-color
-		color: white
-
-.sidebar
-	background-color: $light-bg-color
-	.sidebar_head
-		margin-bottom: 3rem
-		font-size: 1.5rem
-	.search_form
-		margin-bottom: 2rem
-		display: flex
-		justify-content: space-between
-		.search_form_input
-			border: 1px solid $border-secondary
-			width: 85%
-			background-color: white
-		.search_form_button
-			width: 15%
-			text-align: center
-			border: 1px solid $border-secondary
-			background-color: $strong-color
-			i
-				color: white
-	.sidebar_category_container
-		padding: 1rem
-
-	.question_category
-		display: inline-block
-		margin-bottom: 1rem
-
-	.category_num_posts
-		transition: 0.2s
 
 
 .question_detail_wrapper
@@ -449,15 +407,26 @@ $light-bg-color: rgb(250, 250, 250)
 .replies_container
 	display: none
 
+@media screen and (max-width:1500px)
+	.question_list_wrapper
+		.left_column
+			width: 60%
+			.time_container
+				width: 100%
+			.answer_poll
+				width: 100%
+
 @media screen and (max-width:1000px)
 	.question_list_wrapper
 		.left_column
 			order: 3!important
+			width: 100%
 		.right_column
 			order: 2!important
 			margin-bottom: 5rem
-		.section_he
+			width: 100%
 	.questions
+		width: 100%
 	.question_container
 		width: 100%!important
 		.question_container

@@ -1,4 +1,5 @@
 $category-color: rgb(129, 233, 61)
+$category-tag-color: rgb(13, 210, 151)
 $question-bg: rgb(230, 230, 230)
 $border-primary: rgb(121, 121, 121)
 $border-secondary: rgb(228, 228, 228)
@@ -17,8 +18,12 @@ $languagepsychology-color: rgb(85, 173, 201)
 $languageeducation-color: rgb(102, 24, 180)
 
 
+
+
 html
   visibility: hidden
+  &>*
+    font-size: 1.2rem
 
 html.wf-active
   visibility: visible
@@ -34,9 +39,6 @@ textarea, input
 	box-sizing: border-box
 	word-break: break-word
 	font-family: fot-tsukuardgothic-std, sans-serif
-  font-size: 1.1rem
-p
-  font-size: 1.1rem
 .wrapper
 	width: 80vw
 	margin: 0 auto
@@ -47,12 +49,12 @@ p
 	justify-content: space-between
 
 .left_column
-	width: 70%
+	width: 50%
   margin-bottom: 15rem
   position: relative
   z-index: -1
 .right_column
-	width: 22%
+	width: 25%
   z-index: -1
   position: relative
 
@@ -70,25 +72,6 @@ p
 	width: 100%
 	line-height: 2.3rem
 
-.search_result_head
-	width: 100%
-	font-size: 1.2rem
-	margin-bottom: 4rem
-	width: 100%
-	line-height: 3rem
-	&>*
-  	padding: 0.2rem 0.4rem
-	span
-		margin-right: 0.5rem
-		padding: 0.5rem
-		word-break: break-all
-		display: inline
-		&:hover
-			background-color: inherit
-			color: $category-color
-	.query
-    border: 1px solid $content-color
-    border-radius: 0.2rem
 
 
 .content
@@ -236,6 +219,110 @@ p
 		display:  inline-block
 	h4
 		border-left: 0.5rem solid $border-primary
+.meta_info
+  &>*
+    margin-bottom: 0.5rem
+.date
+  margin-bottom: 0.5rem
+  &::before
+    content: "\f017"
+    font-family: "Font Awesome 5 Free"
+    display: inline-block
+    font-weight: 900
+    margin-right: 0.3rem
+.category
+  transition: 0.2s
+  width: fit-content
+  margin-right: 0.7rem
+  border-bottom: 1px solid $border-secondary
+  display: inline-block
+  margin-bottom: 0.5rem
+  &:hover
+    background-color: $category-tag-color
+    color: white
+    transition: 0.2s
+  &::before
+    content: "\f126"
+    font-family: "Font Awesome 5 Free"
+    display: inline-block
+    font-weight: 900
+    margin-right: 0.3rem
+
+.tags
+.tag
+  transition: 0.2s
+  display: inline-block
+  margin-right: 0.7rem
+  margin-bottom: 0.5rem
+  border-bottom: 1px solid $border-secondary
+  &:hover
+    transition: 0.2s
+    color: $category-tag-color
+  &::before
+    content: "\f02b"
+    font-family: "Font Awesome 5 Free"
+    display: inline-block
+    font-weight: 900
+    margin-right: 0.3rem
+
+.sidebar
+  background-color: $light-bg-color
+  padding-bottom: 1rem
+  .sidebar_section_head
+    font-size: 1.3rem
+    border-left: 1rem solid $border-primary
+    padding-left: 0.5rem
+    margin-bottom: 2rem
+  .sidebar_head
+    font-size: 1.2rem
+    margin-bottom: 1rem
+    transition: 0.2s
+    &:hover
+      transition: 0.2s
+      cursor: pointer
+      background-color: $border-primary
+      color: white
+    i
+      display: none
+      margin-left: 0.5rem
+      color: $border-primary
+
+  .search_form
+    border: 1px solid $border-secondary
+    display: flex
+    justify-content: space-between
+    margin-bottom: 2rem
+    .search_form_input
+      background-color: white
+      width: 100%
+    .search_form_button
+      padding: 0.1rem 0.5rem
+      background-color: $strong-color
+      i
+        color: white
+  .sidebar_category_tag_container
+    padding: 0 0.5rem
+    margin-bottom: 5rem
+    &:last-child
+      margin-bottom: 1rem
+    .category_tag_scroll
+      margin-bottom: 2rem
+      padding-left: 1rem
+      .container
+        a
+          i
+          span
+.result
+  margin-bottom: 3rem
+  width: 100%
+  p
+    &>*
+      margin-right: 0.2rem
+    .query
+      border: 1px solid $border-primary
+      padding: 0.1rem 0.3rem
+    .selected_category
+    .selected_tag
 
 .show
     display: flex!important
@@ -348,6 +435,12 @@ p
 				margin-left: 2rem
   .section_head
     font-size: 1.2rem
+  .sidebar
+    .sidebar_head
+      i
+        display: inline-block
+    .category_tag_scroll
+      display: none
 	.markdownexp
 		.markdownexp_container
 			.htmltags_container

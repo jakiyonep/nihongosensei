@@ -19,25 +19,27 @@
         {% endif %}
       </div>
       <div class="time_container">
-        <div class="time">
-          <i class="far fa-clock"></i><span class="question_created_at">{{ question.created_at|date:"Y/m/d f"}}</span>
+        <div class="date">
+          <span class="question_created_at">{{ question.created_at|date:"Y/m/d f"}}</span>
         </div>
       </div>
-      {% if question.poll_question %}
-        <div class="poll_container">
-          <i class="fas fa-poll-h"></i>
+      <div class="answer_poll">
+        <div class="answers_num">
+          <i class="fas fa-comment"></i><span class="question_answers">{{question.answer_reply_num}}</span>
         </div>
-      {% endif %}
-      <div class="answers_num">
-        <i class="fas fa-comment"></i><span class="question_answers">{{question.answer_reply_num}}</span>
+        {% if question.poll_question %}
+          <div class="poll_container">
+            <i class="fas fa-poll-h"></i>
+          </div>
+        {% endif %}
       </div>
-      <div class="category_container">
-        <a href="{% url 'sensei_app:question_category' question.category.category_slug %}" class="question_category question_category_{{ question.category.category_slug }}">{{ question.category }}</a>
+      <div class="category">
+        <a href="{% url 'sensei_app:question_category' question.category.category_slug %}">{{ question.category }}</a>
       </div>
     </div>
     <div class="content_beginning">
       {% with question.content|markdownify as markdown_content %}
-      {{markdown_content|slice:":100"}}{% endwith %}<i class="fas fa-ellipsis-h content_slice"></i>
+      {{markdown_content|slice:":100"}}{% endwith %}
     </div>
   </article>
 {% endfor %}

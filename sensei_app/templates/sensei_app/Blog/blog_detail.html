@@ -1,0 +1,50 @@
+{% extends 'sensei_app/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load markdownx %}
+{% block title %}{{blog.title}}{% endblock %}
+{% block content %}
+<head>
+	<link rel="stylesheet" href="{% static 'sensei_app/css/blog.min.css' %}">
+</head>
+<body>
+	{% include 'sensei_app/navbar.html' %}
+	<div class="wrapper blog_wrapper">
+		<div class="left_column">
+			<div class="blog_top">
+				<div class="thumbnail">
+					{% if blog.thumbnail %}
+						<img src="{{blog.thumbnail.url}}">
+					{% else %}
+						<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/undraw_Design_thinking_re_644h.png" alt="">
+					{% endif %}
+				</div>
+				<h2 class="title">{{blog.title}}</h2>
+				<div class="meta_info">
+					<div class="date">
+						{{blog.updated_at|date:"Y/m/d f"}}
+					</div>
+					<div class="category">
+						<a href="{% url 'sensei_app:blog_category_list' blog.category.category_slug %}">{{blog.category.category}}</a>
+					</div>
+					{% if blog.tag.all %}
+						<div class="tags">
+							{% for tag in blog.tag.all %}
+								<div class="tag">
+									<a href="{% url 'sensei_app:blog_tag_list' tag.tag_slug %}">{{tag.tag}}</a>
+								</div>
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div>
+			</div>
+			<div class="content blog_content">
+				{{blog.content|markdown_to_html}}
+			</div>
+		</div>
+		<div class="right_column">
+			{% include "sensei_app/Blog/sidebar.html" %}
+		</div>
+	</div>
+</body>
+{% endblock %}

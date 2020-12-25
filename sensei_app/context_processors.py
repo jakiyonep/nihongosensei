@@ -1,6 +1,6 @@
 from django.db.models import Count, Q
 
-from sensei_app.models import Question, QuestionCategory, Answer, jltcttag, ExamTags
+from sensei_app.models import *
 
 
 def common(request):
@@ -11,6 +11,13 @@ def common(request):
             num_notes=Count('tag', filter=Q(tags__public=True))),
         'exp_tags': ExamTags.objects.annotate(
             num_notes=Count('tag', filter=Q(tags__public=True))),
-
+        'material_categories': MaterialCategory.objects.annotate(
+            num_materials=Count('category')),
+        'material_tags': MaterialTag.objects.annotate(
+            num_materials=Count('tag')),
+        'blog_categories': BlogCategory.objects.annotate(
+            num_blogs=Count('category')),
+        'blog_tags': BlogTag.objects.annotate(
+            num_blogs=Count('tag')),
     }
     return context

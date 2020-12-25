@@ -27,16 +27,14 @@ from django.http import HttpResponseBadRequest
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views import generic
-from .forms import (
-    LoginForm, UserCreateForm, UserUpdateForm, MyPasswordChangeForm, MyPasswordResetForm, MySetPasswordForm, EmailChangeForm,
-    QuestionForm, AnswerForm,
-)
+from .forms import *
+
 from django.contrib.auth.decorators import login_required
 from sensei_app.models import *
 
 
 
-# SiteDesc
+########### SiteDesc
 
 class SiteDescView(TemplateView):
     template_name = "sensei_app/sitedesc.html"
@@ -44,7 +42,7 @@ class SiteDescView(TemplateView):
 class Toppage(TemplateView):
     template_name = 'sensei_app/toppage.html'
 
-# Contact
+########### Contact
 
 def ContactAdd(request):
     form = forms.ContactForm()
@@ -61,7 +59,7 @@ def ContactAdd(request):
 
     return render(request, 'sensei_app/Contact/contact_add.html', {'form': form})
 
-# Markdown
+########### Markdown
 
 def Markdown_Exp(request):
     htmltags = MarkdownExpModel.objects.all()
@@ -72,7 +70,7 @@ def Markdown_Exp(request):
 
     return render(request, 'sensei_app/markdownexp.html', context)
 
-# RegisterPerk
+########### RegisterPerk
 
 def RegisterPerkList(request):
     perks = RegisterPerk.objects.all()
@@ -101,31 +99,38 @@ def PrivacyPolicyView(request):
 
     return render(request, "sensei_app/privacypolicy.html", context)
 
-# Question
+########### Question
 
 def QuestionList(request):
+    service_name = "質問"
     question_list = Question.objects.all()
     query = request.GET.get('q')
 
     if query:
-        question_list = Question.objects.filter(
-            Q(title__icontains=query) |
-            Q(content__icontains=query) |
-            Q(author__icontains=query)
-        ).distinct()
+        query_dict = query.split()
+        for query_each in query_dict:
+            question_list = question_list.filter(
+                Q(title__icontains=query_each) |
+                Q(content__icontains=query_each) |
+                Q(author__icontains=query_each)
+            ).distinct()
     paginator = Paginator(question_list, 14)
     page = request.GET.get('page')
     question_list = paginator.get_page(page)
     num = request.GET.get('page')
     page_obj = paginator.get_page(num)
 
-    return render(request, 'sensei_app/Question/question_list.html', {
+    context = {
         'question_list': question_list,
         'page_obj': page_obj,
         'num': num,
         'paginator': paginator,
         'query': query,
-    })
+        'service_name':service_name,
+
+    }
+
+    return render(request, 'sensei_app/Question/question_list.html', context)
 
 def QuestionDetail(request, pk):
     context = {}
@@ -167,6 +172,7 @@ def QuestionDetail(request, pk):
     return render(request, 'sensei_app/Question/question_detail.html', context)
 
 def QuestionCategoryView(request, question_category_slug):
+    service_name = "質問"
     category_slug = question_category_slug
     selected_category = get_object_or_404(QuestionCategory, category_slug=category_slug)
     all_question = Question.objects.all()
@@ -178,14 +184,19 @@ def QuestionCategoryView(request, question_category_slug):
     num = request.GET.get('page')
     page_obj = paginator.get_page(num)
 
-    return render(request, 'sensei_app/Question/question_list.html', {
+    context = {
+        'service_name': service_name,
         'question_list': question_list,
         'page_obj': page_obj,
         'num': num,
         'paginator': paginator,
-        'selected_category': selected_category
+        'selected_category': selected_category,
+        'result': 1,
+    }
 
-    })
+
+
+    return render(request, 'sensei_app/Question/question_list.html', context)
 
 def QuestionAdd(request):
     form = forms.QuestionForm()
@@ -427,19 +438,24 @@ def ReplyDelete(request, pk):
 
     return redirect("sensei_app:question_detail", pk=question_pk)
 
-# EXAM
+########### EXAM
 
 def JLTCTTop(request):
     query = request.GET.get('q')
+    result = 0
     all_exam = jltct.objects.all()
+    note_list = all_exam
 
     if query:
-        all_exam = jltct.objects.filter(
-            Q(title__icontains=query) |
-            Q(content__icontains=query) |
-            Q(section__section__icontains=query) |
-            Q(tag__tag__icontains=query)
-        )
+        result = 1
+        query_dict = query.split()
+        for query_each in query_dict:
+            note_list = note_list.filter(
+                Q(title__icontains=query_each) |
+                Q(content__icontains=query_each) |
+                Q(section__section__icontains=query_each) |
+                Q(tag__tag__icontains=query_each)
+            )
 
     society = all_exam.filter(section__section_slug="society")
     language_society = all_exam.filter(section__section_slug="languagesociety")
@@ -453,6 +469,7 @@ def JLTCTTop(request):
         "language_society": language_society,
         "language_psychology": language_psychology,
         "language_education": language_education,
+        "note_list": note_list,
         "query": query,
 
       }
@@ -460,16 +477,18 @@ def JLTCTTop(request):
     exp_query = request.GET.get('exp_q')
     exp_list = ExamExp.objects.all()
     if exp_query:
-        exp_list = exp_list.filter(
-            Q(question_head__icontains=exp_query) |
-            Q(explanation__icontains=exp_query) |
-            Q(answer_1__icontains=exp_query) |
-            Q(answer_2__icontains=exp_query) |
-            Q(answer_3__icontains=exp_query) |
-            Q(answer_4__icontains=exp_query) |
-            Q(answer_5__icontains=exp_query) |
-            Q(after_exp__icontains=exp_query)
-        )
+        exp_query_dict = exp_query.split()
+        for exp_query_each in exp_query_dict:
+            exp_list = exp_list.filter(
+                Q(question_head__icontains=exp_query_each) |
+                Q(explanation__icontains=exp_query_each) |
+                Q(answer_1__icontains=exp_query_each) |
+                Q(answer_2__icontains=exp_query_each) |
+                Q(answer_3__icontains=exp_query_each) |
+                Q(answer_4__icontains=exp_query_each) |
+                Q(answer_5__icontains=exp_query_each) |
+                Q(after_exp__icontains=exp_query_each)
+            )
 
         context['exp_query'] = exp_query
         context['exp_list'] = exp_list
@@ -654,17 +673,17 @@ def JltctReplyAdd(request):
 
 def JLTCTTagNotes(request,tag_slug):
     selected_tag = get_object_or_404(jltcttag,tag_slug=tag_slug)
-    selected_notes = jltct.objects.filter(tag=selected_tag)
+    note_list = jltct.objects.filter(tag=selected_tag)
 
-    society = selected_notes.filter(section__section_slug="society")
-    language_society = selected_notes.filter(section__section_slug="languagesociety")
-    language_psychology = selected_notes.filter(section__section_slug="languagepsychology")
-    language_education = selected_notes.filter(section__section_slug="languageeducation")
-    language = selected_notes.filter(section__section_slug="language")
+    society = note_list.filter(section__section_slug="society")
+    language_society = note_list.filter(section__section_slug="languagesociety")
+    language_psychology = note_list.filter(section__section_slug="languagepsychology")
+    language_education = note_list.filter(section__section_slug="languageeducation")
+    language = note_list.filter(section__section_slug="language")
 
     context = {
         "selected_tag": selected_tag,
-        "selected_notes": selected_notes,
+        "note_list": note_list,
         "society": society,
         "language": language,
         "language_society": language_society,
@@ -674,8 +693,179 @@ def JLTCTTagNotes(request,tag_slug):
 
     return render(request, "sensei_app/Exam/jltct_tag_notes.html", context)
 
+########### Material
 
-# USER REGISTRATION
+def MaterialTop(request):
+    materials = Material.objects.all()
+    service_name = "教材"
+    result = 0
+    query = request.GET.get('q')
+
+    if query:
+        result = 1
+        query_dict = query.split()
+        for query_each in query_dict:
+            materials = materials.filter(
+                Q(title__icontains=query_each) |
+                Q(category__category__icontains=query_each) |
+                Q(tag__tag__icontains=query_each)
+            ).distinct()
+            print(query_each)
+    paginator = Paginator(materials, 20)
+    page = request.GET.get('page')
+    materials = paginator.get_page(page)
+    num = request.GET.get('page')
+    page_obj = paginator.get_page(num)
+
+    context = {
+        'materials': materials,
+        'page_obj': page_obj,
+        'num': num,
+        'paginator': paginator,
+        'query': query,
+        'result': result,
+        'service_name': service_name,
+    }
+
+    return render(request, 'sensei_app/Material/toppage.html', context)
+
+def MaterialCategoryList(request, category_slug):
+    service_name = "教材"
+    all_materials = Material.objects.all()
+    selected_category = get_object_or_404(MaterialCategory, category_slug=category_slug)
+
+    materials = all_materials.filter(category=selected_category)
+
+    context = {
+        'selected_category': selected_category,
+        'materials': materials,
+        'result': 1,
+        'service_name':service_name,
+    }
+
+    return render(request, 'sensei_app/Material/toppage.html', context)
+
+def MaterialTagList(request, tag_slug):
+    service_name = "教材"
+    all_materials = Material.objects.all()
+    selected_tag = get_object_or_404(MaterialTag, tag_slug=tag_slug)
+
+    materials = all_materials.filter(tag=selected_tag)
+
+    context = {
+        'selected_tag': selected_tag,
+        'materials': materials,
+        'result': 1,
+        'service_name': service_name,
+    }
+
+    return render(request, 'sensei_app/Material/toppage.html', context)
+
+class MaterialUpload(generic.CreateView):
+    model = Material
+    form_class = MaterialUploadForm
+    template_name = 'sensei_app/Material/upload.html'
+    success_url = reverse_lazy('sensei_app:material_top')
+
+    def form_valid(self, form):
+        material = form.save(commit=False)
+        material.uploader = self.request.user
+        return super(MaterialUpload,self).form_valid(form)
+
+########### Blog
+
+def BlogTop(request):
+    result = 0
+    service_name = "きまま"
+    blog_list = Blog.objects.all()
+
+    query = request.GET.get('q')
+
+    if query:
+        result = 1
+        query_dict = query.split()
+        for query_each in query_dict:
+            blog_list = blog_list.filter(
+                Q(title__icontains=query_each) |
+                Q(category__category__icontains=query_each) |
+                Q(tag__tag__icontains=query_each) |
+                Q(content__icontains=query_each)
+            ).distinct()
+    paginator = Paginator(blog_list, 20)
+    page = request.GET.get('page')
+    blog_list = paginator.get_page(page)
+    num = request.GET.get('page')
+    page_obj = paginator.get_page(num)
+
+    context = {
+        'blog_list': blog_list,
+        'query': query,
+        'page': page,
+        'page_obj': page_obj,
+        'result': result,
+        'service_name': service_name,
+    }
+
+
+    return render(request, "sensei_app/Blog/blog_top.html", context)
+
+def BlogCategoryList(request, category_slug):
+    service_name = "きまま"
+    selected_category = get_object_or_404(BlogCategory, category_slug=category_slug)
+    blog_list = Blog.objects.filter(category=selected_category)
+
+    paginator = Paginator(blog_list, 20)
+    page = request.GET.get('page')
+    blog_list = paginator.get_page(page)
+    num = request.GET.get('page')
+    page_obj = paginator.get_page(num)
+
+    context = {
+        'blog_list': blog_list,
+        'result': 1,
+        'service_name': service_name,
+        'page': page,
+        'page_obj': page_obj,
+        'selected_category': selected_category
+    }
+
+    return  render(request, 'sensei_app/Blog/blog_top.html', context)
+
+
+def BlogTagList(request, tag_slug):
+    service_name = "きまま"
+    selected_tag = get_object_or_404(BlogTag, tag_slug=tag_slug)
+    blog_list = Blog.objects.filter(tag=selected_tag)
+
+    paginator = Paginator(blog_list, 20)
+    page = request.GET.get('page')
+    blog_list = paginator.get_page(page)
+    num = request.GET.get('page')
+    page_obj = paginator.get_page(num)
+
+    context = {
+        'blog_list': blog_list,
+        'result': 1,
+        'service_name': service_name,
+        'page': page,
+        'page_obj': page_obj,
+        'selected_tag': selected_tag
+    }
+
+    return render(request, 'sensei_app/Blog/blog_top.html', context)
+
+
+def BlogDetail(request, pk):
+    blog = get_object_or_404(Blog, pk=pk)
+
+    context = {
+        "blog": blog
+    }
+
+    return render(request, "sensei_app/Blog/blog_detail.html", context)
+
+
+########### USER REGISTRATION
 
 User = get_user_model()
 

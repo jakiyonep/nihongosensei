@@ -41,6 +41,16 @@ urlpatterns =[
     path('jltct/comment/delete/<int:pk>',JltctCommentDelete, name="note_comment_delete" ),
     path('jltct/reply/delete/<int:pk>',JltctReplyDelete, name='note_reply_delete' ),
 
+    path('material/', MaterialTop, name='material_top'),
+    path('material/category/<str:category_slug>', MaterialCategoryList, name="material_category_list"),
+    path('material/tag/<str:tag_slug>', MaterialTagList, name="material_tag_list"),
+    path('material/upload', MaterialUpload.as_view(), name='material_upload'),
+
+    path('blog', BlogTop, name="blog_top"),
+    path('blog/<int:pk>', BlogDetail, name="blog_detail"),
+    path('blog/category/<str:category_slug>', BlogCategoryList, name="blog_category_list"),
+    path('blog/tag/<str:tag_slug>', BlogTagList, name="blog_tag_list"),
+
     path('login/', views.Login.as_view(), name='login'),
     path('logout/', views.Logout.as_view(), name='logout'),
 

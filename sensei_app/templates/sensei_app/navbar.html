@@ -33,9 +33,19 @@
         みんなの質問
       </a>
     </li>
+		<li class= "navbar_item">
+			<a class="nav-item nav-link" href="{% url 'sensei_app:material_top'%}">
+				みんなの教材
+			</a>
+		</li>
 		<li class="navbar_item">
 			<a href="{% url 'sensei_app:jltct_top' %}">
 				検定試験対策
+			</a>
+		</li>
+		<li class="navbar_item">
+			<a href="{% url 'sensei_app:blog_top' %}">
+				きまま
 			</a>
 		</li>
 		<li class="navbar_item">
@@ -75,8 +85,18 @@
 		</a>
 	</li>
 	<li class="navbar_item_collapse">
+		<a href="{% url 'sensei_app:material_top' %}">
+			みんなの教材
+		</a>
+	</li>
+	<li class="navbar_item_collapse">
 		<a href="{% url 'sensei_app:jltct_top' %}">
 			検定試験対策
+		</a>
+	</li>
+	<li class="navbar_item_collapse">
+		<a href="{% url 'sensei_app:blog_top' %}">
+			きまま
 		</a>
 	</li>
 	<li class="navbar_item_collapse">

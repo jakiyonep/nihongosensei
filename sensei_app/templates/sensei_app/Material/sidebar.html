@@ -1,0 +1,31 @@
+<div class="sidebar">
+	<a class="strong_button" href="{% url 'sensei_app:material_upload' %}">教材をアップロードする</a>
+
+	<form class="search_form" action="{% url "sensei_app:material_top" %}" method="get" accept-charset="utf-8">
+		<input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}" placeholder="キーワード">
+		<button class="search_form_button" type="submit"><span class="icon"><i class="fas fa-search"></i></span></button>
+	</form>
+
+	<div class="sidebar_category_tag_container">
+		<p class="sidebar_head">カテゴリー</p>
+		<div class="category_tag_scroll">
+			<div class="container">
+				{% for category in material_categories %}
+					{% if not category.num_materials == 0 %}
+						<a class="category" href="{% url 'sensei_app:material_category_list' category.category_slug %}">{{ category }} <span class="category_num">{{category.num_materials}}</span></a>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+		<p class="sidebar_head">タグ</p>
+		<div class="category_tag_scroll">
+			<div class="container tags">
+				{% for tag in material_tags %}
+					{% if not tag.num_materials == 0 %}
+						<a class="tag" href="{% url 'sensei_app:material_tag_list' tag.tag_slug %}">{{ tag }} <span class="tag_num">{{tag.num_materials}}</span></a>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>

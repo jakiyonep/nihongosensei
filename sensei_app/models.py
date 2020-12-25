@@ -8,7 +8,7 @@ from django.core.validators import EmailValidator
 from django_countries.fields import CountryField
 
 from markdownx.models import MarkdownxField
-
+from . validators import*
 
 # USER REGISTRATION
 
@@ -191,7 +191,7 @@ class Answer(models.Model):
 class Reply(models.Model):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE, related_name="replies", null=True, blank=True)
     author = models.CharField(null=True, blank=True, max_length=50)
-    login_author=models.ForeignKey(User, on_delete=models.CASCADE, related_name='login_author_reply', null=True, blank=True )
+    login_author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='login_author_reply', null=True, blank=True )
     content = models.TextField(null=True, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -286,7 +286,6 @@ class ExamTags(models.Model):
     def __str__(self):
         return self.tag
 
-
 class ExamExp(models.Model):
     year = models.IntegerField(null=True, blank=True)
     section = models.IntegerField(null=True, blank=True)
@@ -336,6 +335,37 @@ class ExamExp(models.Model):
 
         return section_roman
 
+# materials
+
+class MaterialCategory(models.Model):
+    category = models.CharField(max_length=20, blank=False, null=True)
+    category_slug = models.CharField(max_length=20, blank=False, null=True)
+
+    def __str__(self):
+        return self.category
+
+class MaterialTag(models.Model):
+    tag = models.CharField(max_length=20, blank=False, null=True)
+    tag_slug = models.CharField(max_length=20, blank=False, null=True)
+
+    def __str__(self):
+        return self.tag
+
+class Material(models.Model):
+    title = models.CharField(max_length=50, blank=False, null=True)
+    file = models.FileField(upload_to="MinnaNoMaterial", validators=[validate_pdf_or_MSO, validate_file_size])
+    category = models.ForeignKey(MaterialCategory, on_delete=models.CASCADE, blank=False, null=True, related_name='category_materials')
+    tag = models.ManyToManyField(MaterialTag, blank=True, null=True, related_name='tag_materials')
+    description = models.TextField(blank=True, null=True)
+    upload_at = models.DateTimeField(auto_now=True)
+    uploader = models.ForeignKey(User, on_delete=models.CASCADE, related_name='uploaded_materials', null=True, blank=True )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ["-upload_at"]
+
 # job listing
 
 class JobListing(models.Model):
@@ -366,6 +396,45 @@ class JobListing(models.Model):
             return 'not_japan'
         else:
             return 'japan'
+
+# Blog
+
+class BlogCategory(models.Model):
+    category = models.CharField(max_length=40, blank=False, null=True)
+    category_slug = models.CharField(max_length=40, blank=False, null=True)
+
+    def __str__(self):
+        return self.category
+
+class BlogTag(models.Model):
+    tag = models.CharField(max_length=40, blank=False, null=True)
+    tag_slug = models.CharField(max_length=40, blank=False, null=True)
+
+    def __str__(self):
+        return self.tag
+
+class Blog(models.Model):
+    title = models.CharField(max_length=40, blank=False, null=True)
+    content = MarkdownxField(blank=False, null=True)
+    category = models.ForeignKey(BlogCategory, on_delete=models.CASCADE, blank=False, null=True, related_name="blog_categoty_posts")
+    tag = models.ManyToManyField(BlogTag,blank=False, null=True, related_name="blog_tag_posts")
+    updated_at = models.DateTimeField(auto_now=True)
+    public = models.BooleanField(default=False)
+    thumbnail = models.ImageField(blank=True, null=True, upload_to='blog_thumbnail')
+
+    def __str__(self):
+        return self.title
+
+class BlogReference(models.Model):
+    blog = models.ForeignKey(Blog,on_delete=models.CASCADE)
+    title = models.CharField(max_length=200, blank=False, null=True)
+    url = models.CharField(max_length=200, blank=False, null=True)
+
+    def __str__(self):
+        return self.title
+
+
+
 # Others
 
 class MarkdownExpModel(models.Model):

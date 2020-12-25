@@ -52,6 +52,9 @@
 					{% include "sensei_app/Exam/Exp/exp_search_snippet.html" %}
 				</section>
 			{% endif %}
+
+
+			
 			<section class="subsection subsection_countdown">
 				<h2 class="subsection_head">試験日カウントダウン(おまけ)</h2>
 				<div class="countdown_container">
@@ -73,7 +76,7 @@
 	var exam_date_sec = exam_date.getTime();
 
 	var rest_days_sec = exam_date_sec - now_date_sec
-	var rest_days = Math.ceil(rest_days_sec/(1000*60*60*24))
+	var rest_days = Math.round(rest_days_sec/(1000*60*60*24))
 
 	var rest_weeks = rest_days/7
 
@@ -82,7 +85,7 @@
 
 	$(document).on('input', "#hour_input", function(event){
 		var hour = $("#hour_input").val()
-		var calculated_hours = rest_weeks*hour
+		var calculated_hours = Math.round(rest_weeks*hour)
 		$("#rest_hours").html(calculated_hours)
 	})
 </script>

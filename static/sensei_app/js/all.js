@@ -162,3 +162,9 @@ $(document).on('click', '.note_reply_open_button', function(event){
 	var target_container = $(this).attr('name')
 	$('#' + target_container).slideToggle('fast')
 })
+
+
+$(document).on('click', '.sidebar_head', function(event){
+	$(this).next().slideToggle('fast')
+	$(this).classToggle('clicked')
+})
