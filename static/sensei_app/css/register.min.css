@@ -1,1 +1,134 @@
-.form_button{width:100%;padding:0.8rem;background-color:#ff7070;text-align:center;color:white;border-radius:0.5rem;margin-bottom:2rem;transition:0.5s}.form_button:hover{transition:0.5s;color:#ff7070;background-color:white}.register_wrapper .plain_text{font-size:1.1rem;margin-bottom:2rem}.register_wrapper .form_container{padding:3rem;border:1px solid #797979;border-radius:0.5rem;margin:0 auto;width:60%}.register_wrapper .form_container .form_head{font-size:1.3rem;margin-bottom:2rem}.register_wrapper .form_container .form_desc{font-size:1.1rem;margin-bottom:2rem}.register_wrapper .form_container form{display:flex;flex-direction:column;justify-content:center}.register_wrapper .form_container form input{border:1px solid #e4e4e4;margin-bottom:1rem;height:3rem}.register_wrapper .form_container form .form_groups{display:flex;flex-direction:row;flex-wrap:wrap}.register_wrapper .form_container form .form_groups .form_group{width:100%;display:flex;align-items:center;flex-wrap:wrap}.register_wrapper .form_container form .form_groups .form_group label{width:40%}.register_wrapper .form_container form .form_groups .form_group span{width:60%}.register_wrapper .form_container form .form_groups .form_group span>*{width:100%}.register_wrapper .form_container form .form_groups .form_group .form_error li{color:#ff7070;margin-bottom:0.5rem}.register_wrapper .form_container .login_form_bottom{display:flex;justify-content:space-between}.register_wrapper .form_container .login_form_bottom .form_button{background-color:#e4e4e4;width:45%;color:inherit;transition:0.5s}.register_wrapper .form_container .login_form_bottom .form_button:hover{transition:0.5s;background-color:inherit;color:black}.plain_wrapper{display:flex;flex-direction:column}.plain_wrapper a{color:#03c4d6;font-size:1.1rem}.register_perk a{color:#03c4d6}.register_perk_wrapper .section_head{order:1}.register_perk_wrapper .register_perk_list{width:100%;margin:5rem auto !important;order:2}.register_perk_wrapper .register_perk_list .register_perk_container{margin-bottom:5rem}.register_perk_wrapper .register_perk_list .register_perk_container .perk{font-size:1.1rem;padding:0.5rem 1rem;border:1px solid #e4e4e4;background-color:#f48722;color:white;display:inline-block;margin-bottom:2rem}.register_perk_wrapper .register_perk_list .register_perk_container .perk_desc{margin-left:2rem}@media screen and (max-width: 1100px){.register_wrapper .form_container{width:100%;padding:0.5rem}.register_wrapper .form_container .login_form_bottom{flex-direction:column}.register_wrapper .form_container .login_form_bottom>a{width:100% !important}.register_wrapper .form_container .form_group{flex-direction:column !important}.register_wrapper .form_container .form_group *{width:100% !important}.register_perk_wrapper .register_perk_list .register_perk_container .perk_desc{margin-left:0}}
+/* bg */
+/* border */
+/* font */
+/* highlight */
+/* difficulty */
+/* others */
+/* bg */
+/* border */
+/* font */
+/* highlight */
+/* difficulty */
+/* others */
+.fontawesome_before {
+  font-family: "Font Awesome 5 Free";
+  display: inline-block;
+  font-weight: 900;
+  color: #8b8b8b;
+}
+
+.green_hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #d1f8d3;
+  cursor: pointer;
+}
+
+.register_wrapper {
+  width: 50vw;
+}
+
+.register_wrapper input {
+  height: 2.5rem;
+}
+
+.register_wrapper .form_head {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.register_wrapper .register_container {
+  border: 1px solid #dad8d8;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  margin: 0 auto;
+}
+
+.terms_conditions_wrapper .exp {
+  font-size: 1.2rem;
+  margin-bottom: 5rem;
+}
+
+.terms_conditions_wrapper .terms_conditions_container {
+  background-color: whitesmoke;
+  padding: 1rem 0.5rem;
+}
+
+.terms_conditions_wrapper .terms_conditions_container .terms_conditions_content > * {
+  margin-bottom: 1.5rem;
+}
+
+.terms_conditions_wrapper .terms_conditions_container .terms_conditions_content h2 {
+  font-size: 1.3rem;
+}
+
+.terms_conditions_wrapper .terms_conditions_container .terms_conditions_content h3 {
+  font-size: 1.2rem;
+}
+
+.terms_conditions_wrapper .terms_conditions_container .terms_conditions_content li {
+  list-style-type: decimal;
+}
+
+.terms_conditions_wrapper .terms_conditions_container .terms_conditions_content a {
+  color: #7dd5eb;
+}
+
+.terms_conditions_wrapper .terms_conditions_container .terms_date {
+  margin-top: 3rem;
+  text-align: right;
+}
+
+.terms_conditions_wrapper .terms_conditions_container .terms_date p {
+  margin-bottom: 0.5rem;
+}
+
+.terms_conditions_wrapper .agree_container {
+  margin-top: 5rem;
+}
+
+.terms_conditions_wrapper .agree_container .agree_check {
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.terms_conditions_wrapper .agree_container .agree_check > * {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.terms_conditions_wrapper .agree_container .agree_check label {
+  margin-left: 2rem;
+  white-space: nowrap;
+}
+
+.terms_conditions_wrapper .agree_container .agree_check label:hover {
+  cursor: auto;
+}
+
+.terms_conditions_wrapper .agree_container .register_collapse {
+  margin-top: 1rem;
+  display: none;
+}
+
+@media screen and (max-width: 1100px) {
+  .register_wrapper {
+    width: 70vw;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .register_wrapper {
+    width: 90vw;
+  }
+  .register_wrapper .register_container {
+    padding: 1rem;
+  }
+}
+/*# sourceMappingURL=register.min.css.map */

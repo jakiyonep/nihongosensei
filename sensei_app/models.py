@@ -210,14 +210,16 @@ class Contact(models.Model):
     email = models.EmailField(null=True, blank=False,)
     content = models.TextField(null=True, blank=False)
 
+    def __str__(self):
+        return self.name
 # JLTCT
 
-class jltctsection(models.Model):
-    section = models.CharField(null=False, blank=False, max_length=200)
-    section_slug = models.CharField(null=False, blank=False, max_length=200)
+class jltctcategory(models.Model):
+    category = models.CharField(null=False, blank=False, max_length=200)
+    category_slug = models.CharField(null=False, blank=False, max_length=200)
 
     def __str__(self):
-        return self.section
+        return self.category
 
 class jltcttag(models.Model):
     tag = models.CharField(null=False, blank=False, max_length=200)
@@ -230,7 +232,7 @@ class jltct(models.Model):
     title = models.CharField(null=False, blank=False, max_length=200)
     title_slug = models.CharField(null=False, blank=False, max_length=200, unique=True)
     number = models.IntegerField(null=True, blank=True)
-    section = models.ForeignKey(jltctsection, on_delete=models.CASCADE, related_name="section_name", blank=False, null=True)
+    category = models.ForeignKey(jltctcategory, on_delete=models.CASCADE, related_name="category_notes", blank=False, null=True)
     tag = models.ManyToManyField(jltcttag, related_name="tags", blank=True, null=True)
     content = MarkdownxField(null=False, blank=False)
     public = models.BooleanField(default=False)
@@ -243,7 +245,7 @@ class jltct(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['section','number']
+        ordering = ['category','number']
 
     def total_likes(self):
         return self.likes.count()
@@ -332,6 +334,8 @@ class ExamExp(models.Model):
             section_roman = 'II'
         elif self.section == 3:
             section_roman = 'III'
+        else:
+            section_roman = "?"
 
         return section_roman
 
@@ -424,6 +428,9 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['-updated_at']
 
 class BlogReference(models.Model):
     blog = models.ForeignKey(Blog,on_delete=models.CASCADE)

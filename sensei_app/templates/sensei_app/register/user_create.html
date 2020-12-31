@@ -1,28 +1,32 @@
 {% extends "sensei_app/base.html" %}
 {% block content %}
 {% load static %}
+
 <head>
 	<link rel="stylesheet" href="{% static 'sensei_app/css/register.min.css' %}">
 </head>
+
 <body>
-	{% include 'sensei_app/navbar.html' %}
+	<div class="navbar">
+		{% include 'sensei_app/navbar.html' %}
+	</div><!-- /.navbar -->
 	<div class="wrapper register_wrapper">
-		<div class="form_container">
+		<div class="register_container">
 			<p class="form_head">会員登録</p>
-			<p class="form_desc">登録用のURLをお送りするのでメールアドレスを入力してください。またログインの際に使うパスワードを設定してください</p>
-			<form action="" method="POST">
-		    {{ form.non_field_errors }}
+			<p class="form_desc">以下の項目を入力してください。入力されたメールアドレスに本登録のURLをお送りするので、クリックし、会員登録を完了してください。</p>
+			<form class="form_container" action="" method="POST">
+				{{ form.non_field_errors }}
 				<div class="form_groups">
-			    {% for field in form %}
-			    <div class="form_group">
-		        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-		        <span>{{ field }}</span>
-		        <span class="form_error">{{ field.errors }}</span>
-			    </div>
-			    {% endfor %}
+					{% for field in form %}
+						<div class="form_group">
+							<label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+							<span>{{ field }}</span>
+							<span class="form_error">{{ field.errors }}</span>
+						</div>
+					{% endfor %}
 				</div>
-		    {% csrf_token %}
-		    <button type="submit" class="form_button">送信</button>
+				{% csrf_token %}
+				<button type="submit" class="strong_button">送信</button>
 			</form>
 		</div>
 	</div>

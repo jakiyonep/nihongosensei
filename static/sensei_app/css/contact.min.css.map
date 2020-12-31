@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "mappings": "ACAA,QAAQ;AAIR,YAAY;AAIZ,UAAU;AAGV,eAAe;AAUf,gBAAgB;AAKhB,YAAY;AA1BZ,QAAQ;AAIR,YAAY;AAIZ,UAAU;AAGV,eAAe;AAUf,gBAAgB;AAKhB,YAAY;ACxBZ,AAAA,mBAAmB,CAAA;EACjB,WAAW,EAAE,qBAAqB;EAClC,OAAO,EAAE,YAAY;EACrB,WAAW,EAAE,GAAG;EAChB,KAAK,EDDU,OAAkB;CCElC;;AFJD,AAAA,gBAAgB,CAAA;EACd,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,MAAM;CAEf",
+    "sources": [
+        "contact.scss",
+        "color_list.scss",
+        "class_list.scss",
+        "color_list.scss"
+    ],
+    "names": [],
+    "file": "contact.min.css"
+}

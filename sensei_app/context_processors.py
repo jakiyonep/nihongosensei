@@ -7,7 +7,9 @@ def common(request):
     context = {
         'question_categories': QuestionCategory.objects.annotate(
             num_posts=Count('question', filter=Q(question__is_public=True))),
-        'jltct_tags': jltcttag.objects.annotate(
+        'note_categories': jltctcategory.objects.annotate(
+            num_notes=Count('category', filter=Q(category_notes__public=True))),
+        'note_tags': jltcttag.objects.annotate(
             num_notes=Count('tag', filter=Q(tags__public=True))),
         'exp_tags': ExamTags.objects.annotate(
             num_notes=Count('tag', filter=Q(tags__public=True))),

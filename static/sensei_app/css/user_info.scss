@@ -1,0 +1,81 @@
+@import "color_list.scss";
+@import "class_list.scss";
+
+.user_info_wrapper{
+    width: 60vw;
+  .left_column{
+    width: 100%;
+    .subsection{
+
+    }
+    .subsection_user_info{
+      .user_info_top{
+        margin-bottom: 3rem;
+        .user_info_row{
+          display: flex;
+          flex-wrap: nowrap;
+          
+          &>*{
+            border: 1px solid $border-secondary;
+            padding: 0.3rem 0.5rem;
+          }
+          .user_info_left{            
+            width: 40%;
+            background-color: $light-bg-bolor;
+          }
+          .user_info_right{
+            width: 60%;
+          }
+        }
+      }
+      .user_info_menu{
+        .user_info_menu_item{
+          list-style-type: none;
+          margin-left: 0;
+        }
+      }
+    }
+    .subsection_question{
+      .buttons{
+        margin-bottom: 1rem;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        .question_answer_button{
+          width: 50%;
+          text-align: center;
+          padding: 0.8rem;
+        }
+        .button_active{ 
+          background-color: $border-primary;
+          color: white;
+        }
+        .button_inactive{
+          border: 1px solid $border-primary;
+          transition: 0.2s;
+          &:hover{
+            transition: 0.2s;
+            background-color: $border-primary;
+          }
+        }
+      }
+      .answer_collapse{
+        display: none;
+      }
+    }
+  }
+  .right_column{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1100px){
+  .user_info_wrapper{
+    width: 70vw;
+  }
+}
+@media screen and (max-width: 650px){
+  .user_info_wrapper{
+    width: 90vw;
+  }
+}

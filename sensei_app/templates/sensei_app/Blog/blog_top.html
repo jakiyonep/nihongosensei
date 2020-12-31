@@ -4,55 +4,61 @@
 {% load markdownify %}
 {% block title %}きまま{% endblock %}
 {% block description %}
-  管理人が思ったことを書くという自己満です。暇を極めた方は読んであげてください。
+管理人が思ったことを書くという自己満です。暇を極めた方は読んであげてください。
 {% endblock %}
 {% block content %}
+
 <head>
 	<link rel="stylesheet" href="{% static 'sensei_app/css/blog.min.css' %}">
 </head>
+
 <body>
-	{% include 'sensei_app/navbar.html' %}
+	<div class="navbar">
+		{% include 'sensei_app/navbar.html' %}
+	</div><!-- /.navbar -->
 	<div class="wrapper blog_wrapper">
 		<p class="section_head">きまま</p>
 		<div class="left_column">
 			<div class="blogs_container">
 				{% if result == 1 %}
-          {% include "sensei_app/result.html" %}
+					{% include "sensei_app/result.html" %}
 				{% endif %}
 				{% for blog in blog_list %}
-						<div class="blog_container">
-							<a class="blog_link" href="{% url 'sensei_app:blog_detail' blog.pk %}">
+					<div class="blog_container">
+						<a class="blog_link" href="{% url 'sensei_app:blog_detail' blog.pk %}">
 							<div class="thumbnail">
 								{% if blog.thumbnail %}
 									<img src="{{blog.thumbnail.url}}">
 								{% else %}
-									<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/undraw_Design_thinking_re_644h.png" alt="">
+									<img
+										src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/undraw_Design_thinking_re_644h.png"
+										alt="">
 								{% endif %}
 							</div>
-							<div class="bottom">
-								<div class="title">
-									{{blog.title}}
-								</div>
-								<div class="meta_info">
-									<div class="date">
-									{{blog.updated_at|date:"Y/m/d f"}}
-									</div>
-									<div class="category">
-										<a href="{% url 'sensei_app:blog_category_list' blog.category.category_slug %}">{{blog.category.category}}</a>
-									</div>
-									{% if blog.tag.all %}
-										<div class="tags">
-											{% for tag in blog.tag.all %}
-												<div class="tag">
-													<a href="{% url 'sensei_app:blog_tag_list' tag.tag_slug %}">{{tag.tag}}</a>
-												</div>
-											{% endfor %}
-										</div>
-									{% endif %}
-								</div>
-							</div>
 						</a>
+						<div class="bottom">
+							<div class="title">
+								{{blog.title}}
+							</div>
+							<div class="meta_info">
+								<div class="date">
+									{{blog.updated_at|date:"Y/m/d f"}}
+								</div>
+								<a class="category" href="{% url 'sensei_app:blog_category_list' blog.category.category_slug %}">
+								{{blog.category.category}}
+								</a>
+								{% if blog.tag.all %}
+								<div class="tags">
+									{% for tag in blog.tag.all %}
+									<div class="tag">
+										<a href="{% url 'sensei_app:blog_tag_list' tag.tag_slug %}">{{tag.tag}}</a>
+									</div>
+									{% endfor %}
+								</div>
+								{% endif %}
+							</div>
 						</div>
+					</div>
 				{% endfor %}
 			</div>
 		</div>

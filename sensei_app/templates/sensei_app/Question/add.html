@@ -3,40 +3,45 @@
 {% load humanize %}
 {% block title %}質問する{% endblock %}
 {% block description %}
-  日本語や日本語教育に関する質問をして、疑問を解決しましょう！
+日本語や日本語教育に関する質問をして、疑問を解決しましょう！
 {% endblock %}
 {% block content %}
+
 <head>
-	<link rel="stylesheet" href="{% static 'sensei_app/css/question.min.css' %}">
+  <link rel="stylesheet" href="{% static 'sensei_app/css/question.min.css' %}">
 </head>
+
 <body>
-	{% include 'sensei_app/navbar.html' %}
-	<div class="wrapper question_list_wrapper question_add_wrapper">
-		<h1 class="section_head">質問する</h1>
+	<div class="navbar">
+		{% include 'sensei_app/navbar.html' %}
+	</div><!-- /.navbar -->
+  <div class="wrapper question_wrapper">
+    <h1 class="section_head">質問する</h1>
     <section class="left_column">
-  		<main class="question_add">
-        <form class="question_form" id="question_form_id" action="{% url 'sensei_app:question_add' %}"  method="POST" onsubmit="return confirm('投稿してもよろしいでしょうか？');">
-  				<section class="title">
-  					{{form.title}}
-  				</section>
-  				{% if not user.is_authenticated %}
-  					<section class="author">
-  						{{form.author}}
-  					</section>
-  				{% endif %}
-  				<section class="category">
-  					{{form.category}}
-  				</section>
-            {% include "sensei_app/markdown_exp.html" %}
-  				<section>
-  					{{form.content}}
-  				</section>
-      		<p class="check_button question_check_button">プレビュー画面</p>
+      <main class="question_add">
+        <form class="form_container question_form" id="question_form_id" action="{% url 'sensei_app:question_add' %}" method="POST"
+          onsubmit="return confirm('投稿してもよろしいでしょうか？');">
+          <section class="title">
+            {{form.title}}
+          </section>
+          {% if not user.is_authenticated %}
+          <section class="author">
+            {{form.author}}
+          </section>
+          {% endif %}
+          <section>
+            {{form.category}}
+          </section>
+          {% include "sensei_app/Snippet/markdown_exp.html" %}
+          <section>
+            {{form.content}}
+          </section>
+          <p class="check_button question_check_button">プレビュー画面</p>
           <div class="content_check question_check content user_content" id="markdowned_content">
           </div>
           {% if user.is_authenticated %}
-            <div class="poll">
-            <p class="poll_open_button">投票を追加する{{form.poll}}</p>
+          <div class="poll_add">
+            <p class="weak_button poll_open_button">投票を追加する{{form.poll}}</p>
             <div class="poll_collapse">
               <div class="poll_question">
                 {{form.poll_question}}
@@ -78,15 +83,15 @@
             </div>
           </div>
           {% endif %}
-  				<button type="submit" name="button" class="strong_button submit_button">質問を投稿する</button>
-  				{% csrf_token %}
-  			</form>
-  		</main>
-		</section>
+          <button type="submit" name="button" class="strong_button">質問を投稿する</button>
+          {% csrf_token %}
+        </form>
+      </main>
+    </section>
     <section class="right_column">
       {% include "sensei_app/Question/sidebar.html" %}
     </section>
-	</div>
+  </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 {% endblock %}

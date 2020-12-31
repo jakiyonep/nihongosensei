@@ -1,0 +1,65 @@
+{% extends 'sensei_app/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load markdownify %}
+{% block title %}質問する{% endblock %}
+{% block description %}
+  日本語や日本語教育に関する質問をして、疑問を解決しましょう！
+{% endblock %}
+{% block content %}
+<head>
+	<link rel="stylesheet" href="{% static 'sensei_app/css/question.min.css' %}">
+</head>
+<body>
+	<div class="navbar">
+		{% include 'sensei_app/navbar.html' %}
+	</div><!-- /.navbar -->
+	<div class="wrapper question_list_wrapper question_add_wrapper">
+		<section class="left_column">
+			<div class="left_top">
+				<h1 class="section_head">回答する</h1>
+			</div>
+			<main class="question_add">
+        <form class="question_form"  method="POST" onsubmit="return confirm('送信してもよろしいでしょうか？');">
+					{% if not user.is_authenticated %}
+						<section class="author">
+							{{form.author}}
+						</section>
+					{% endif %}
+					{{form.answer}}
+					<section class="content">
+						{{form.content}}
+					</section>
+					<button type="submit" name="button" class="strong_button">投稿する</button>
+					{% csrf_token %}
+				</form>
+			</main>
+			<section class="selected_question"><!-- selected question-->
+				{% if object.answers == None %}
+					{{object.answers}}
+				{% endif %}
+				<h1 class="section_head">{{question.title}}</h1>
+				{% if not question.login_author %}
+					{% if question.author %}
+						<span class="question_author">{{ question.author }}さん</span>
+					{% else %}
+						<span class="question_author">名無しさん</span>
+					{% endif %}
+				{% else %}
+					<span class="question_author login_author_link">
+						<a href="{% url 'sensei_app:activities_of_user' question.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{question.login_author.nickname}}さん</a>
+					</span>
+				{% endif %}
+				<span class="question_created_at"><i class="far fa-clock"></i>{{ question.created_at | naturaltime}}</span><br>
+				<a href="{% url 'sensei_app:question_category' question.category.category_slug %}" class="question_category question_category_{{ question.category.category_slug }}">{{ question.category }}</a>
+				<br>
+			<article class="content question_content">
+				{{ question.content |markdownify}}
+			</article>
+
+			</section>
+		</section>
+	</div>
+	</div>
+</body>
+{% endblock %}

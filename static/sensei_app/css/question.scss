@@ -1,0 +1,80 @@
+@import "color_list.scss";
+@import "class_list.scss";
+
+.question_wrapper{
+  .left_column{
+    /*question_list*/
+      //desing css in common_new.scss
+    /* question_detail */
+    .question_deteil_container{      
+      .question_detail_top{
+        background-color: $light-bg-bolor;
+        padding: 1rem;
+        .question_title{
+          font-size: 2rem;
+          margin-bottom: 1rem;
+        }        
+      }
+      .content{
+        .question_main{
+
+        }
+        .poll_container{
+          /* see common_new.scss */
+        }
+        .addition_container{
+          .addition_head{
+            width: 100%;
+            padding: 0.5rem 0 0.5rem 1rem;
+            border-bottom: 1px solid $border-primary;
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+          }
+        }        
+      }
+    }
+    .question_setting{
+      .addition{
+        .addition_form{
+          display: none;
+        }
+      }
+    }
+    .comment_section{
+      /* design in common_new. scss */
+    }
+
+    /*question_add */
+    .question_add{
+      .poll_add{
+        .poll_open_button{
+          color: $strong-green;
+          border: 1px solid $strong-green;
+          &:hover{
+            background-color: $strong-green;
+            color: white;
+          }
+        }
+        .poll_collapse{
+          display: none;
+        }
+        .poll_options{
+          .poll_option{
+            display: flex;
+            flex-wrap: nowrap;
+            margin-left: 1rem;
+            .left{
+              width: 5rem
+            }
+            .right{          
+              width: 100rem;    
+            }
+          }
+        }
+      }
+    }
+  }
+  .right_column{
+  }
+}

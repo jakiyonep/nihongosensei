@@ -1,15 +1,19 @@
 {% extends 'sensei_app/base.html' %}
 {% block content %}
 {% load static %}
+
 <head>
 	<link rel="stylesheet" href="{% static 'sensei_app/css/toppage.min.css' %}">
 </head>
+
 <body>
-	{% include 'sensei_app/navbar.html' %}
+	<div class="navbar">
+		{% include 'sensei_app/navbar.html' %}
+	</div><!-- /.navbar -->
 	<div class="wrapper toppage_wrapper">
 
 		{% if not user.is_authenticated %}
-		<section>
+		<section class="card_container">
 			<a class="toppage_card" href="{% url 'sensei_app:site_desc' %}">
 				<div class="card_img">
 					<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/undraw_teacher_35j2.png" alt="">
@@ -19,33 +23,36 @@
 					<p class="card_desc"></p>
 				</div>
 			</a>
+			<div class="card_empty"></div>
 		</section>
-		 <section>
-			 <a class="toppage_card" href="{% url 'sensei_app:login' %}">
-				 <div class="card_img">
-					 <img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/toppage_login.png" alt="">
-				 </div>
-				 <div class="card_right">
-					 <h1 class="card_top">ログイン</h1>
-					 <p class="card_desc">ログインした状態で質問や回答をすると、マイページに記録が残り、いつでも確認できるようになります。</p>
-				 </div>
-			 </a>
-		 </section>
-	 {% else %}
-		 <section>
-			 <a class="toppage_card" href="{% url 'sensei_app:user_detail' user.pk %}">
-				 <div class="card_img">
-					 <img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/toppage_mypage.png" alt="">
-				 </div>
-				 <div class="card_right">
-					 <h1 class="card_top">マイページ</h1>
-					 <p class="card_desc">会員情報の変更や過去の質問・回答の確認ができます。</p>
-				 </div>
-			 </a>
-		 </section>
-	 {% endif %}
+		<section class="card_container">
+			<a class="toppage_card" href="{% url 'sensei_app:login' %}">
+				<div class="card_img">
+					<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/toppage_login.png" alt="">
+				</div>
+				<div class="card_right">
+					<h1 class="card_top">ログイン</h1>
+					<p class="card_desc">ログインした状態で質問や回答をすると、マイページに記録が残り、いつでも確認できるようになります。</p>
+				</div>
+			</a>
+			<div class="card_empty"></div>
+		</section>
+		{% else %}
+		<section class="card_container">
+			<a class="toppage_card" href="{% url 'sensei_app:user_detail' user.pk %}">
+				<div class="card_img">
+					<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/toppage_mypage.png" alt="">
+				</div>
+				<div class="card_right">
+					<h1 class="card_top">マイページ</h1>
+					<p class="card_desc">会員情報の変更や過去の質問・回答の確認ができます。</p>
+				</div>
+			</a>
+			<div class="card_empty"></div>
+		</section>
+		{% endif %}
 
-		<section>
+		<section class="card_container">
 			<a class="toppage_card" href="{% url 'sensei_app:question_list' %}">
 				<div class="card_img">
 					<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/toppage_questions.png" alt="">
@@ -55,21 +62,25 @@
 					<p class="card_desc">あなたが疑問に思っていることは皆さんも疑問に思っているはず!自分だけでなく皆さんのためにも質問をしてみましょう!</p>
 				</div>
 			</a>
+			<div class="card_empty"></div>
 		</section>
 
-		<section>
+		<section class="card_container">
 			<a class="toppage_card" href="{% url 'sensei_app:material_top' %}">
 				<div class="card_img">
-					<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/undraw_Personal_notebook_re_d7dc.png" alt="">
+					<img
+						src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/undraw_Personal_notebook_re_d7dc.png"
+						alt="">
 				</div>
 				<div class="card_right">
 					<h1 class="card_top">みんなの教材</h1>
 					<p class="card_desc">教材置き場だよーー</p>
 				</div>
 			</a>
+			<div class="card_empty"></div>
 		</section>
 
-		<section>
+		<section class="card_container">
 			<a class="toppage_card" href="{% url 'sensei_app:jltct_top' %}">
 				<div class="card_img">
 					<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/toppage_jltct.png.png" alt="">
@@ -79,9 +90,10 @@
 					<p class="card_desc">検定試験に出題される知識や勉強テクニックを紹介します！</p>
 				</div>
 			</a>
+			<div class="card_empty"></div>
 		</section>
 
-		<section>
+		<section class="card_container">
 			<a class="toppage_card" href="{% url 'sensei_app:blog_top' %}">
 				<div class="card_img">
 					<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/undraw_font_kwpk.png" alt="">
@@ -91,9 +103,10 @@
 					<p class="card_desc">管理人が思ったことを文章にするというただの自己満です。</p>
 				</div>
 			</a>
+			<div class="card_empty"></div>
 		</section>
 
-		<section>
+		<section class="card_container">
 			<a class="toppage_card" href="{% url 'sensei_app:contact_add' %}">
 				<div class="card_img">
 					<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/Toppage_Contact.png" alt="">
@@ -103,11 +116,12 @@
 					<p class="card_desc">質問、問い合わせ等は全てこちらまで。</p>
 				</div>
 			</a>
+			<div class="card_empty"></div>
 		</section>
 
 
 		{% if user.is_authenticated %}
-		<section>
+		<section class="card_container">
 			<a class="toppage_card" href="{% url 'sensei_app:logout' %}">
 				<div class="card_img">
 					<img src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/toppage_logout.png" alt="">
@@ -117,6 +131,7 @@
 					<p class="card_desc">さようなら!</p>
 				</div>
 			</a>
+			<div class="card_empty"></div>
 		</section>
 		{% endif %}
 	</div>

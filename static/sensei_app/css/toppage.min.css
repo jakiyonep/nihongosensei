@@ -1,1 +1,107 @@
-.toppage_wrapper{flex-direction:column}.toppage_wrapper section{width:80%}.toppage_wrapper section:nth-of-type(odd) .toppage_card{transition:0.5s}.toppage_wrapper section:nth-of-type(odd) .toppage_card:hover{transform:translateX(0.5rem);transition:0.5s}.toppage_wrapper section:nth-of-type(even){margin:0 0 0 auto}.toppage_wrapper section:nth-of-type(even) .toppage_card{transition:0.5s}.toppage_wrapper section:nth-of-type(even) .toppage_card:hover{transform:translateX(-0.5rem);transition:0.5s}.toppage_wrapper .toppage_card{width:100%;padding:1rem;border:1px solid #e4e4e4;border-radius:1rem;display:flex;flex-direction:row;margin-bottom:3rem;justify-content:space-between}.toppage_wrapper .toppage_card:hover{transition:0.5s;border:1px solid #ff7070}.toppage_wrapper .toppage_card .card_img{width:30%}.toppage_wrapper .toppage_card .card_img img{object-fit:contain;height:30vh;max-width:100%}.toppage_wrapper .toppage_card .card_right{width:65%;display:flex;align-items:center}.toppage_wrapper .toppage_card .card_right .card_top{font-size:1.7rem;color:#ff7070;margin-bottom:2rem}.toppage_wrapper .toppage_card .card_right .card_desc{display:none}@media screen and (max-width: 1100px){.toppage_wrapper section{width:100%}.toppage_wrapper section:nth-of-type(odd) .toppage_card{transition:0.5s}.toppage_wrapper section:nth-of-type(odd) .toppage_card:hover{transform:none;transition:0.5s}.toppage_wrapper section:nth-of-type(even){margin:0 auto 0 0}.toppage_wrapper section:nth-of-type(even) .toppage_card{transition:0.5s}.toppage_wrapper section:nth-of-type(even) .toppage_card:hover{transform:none;transition:0.5s}.toppage_wrapper section .toppage_card{flex-direction:column}.toppage_wrapper section .toppage_card .card_img{width:100%;margin-bottom:3rem}.toppage_wrapper section .toppage_card .card_img img{height:20vh}.toppage_wrapper section .toppage_card .card_right{width:100%;display:flex;justify-content:flex-end}.toppage_wrapper section .toppage_card .card_right .card_top{font-size:1.3rem}}
+/* bg */
+/* border */
+/* font */
+/* highlight */
+/* difficulty */
+/* others */
+.toppage_wrapper {
+  width: 70vw;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.toppage_wrapper .card_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.toppage_wrapper .card_container:nth-child(2n) {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.toppage_wrapper .card_container .toppage_card {
+  margin-bottom: 4rem;
+  border: 1px solid #dad8d8;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 90%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.toppage_wrapper .card_container .toppage_card:hover {
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem #7dd5eb;
+          box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem #7dd5eb;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.toppage_wrapper .card_container .toppage_card .card_img {
+  width: 60%;
+}
+
+.toppage_wrapper .card_container .toppage_card .card_img img {
+  max-height: 25vh;
+  max-width: 100%;
+}
+
+.toppage_wrapper .card_container .toppage_card .card_right {
+  width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.toppage_wrapper .card_container .toppage_card .card_right .card_top {
+  color: #f89f9f;
+  font-size: 1.5rem;
+}
+
+.toppage_wrapper .card_container .toppage_card .card_right .card_desc {
+  display: none;
+}
+
+.toppage_wrapper .card_container .card_empty {
+  width: 10%;
+  height: 100%;
+}
+
+@media screen and (max-width: 1100px) {
+  .toppage_wrapper {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 90vw;
+  }
+  .toppage_wrapper .card_container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+  }
+  .toppage_wrapper .card_container:nth-child(2n) {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .toppage_wrapper .card_container .toppage_card {
+    width: 100%;
+  }
+  .toppage_wrapper .card_empty {
+    display: none;
+  }
+}
+/*# sourceMappingURL=toppage.min.css.map */

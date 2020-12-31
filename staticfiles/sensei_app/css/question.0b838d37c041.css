@@ -1,0 +1,194 @@
+.question_list_wrapper {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.question_list_wrapper .left_column {
+  width: 75%;
+}
+
+.question_list_wrapper .left_column .questions .question_container {
+  margin-bottom: 3rem;
+  background-color: #e6e6e6;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+}
+
+.question_list_wrapper .left_column .questions .question_container .question_link {
+  width: 100%;
+  height: 100%;
+}
+
+.question_list_wrapper .left_column .questions .question_container .question_title {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #797979;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.question_list_wrapper .left_column .questions .question_container .question_title:hover {
+  border-bottom: 2px solid #ff7070;
+  letter-spacing: 0.1rem;
+}
+
+.question_list_wrapper .left_column .questions .question_container .question_created_at {
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.question_list_wrapper .left_column .questions .question_container .question_author span {
+  font-weight: bold;
+}
+
+.question_list_wrapper .right_column {
+  width: 20%;
+}
+
+.question_category {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #fb884a;
+  color: white;
+  border-radius: 1rem;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.question_category:hover {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  background-color: white;
+  color: #fb884a;
+}
+
+.question_category_sensei {
+  background-color: #3475f2;
+}
+
+.question_category_sensei:hover {
+  color: #3475f2;
+}
+
+.question_category_jltct {
+  background-color: #4ce676;
+}
+
+.question_category_jltct:hover {
+  color: #4ce676;
+}
+
+.question_category_others {
+  background-color: #297081;
+}
+
+.question_category_others:hover {
+  color: #297081;
+}
+
+.sidebar .sidebar_head {
+  margin-bottom: 3rem;
+  font-size: 1.5rem;
+}
+
+.sidebar .question_category {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.question_detail_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.question_detail_wrapper .question_category {
+  margin: 1rem 0;
+}
+
+.question_detail_wrapper .question_content {
+  border-top: 1px solid #797979;
+  border-bottom: 1px solid #797979;
+  margin: 2rem 0;
+  padding: 2rem 0;
+}
+
+.question_detail_wrapper .answer_section {
+  margin: 3rem 0;
+}
+
+.question_detail_wrapper .answer_section .submit_answer {
+  margin-bottom: 5rem;
+}
+
+.question_detail_wrapper .answer_section .answers .answer {
+  background-color: #fcfcfc;
+  padding: 3rem 1rem;
+  border-radius: 1rem;
+  margin-bottom: 3rem;
+}
+
+.question_detail_wrapper .answer_section .answers .answer .answer_author {
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+.question_detail_wrapper .answer_section .answers .answer .answer_author span {
+  font-weight: bold;
+}
+
+.question_detail_wrapper .answer_section .answers .answer .answer_content {
+  padding-left: 1rem;
+}
+
+.question_add_wrapper .left_column {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.question_add_wrapper .question_add section {
+  margin-bottom: 3rem;
+}
+
+.question_add_wrapper .question_add section > * {
+  border: 1px solid grey;
+}
+
+.question_add_wrapper .question_add section input {
+  width: 60%;
+}
+
+.question_add_wrapper .question_add section textarea {
+  width: 60%;
+}
+
+.question_add_wrapper .question_add section select {
+  width: 60%;
+}
+
+.question_add_wrapper .selected_question {
+  margin: 5rem 0;
+  padding: 2rem 0;
+}
+
+.question_add_wrapper .selected_question > * {
+  margin-bottom: 1rem;
+}
+
+.question_add_wrapper .selected_question .selected_question_title {
+  font-size: 1.5rem;
+}
+
+.question_add_wrapper .selected_question .selected_question_author span {
+  font-weight: bold;
+}
+
+.question_add_wrapper .selected_question .selected_question_content {
+  border-top: 1px solid #797979;
+  border-bottom: 1px solid #797979;
+  margin: 2rem 0;
+  padding: 2rem 0;
+}
+/*# sourceMappingURL=question.0b838d37c041.css.map */

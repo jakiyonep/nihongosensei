@@ -1,0 +1,14 @@
+@import "color_list.scss";
+
+.fontawesome_before{
+  font-family: "Font Awesome 5 Free";
+  display: inline-block;
+  font-weight: 900;
+  color: $border-primary;
+}
+
+.green_hover{
+  transition: 0.2s;
+  background-color: $weak-hover-green;
+  cursor: pointer;
+}

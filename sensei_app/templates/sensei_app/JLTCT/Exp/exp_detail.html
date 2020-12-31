@@ -1,0 +1,250 @@
+
+{% extends 'sensei_app/base.html' %}
+{% load static %}
+{% load markdownx %}
+{% load markdownify %}
+{% block title %}{{year}}年度/試験{{section_roman}}/問題{{question_num}}の解説{% endblock %}
+{% block content %}
+
+
+<head>
+	<link rel="stylesheet" href="{% static 'sensei_app/css/common_new.min.css' %}">
+	<link rel="stylesheet" href="{% static 'sensei_app/css/jltct.min.css' %}">
+	<link rel="stylesheet" href="{% static 'sensei_app/css/exam.min.css' %}">
+</head>
+<body>
+	<div class="navbar">
+		{% include 'sensei_app/navbar.html' %}
+	</div><!-- /.navbar -->
+	<div class="wrapper jltct_wrapper">
+	<section class="left_column">
+		<div class="exp_detail_fixed_menu">
+			<div class="left_side_menu">
+				<p class="exam_year_head">{{year}}年度</p>
+				<p class="exam_section_head" id="section_1">試験I</p>
+				<div class="exam_question_num_container" id="year_section_1_collapse">
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=1 %}" class="exam_question_num_head">問題1</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=2 %}" class="exam_question_num_head">問題2</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=3 %}" class="exam_question_num_head">問題3</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=4 %}" class="exam_question_num_head">問題4</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=5 %}" class="exam_question_num_head">問題5</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=6 %}" class="exam_question_num_head">問題6</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=7 %}" class="exam_question_num_head">問題7</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=8 %}" class="exam_question_num_head">問題8</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=9 %}" class="exam_question_num_head">問題9</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=10 %}" class="exam_question_num_head">問題10</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=11 %}" class="exam_question_num_head">問題11</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=12 %}" class="exam_question_num_head">問題12</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=13 %}" class="exam_question_num_head">問題13</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=14 %}" class="exam_question_num_head">問題14</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=1 question_num=15 %}" class="exam_question_num_head">問題15</a>
+				</div>
+				<p class="exam_section_head" id="section_2">試験II</p>
+				<div class="exam_question_num_container" id="year_section_2_collapse">
+					<a href="{% url 'sensei_app:exp_detail' year=year section=2 question_num=1 %}" class="exam_question_num_head">問題1</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=2 question_num=2 %}" class="exam_question_num_head">問題2</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=2 question_num=3 %}" class="exam_question_num_head">問題3</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=2 question_num=4 %}" class="exam_question_num_head">問題4</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=2 question_num=5 %}" class="exam_question_num_head">問題5</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=2 question_num=6 %}" class="exam_question_num_head">問題6</a>
+				</div>
+
+				<p class="exam_section_head" id="section_3">試験III</p>
+				<div class="exam_question_num_container" id="year_section_3_collapse">
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=1 %}" class="exam_question_num_head">問題1</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=2 %}" class="exam_question_num_head">問題2</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=3 %}" class="exam_question_num_head">問題3</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=4 %}" class="exam_question_num_head">問題4</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=5 %}" class="exam_question_num_head">問題5</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=6 %}" class="exam_question_num_head">問題6</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=7 %}" class="exam_question_num_head">問題7</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=8 %}" class="exam_question_num_head">問題8</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=9 %}" class="exam_question_num_head">問題9</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=10 %}" class="exam_question_num_head">問題10</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=11 %}" class="exam_question_num_head">問題11</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=12 %}" class="exam_question_num_head">問題12</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=13 %}" class="exam_question_num_head">問題13</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=14 %}" class="exam_question_num_head">問題14</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=15 %}" class="exam_question_num_head">問題15</a>
+					<a href="{% url 'sensei_app:exp_detail' year=year section=3 question_num=16 %}" class="exam_question_num_head">問題16</a>
+				</div>
+			</div>
+		</div><!--/.left_side_menu_wrapper-->		
+		<div class="side_menu_button">
+			<i class="fas fa-chevron-left"></i>
+		</div>
+		<div class="exp_detail">
+			<div class="back_button">
+				<a href="{% url 'sensei_app:jltct_top' %}#exp_section">問題一覧に戻る</a>
+			</div>
+			<div class="exp_head">
+				{{year}}年度/試験{{section_roman}}/問題{{question_num}}
+			</div>
+			{% if none == 1 %}
+				<p>ごめんなさい。もう少々お待ちください。</p>
+			{% else %}
+			<div class="toc_non_markdown">
+				<p class="toc_non_markdown_head collapse_head">目次<i class="far fa-plus-square collapse_head_plus"></i></p>
+				<div class="toc_non_markdown_collapse collapse_container">
+					{% for exp in exp_list %}
+							<a class="toc_non_markdown_item" href="#{{exp.question_num_small}}"><span class="toi">問{{exp.question_num_small}}</span><span class="exp_title">{{exp.question_head}}</span></a>
+					{% endfor %}
+				</div>
+			</div><!--/.toc_non_markdown-->
+
+			<div class="question_num_smalls_container">
+				{% for exp in exp_list %}
+					<div class="question_num_small_container">
+						{% if exp.question_num_small == 1 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問1</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 2 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問2</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 3 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問3</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 4 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問4</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 5 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問5</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 6 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問6</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 7 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問7</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 8 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問8</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 9 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問9</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 10 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問10</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 11 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問11</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 12 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問12</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 13 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問13</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 14 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問14</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 15 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問15</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 16 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問16</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 17 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問17</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 18 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問18</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 19 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問19</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+						{% if exp.question_num_small == 20 %}
+						<h3 class="exp_title" id="{{exp.question_num_small}}"><span class="toi">問20</span><span class="title">{{exp.question_head}}</span></h3>
+							{% include "sensei_app/JLTCT/Exp/exp_detail_snippet.html" %}
+						{% endif %}
+
+					</div>
+				{% endfor %}
+			</div>
+			{% endif %}
+			<div class="related_exp">
+				<div class="related_exp_container">
+					<div class="left">
+						{% if section_beginning == 0 %}
+							<a href="{% url 'sensei_app:exp_detail' year=year section=section question_num=question_num_previous %}" class="exam_question_num_head">
+								<i class="fas fa-arrow-left"></i><span>{{year}}/試験{{section_roman}}/問題{{question_num_previous}}</span>
+							</a>
+						{% else %}
+							<div class="none">
+								<span>---</span>
+							</div>
+						{% endif %}
+					</div>
+					<div class="right">
+						{% if section_end == 0 %}
+							<a href="{% url 'sensei_app:exp_detail' year=year section=section question_num=question_num_next %}" class="exam_question_num_head">
+								<i class="fas fa-arrow-right"></i><span>{{year}}/試験{{section_roman}}/問題{{question_num_next}}</span>
+							</a>
+						{% else %}
+							<div class="none">
+								<span>---</span>
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div><!-- /.exp_detail -->
+		</section>
+		<section class="right_column jltct_detail_right_column">
+			{% include 'sensei_app/JLTCT/sidebar.html' %}
+		</section>
+  </div>
+
+
+
+
+<script type="text/javascript">
+	$(document).on('click', '.exam_section_head', function(event){
+		var target = $(this).attr('id')
+		$('#year_' + target + '_collapse').slideToggle('fast')
+	})
+</script>
+
+<script type="text/javascript">
+
+</script>
+
+</body>
+{% endblock %}

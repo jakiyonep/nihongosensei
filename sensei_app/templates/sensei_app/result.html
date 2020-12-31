@@ -1,9 +1,11 @@
 <div class="result">
 	{% if query %}
 		<p><span class="query">{{query}}</span>に関する{{service_name}}</p>
+	{% elif exp_query %}
+		<p><span class="query">{{exp_query}}</span>に関する過去問解説</p>
 	{% elif selected_category %}
 		<p><span class="category">{{selected_category}}</span>に関する{{service_name}}</p>
 	{% elif selected_tag %}
-		<p><span class="category">{{selected_tag}}</span>に関する{{service_name}}</p>
+		<p><span class="tag">{{selected_tag}}</span>に関する{{service_name}}</p>
 	{% endif %}
 </div>

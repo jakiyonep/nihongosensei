@@ -10,7 +10,7 @@
 			<div class="container">
 				{% for category in blog_categories %}
 					{% if not category.num_blogs == 0 %}
-						<a class="category" href="{% url 'sensei_app:blog_category_list' category.category_slug %}">{{ category }} <span class="category_num">{{category.num_blogs}}</span></a>
+						<a class="category" href="{% url 'sensei_app:blog_category_list' category.category_slug %}">{{ category }} <span class="num category_num">{{category.num_blogs}}</span></a>
 					{% endif %}
 				{% endfor %}
 			</div>
@@ -20,7 +20,7 @@
 			<div class="container tags">
 				{% for tag in blog_tags %}
 					{% if not tag.num_blogs == 0 %}
-						<a class="tag" href="{% url 'sensei_app:blog_tag_list' tag.tag_slug %}">{{ tag }} <span class="tag_num">{{tag.num_blogs}}</span></a>
+						<a class="tag" href="{% url 'sensei_app:blog_tag_list' tag.tag_slug %}">{{ tag }} <span class="num tag_num">{{tag.num_blogs}}</span></a>
 					{% endif %}
 				{% endfor %}
 			</div>

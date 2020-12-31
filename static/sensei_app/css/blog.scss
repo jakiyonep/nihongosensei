@@ -1,24 +1,13 @@
-$category-color: rgb(129, 233, 61);
-$question-bg: rgb(230, 230, 230);
-$border-primary: rgb(121, 121, 121);
-$border-secondary: rgb(228, 228, 228);
-$strong-color: rgb(255, 112, 112);
-$semi-strong-color: rgb(62, 98, 189);
-$link-color: rgb(3, 196, 214);
-$content-color: rgb(108, 108, 108);
+@import "color_list.scss";
+@import "class_list.scss";
 
-$light-bg-color: rgb(250, 250, 250);
-$quote-bg-color: rgb(242, 242, 242);
 
 .blog_wrapper{
 	justify-content: space-between;
 	/* snippet */
 	.left_column{
-		width: 50%;
-
 		/* blog_top */
 		.blogs_container{
-			.blog_link{}
 			.blog_container{
 				margin-bottom: 2rem;
 				display: flex;
@@ -29,20 +18,25 @@ $quote-bg-color: rgb(242, 242, 242);
 					transition: 0.2s;
 					box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem $border-primary;
 				}
-				.thumbnail{
-					border-bottom: 1px solid $border-secondary;
-					text-align: center;
-					img{
-						object-fit: contain;
-						height: 35vh;
-						max-width: 100%;
+				.blog_link{
+					width: 100%;
+					.thumbnail{
+						border-bottom: 1px solid $border-secondary;
+						text-align: center;
+						width: 100%;
+						img{
+							object-fit: contain;
+							height: 35vh;
+							max-width: 100%;
+						}
 					}
 				}
 				.bottom{
 					padding: 0.5rem;
+					width: 100%;
 					.title{
-						font-size: 1.3rem;
-						margin-bottom: 1rem;
+						font-size: 1.4rem;
+						margin-bottom: 1.5rem;
 					}
 					.info{
 						.date{}
@@ -55,15 +49,19 @@ $quote-bg-color: rgb(242, 242, 242);
 			}
 		}
 		/* blog_detail */
-		.thumbnail{
-			img{
-				max-width: 100%;
-				margin-bottom: 2rem;
+		.blog_detail_top{
+			margin-bottom: 5rem;
+			width: 100%;
+			.thumbnail{
+				width: 100%;
+				text-align: center;
+				img{
+					max-width: 100%;
+					margin-bottom: 2rem;
+				}
 			}
-		}
-		.blot_top{
 			.title{
-				font-size: 1.8rem;
+				font-size: 1.5rem;
 				margin-bottom: 1rem;
 			}
 			.info{
@@ -74,8 +72,5 @@ $quote-bg-color: rgb(242, 242, 242);
 				}
 			}
 		}
-	}
-	.right_column{
-		width: 25%;
 	}
 }

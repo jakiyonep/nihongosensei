@@ -8,10 +8,12 @@
 	<link rel="stylesheet" href="{% static 'sensei_app/css/blog.min.css' %}">
 </head>
 <body>
-	{% include 'sensei_app/navbar.html' %}
+	<div class="navbar">
+		{% include 'sensei_app/navbar.html' %}
+	</div><!-- /.navbar -->
 	<div class="wrapper blog_wrapper">
 		<div class="left_column">
-			<div class="blog_top">
+			<div class="blog_detail_top">
 				<div class="thumbnail">
 					{% if blog.thumbnail %}
 						<img src="{{blog.thumbnail.url}}">

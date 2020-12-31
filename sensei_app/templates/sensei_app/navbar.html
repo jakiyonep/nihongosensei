@@ -1,115 +1,114 @@
 {% load static %}
 <link href="https://fonts.googleapis.com/css?family=Sawarabi+Mincho" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'sensei_app/css/navbar.min.css' %}">
-<body>
-<div class="navbar_wrapper" id="navbar">
-<nav class="navbar">
-	<div class="navbar_logo">
-	  <a class="logo_container" href="/"><i class="fas fa-hands-helping"></i><span>集まれ日本語教師!</span></a>
-	</div>
 
-  <ul class="navbar_list">
+<body>
+	<div class="navbar_wrapper" id="navbar">
+		<nav class="navbar">
+			<div class="navbar_logo">
+				<a class="logo" href="/"><i class="fas fa-hands-helping"></i>集まれ日本語教師!</a>
+			</div>
+
+			<ul class="navbar_list">
+				{% if user.is_authenticated %}
+				<li class="navbar_item">
+					<a class="navbar_link"href="{% url 'sensei_app:user_detail' user.pk %}">
+						マイページ
+					</a>
+				</li>
+
+				<li class="navbar_item">
+					<a class="navbar_link"href="{% url 'sensei_app:logout' %}">
+						ログアウト
+					</a>
+				</li>
+				{% else %}
+				<li class="navbar_item">
+					<a class="navbar_link"href="{% url 'sensei_app:login' %}">
+						ログイン
+					</a>
+				</li>
+				{% endif %}
+				<li class="navbar_item">
+					<a class="navbar_link"href="{% url 'sensei_app:question_list' %}">
+						みんなの質問
+					</a>
+				</li>
+				<li class="navbar_item">
+					<a class="navbar_link" href="{% url 'sensei_app:material_top'%}">
+						みんなの教材
+					</a>
+				</li>
+				<li class="navbar_item">
+					<a class="navbar_link"href="{% url 'sensei_app:jltct_top' %}">
+						検定試験対策
+					</a>
+				</li>
+				<li class="navbar_item">
+					<a class="navbar_link"href="{% url 'sensei_app:blog_top' %}">
+						きまま
+					</a>
+				</li>
+				<li class="navbar_item">
+					<a class="navbar_link"href="{% url 'sensei_app:contact_add' %}">
+						お問い合わせ
+					</a>
+				</li>
+			</ul>
+			<p class="navbar_button" href="#" id="navbar_button"><i class="fas fa-bars"></i></p>
+		</nav>
+	</div>
+	<ul class="navbar_list_collapse" id="navbar_collapse">
 		{% if user.is_authenticated %}
-		<li class= "navbar_item">
-			<a class="nav-item nav-link" href="{% url 'sensei_app:user_detail' user.pk %}">
+		<li class="navbar_item_collapse">
+			<a class="navbar_link" href="{% url 'sensei_app:user_detail' user.pk %}">
 				マイページ
 			</a>
 		</li>
 
-		<li class="navbar_item">
-			<a  href="{% url 'sensei_app:logout' %}">
+		<li class="navbar_item_collapse">
+			<a class="navbar_link" href="{% url 'sensei_app:logout' %}">
 				ログアウト
 			</a>
 		</li>
 		{% else %}
-			<li class="navbar_item">
-				<a href="{% url 'sensei_app:login' %}">
-				 ログイン
-			 </a>
-		 </li>
+		<li class="navbar_item_collapse">
+			<a class="navbar_link" href="{% url 'sensei_app:login' %}">
+				ログイン
+			</a>
+		</li>
 		{% endif %}
-    <li class="navbar_item">
-      <a href="{% url 'sensei_app:question_list' %}">
-        みんなの質問
-      </a>
-    </li>
-		<li class= "navbar_item">
-			<a class="nav-item nav-link" href="{% url 'sensei_app:material_top'%}">
+		<li class="navbar_item_collapse">
+			<a class="navbar_link" href="{% url 'sensei_app:question_list' %}">
+				みんなの質問
+			</a>
+		</li>
+		<li class="navbar_item_collapse">
+			<a class="navbar_link" href="{% url 'sensei_app:material_top' %}">
 				みんなの教材
 			</a>
 		</li>
-		<li class="navbar_item">
-			<a href="{% url 'sensei_app:jltct_top' %}">
+		<li class="navbar_item_collapse">
+			<a class="navbar_link" href="{% url 'sensei_app:jltct_top' %}">
 				検定試験対策
 			</a>
 		</li>
-		<li class="navbar_item">
-			<a href="{% url 'sensei_app:blog_top' %}">
+		<li class="navbar_item_collapse">
+			<a class="navbar_link" href="{% url 'sensei_app:blog_top' %}">
 				きまま
 			</a>
 		</li>
-		<li class="navbar_item">
-			<a href="{% url 'sensei_app:contact_add' %}">
+		<li class="navbar_item_collapse">
+			<a class="navbar_link" href="{% url 'sensei_app:contact_add' %}">
 				お問い合わせ
 			</a>
 		</li>
+	</ul>
+	<div class="empty">
 
-  </ul>
+	</div>
 
-  <p class="navbar_button" href="#"  id="navbar_button"><i class="fas fa-bars"></i></p>
-</nav>
-</div>
-<ul class="navbar_list_collapse" id="navbar_collapse">
-	{% if user.is_authenticated %}
-	<li class= "navbar_item_collapse">
-		<a class="nav-item nav-link" href="{% url 'sensei_app:user_detail' user.pk %}">
-			マイページ
-		</a>
-	</li>
-
-	<li class="navbar_item_collapse">
-		<a  href="{% url 'sensei_app:logout' %}">
-			ログアウト
-		</a>
-	</li>
-	{% else %}
-		<li class="navbar_item_collapse">
-			<a href="{% url 'sensei_app:login' %}">
-			 ログイン
-		 </a>
-	 </li>
-	{% endif %}
-	<li class="navbar_item_collapse">
-		<a href="{% url 'sensei_app:question_list' %}">
-			みんなの質問
-		</a>
-	</li>
-	<li class="navbar_item_collapse">
-		<a href="{% url 'sensei_app:material_top' %}">
-			みんなの教材
-		</a>
-	</li>
-	<li class="navbar_item_collapse">
-		<a href="{% url 'sensei_app:jltct_top' %}">
-			検定試験対策
-		</a>
-	</li>
-	<li class="navbar_item_collapse">
-		<a href="{% url 'sensei_app:blog_top' %}">
-			きまま
-		</a>
-	</li>
-	<li class="navbar_item_collapse">
-		<a href="{% url 'sensei_app:contact_add' %}">
-			お問い合わせ
-		</a>
-	</li>
-</ul>
-<div class="empty">
-
-</div>
-
-<span class="back_top_button back_top_button_move"><i class="fas fa-angle-up fas_move"></i></span>
+	<span class="back_top_button back_top_button_move"><i class="fas fa-angle-up fas_move"></i></span>
 
 
 </body>
@@ -117,32 +116,13 @@
 
 <!-- back_top_button -->
 <script type="text/javascript">
-$(function () {
-	$(".back_top_button").hide();
-	$(window).scroll(function () {
-			if ($(window).scrollTop() > 800) {
-					$(".back_top_button").fadeIn(1000);
-			} else {
-					$(".back_top_button").fadeOut();
-			}
-	});
-	$(".back_top_button").click(function () {
-			$("body,html").animate({scrollTop: 0}, 500);
+	$(function () {
+
+		$(".back_top_button").click(function () {
+			$("body,html").animate({
+				scrollTop: 0
+			}, 500);
 			return false;
+		});
 	});
-});
-
-	$('.back_top_button').hover(
-		function(){
-			$('.fas_move').stop().animate({
-				"margin-bottom": "1.5rem"
-			})
-		},
-		function(){
-			$('.fas_move').stop().animate({
-				"margin-bottom": '0'
-			})
-		}
-	)
-
 </script>

@@ -16,7 +16,6 @@
 		{% if result == 1 %}
 			{% include "sensei_app/result.html" %}
 		{% endif %}
-
 		<div class="left_column">
 			<div class="materials_container">
 				{% for material in materials %}
@@ -25,33 +24,37 @@
 							<div class="material_title">
 								{{material.title}}
 							</div>
-							<a class="download_button" href="{{material.file.url}}"><i class="fas fa-download"></i>ダウンロード</a>
-
-						</div>
-						<div class="material_second">
-							<div class="material_upload_date">
-								<i class="far fa-clock"></i>{{material.upload_at|date:"Y/m/d f"}}
-							</div>
-							<div class="material_uploader">
-								<a href="{% url 'sensei_app:activities_of_user' material.uploader.pk %}"><i class="fas fa-chalkboard-teacher"></i><span>{{material.uploader.nickname}}</span>さん</a>
-							</div>
-						</div>
-						<div>
-							<a class="category" href="{% url 'sensei_app:material_category_list' material.category.category_slug %}">{{material.category}}</a>
-						</div>
-						<div class="tags">
-							{% if material.tag.all %}
-								{% for tag in material.tag.all %}
-									<a class="tag" href="{% url 'sensei_app:material_tag_list' tag.tag_slug %}">{{tag.tag}}</a>
-								{% endfor %}
+							{% if user.is_authenticated  %}
+								<a class="download_button" href="{{material.file.url}}">ダウンロード</a>
+								<a class="download_button download_button_small" href="{{material.file.url}}"></a>
+							{% else %}
+								<a class="download_button" href="{% url 'sensei_app:login' %}">ダウンロード</a>
+								<a class="download_button download_button_small" href="{% url 'sensei_app:login' %}"></a>
 							{% endif %}
+						</div>
+						<div class="meta_info">
+							<div class="date">
+								{{material.upload_at|date:"Y/m/d f"}}
+							</div>
+							<a class="user" href="{% url 'sensei_app:activities_of_user' material.uploader.pk %}">
+								{{material.uploader.nickname}}
+							</a>
+							<a class="category" href="{% url 'sensei_app:material_category_list' material.category.category_slug %}">
+								{{material.category}}
+							</a>
+							<div class="tags">
+								{% if material.tag.all %}
+									{% for tag in material.tag.all %}
+										<a class="tag" href="{% url 'sensei_app:material_tag_list' tag.tag_slug %}">{{tag.tag}}</a>
+									{% endfor %}
+								{% endif %}
+							</div>
 						</div>
 						{% if material.description %}
 							<div class="material_desc">
 								{{material.description}}
 							</div>
-						{% endif %}
-						<a class="download_button_small" href="{{material.file.url}}"><i class="fas fa-download"></i></a>
+						{% endif %}						
 					</div>
 				{% endfor %}
 			</div>

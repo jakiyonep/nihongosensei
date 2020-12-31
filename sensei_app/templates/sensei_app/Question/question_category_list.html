@@ -10,7 +10,9 @@
 	<link rel="stylesheet" href="{% static 'sensei_app/css/question.min.css' %}">
 </head>
 <body>
-	{% include 'sensei_app/navbar.html' %}
+	<div class="navbar">
+		{% include 'sensei_app/navbar.html' %}
+	</div><!-- /.navbar -->
 	<div class="wrapper question_list_wrapper">
 		<h1 class="section_head">{{question_category_slug}}</h1>
 		<section class="left_column">

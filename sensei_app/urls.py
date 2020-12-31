@@ -8,7 +8,7 @@ app_name = 'sensei_app'
 urlpatterns =[
     path('', Toppage.as_view(), name='toppage'),
 
-    path('sitedesc/', SiteDescView.as_view(), name="site_desc"),
+    path('sitedesc/', SiteDescView, name="site_desc"),
 
     path('questions/', QuestionList, name='question_list'),
     path('question/<int:pk>/', QuestionDetail, name="question_detail"),
@@ -31,10 +31,11 @@ urlpatterns =[
     path('privacypolicy/', PrivacyPolicyView, name="privacypolicy"),
 
     path('jltct', JLTCTTop, name='jltct_top'),
+    path('jltct/tag/<str:tag_slug>', JLTCTTagNotes, name="tag_notes"),
+    path('jltct/category/<str:category_slug>', JLTCTCategoryNotes, name="category_notes"),
     path('jltct/note/<str:title_slug>', JLTCTNoteDetail, name="note_detail"),
     path('jltct/exp/<int:year>/<int:section>/<int:question_num>', ExamExpDetail, name="exp_detail"),
     path('jltct/exp/tag/<str:tag_slug>', ExamTagList, name="exp_tag_list"),
-    path('jltct/tag/<str:tag_slug>', JLTCTTagNotes, name="tag_notes"),
     path('jltct/like', views.NoteLike, name="note_like"),
     path('jltct/comment', JltctCommentAdd, name="jltct_comment_add"),
     path('jltct/reply', JltctReplyAdd, name="jltct_reply_add"),

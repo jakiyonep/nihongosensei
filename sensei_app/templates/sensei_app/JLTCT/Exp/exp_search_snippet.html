@@ -1,0 +1,16 @@
+	<div class="search_exps_container">
+		{% if exp_list %}
+			{% for exp in exp_list %}
+				<a class="search_exp_container" href="{% url 'sensei_app:exp_detail' year=exp.year section=exp.section question_num=exp.question_num %}#{{exp.question_num_small}}">
+					<span class="head">{{exp.question_head}}</span>
+					<div class="info_container">
+						<div class="info">
+							{{exp.year}}年度/試験{{exp.convert_section_roman}}/問題{{exp.question_num}}/問{{exp.question_num_small}}
+						</div><!-- /.info -->
+					</div>
+				</a>
+			{% endfor %}
+		{% else %}
+			見つかりませんでした
+		{% endif %}
+	</div>

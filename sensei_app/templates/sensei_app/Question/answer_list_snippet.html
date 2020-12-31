@@ -1,44 +1,36 @@
 {% load markdownify %}
-
 {% for answer in answer_list %}
   <article class="question_container">
-    <a class="question_link" href="{% url 'sensei_app:question_detail' answer.question.pk %}">
-      <h2 class="question_title">
-        {{ answer.question.title }}
-      </h2>
-      </a>
-    <div class="question_info">
-      <div class="author_container">
-        {% if not answer.question.login_author %}
-          {% if answer.question.author %}
-          <span class="question_author">
-            {{ answer.question.author }}<span class="san">さん</span>
-          </span>
-          {% else %}
-          <span class="question_author">名無しさん</span>
-          {% endif %}
-        {% else %}
-          <a class="question_author login_author_link" href="{% url 'sensei_app:activities_of_user' answer.question.login_author.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{answer.question.login_author.nickname}}<span class="san">さん</span></a>
-        {% endif %}
-      </div>
-      <div class="time_container">
-        <i class="far fa-clock"></i><span class="question_created_at">{{ answer.question.created_at|date:"Y/m/d f"}}</span>
-      </div>
-      {% if answer.question.poll_question %}
-        <div class="poll_container">
-          <i class="fas fa-poll-h"></i>
-        </div>
+  <a class="question_title" href="{% url 'sensei_app:question_detail' answer.question.pk %}">
+    {{answer.question.title}}
+  </a>
+  <div class="meta_info">
+    {% if not answer.question.login_author %}
+      {% if answer.question.author %}
+        <div class="user">{{ answer.question.author }}</div>
+      {% else %}
+        <div class="user">名無し</div>
       {% endif %}
-      <div class="answers_num">
-        <i class="fas fa-comment"></i><span class="question_answers">{{answer.question.answers.count}}</span>
-      </div>
-      <div class="category_container">
-        <a href="{% url 'sensei_app:question_category' answer.question.category.category_slug %}" class="question_category question_category_{{ answer.question.category.category_slug }}">{{ answer.question.category }}</a>
-      </div>
+    {% else %}
+      <a class="user" href="{% url 'sensei_app:activities_of_user' answer.question.login_author.pk %}">{{answer.question.login_author.nickname}}</a>
+    {% endif %}
+    <div class="date">
+      {{ answer.question.created_at|date:"Y/m/d f"}}
     </div>
+    <div class="comment">
+      {{answer.question.answer_reply_num}}
+    </div>
+    {% if answer.question.poll_question %}
+      <div class="poll">
+        投票有
+      </div>
+    {% endif %}
+    <a class="category" href="{% url 'sensei_app:question_category' answer.question.category.category_slug %}">{{ answer.question.category }}</a>
     <div class="content_beginning">
       {% with answer.question.content|markdownify as markdown_content %}
-      {{markdown_content|slice:":100"}}{% endwith %} <i class="fas fa-ellipsis-h"></i>
+        {{markdown_content|slice:":100"}}
+      {% endwith %}
     </div>
-  </article>
+  </div>
+</article>
 {% endfor %}

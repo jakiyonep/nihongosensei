@@ -1,0 +1,15 @@
+{% if user.is_authenticated %}
+	{% if request.user in answer.likes.all %}
+		<button type="button" name="{{answer.pk}}" class="like_button answer_like_button like_button_liked">
+			<span class="like_num">{{answer.total_likes}}</span>
+		</button>
+	{% else %}
+		<button type="button" name="{{answer.pk}}" class="like_button answer_like_button">
+			<span class="like_num">{{answer.total_likes}}</span>
+		</button>
+	{% endif %}
+{% else %}
+	<a class=" non_user_answer_like_button like_button" href='{% url 'sensei_app:login' %}'>
+		<span class="like_num">{{answer.total_likes}}</span>
+	</a>
+{% endif %}

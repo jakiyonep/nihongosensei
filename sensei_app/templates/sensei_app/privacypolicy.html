@@ -8,13 +8,17 @@
 
 {% block content %}
 <head>
-	<link rel="stylesheet" href="{% static 'sensei_app/css/termsconditions.min.css' %}">
+	<link rel="stylesheet" href="{% static 'sensei_app/css/register.min.css' %}">
 </head>
 <body>
-	{% include 'sensei_app/navbar.html' %}
-	<div class="wrapper">
-		<div class="termsconditions">
+	<div class="navbar">
+		{% include 'sensei_app/navbar.html' %}
+	</div><!-- /.navbar -->
+	<div class="wrapper terms_conditions_wrapper">
+		<div class="terms_conditions_container">
+			<div class="terms_conditions_content">
 				{{policy.content|markdownify}}
+			</div><!-- /.terms_conditions_content -->
 				<div class="terms_date">
 					{% if terms.content %}
 						<p class="terms_date_update">{{policy.update_at}}<span>更新</span>

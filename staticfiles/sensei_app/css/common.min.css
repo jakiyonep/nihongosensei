@@ -1,1 +1,126 @@
-*{color:#424242;line-height:1.8rem}.wrapper{width:80vw;margin:0 auto;display:flex;margin-bottom:10rem}.section_head{font-size:2rem;margin-bottom:5rem;color:#ff7070}.content *{margin:2rem 0}.content h1,.content h2,.content h3,.content h4,.content h5,.content h6{margin:4rem 0}.content h1{font-size:1.5rem}.content h2{font-size:1.4rem}.content h3{font-size:1.3rem}.content h4{font-size:1.2rem}.content h5{font-size:1.1rem}.content h6{font-size:1rem}.content ul li{list-style-type:disc;list-style-position:inside;padding-left:1rem;margin:1rem 0}.content ol li{list-style:decimal;list-style-position:inside;padding-left:1rem;margin:1rem 0}.content strong{background:linear-gradient(transparent 90%, #ff7070 90%)}.content a{color:#03c4d6}.strong_button{display:inline-block;width:200px;text-align:center;background-color:#ff7070;border:2px solid #ff7070;font-size:16px;color:#ff7070;text-decoration:none;padding:10px 24px;border-radius:4px;position:relative}.strong_button span{position:relative;z-index:1;color:grey}.strong_button::before,.strong_button::after{content:"";display:block;background-color:#FFF;width:50%;height:100%;position:absolute;top:0;transition:.2s}.strong_button::before{left:0}.strong_button::after{right:0}.strong_button:hover:before,.strong_button:hover:after{width:0;background-color:#FFF}.strong_button:hover{color:#FFF}
+* {
+  color: #424242;
+  line-height: 1.8rem;
+}
+
+.wrapper {
+  width: 80vw;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 10rem;
+}
+
+.section_head {
+  font-size: 2rem;
+  margin-bottom: 5rem;
+  color: #ff7070;
+}
+
+.content * {
+  margin: 2rem 0;
+}
+
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+  margin: 4rem 0;
+}
+
+.content h1 {
+  font-size: 1.5rem;
+}
+
+.content h2 {
+  font-size: 1.4rem;
+}
+
+.content h3 {
+  font-size: 1.3rem;
+}
+
+.content h4 {
+  font-size: 1.2rem;
+}
+
+.content h5 {
+  font-size: 1.1rem;
+}
+
+.content h6 {
+  font-size: 1rem;
+}
+
+.content ul li {
+  list-style-type: disc;
+  list-style-position: inside;
+  padding-left: 1rem;
+  margin: 1rem 0;
+}
+
+.content ol li {
+  list-style: decimal;
+  list-style-position: inside;
+  padding-left: 1rem;
+  margin: 1rem 0;
+}
+
+.content strong {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(90%, transparent), color-stop(90%, #ff7070));
+  background: linear-gradient(transparent 90%, #ff7070 90%);
+}
+
+.content a {
+  color: #03c4d6;
+}
+
+.strong_button {
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+  background-color: #ff7070;
+  border: 2px solid #ff7070;
+  font-size: 16px;
+  color: #ff7070;
+  text-decoration: none;
+  padding: 10px 24px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.strong_button span {
+  position: relative;
+  z-index: 1;
+  color: grey;
+}
+
+.strong_button::before,
+.strong_button::after {
+  content: "";
+  display: block;
+  background-color: #FFF;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.strong_button::before {
+  left: 0;
+}
+
+.strong_button::after {
+  right: 0;
+}
+
+.strong_button:hover:before,
+.strong_button:hover:after {
+  width: 0;
+  background-color: #FFF;
+}
+
+.strong_button:hover {
+  color: #FFF;
+}
+/*# sourceMappingURL=common.min.css.map */

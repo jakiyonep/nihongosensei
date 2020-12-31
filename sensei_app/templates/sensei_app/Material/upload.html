@@ -14,7 +14,7 @@
 	<div class="wrapper material_wrapper">
 		<h2 class="section_head">教材をアップロードする</h2>
 		<div class="left_column">
-			<form class="material_form" method="post" enctype="multipart/form-data">
+			<form class="form_container" method="post" enctype="multipart/form-data">
 				{% csrf_token %}
 				{% for field in form %}
 					<div class="field">
@@ -33,7 +33,7 @@
 			</form>
 		</div>
 		<div class="right_column">
-
+			{% include 'sensei_app/Material/sidebar.html' %}
 		</div>
 	</div>
 </body>

@@ -1,0 +1,55 @@
+{% load humanize %}
+{% load markdownify %}
+{% if question.answers.all %}<!-- if any answer -->
+	{% for answer in answers %}<!-- all answers-->
+		{% if answer.login_author %}<!-- if the answerer is a member-->
+			{% if answer.login_author == question.login_author %}<!-- if quesioner and answerer are the same -->
+				<div class="comment_container reply_same">
+					<div class="meta_info">
+						<a class="user" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}">{{answer.login_author.nickname}}</a>
+						<p class="date">{{answer.created_at|date:"Y/m/d f"}}</p>
+						<div class="like_container question_like" id="like_container_{{answer.pk}}">
+							{% include "sensei_app/Question/Detail/Answers/answer_like.html" %}
+						</div>
+					</div>
+					<div class="comment_main">
+						{% include "sensei_app/Question/Detail/Answers/answer_main.html" %}
+					</div><!-- /.answer_main -->
+				</div>
+			{% else %}<!--if questioner and answerer are different-->
+				<div class="comment_container">
+					<div class="meta_info">
+						<a class="user" href="{% url 'sensei_app:activities_of_user' answer.login_author.pk %}">{{answer.login_author.nickname}}</a>
+						<p class="date">{{answer.created_at|date:"Y/m/d f"}}</p>
+						<div class="like_container question_like" id="like_container_{{answer.pk}}">
+						</div>
+					</div>
+					<div class="comment_main">
+						{% include "sensei_app/Question/Detail/Answers/answer_main.html" %}
+					</div><!-- /.answer_main -->
+					
+					
+				</div>
+			{% endif %}<!--same or different end-->
+		{% else %}<!-- if the answerer is not a member-->
+			<div class="comment_container">
+				<div class="meta_info">
+					<p class="non_user">{{answer.author}}</p>
+					<p class="date">{{answer.created_at|date:"Y/m/d f"}}</p>
+				</div>
+				<div class="comment_main">
+					{% include "sensei_app/Question/Detail/Answers/answer_main.html" %}
+				</div>
+			</div>
+		{% endif %}<!-- member or not member end if-->
+	<div class="replies_container" id="replies_container_{{answer.pk}}">
+		{% include 'sensei_app/Question/Detail/Answers/replies.html' %}
+	</div>
+	{% endfor %}<!-- all answers endfor -->
+{% else %}<!-- if no answer-->
+	<p style="font-size:1.2rem; ">まだ回答がありません</p>
+{% endif %}<!-- if any answer end-->
+
+{% if  not ajax_replies  %}
+
+{% endif %}

@@ -1,0 +1,152 @@
+{% extends 'sensei_app/base.html' %}
+{% load static %}
+{% load markdownx %}
+{% load markdownify %}
+{% block title %}{{note.title}}{% endblock %}
+{% block content %}
+
+
+<head>
+	<link rel="stylesheet" href="{% static 'sensei_app/css/common_new.min.css' %}">
+	<link rel="stylesheet" href="{% static 'sensei_app/css/jltct.min.css' %}">	
+</head>
+
+<body>
+	<div class="navbar">
+		{% include 'sensei_app/navbar.html' %}
+	</div><!-- /.navbar -->
+	<div class="wrapper jltct_wrapper">
+		<section class="left_column">
+			<div class="note_detail">
+				<div class="note_top">
+					<h1 class="note_title">{{note.title}}</h1>
+					<div class="meta_info">
+						<div class="date">
+							{{note.update}}							
+						</div>
+						<div class="category">							
+							{{note.category}}
+						</div>
+						<div class="tags">
+							{% for tag in note.tag.all %}
+								<a class="tag" href="{% url 'sensei_app:tag_notes' tag.tag_slug %}">{{tag}}</a>
+							{% endfor %}
+						</div>
+						<div class="like_container info_like">
+								{% include "sensei_app/JLTCT/Note/like.html" %}
+						</div>
+					</div>
+				</div><!--/.note_top-->
+				<div class="content note_content">
+					{{ note.content|markdown_to_html}}
+				</div>
+				{% if note.jltctreference_set.all %}
+				<div class="reference sub">
+					<p class="sub_head">参考</p>
+					{% for reference in note.jltctreference_set.all %}
+					<li>
+						<a href="{{reference.url}}">{{reference.name}}</a>
+					</li>
+					{% endfor %}
+				</div>
+				{% endif %}
+				{% if note.related_note.all %}
+				<div class="related sub">
+					<p class="sub_head">関連ノート</p>
+					{% for related in note.related_note.all %}
+					<li>
+						<a href="{% url 'sensei_app:note_detail' related.title_slug %}">{{related.title}}</a>
+					</li>
+					{% endfor %}
+				</div>
+				{% endif %}
+			</div><!-- /.note_detail -->
+			<div class="comment_section note_comment_section">
+				{% include "sensei_app/JLTCT/Note/Comments/comment_section.html" %}
+			</div>
+		</section>
+		<section class="right_column jltct_detail_right_column">
+			{% include 'sensei_app/JLTCT/sidebar.html' %}
+		</section>
+	</div>
+
+	<!--note_like -->
+	<script type="text/javascript">
+		$(document).on('click', '.note_like_button', function (event) {
+			event.preventDefault();
+			var note_id = $(this).attr('name')
+			$.ajax({
+				type: "POST",
+				url: "{% url 'sensei_app:note_like' %}",
+				data: {
+					'note_id': note_id,
+					'csrfmiddlewaretoken': '{{ csrf_token }}',
+				},
+				dataType: "json",
+				success: function (response) {
+					$('.like_container').html(response['form'])
+				},
+			});
+		})
+	</script>
+
+	<!--note_comment_submit -->
+	<script type="text/javascript">
+		$(document).on('click', '.note_comment_submit_button', function (event) {
+			event.preventDefault();
+			var checked = confirm("投稿してもよろしいでしょうか？")
+			if (checked == true) {
+				var comment_content = $('#comment_content').val()
+				var note_id = $('.note_comment_form').attr('id')
+				$('.comment_add_container').slideToggle()
+				$.ajax({
+					type: "POST",
+					url: "{% url 'sensei_app:jltct_comment_add' %}",
+					data: {
+						'comment_content': comment_content,
+						'note_id': note_id,
+						'csrfmiddlewaretoken': '{{ csrf_token }}',
+					},
+					dataType: "json",
+					success: function (response) {
+						$('.note_comments').html(response['form'])
+						$('#comment_content').val('')
+					},
+				});
+			} else {
+				return false
+			}
+		})
+	</script>
+
+	<!--note_reply_submit -->
+	<script type="text/javascript">
+		$(document).on('click', '.note_reply_submit_button', function (event) {
+			event.preventDefault();
+			var checked = confirm("投稿してもよろしいでしょうか？")
+			var comment_id = $(this).parent().attr('id')
+			if (checked == true) {
+				var reply_content = $('#reply_content_' + comment_id).val()
+				$('.reply_add_container' + comment_id).slideToggle()
+				$.ajax({
+					type: "POST",
+					url: "{% url 'sensei_app:jltct_reply_add' %}",
+					data: {
+						'reply_content': reply_content,
+						'comment_id': comment_id,
+						'csrfmiddlewaretoken': '{{ csrf_token }}',
+					},
+					dataType: "json",
+					success: function (response) {
+						$('#replies_' + comment_id).html(response['form'])
+						$('#reply_content_' + comment_id).val('')
+					},
+				});
+			} else {
+				return false
+			}
+		})
+	</script>
+
+</body>
+{% endblock %}

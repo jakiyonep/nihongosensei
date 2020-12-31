@@ -83,7 +83,7 @@ admin.site.register(jltct,jltctAdmin)
 admin.site.register(JltctComment)
 admin.site.register(JltctReply)
 admin.site.register(jltcttag)
-admin.site.register(jltctsection)
+admin.site.register(jltctcategory)
 
 admin.site.register(Material)
 admin.site.register(MaterialCategory)

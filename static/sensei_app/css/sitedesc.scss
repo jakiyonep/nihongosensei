@@ -1,0 +1,123 @@
+@import "color_list.scss";
+@import "class_list.scss";
+
+.sitedesc_wrapper{
+  .sitedesc_container{
+    p{
+      margin-bottom: 2rem;
+    }
+    strong{
+      background:linear-gradient(transparent 80%, $strong-green 80%);
+    }
+  }
+  .services_container{
+    .service_container{
+      margin-bottom: 3rem;
+      .service_name{
+        position: relative;
+        padding: 0.8rem 2rem;
+        display: block;
+        width: fit-content;
+        border-top: solid 2px $border-primary;
+        border-bottom: solid 2px $border-primary;
+        margin-bottom: 1rem;
+        &::before, &::after {
+          content: '';
+          position: absolute;
+          top: -0.5rem;
+          width: 2px;
+          height: -webkit-calc(100% + 1rem);
+          height: calc(100% + 1rem);
+          background-color: $border-primary;
+        }
+        &::before {
+          left: 0.5rem;
+        }
+        &::after {
+          right: 0.5rem;
+        }
+      }
+      .service_desc_container{
+        display: flex;
+        align-items: center;
+        .service_desc{
+          p{
+          }
+          .login_user_perks{
+            border: 2px solid $strong-blue;
+            padding: 2rem 1rem 1rem 1rem;
+            position: relative;
+            z-index: -1;
+            &::before{
+              content: "会員になると？";
+              display: block;              
+              position: absolute;
+              top: 0;
+              left: 0;
+              background-color: $strong-blue;
+              color: white;
+              padding: 0.2rem 0.5rem;
+            }
+            li{
+              list-style-type: none;
+              margin-left: 0;
+              display:flex;              
+              &::before{
+                content: "\f00c";
+                margin-right: 0.5rem;
+                @extend .fontawesome_before;
+              }              
+            }
+          }
+        }
+        .service_img{
+        }        
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 1100px){
+  .sitedesc_wrapper{
+    .sitedesc_container{
+    }
+    .services_container{
+      .service_container{
+        .service_name{
+        }
+        .service_desc_container{
+          .login_user_perks{
+          }              
+        }
+      }
+      .service_img{
+        img{          
+          width: 100%;
+        }
+      }        
+    }
+  }
+}
+@media screen and (max-width: 650px){
+  .sitedesc_wrapper{
+    .sitedesc_container{
+    }
+    .services_container{
+      .service_container{
+        .service_name{
+        }
+        .service_desc_container{
+          flex-wrap: wrap;
+          .service_desc{
+            order: 2;
+          }
+        }
+      }
+      .service_img{
+        width: 100%;
+        order: 1;
+      }        
+    }
+  }
+}

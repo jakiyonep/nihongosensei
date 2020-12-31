@@ -3,30 +3,25 @@
 
 <nav class="pagination">
 	{% if page_obj.has_next or page_obj.has_previous%}
-		<ul class="pagination_ul">
+		<div class="pagination_ul">
 			{% if page_obj.number|add:"-3" > 1 %}
-				<li class="page_item">
-					<a class="page_link page_side" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">1&laquo;</a>
-				</li>
+				<a class="page_link other_page" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">1&laquo;</a>
 			{% endif %}
 
 			{% for num in paginator.page_range %}
 				{% if  num == page_obj.number|add:"-1" or num == page_obj.number|add:"-2" or num == page_obj.number|add:"1" or num == page_obj.number|add:"2" or num == page_obj.number|add:"-3" or num == page_obj.number|add:"3"  %}
-					<li class="page_item "><a class="page_link other_num" href="?page={{num}}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{num}}</a></li>
+				<a class="page_link other_page" href="?page={{num}}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{num}}</a>
 				{% endif %}
 
 				{% if page_obj.number == num %}
-					<li class="page_item current_number"><a class="page-link">{{num}}</a></li>
+					<a class="page_link current_page">{{num}}</a>
 				{% endif %}
 			{% endfor %}
-
 			{% if page_obj.paginator.num_pages > page_obj.number|add:"3" %}
-				<li class="page_item">
-					<a class="page_link page_side" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" aria-label="Next">
-						&raquo;{{page_obj.paginator.num_pages}}
-					</a>
-				</li>
+				<a class="page_link other_page" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" aria-label="Next">
+					&raquo;{{page_obj.paginator.num_pages}}
+				</a>
 			{% endif %}
-		</ul>
+		</div>
 	{% endif %}
 </nav>

@@ -1,9 +1,0 @@
-<form class="note_reply_form" method="POST" id="{{comment.pk}}">
-  {% include "sensei_app/markdown_exp.html" %}
-	<textarea class="note_reply_input" name="content" rows="8" cols="80" placeholder="コメント内容" id="reply_content_{{comment.pk}}"></textarea>
-	<p class="check_button note_reply_check_button">プレビュー画面</p>
-  <div class="content_check question_check content user_content" id="markdowned_reply_content_{{comment.pk}}">
-  </div>
-	<button class="note_reply_submit_button" type="button" name="button">返信を投稿する</button>
-</form>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>

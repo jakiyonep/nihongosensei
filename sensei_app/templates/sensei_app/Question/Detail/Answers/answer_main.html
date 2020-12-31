@@ -1,0 +1,17 @@
+{% load markdownify %}
+
+<div class="content comment_content">
+  {{answer.content|markdownify}}
+</div>
+<div class="buttons">  
+  <a class="inline_weak_button reply_button" name="{{answer.pk}}">返信する</a>
+  {% if answer.replies.all %}
+    <a class="inline_weak_button reply_open_button" name="{{answer.pk}}">返信を非表示にする</a>
+  {% endif %}
+  {% if request.user == answer.login_author %}
+    <a class="inline_delete_button answer_delete_button" href="{% url 'sensei_app:answer_delete' answer.pk  %}" onclick="return confirm('削除してもよろしいですか？');">この回答を削除する</a>
+  {% endif %}
+</div><!-- /.buttons -->
+<div class="reply_form_wrapper" id="reply_form_wrapper_{{answer.pk}}" style="display:none;">
+  {% include 'sensei_app/Question/Detail/answers/reply_form.html' %}
+</div>

@@ -9,7 +9,9 @@
 		<link rel="stylesheet" href="{% static 'sensei_app/css/question.min.css' %}">
 </head>
 <body>
-	{% include 'sensei_app/navbar.html' %}
+	<div class="navbar">
+		{% include 'sensei_app/navbar.html' %}
+	</div><!-- /.navbar -->
 	<div class="wrapper question_list_wrapper all_wrapper">
 		<p class="section_head">
 			{% if user.nickname %}

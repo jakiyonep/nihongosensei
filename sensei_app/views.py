@@ -23,11 +23,12 @@ from django.contrib.auth.views import (
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail, BadHeaderError
 from django.core.signing import BadSignature, SignatureExpired, loads, dumps
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest, HttpResponse
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views import generic
 from .forms import *
+from django.utils import timezone
 
 from django.contrib.auth.decorators import login_required
 from sensei_app.models import *
@@ -36,8 +37,12 @@ from sensei_app.models import *
 
 ########### SiteDesc
 
-class SiteDescView(TemplateView):
-    template_name = "sensei_app/sitedesc.html"
+def SiteDescView(request):
+    current_date = timezone.now()
+    context = {
+        'current_date': current_date,
+    }
+    return render(request, "sensei_app/SiteInfo/sitedesc.html", context)
 
 class Toppage(TemplateView):
     template_name = 'sensei_app/toppage.html'
@@ -45,10 +50,10 @@ class Toppage(TemplateView):
 ########### Contact
 
 def ContactAdd(request):
-    form = forms.ContactForm()
+    form = ContactForm()
 
     if request.method == 'POST':
-        form = forms.ContactForm(request.POST)
+        form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
             print("検証に成功しました。データを保存します")
@@ -68,7 +73,7 @@ def Markdown_Exp(request):
         "htmltags": htmltags
     }
 
-    return render(request, 'sensei_app/markdownexp.html', context)
+    return render(request, 'sensei_app/Snippet/markdownexp.html', context)
 
 ########### RegisterPerk
 
@@ -89,7 +94,7 @@ def TermsConditionsView(request):
         'terms':selected_terms
     }
 
-    return render(request, "sensei_app/termsandconditions.html", context)
+    return render(request, "sensei_app/Register/termsandconditions.html", context)
 
 def PrivacyPolicyView(request):
     selected_terms = get_object_or_404(TermsConditions, number=2)
@@ -105,9 +110,10 @@ def QuestionList(request):
     service_name = "質問"
     question_list = Question.objects.all()
     query = request.GET.get('q')
-
+    result = 0
     if query:
         query_dict = query.split()
+        result = 1
         for query_each in query_dict:
             question_list = question_list.filter(
                 Q(title__icontains=query_each) |
@@ -124,10 +130,10 @@ def QuestionList(request):
         'question_list': question_list,
         'page_obj': page_obj,
         'num': num,
+        'result': result,
         'paginator': paginator,
         'query': query,
         'service_name':service_name,
-
     }
 
     return render(request, 'sensei_app/Question/question_list.html', context)
@@ -143,33 +149,30 @@ def QuestionDetail(request, pk):
         context['already_voted'] = 1
 
     if request.method == 'POST':
-        selected_sort = request.POST['selected_sort']
+        if request.POST.get("comment_submit"):
+            selected_sort = request.POST['selected_sort']
 
-        if selected_sort == 'likes':
-            answers = answers\
-                    .annotate(num_likes=Count('likes'))\
-                    .order_by('-num_likes')
-        elif selected_sort == 'new':
-            answers = answers.order_by('-created_at')
-        elif selected_sort == 'old':
-            answers = answers.order_by('created_at')
+            if selected_sort == 'likes':
+                answers = answers\
+                        .annotate(num_likes=Count('likes'))\
+                        .order_by('-num_likes')
+            elif selected_sort == 'new':
+                answers = answers.order_by('-created_at')
+            elif selected_sort == 'old':
+                answers = answers.order_by('created_at')
 
 
-        context = {
-            'question': question,
-            'answers': answers,
-        }
+            context['question'] = question
+            context['answers'] = answers
 
-        html = render_to_string('sensei_app/Question/comments.html', context, request=request)
+            html = render_to_string('sensei_app/Question/Detail/Answers/comments.html', context, request=request)
 
-        return JsonResponse({'answers_sort': html})
+            return JsonResponse({'comment_sort': html})
 
-    context ={
-        'question': question,
-        'answers': answers,
-    }
+    context['question'] = question
+    context['answers'] = answers
 
-    return render(request, 'sensei_app/Question/question_detail.html', context)
+    return render(request, 'sensei_app/Question/Detail/question_detail.html', context)
 
 def QuestionCategoryView(request, question_category_slug):
     service_name = "質問"
@@ -199,11 +202,10 @@ def QuestionCategoryView(request, question_category_slug):
     return render(request, 'sensei_app/Question/question_list.html', context)
 
 def QuestionAdd(request):
-    form = forms.QuestionForm()
+    form = QuestionForm()
     user = request.user
-
     if request.method == 'POST':
-        form = forms.QuestionForm(request.POST)
+        form = QuestionForm(request.POST)
         if "button" in request.POST:
             if form.is_valid():
                 if request.user.is_authenticated:
@@ -232,11 +234,12 @@ def QuestionAddition(request):
         question.save()
         question_category_slug = question.category.category_slug
         context = {
+            'question': question,
             'addition_content': addition_content,
             'question_category_slug': question_category_slug,
         }
 
-        html = render_to_string('sensei_app/Question/content_addition.html', context, request=request)
+        html = render_to_string('sensei_app/Question/Detail/Snippet/content_addition.html', context, request=request)
 
         return JsonResponse({'addition':html})
 
@@ -250,7 +253,6 @@ def QuestionPollVote(request):
             question = get_object_or_404(Question, pk=question_id)
             if not question.answered_user.filter(pk=user.pk).exists():
                 question.answered_user.add(user)
-                print('first time')
                 if selected_option == "1":
                     question.option_1_count += 1
                 if selected_option == "2":
@@ -262,11 +264,7 @@ def QuestionPollVote(request):
 
                 question.save()
                 question_category_slug = question.category.category_slug
-                context = {
-                    'question': question,
-                    'question_category_slug': question_category_slug,
-                    'ajax_requested': 1,
-                }
+
 
                 option_1_count = question.option_1_count
                 option_2_count = question.option_2_count
@@ -287,27 +285,23 @@ def QuestionPollVote(request):
                 if not option_4_count == 0:
                     option_4_percentage = round(option_4_count / total * 100)
 
-                context["poll_total"] = total
-                context["option_1_percentage"] = option_1_percentage
-                context["option_2_percentage"] = option_2_percentage
-                context["option_3_percentage"] = option_3_percentage
-                context["option_4_percentage"] = option_4_percentage
 
-                html = render_to_string('sensei_app/Question/content_poll.html', context, request=request)
+                context["already_voted"] = 1
+                context = {
+                    'question': question,
+                    'question_category_slug': question_category_slug,
+                    'ajax_requested': 1,
+                }
+
+                html = render_to_string('sensei_app/Question/Detail/Snippet/content_poll.html', context, request=request)
                 already_answered = 1
-
                 return JsonResponse({
                     'poll_vote': html,
-                    "option_1_percentage": option_1_percentage,
-                    "option_2_percentage": option_2_percentage,
-                    "option_3_percentage": option_3_percentage,
-                    "option_4_percentage": option_4_percentage,
                 })
-            else:
-                return redirect('https://google.co.jp')
+            return HttpResponse('')
 
     else:
-        return redirect('https://google.co.jp')
+        return HttpResponse('')
 
 @login_required
 def QuestionDelete(request,pk):
@@ -338,7 +332,10 @@ def AnswerAdd(request):
 
         all_answers = Answer.objects.all()
         answers = all_answers.filter(question=question)
-        ajax_selected_sort = request.POST['ajax_selected_sort']
+        ajax_selected_sort = "new"
+
+        if request == 'POST':
+            ajax_selected_sort = request.POST['ajax_selected_sort']
 
         if ajax_selected_sort == 'likes':
             answers = answers\
@@ -354,7 +351,7 @@ def AnswerAdd(request):
             'question': question,
         }
 
-        html = render_to_string('sensei_app/Question/comments.html', context, request=request)
+        html = render_to_string('sensei_app/Question/Detail/Answers/comments.html', context, request=request)
 
         return JsonResponse({'form':html})
 
@@ -377,7 +374,7 @@ def AnswerLike(request):
             'total_likes': answer.total_likes()
         }
     if request.is_ajax():
-        html = render_to_string('sensei_app/Question/answer_like.html', context, request=request)
+        html = render_to_string('sensei_app/Question/Detail/Answers/answer_like.html', context, request=request)
         return JsonResponse({'form':html})
 
 @login_required()
@@ -423,9 +420,10 @@ def ReplyAdd(request):
             'reply_author': author,
             'answer_author': answer.author,
             'answer_login_author': answer.login_author,
+            'answer':answer,
         }
 
-        html = render_to_string('sensei_app/Question/ajax_replies.html', context)
+        html = render_to_string('sensei_app/Question/Detail/Answers/ajax_replies.html', context)
 
         return JsonResponse({'form':html})
 
@@ -445,38 +443,31 @@ def JLTCTTop(request):
     result = 0
     all_exam = jltct.objects.all()
     note_list = all_exam
+    note_search = 0
+    exp_search = 0
 
     if query:
         result = 1
+        note_search = 1
         query_dict = query.split()
         for query_each in query_dict:
             note_list = note_list.filter(
                 Q(title__icontains=query_each) |
                 Q(content__icontains=query_each) |
-                Q(section__section__icontains=query_each) |
+                Q(category__category__icontains=query_each) |
                 Q(tag__tag__icontains=query_each)
             )
-
-    society = all_exam.filter(section__section_slug="society")
-    language_society = all_exam.filter(section__section_slug="languagesociety")
-    language_psychology = all_exam.filter(section__section_slug="languagepsychology")
-    language_education = all_exam.filter(section__section_slug="languageeducation")
-    language = all_exam.filter(section__section_slug="language")
-
     context={
-        "society": society,
-        "language": language,
-        "language_society": language_society,
-        "language_psychology": language_psychology,
-        "language_education": language_education,
         "note_list": note_list,
         "query": query,
-
+        "note_search": note_search,
       }
 
     exp_query = request.GET.get('exp_q')
     exp_list = ExamExp.objects.all()
     if exp_query:
+        result = 1
+        exp_search = 1
         exp_query_dict = exp_query.split()
         for exp_query_each in exp_query_dict:
             exp_list = exp_list.filter(
@@ -492,8 +483,43 @@ def JLTCTTop(request):
 
         context['exp_query'] = exp_query
         context['exp_list'] = exp_list
+    context["exp_search"] = exp_search
+    context['result'] = result
+    context['service_name'] = "ノート"
 
-    return render(request, 'sensei_app/Exam/jltct_top.html', context)
+    return render(request, 'sensei_app/JLTCT/jltct_top.html', context)
+
+def JLTCTCategoryNotes(request,category_slug):
+    selected_category = get_object_or_404(jltctcategory, category_slug=category_slug)
+    note_list = jltct.objects.filter(category=selected_category)
+    service_name = "ノート"
+
+
+    context = {
+        "selected_category": selected_category,
+        "note_list": note_list,
+        "service_name": service_name,
+        "result": 1,
+        "note_search": 1,
+    }
+
+    return render(request, "sensei_app/JLTCT/jltct_top.html", context)
+
+def JLTCTTagNotes(request,tag_slug):
+    selected_tag = get_object_or_404(jltcttag,tag_slug=tag_slug)
+    note_list = jltct.objects.filter(tag=selected_tag)
+    service_name = "ノート"
+
+
+    context = {
+        "selected_tag": selected_tag,
+        "note_list": note_list,
+        "service_name": service_name,
+        "result": 1,
+        "note_search": 1,
+     }
+
+    return render(request, "sensei_app/JLTCT/jltct_top.html", context)
 
 def JLTCTNoteDetail(request, title_slug):
     note = get_object_or_404(jltct,title_slug=title_slug)
@@ -502,18 +528,22 @@ def JLTCTNoteDetail(request, title_slug):
         "note": note,
     }
 
-    return render(request, "sensei_app/Exam/jltct_note_detail.html", context)
+    return render(request, "sensei_app/JLTCT/Note/jltct_note_detail.html", context)
 
 def ExamTagList(request,tag_slug):
     selected_tag = get_object_or_404(ExamTags,tag_slug=tag_slug)
     exp_list = ExamExp.objects.filter(tag=selected_tag)
+    service_name = "過去問解説"
 
     context = {
         "selected_tag": selected_tag,
         "exp_list": exp_list,
+        "exp_search": 1,
+        "result": 1,
+        "service_name": service_name,
     }
 
-    return render(request, "sensei_app/Exam/Exp/tag_list.html", context)
+    return render(request, "sensei_app/JLTCT/jltct_top.html", context)
 
 def ExamExpDetail(request, year, section, question_num):
     exp_list = ExamExp.objects.filter(year=year, section=section, question_num=question_num)
@@ -575,7 +605,7 @@ def ExamExpDetail(request, year, section, question_num):
             if exp.public == False:
                 context['none'] = 1
 
-    return render(request, 'sensei_app/Exam/Exp/exp_detail.html', context)
+    return render(request, 'sensei_app/JLTCT/Exp/exp_detail.html', context)
 
 @login_required
 def NoteLike(request):
@@ -595,7 +625,7 @@ def NoteLike(request):
             'total_likes': note.total_likes()
         }
     if request.is_ajax():
-        html = render_to_string('sensei_app/Exam/like.html', context, request=request)
+        html = render_to_string('sensei_app/JLTCT/Note/like.html', context, request=request)
         return JsonResponse({'form':html})
 
 @login_required
@@ -622,7 +652,7 @@ def JltctCommentAdd(request):
             'note': note
         }
 
-        html = render_to_string('sensei_app/Exam/comments.html', context)
+        html = render_to_string('sensei_app/JLTCT/Note/Comments/comments.html', context)
 
         return JsonResponse({'form':html})
 
@@ -667,31 +697,10 @@ def JltctReplyAdd(request):
             'comment': comment,
         }
 
-        html = render_to_string('sensei_app/Exam/replies.html', context)
+        html = render_to_string('sensei_app/JLTCT/Note/Comments/replies.html', context)
 
         return JsonResponse({'form':html})
 
-def JLTCTTagNotes(request,tag_slug):
-    selected_tag = get_object_or_404(jltcttag,tag_slug=tag_slug)
-    note_list = jltct.objects.filter(tag=selected_tag)
-
-    society = note_list.filter(section__section_slug="society")
-    language_society = note_list.filter(section__section_slug="languagesociety")
-    language_psychology = note_list.filter(section__section_slug="languagepsychology")
-    language_education = note_list.filter(section__section_slug="languageeducation")
-    language = note_list.filter(section__section_slug="language")
-
-    context = {
-        "selected_tag": selected_tag,
-        "note_list": note_list,
-        "society": society,
-        "language": language,
-        "language_society": language_society,
-        "language_psychology": language_psychology,
-        "language_education": language_education,
-    }
-
-    return render(request, "sensei_app/Exam/jltct_tag_notes.html", context)
 
 ########### Material
 
@@ -708,7 +717,8 @@ def MaterialTop(request):
             materials = materials.filter(
                 Q(title__icontains=query_each) |
                 Q(category__category__icontains=query_each) |
-                Q(tag__tag__icontains=query_each)
+                Q(tag__tag__icontains=query_each) |
+                Q(description__icontains=query_each)
             ).distinct()
             print(query_each)
     paginator = Paginator(materials, 20)
@@ -872,7 +882,7 @@ User = get_user_model()
 class Login(LoginView):
     """ログインページ"""
     form_class = LoginForm
-    template_name = 'sensei_app/register/login.html'
+    template_name = 'sensei_app/UserInfo/login.html'
 
 class Logout(LogoutView):
     """ログアウトページ"""
@@ -965,30 +975,19 @@ def UserDetail(request, pk):
 
     all_exam = jltct.objects.all()
 
-    society = all_exam.filter(section__section_slug="society").filter(likes=request.user)
-    language_society = all_exam.filter(section__section_slug="languagesociety").filter(likes=request.user)
-    language_psychology = all_exam.filter(section__section_slug="languagepsychology").filter(likes=request.user)
-    language_education = all_exam.filter(section__section_slug="languageeducation").filter(likes=request.user)
-    language = all_exam.filter(section__section_slug="language").filter(likes=request.user)
-
     liked_notes = all_exam.filter(likes=request.user)
 
 
     context={
-        "society": society,
-        "language": language,
-        "language_society": language_society,
-        "language_psychology": language_psychology,
-        "language_education": language_education,
         'user': login_author,
         'question_list': questions,
         'answer_list': answers,
         'all_questions_num': all_questions_num,
         'all_answers_num': all_answers_num,
-        'liked_notes': liked_notes,
+        'note_list': liked_notes,
     }
 
-    return render(request, 'sensei_app/register/user_detail.html', context)
+    return render(request, 'sensei_app/UserInfo/user_detail.html', context)
 
 def ActivitiesOfUser(request, pk):
     login_author = get_object_or_404(User, pk=pk)
@@ -1002,18 +1001,7 @@ def ActivitiesOfUser(request, pk):
 
     all_exam = jltct.objects.all()
 
-    society = all_exam.filter(section__section_slug="society")
-    language_society = all_exam.filter(section__section_slug="languagesociety")
-    language_psychology = all_exam.filter(section__section_slug="languagepsychology")
-    language_education = all_exam.filter(section__section_slug="languageeducation")
-    language = all_exam.filter(section__section_slug="language")
-
     context = {
-        "society": society,
-        "language": language,
-        "language_society": language_society,
-        "language_psychology": language_psychology,
-        "language_education": language_education,
         'user': login_author,
         'question_list': questions,
         'answer_list': answers,
@@ -1066,7 +1054,7 @@ class UserUpdate(OnlyYouMixin, generic.UpdateView):
     """ユーザー情報更新ページ"""
     model = User
     form_class = UserUpdateForm
-    template_name = 'sensei_app/register/user_update.html'  # デフォルトユーザーを使う場合に備え、きちんとtemplate名を書く
+    template_name = 'sensei_app/UserInfo/Change/user_update.html'  # デフォルトユーザーを使う場合に備え、きちんとtemplate名を書く
 
     def get_success_url(self):
         return resolve_url('sensei_app:user_detail', pk=self.kwargs['pk'])
@@ -1075,37 +1063,37 @@ class PasswordChange(PasswordChangeView):
     """パスワード変更ビュー"""
     form_class = MyPasswordChangeForm
     success_url = reverse_lazy('sensei_app:password_change_done')
-    template_name = 'sensei_app/register/password_change.html'
+    template_name = 'sensei_app/UserInfo/Change/password_change.html'
 
 class PasswordChangeDone(PasswordChangeDoneView):
     """パスワード変更しました"""
-    template_name = 'sensei_app/register/password_change_done.html'
+    template_name = 'sensei_app/UserInfo/Change/password_change_done.html'
 
 class PasswordReset(PasswordResetView):
     """パスワード変更用URLの送付ページ"""
     subject_template_name = 'sensei_app/mail_template/password_reset/subject.txt'
     email_template_name = 'sensei_app/mail_template/password_reset/message.txt'
-    template_name = 'sensei_app/register/password_reset_form.html'
+    template_name = 'sensei_app/UserInfo/Change/password_reset_form.html'
     form_class = MyPasswordResetForm
     success_url = reverse_lazy('sensei_app:password_reset_done')
 
 class PasswordResetDone(PasswordResetDoneView):
     """パスワード変更用URLを送りましたページ"""
-    template_name = 'sensei_app/register/password_reset_done.html'
+    template_name = 'sensei_app/UserInfo/Change/password_reset_done.html'
 
 class PasswordResetConfirm(PasswordResetConfirmView):
     """新パスワード入力ページ"""
     form_class = MySetPasswordForm
     success_url = reverse_lazy('sensei_app:password_reset_complete')
-    template_name = 'sensei_app/register/password_reset_confirm.html'
+    template_name = 'sensei_app/UserInfo/Change/password_reset_confirm.html'
 
 class PasswordResetComplete(PasswordResetCompleteView):
     """新パスワード設定しましたページ"""
-    template_name = 'sensei_app/register/password_reset_complete.html'
+    template_name = 'sensei_app/UserInfo/Change/password_reset_complete.html'
 
 class EmailChange(LoginRequiredMixin, generic.FormView):
     """メールアドレスの変更"""
-    template_name = 'sensei_app/register/email_change_form.html'
+    template_name = 'sensei_app/UserInfo/Change/email_change_form.html'
     form_class = EmailChangeForm
 
     def form_valid(self, form):
@@ -1131,11 +1119,11 @@ class EmailChange(LoginRequiredMixin, generic.FormView):
 
 class EmailChangeDone(LoginRequiredMixin, generic.TemplateView):
     """メールアドレスの変更メールを送ったよ"""
-    template_name = 'sensei_app/register/email_change_done.html'
+    template_name = 'sensei_app/UserInfo/Change/email_change_done.html'
 
 class EmailChangeComplete(LoginRequiredMixin, generic.TemplateView):
     """リンクを踏んだ後に呼ばれるメアド変更ビュー"""
-    template_name = 'sensei_app/register/email_change_complete.html'
+    template_name = 'sensei_app/UserInfo/Change/email_change_complete.html'
     timeout_seconds = getattr(settings, 'ACTIVATION_TIMEOUT_SECONDS', 60 * 60 * 24)  # デフォルトでは1日以内
 
     def get(self, request, **kwargs):

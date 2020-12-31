@@ -1,1 +1,126 @@
-.navbar_wrapper{background-color:#d0d0d0;overflow-x:hidden;z-index:2;position:relative;position:fixed;width:100%;transition:top 0.5s}.navbar_wrapper .navbar{width:95vw;height:5em;margin:0 auto;display:flex;justify-content:space-between;align-items:center}.navbar_wrapper .navbar .navbar_logo{width:20%;height:100%}.navbar_wrapper .navbar .navbar_logo .logo_img{object-fit:contain;max-height:100%}.navbar_wrapper .navbar .navbar_list{width:80%;display:inline-block}.navbar_wrapper .navbar .navbar_list .navbar_item{display:inline-block;height:100%;margin-right:0.5em}.navbar_wrapper .navbar .navbar_list .navbar_item a{display:inline-block;color:#737373;font-size:1.4rem;height:100%;padding:1em 0.2em;transition:0.4s;border-bottom:1px solid rgba(5,71,54,0)}.navbar_wrapper .navbar .navbar_list .navbar_item a:hover{background-color:white;transition:0.2s;border-radius:0}.navbar_wrapper .navbar .navbar_button{display:none;padding:0.2em 0.4em;border-radius:1px}.navbar_wrapper .navbar .fa-bars{color:white;font-size:1.6rem}.navbar_list_collapse{transform:translateY(-100%);transition:0.5s;z-index:3;position:relative;padding-top:3em;padding-bottom:3em;background-color:#fff}.navbar_list_collapse .navbar_item_collapse{text-align:center;margin-bottom:1em}.navbar_list_collapse .navbar_item_collapse a{margin:0 auto;display:block;width:80%;padding:0 0.5em;border-bottom:1px solid grey}.navbar_list_collapse .navbar_item_collapse a:hover{border-bottom:1px solid #f66}.menu_drop{transform:translateX(0);transition:0.5s;display:block}@media screen and (max-width: 800px){.navbar{height:4em !important}.navbar_list{display:none !important}.navbar_button{display:inline-block !important}}
+.navbar_wrapper {
+  background-color: #d0d0d0;
+  overflow-x: hidden;
+  z-index: 2;
+  position: relative;
+  position: fixed;
+  width: 100%;
+  -webkit-transition: top 0.5s;
+  transition: top 0.5s;
+}
+
+.navbar_wrapper .navbar {
+  width: 95vw;
+  height: 5em;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar_wrapper .navbar .navbar_logo {
+  width: 20%;
+  height: 100%;
+}
+
+.navbar_wrapper .navbar .navbar_logo .logo_img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  max-height: 100%;
+}
+
+.navbar_wrapper .navbar .navbar_list {
+  width: 80%;
+  display: inline-block;
+}
+
+.navbar_wrapper .navbar .navbar_list .navbar_item {
+  display: inline-block;
+  height: 100%;
+  margin-right: 0.5em;
+}
+
+.navbar_wrapper .navbar .navbar_list .navbar_item a {
+  display: inline-block;
+  color: #737373;
+  font-size: 1.4rem;
+  height: 100%;
+  padding: 1em 0.2em;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-bottom: 1px solid rgba(5, 71, 54, 0);
+}
+
+.navbar_wrapper .navbar .navbar_list .navbar_item a:hover {
+  background-color: white;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border-radius: 0;
+}
+
+.navbar_wrapper .navbar .navbar_button {
+  display: none;
+  padding: 0.2em 0.4em;
+  border-radius: 1px;
+}
+
+.navbar_wrapper .navbar .fa-bars {
+  color: white;
+  font-size: 1.6rem;
+}
+
+.navbar_list_collapse {
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  z-index: 3;
+  position: relative;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background-color: white;
+}
+
+.navbar_list_collapse .navbar_item_collapse {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.navbar_list_collapse .navbar_item_collapse a {
+  margin: 0 auto;
+  display: block;
+  width: 80%;
+  padding: 0 0.5em;
+  border-bottom: 1px solid grey;
+}
+
+.navbar_list_collapse .navbar_item_collapse a:hover {
+  border-bottom: 1px solid #ff6666;
+}
+
+.menu_drop {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  display: block;
+}
+
+@media screen and (max-width: 800px) {
+  .navbar {
+    height: 4em !important;
+  }
+  .navbar_list {
+    display: none !important;
+  }
+  .navbar_button {
+    display: inline-block !important;
+  }
+}
+/*# sourceMappingURL=navbar.min.css.map */

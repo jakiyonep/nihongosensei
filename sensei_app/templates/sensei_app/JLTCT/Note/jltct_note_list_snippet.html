@@ -1,0 +1,20 @@
+{% load static %}
+
+<div class="notes_container">
+	{% for note in note_list %}
+		<div class="note_container {% if request.user in note.likes.all %}liked_one{% endif %}">
+			<a class="note_title" href="{% url "sensei_app:note_detail" note.title_slug %}">{{note.title}}</a>
+			<div class="category_container">
+				<a class="category" href="{% url "sensei_app:category_notes" note.category.category_slug %}">{{note.category.category}}</a>
+			</div>
+		</div><!-- /.note_contaier -->
+	{% endfor %}	
+</div><!-- /.notes_container -->
+
+
+<script type="text/javascript">
+	$(document).on('click', '.section_name', function(event){
+		var id = $(this).attr('id')
+		$('.' + id + '_collapse').slideToggle('fast')
+	})
+</script>

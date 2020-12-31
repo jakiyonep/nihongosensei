@@ -1,0 +1,39 @@
+@import "color_list.scss";
+@import "class_list.scss";
+
+.pagination{
+  width: 100%;
+  text-align: center;
+  .pagination_ul{
+    width: 100%;
+    display: inline-block;
+    .page_link{
+      display: inline-block;
+      background-color: $strong-green;
+      padding: 0.5rem;
+      color: white;
+      border-radius: 0.2rem;
+    }
+    .other_page{
+      transition: 0.2s;
+      &:hover{
+        background-color: $strong-hover-green;
+        transition: 0.2s;
+      }
+    }
+    .current_page{
+      background-color: $border-primary;      
+    }
+  }
+}
+
+@media screen and (max-width: 650px){
+  .pagination{
+    .pagination_ul{
+      .page_link{
+        padding: 0.5rem 0.3rem;
+        margin: 0;
+      }
+    }
+  }
+}

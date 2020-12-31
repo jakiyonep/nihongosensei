@@ -1,0 +1,68 @@
+@import "color_list.scss";
+@import "class_list.scss";
+
+.material_wrapper{
+  .left_column{
+    .materials_container{
+      .material_container{
+        margin-bottom: 2rem;
+        border: 1px solid $border-secondary;
+        padding: 1rem;
+        .material_top{
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          margin-bottom: 1rem;
+          border-bottom: 1px solid $border-secondary;
+          .material_title{            
+            font-size: 1.2rem;
+            max-width: 75%;
+          }
+          .download_button{
+            /* design css in common_new.scss*/
+          }
+          .download_button_small{
+            display: none;
+          }
+        }
+        .meta_info{
+        }
+        .material_desc{
+          margin-top: 1rem;
+          background-color: $light-bg-bolor;
+          font-size: 0.8rem;
+          padding: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1100px){
+  .material_wrapper{
+    .left_column{
+      .materials_container{
+        .material_container{
+          .material_top{
+            .material_title{
+              width: 100%;
+            }
+            .download_button{
+              display: none;
+            }
+            .download_button_small{
+              display: inline-block;
+            }            
+          }
+          .meta_info{            
+          }
+          .material_desc{            
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 650px){
+  
+}

@@ -1,5 +1,9 @@
 <div class="sidebar">
-	<a class="strong_button" href="{% url 'sensei_app:material_upload' %}">教材をアップロードする</a>
+	{% if user.is_authenticated %}
+		<a class="strong_button" href="{% url 'sensei_app:material_upload' %}">教材をアップロードする</a>
+	{% else %}
+		<a class="strong_button" href="{% url 'sensei_app:login' %}">教材をアップロードする</a>
+	{% endif %}
 
 	<form class="search_form" action="{% url "sensei_app:material_top" %}" method="get" accept-charset="utf-8">
 		<input class="search_form_input" type="text" name="q" value="{{ request.GET.q }}" placeholder="キーワード">
@@ -12,7 +16,7 @@
 			<div class="container">
 				{% for category in material_categories %}
 					{% if not category.num_materials == 0 %}
-						<a class="category" href="{% url 'sensei_app:material_category_list' category.category_slug %}">{{ category }} <span class="category_num">{{category.num_materials}}</span></a>
+						<a class="category" href="{% url 'sensei_app:material_category_list' category.category_slug %}">{{ category }} <span class="num category_num">{{category.num_materials}}</span></a>
 					{% endif %}
 				{% endfor %}
 			</div>
@@ -22,7 +26,7 @@
 			<div class="container tags">
 				{% for tag in material_tags %}
 					{% if not tag.num_materials == 0 %}
-						<a class="tag" href="{% url 'sensei_app:material_tag_list' tag.tag_slug %}">{{ tag }} <span class="tag_num">{{tag.num_materials}}</span></a>
+						<a class="tag" href="{% url 'sensei_app:material_tag_list' tag.tag_slug %}">{{ tag }} <span class="num tag_num">{{tag.num_materials}}</span></a>
 					{% endif %}
 				{% endfor %}
 			</div>
