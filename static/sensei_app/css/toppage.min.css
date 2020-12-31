@@ -27,7 +27,7 @@
 
 .toppage_wrapper .card_container .toppage_card {
   margin-bottom: 4rem;
-  border: 1px solid #dad8d8;
+  border: 1px solid #e6e6e6;
   padding: 1rem;
   border-radius: 0.5rem;
   width: 90%;
@@ -46,7 +46,7 @@
 }
 
 .toppage_wrapper .card_container .toppage_card .card_img {
-  width: 60%;
+  max-width: 60%;
 }
 
 .toppage_wrapper .card_container .toppage_card .card_img img {
@@ -99,6 +99,27 @@
   }
   .toppage_wrapper .card_container .toppage_card {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .toppage_wrapper .card_container .toppage_card .card_img {
+    width: 100%;
+  }
+  .toppage_wrapper .card_container .toppage_card .card_img img {
+    height: 20vh;
+  }
+  .toppage_wrapper .card_container .toppage_card .card_right {
+    width: 100%;
+    text-align: right;
+  }
+  .toppage_wrapper .card_container .toppage_card .card_right .card_top {
+    font-size: 1.3rem;
   }
   .toppage_wrapper .card_empty {
     display: none;

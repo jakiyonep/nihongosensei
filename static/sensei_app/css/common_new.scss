@@ -16,10 +16,13 @@ html {
     font-family: a-otf-ud-shin-maru-go-pr6n,sans-serif;
     font-weight: 300;
     font-style: normal;
-    font-size: 1rem;
+    font-size: 1.05rem;
     box-sizing: border-box;
     color: $base-font-color;
-    line-height: 1.2rem;
+    word-break: break-all;
+}
+p, h1, h2, h3, h4{
+    line-height: 1.5rem;
 }
 
 img { 
@@ -107,6 +110,7 @@ li {
                 width: 100%;
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
 
                 .search_form_input {
                     width: 100%;
@@ -501,6 +505,9 @@ li {
         margin-top: 1rem;
         background-color: $light-bg-bolor;
         padding: 0.5rem;
+        p{
+            font-size: 0.9rem;            
+        }
     }
 }
 
@@ -540,18 +547,18 @@ li {
     margin: 1rem 0 1rem 0;
     padding: 1rem 0 1rem 0;
     &>*{
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;       
     }
     h2, h3, h4{
         font-size: 1.2rem;
-        margin-top: 2rem;
+        margin-top: 4rem;
         margin-bottom: 2rem;
-        font-weight: 800;
     }
     h2{
         background-color: $border-primary;
         color: white;
-        padding: 0.5rem 0;
+        padding: 0.5rem 1rem;
+        margin-top: 5rem;
     }
     h3{
         border: 1px solid $border-primary;
@@ -564,7 +571,7 @@ li {
         padding-left: 0.5rem;
     }
     p{
-        line-height: 1.5rem;
+        line-height: 2rem;
     }
     strong{
         border-bottom: 0.1rem solid $strong-red;
@@ -572,7 +579,28 @@ li {
     img{
         box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem $border-secondary;
     }
+    a{
+        color: $strong-blue;
+        transition: 0.2s;
+        &:hover{
+            transition: 0.2s;
+            color: $strong-hover-blue;
+        }
+    }
+    blockquote{
+        background-color: $quote-color;
+        padding: 0.5rem;
+        &::before{
+            @extend .fontawesome_before;
+            content: "\f10d"
 
+        }
+    }   
+    ol{
+        li{
+            list-style-type: decimal;
+        }
+    }
     .toc{
         border: 2px solid $weak-blue;
         padding: 1rem 0.5rem;
@@ -614,19 +642,21 @@ li {
         }
     }
     .point{
-        border: 2px solid $strong-red;
+        border: 2px solid $weak-red;
+        border-radius: 0.2rem;
         padding: 1rem 0.5rem;
         position: relative;
         margin: 2rem 0;
-        &::before{
+        &::before{ 
             content: "Point!";
             position: absolute;
-            top: -0.5rem;
+            top: -0.8rem;
             left: -0.5rem;
-            background-color: $strong-red;
+            background-color: $weak-red;
             color: white;
             padding: 0.2rem;
-            transform: rotate(-6deg);
+            transform: rotate(-4deg);
+            border-radius: 0.3rem;
         }
         li{
             &:last-child{
@@ -637,11 +667,16 @@ li {
     /* exp */
     .bun{
         width: fit-content;
-        background-color: $light-bg-bolor;
+        background-color: $bun-bolor;
         padding: 0.5rem 1rem;
+        font-style: italic;
+        &>*{
+            font-style: italic;
+        }
         em, strong{
             border-bottom: 0.1rem solid $border-primary;
             font-weight: normal;
+
         }
     }
     .answer_exp_container{

@@ -7,5 +7,11 @@
 		<p><span class="category">{{selected_category}}</span>に関する{{service_name}}</p>
 	{% elif selected_tag %}
 		<p><span class="tag">{{selected_tag}}</span>に関する{{service_name}}</p>
+	{% elif all_questions_of_user == 1%}
+		<a class="user" href="{% url 'sensei_app:activities_of_user' user.pk %}">
+			{{user.nickname}}</a>さんの質問
+	{% elif all_answers_of_user == 1 %}
+		<a class="user" href="{% url 'sensei_app:activities_of_user' user.pk %}">
+		{{user.nickname}}</a>さんが回答した質問
 	{% endif %}
 </div>

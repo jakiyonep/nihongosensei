@@ -262,6 +262,39 @@
           }
         }
       }
+      .related_exp{
+        display: flex;
+        flex-wrap: wrap;
+        .left, .right{
+          width: 100%;
+          border: 1px solid $border-secondary;
+          padding: 0.5rem 2rem;
+          transition: 0.2s;
+          &:hover{
+            transition: 0.2s;
+            background-color: $border-primary;
+            &>*{
+              &>*{
+                transition: 0.2s;
+                color: white;
+              }
+            }
+          }
+          .exam_question_num_head{
+            display: flex;
+            align-items: center;        
+            i{
+              width: 2rem;
+              text-align: center
+            }
+          }
+        }
+        .right{;
+          .exam_question_num_head{
+            flex-direction: row-reverse;
+          }
+        }
+      }
     }
   }
 }

@@ -22,7 +22,7 @@
         transition: 0.2s;
       }      
       .card_img{
-        width: 60%;
+        max-width: 60%;
         img{
           max-height: 25vh;
           max-width: 100%;
@@ -61,12 +61,20 @@
       }
       .toppage_card{
         width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         .card_img{
+          width: 100%;
           img{
+            height: 20vh;
           }        
         }
         .card_right{
+          width: 100%;
+          text-align: right;
           .card_top{
+            font-size: 1.3rem;
           }
           .card_desc{
           }

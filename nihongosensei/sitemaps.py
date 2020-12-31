@@ -51,6 +51,20 @@ class ExamSitemap(Sitemap):
     def lastmod(self, obj):
         return obj.updated
 
+class BlogSitemap(Sitemap):
+    changefreq = "daily"
+    priority = 0.8
+
+    def items(self):
+        return Blog.objects.all()
+
+    # モデルに get_absolute_url() が定義されている場合は不要
+    def location(self, obj):
+        return resolve_url('sensei_app:blog_detail', pk=obj.pk)
+
+    def lastmod(self, obj):
+        return obj.updated_at
+
 class UserSitemap(Sitemap):
     """
     静的ページのサイトマップ

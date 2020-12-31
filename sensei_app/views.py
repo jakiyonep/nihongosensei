@@ -1009,7 +1009,7 @@ def ActivitiesOfUser(request, pk):
         'all_answers_num': all_answers_num,
     }
 
-    return render(request, 'sensei_app/activities_of_user.html', context)
+    return render(request, 'sensei_app/UserInfo/activities_of_user.html', context)
 
 def AllQuestionsofUser(request, pk):
     login_author = get_object_or_404(User, pk=pk)
@@ -1028,6 +1028,7 @@ def AllQuestionsofUser(request, pk):
         'page_obj': page_obj,
         'num': num,
         'paginator': paginator,
+        'all_questions_of_user': 1,
     })
 
 def AllAnswersofUser(request, pk):
@@ -1048,6 +1049,7 @@ def AllAnswersofUser(request, pk):
         'page_obj': page_obj,
         'num': num,
         'paginator':paginator,
+        'all_answers_of_user':1,
     })
 
 class UserUpdate(OnlyYouMixin, generic.UpdateView):

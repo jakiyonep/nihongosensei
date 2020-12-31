@@ -26,6 +26,7 @@ from .sitemaps import (
     ExamSitemap,
     UserSitemap,
     StaticViewSitemap,
+    BlogSitemap,
 )
 
 sitemaps = {
@@ -34,6 +35,7 @@ sitemaps = {
     'static': StaticViewSitemap,
     'jltct': JltctNoteSitemap,
     'exam': ExamSitemap,
+    'blog':BlogSitemap,
 }
 
 urlpatterns = [

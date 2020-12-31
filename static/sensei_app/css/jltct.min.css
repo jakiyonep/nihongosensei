@@ -31,7 +31,7 @@
 }
 
 .jltct_wrapper .left_column .subsection_exp .year_section .exam_year_container {
-  border: 1px solid #dad8d8;
+  border: 1px solid #e6e6e6;
   padding: 0.5rem;
 }
 
@@ -52,7 +52,7 @@
 
 .jltct_wrapper .left_column .subsection_exp .year_section .exam_year_container .exam_section_container .exam_section_head {
   margin-bottom: 1;
-  border-bottom: 1px solid #dad8d8;
+  border-bottom: 1px solid #e6e6e6;
   padding: 0.1rem 0.2rem;
 }
 
@@ -94,7 +94,7 @@
   width: 100%;
   margin-bottom: 1rem;
   display: block;
-  border: 1px solid #dad8d8;
+  border: 1px solid #e6e6e6;
   padding: 0.5rem;
 }
 
@@ -119,7 +119,7 @@
 }
 
 .jltct_wrapper .left_column .subsection_exp .search_exps_container .search_exp_container .info_container .info {
-  background-color: whitesmoke;
+  background-color: #fafafa;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -133,7 +133,7 @@
 
 .jltct_wrapper .left_column .subsection_countdown .countdown_container input {
   width: 3rem;
-  border: 1px solid #dad8d8;
+  border: 1px solid #e6e6e6;
 }
 
 .jltct_wrapper .left_column .subsection_countdown .countdown_container span {
@@ -153,7 +153,7 @@
 }
 
 .jltct_wrapper .left_column .note_detail .note_top {
-  background-color: whitesmoke;
+  background-color: #fafafa;
   padding: 0.5rem;
 }
 
@@ -184,7 +184,7 @@
 }
 
 .jltct_wrapper .left_column .exp_detail_fixed_menu::-webkit-scrollbar-thumb {
-  background-color: #dad8d8;
+  background-color: #e6e6e6;
 }
 
 .jltct_wrapper .left_column .exp_detail_fixed_menu .left_side_menu {
@@ -309,15 +309,64 @@
 }
 
 .jltct_wrapper .left_column .exp_detail .question_num_smalls_container .question_num_small_container .difficulty .difficulty_1 {
-  background-color: #646ce2;
+  background-color: #7e86f5;
 }
 
 .jltct_wrapper .left_column .exp_detail .question_num_smalls_container .question_num_small_container .difficulty .difficulty_2 {
-  background-color: #64ca7a;
+  background-color: #75c486;
 }
 
 .jltct_wrapper .left_column .exp_detail .question_num_smalls_container .question_num_small_container .difficulty .difficulty_3 {
-  background-color: #eb7a72;
+  background-color: #ce7a74;
+}
+
+.jltct_wrapper .left_column .exp_detail .related_exp {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.jltct_wrapper .left_column .exp_detail .related_exp .left, .jltct_wrapper .left_column .exp_detail .related_exp .right {
+  width: 100%;
+  border: 1px solid #e6e6e6;
+  padding: 0.5rem 2rem;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.jltct_wrapper .left_column .exp_detail .related_exp .left:hover, .jltct_wrapper .left_column .exp_detail .related_exp .right:hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #8b8b8b;
+}
+
+.jltct_wrapper .left_column .exp_detail .related_exp .left:hover > * > *, .jltct_wrapper .left_column .exp_detail .related_exp .right:hover > * > * {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  color: white;
+}
+
+.jltct_wrapper .left_column .exp_detail .related_exp .left .exam_question_num_head, .jltct_wrapper .left_column .exp_detail .related_exp .right .exam_question_num_head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.jltct_wrapper .left_column .exp_detail .related_exp .left .exam_question_num_head i, .jltct_wrapper .left_column .exp_detail .related_exp .right .exam_question_num_head i {
+  width: 2rem;
+  text-align: center;
+}
+
+.jltct_wrapper .left_column .exp_detail .related_exp .right .exam_question_num_head {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
 }
 
 @media screen and (max-width: 1100px) {

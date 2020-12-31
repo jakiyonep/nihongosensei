@@ -14,12 +14,9 @@
 	</div><!-- /.navbar -->
 	<div class="wrapper question_list_wrapper all_wrapper">
 		<p class="section_head">
-			{% if user.nickname %}
-				<a class="login_author_link" href="{% url 'sensei_app:activities_of_user' user.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{user.nickname}}</a>さんの質問
-			{% else %}
-				あなたの質問
-			{% endif %}
+			みんなの質問
 		</p>
+		{% include "sensei_app/result.html" %}
 		<div class="left_column">
 			<div class="questions">
 				{% include "sensei_app/Question/question_list_snippet.html" %}
@@ -30,5 +27,6 @@
 			{% include "sensei_app/Question/sidebar.html" %}
 		</div>
 	</div>
+	
 </body>
 {% endblock %}

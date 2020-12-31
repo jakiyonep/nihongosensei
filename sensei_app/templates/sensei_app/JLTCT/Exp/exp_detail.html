@@ -200,29 +200,27 @@
 			</div>
 			{% endif %}
 			<div class="related_exp">
-				<div class="related_exp_container">
-					<div class="left">
-						{% if section_beginning == 0 %}
-							<a href="{% url 'sensei_app:exp_detail' year=year section=section question_num=question_num_previous %}" class="exam_question_num_head">
-								<i class="fas fa-arrow-left"></i><span>{{year}}/試験{{section_roman}}/問題{{question_num_previous}}</span>
-							</a>
-						{% else %}
-							<div class="none">
-								<span>---</span>
-							</div>
-						{% endif %}
-					</div>
-					<div class="right">
-						{% if section_end == 0 %}
-							<a href="{% url 'sensei_app:exp_detail' year=year section=section question_num=question_num_next %}" class="exam_question_num_head">
-								<i class="fas fa-arrow-right"></i><span>{{year}}/試験{{section_roman}}/問題{{question_num_next}}</span>
-							</a>
-						{% else %}
-							<div class="none">
-								<span>---</span>
-							</div>
-						{% endif %}
-					</div>
+				<div class="left">
+					{% if section_beginning == 0 %}
+						<a href="{% url 'sensei_app:exp_detail' year=year section=section question_num=question_num_previous %}" class="exam_question_num_head">
+							<i class="fas fa-arrow-left"></i><span>{{year}}/試験{{section_roman}}/問題{{question_num_previous}}</span>
+						</a>
+					{% else %}
+						<div class="none">
+							<span>---</span>
+						</div>
+					{% endif %}
+				</div>
+				<div class="right">
+					{% if section_end == 0 %}
+						<a href="{% url 'sensei_app:exp_detail' year=year section=section question_num=question_num_next %}" class="exam_question_num_head">
+							<i class="fas fa-arrow-right"></i><span>{{year}}/試験{{section_roman}}/問題{{question_num_next}}</span>
+						</a>
+					{% else %}
+						<div class="none">
+							<span>---</span>
+						</div>
+					{% endif %}
 				</div>
 			</div>
 		</div><!-- /.exp_detail -->
@@ -235,16 +233,15 @@
 
 
 
-<script type="text/javascript">
-	$(document).on('click', '.exam_section_head', function(event){
-		var target = $(this).attr('id')
-		$('#year_' + target + '_collapse').slideToggle('fast')
-	})
-</script>
+	<script type="text/javascript">
+		$(document).on('click', '.exam_section_head', function(event){
+			var target = $(this).attr('id')
+			$('#year_' + target + '_collapse').slideToggle('fast')
+		})
+	</script>
 
-<script type="text/javascript">
-
-</script>
+	<script type="text/javascript">
+	</script>
 
 </body>
 {% endblock %}

@@ -11,64 +11,73 @@
 	<div class="navbar">
 		{% include 'sensei_app/navbar.html' %}
 	</div><!-- /.navbar -->
-	<div class="wrapper user_info_wrapper">
-		<div class="left_column user_info_left_column">
-		<p class="section_head">
-			{% if user.nickname %}
-				{{user.nickname}}さんのページ
-			{% else %}
-				名無しさんのページ
-			{% endif %}
-		</p>
-			<div class="user_info_top">
-				<div class="user_info">
-				<div class="user_info_row">
-					<div class="user_info_left">
-						ニックネーム
+		<div class="wrapper user_info_wrapper">
+		<div class="left_column">
+			<p class="section_head">
+				{% if  user.nickname%}
+					{{user.nickname}}さんのページ
+				{% else %}
+					ななしさんのページ
+				{% endif %}
+			</p>
+			<div class="subsection subsection_user_info">
+				<p class="subsection_head">ユーザー情報</p>
+				<div class="user_info_top">
+					<div class="user_info_row">
+						<div class="user_info_left">
+							ニックネーム
+						</div>
+						<div class="user_info_right">
+							{{user.nickname}}
+						</div>
 					</div>
-					<div class="user_info_right">
-						{{user.nickname}}
+					<div class="user_info_row">
+						<div class="user_info_left">
+							登録日
+						</div>
+						<div class="user_info_right">
+							{{user.date_joined|date:'Y-m-d'}}
+						</div>
 					</div>
-				</div>
-				<div class="user_info_row">
-					<div class="user_info_left">
-						登録日
+					<div class="user_info_row">
+						<div class="user_info_left">
+							質問数
+						</div>
+						<div class="user_info_right">
+							{{user.login_author.count}}
+						</div>
 					</div>
-					<div class="user_info_right">
-						{{user.date_joined|date:'Y-m-d'}}
+					<div class="user_info_row">
+						<div class="user_info_left">
+							回答数
+						</div>
+						<div class="user_info_right">
+							{{user.login_author_answer.count}}
+						</div>
 					</div>
-				</div>
-				<div class="user_info_row">
-					<div class="user_info_left">
-						質問数
+					<div class="user_info_row">
+						<div class="user_info_left">
+							いいねした検定試験ノート
+						</div>
+						<div class="user_info_right">
+							{{user.liked_notes.count}}
+						</div>
 					</div>
-					<div class="user_info_right">
-						{{user.login_author.count}}
-					</div>
-				</div>
-				<div class="user_info_row">
-					<div class="user_info_left">
-						回答数
-					</div>
-					<div class="user_info_right">
-						{{user.login_author_answer.count}}
-					</div>
-				</div>
-			</div>
-			</div>
-			<div class="user_info_list question_list_wrapper">
-				<p class="section_head">
+				</div><!--/.user_info_top-->
+			</div><!-- /.user_info_container -->
+			<div class="subsection subsection_question">
+				<p class="subsection_head">
 					{% if user.nickname %}
-						{{user.nickname}}さんの質問・回答
+						{{user.nickname}}の質問・回答
 					{% else %}
-						あなたの質問
+						名無しさんの質問
 					{% endif %}
 				</p>
-				<div class="question_answer_container">
+				<div class="buttons">
 					<button type="button" class="question_answer_button button_active" id="question_active">投稿した質問</button>
 					<button type="button" class="question_answer_button button_inactive" id="answer_active">回答した質問</button>
 				</div>
-				<div class="questions question_collapse">
+				<div class="collapse_container question_collapse">
 					{% if all_questions_num == 0 %}
 						まだ質問をしていません
 					{% else %}
@@ -78,7 +87,7 @@
 						<a class="more_button" href="{% url 'sensei_app:all_questions_of_user' user.pk %}">もっとみる</a>
 					{% endif %}
 				</div>
-				<div class="questions answer_collapse">
+				<div class="collapse_container answer_collapse">
 					{% if all_answers_num == 0 %}
 						まだ回答をしていません
 					{% else %}
@@ -89,10 +98,13 @@
 					{% endif %}
 				</div>
 			</div>
-		<div class="right_column user_info_right_column">
+		</div><!-- left_column end -->
+		<div class="right_column">
 
 		</div>
 	</div>
+
+
 	<script type="text/javascript">
 		$(document).on('click', '.button_inactive', function(event){
 			$('.button_active').addClass('button_inactive')
@@ -104,12 +116,13 @@
 
 			if(question_or_answer == 'question_active'){
 				$('.answer_collapse').css('display', 'none')
-				$('.question_collapse').css('display', 'flex')
+				$('.question_collapse').css('display', 'block')
 			}else if(question_or_answer == "answer_active"){
 				$('.question_collapse').css('display', 'none')
-				$('.answer_collapse').css('display', 'flex')
+				$('.answer_collapse').css('display', 'block')
 			}
 		})
 	</script>
+
 </body>
 {% endblock %}

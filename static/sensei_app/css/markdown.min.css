@@ -1,0 +1,101 @@
+/* bg */
+/* border */
+/* font */
+/* highlight */
+/* difficulty */
+/* others */
+/* bg */
+/* border */
+/* font */
+/* highlight */
+/* difficulty */
+/* others */
+.fontawesome_before {
+  font-family: "Font Awesome 5 Free";
+  display: inline-block;
+  font-weight: 900;
+  color: #8b8b8b;
+}
+
+.green_hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #d1f8d3;
+  cursor: pointer;
+}
+
+.markdown_exp_wrapper .markdown_explanation {
+  margin-bottom: 4rem;
+}
+
+.markdown_exp_wrapper .htmltags_container .htmltag {
+  margin-bottom: 2rem;
+}
+
+.markdown_exp_wrapper .htmltags_container .htmltag .upper .htmltag_name {
+  margin-bottom: 1rem;
+}
+
+.markdown_exp_wrapper .htmltags_container .htmltag .upper .htmltag_name span {
+  border: 1px solid #8b8b8b;
+  padding: 0.2rem 0.4rem;
+}
+
+.markdown_exp_wrapper .htmltags_container .htmltag .bottom {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.markdown_exp_wrapper .htmltags_container .htmltag .bottom .left, .markdown_exp_wrapper .htmltags_container .htmltag .bottom .right {
+  background-color: #fafafa;
+  padding: 1rem;
+  width: 40%;
+}
+
+.markdown_exp_wrapper .htmltags_container .htmltag .bottom .middle > * {
+  font-size: 1.5rem;
+}
+
+.markdown_exp_wrapper .htmltags_container .htmltag .bottom .middle .fa-arrow-down {
+  display: none;
+}
+
+@media screen and (max-width: 650px) {
+  .markdown_exp_wrapper .htmltags_container .htmltag .bottom {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .markdown_exp_wrapper .htmltags_container .htmltag .bottom .left {
+    width: 100%;
+  }
+  .markdown_exp_wrapper .htmltags_container .htmltag .bottom .middle {
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .markdown_exp_wrapper .htmltags_container .htmltag .bottom .middle .fa-arrow-right {
+    display: none;
+  }
+  .markdown_exp_wrapper .htmltags_container .htmltag .bottom .middle .fa-arrow-down {
+    display: block;
+  }
+  .markdown_exp_wrapper .htmltags_container .htmltag .bottom .right {
+    width: 100%;
+  }
+}
+/*# sourceMappingURL=markdown.min.css.map */

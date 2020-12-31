@@ -1,0 +1,92 @@
+@import "color_list.scss";
+@import "class_list.scss";
+
+.markdown_exp_wrapper{
+  .markdown_explanation{
+    margin-bottom: 4rem;
+  }
+  .htmltags_container{
+    .htmltag{
+      margin-bottom: 2rem;
+      .upper{
+        .htmltag_name{
+          margin-bottom: 1rem;
+          span{
+            border: 1px solid $border-primary;
+            padding: 0.2rem 0.4rem;
+          }
+        }
+        .htmltag_exp{          
+        }
+      }
+      .bottom{
+        margin-top: 1rem;
+        padding: 0.5rem;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+        .left, .right{
+          background-color: $light-bg-bolor;
+          padding: 1rem;
+          width: 40%;
+        }        
+        .left{
+        }
+        .middle{
+          &>*{
+            font-size: 1.5rem;
+          }
+          .fa-arrow-down{
+            display: none;
+          }
+        }
+        .right{
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 650px){
+  .markdown_exp_wrapper{
+    .htmltags_container{
+      .htmltag{
+        .upper{
+          .htmltag_name{
+            span{
+
+            }
+          }
+          .htmltag_exp{
+
+          }
+        }
+        .bottom{
+          flex-wrap: wrap;
+          justify-content: center;          
+          .left{
+            width: 100%;
+          }
+          .middle{
+            width: 100%;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            vertical-align: middle;
+            .fa-arrow-right{
+              display: none;
+            }
+            .fa-arrow-down{
+              display: block;
+            }
+          }
+          .right{
+            width: 100%;
+
+          }
+        }
+      }
+    }
+  }
+} 

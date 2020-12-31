@@ -51,9 +51,7 @@
 									{% if blog.tag.all %}
 									<div class="tags">
 										{% for tag in blog.tag.all %}
-										<div class="tag">
-											<a href="{% url 'sensei_app:blog_tag_list' tag.tag_slug %}">{{tag.tag}}</a>
-										</div>
+										<a class="tag" href="{% url 'sensei_app:blog_tag_list' tag.tag_slug %}">{{tag.tag}}</a>
 										{% endfor %}
 									</div>
 									{% endif %}

@@ -12,7 +12,7 @@
 /* difficulty */
 /* others */
 .fontawesome_before, .like_button::before,
-.like_button_liked::before, .download_button::before, .user::before, .category::before, .tag::before, .date::before, .comment::before, .poll::before, .comment_section .comments .comments_container .replies_container .reply_container::before, .liked_one::before {
+.like_button_liked::before, .download_button::before, .user::before, .category::before, .tag::before, .date::before, .comment::before, .poll::before, .content blockquote::before, .comment_section .comments .comments_container .replies_container .reply_container::before, .liked_one::before {
   font-family: "Font Awesome 5 Free";
   display: inline-block;
   font-weight: 900;
@@ -39,11 +39,15 @@ html.wf-active {
   font-family: a-otf-ud-shin-maru-go-pr6n,sans-serif;
   font-weight: 300;
   font-style: normal;
-  font-size: 1rem;
+  font-size: 1.05rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   color: #4b4b4b;
-  line-height: 1.2rem;
+  word-break: break-all;
+}
+
+p, h1, h2, h3, h4 {
+  line-height: 1.5rem;
 }
 
 img {
@@ -61,7 +65,7 @@ select {
   width: 100%;
   background-color: white;
   font-family: 'sans-serif';
-  border: 1px solid #dad8d8;
+  border: 1px solid #e6e6e6;
 }
 
 input[type="text"]:focus,
@@ -149,6 +153,9 @@ li {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .wrapper .right_column .sidebar .search_form .search_form_input {
@@ -467,7 +474,7 @@ li {
   display: inline-block;
   margin-right: 0.3rem;
   margin-bottom: 0.3rem;
-  border-bottom: 1px solid #dad8d8;
+  border-bottom: 1px solid #e6e6e6;
   padding-bottom: 0.2rem;
   -webkit-transition: 0.2s;
   transition: 0.2s;
@@ -541,7 +548,7 @@ li {
 /* question_list */
 .question_container {
   margin-bottom: 2rem;
-  border: 1px solid #dad8d8;
+  border: 1px solid #e6e6e6;
   padding: 1rem;
 }
 
@@ -568,6 +575,10 @@ li {
   padding: 0.5rem;
 }
 
+.question_container .content_beginning p {
+  font-size: 0.9rem;
+}
+
 /* note_list */
 .notes_container {
   padding-left: 1rem;
@@ -584,7 +595,7 @@ li {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border: 1px solid #dad8d8;
+  border: 1px solid #e6e6e6;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -615,20 +626,20 @@ li {
 }
 
 .content > * {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .content h2, .content h3, .content h4 {
   font-size: 1.2rem;
-  margin-top: 2rem;
+  margin-top: 4rem;
   margin-bottom: 2rem;
-  font-weight: 800;
 }
 
 .content h2 {
   background-color: #8b8b8b;
   color: white;
-  padding: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  margin-top: 5rem;
 }
 
 .content h3 {
@@ -646,7 +657,7 @@ li {
 }
 
 .content p {
-  line-height: 1.5rem;
+  line-height: 2rem;
 }
 
 .content strong {
@@ -654,8 +665,33 @@ li {
 }
 
 .content img {
-  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem #dad8d8;
-          box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem #dad8d8;
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem #e6e6e6;
+          box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem #e6e6e6;
+}
+
+.content a {
+  color: #7dd5eb;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.content a:hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  color: #81e4fd;
+}
+
+.content blockquote {
+  background-color: #f0f0f0;
+  padding: 0.5rem;
+}
+
+.content blockquote::before {
+  content: "\f10d";
+}
+
+.content ol li {
+  list-style-type: decimal;
 }
 
 .content .toc {
@@ -685,7 +721,7 @@ li {
 
 .content .table table tbody tr th, .content .table table tbody tr td {
   padding: 0.5rem;
-  border: 1px solid #dad8d8;
+  border: 1px solid #e6e6e6;
   vertical-align: middle;
   font-size: 0.9rem;
 }
@@ -696,7 +732,8 @@ li {
 }
 
 .content .point {
-  border: 2px solid #f89f9f;
+  border: 2px solid #fad3d3;
+  border-radius: 0.2rem;
   padding: 1rem 0.5rem;
   position: relative;
   margin: 2rem 0;
@@ -705,13 +742,14 @@ li {
 .content .point::before {
   content: "Point!";
   position: absolute;
-  top: -0.5rem;
+  top: -0.8rem;
   left: -0.5rem;
-  background-color: #f89f9f;
+  background-color: #fad3d3;
   color: white;
   padding: 0.2rem;
-  -webkit-transform: rotate(-6deg);
-          transform: rotate(-6deg);
+  -webkit-transform: rotate(-4deg);
+          transform: rotate(-4deg);
+  border-radius: 0.3rem;
 }
 
 .content .point li:last-child {
@@ -722,8 +760,13 @@ li {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  background-color: #fafafa;
+  background-color: #f3f3f3;
   padding: 0.5rem 1rem;
+  font-style: italic;
+}
+
+.content .bun > * {
+  font-style: italic;
 }
 
 .content .bun em, .content .bun strong {
@@ -846,7 +889,7 @@ li {
 
 .poll_container .poll_vote_form .poll_options .poll_option {
   margin-bottom: 1rem;
-  border: 1px solid #dad8d8;
+  border: 1px solid #e6e6e6;
 }
 
 .poll_container .poll_vote_form .poll_options .poll_option .poll_option_button {
@@ -896,7 +939,7 @@ li {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border: 1px solid #dad8d8;
+  border: 1px solid #e6e6e6;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -908,9 +951,9 @@ li {
 
 .sort_container .sort_head {
   word-break: keep-all;
-  background-color: #dad8d8;
+  background-color: #e6e6e6;
   color: white;
-  border-right: 1px solid #dad8d8;
+  border-right: 1px solid #e6e6e6;
 }
 
 .sort_container .sort_select {

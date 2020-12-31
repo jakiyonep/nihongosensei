@@ -11,14 +11,11 @@
 	<div class="navbar">
 		{% include 'sensei_app/navbar.html' %}
 	</div><!-- /.navbar -->
-	<div class="wrapper question_list_wrapper all_wrapper">
+	<div class="wrapper question_list_wrapper all_wrapper">		
 		<p class="section_head">
-			{% if user.nickname %}
-				<a class="login_author_link" href="{% url 'sensei_app:activities_of_user' user.pk %}"><i class="fas fa-chalkboard-teacher"></i>{{user.nickname}}</a>さんが回答した質問
-			{% else %}
-				あなたの回答
-			{% endif %}
+			みんなの質問
 		</p>
+		{% include 'sensei_app/result.html' %}	
 		<div class="left_column">
 			<div class="questions">
 				{% include "sensei_app/Question/answer_list_snippet.html" %}
