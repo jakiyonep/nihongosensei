@@ -18,6 +18,13 @@
   color: #8b8b8b;
 }
 
+.green_hover {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #d1f8d3;
+  cursor: pointer;
+}
+
 .sitedesc_wrapper .sitedesc_container p {
   margin-bottom: 2rem;
 }

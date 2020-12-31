@@ -45,13 +45,13 @@
 }
 
 .user_info_wrapper .left_column .subsection_user_info .user_info_top .user_info_row > * {
-  border: 1px solid #dad8d8;
+  border: 1px solid #e6e6e6;
   padding: 0.3rem 0.5rem;
 }
 
 .user_info_wrapper .left_column .subsection_user_info .user_info_top .user_info_row .user_info_left {
   width: 40%;
-  background-color: whitesmoke;
+  background-color: #fafafa;
 }
 
 .user_info_wrapper .left_column .subsection_user_info .user_info_top .user_info_row .user_info_right {

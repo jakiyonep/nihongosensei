@@ -138,7 +138,7 @@
     -webkit-transform: translateY(-100%);
             transform: translateY(-100%);
     text-align: center;
-    background-color: whitesmoke;
+    background-color: #fafafa;
     padding: 2rem 0;
     -webkit-transition: 0.5s;
     transition: 0.5s;

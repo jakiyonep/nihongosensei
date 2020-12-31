@@ -43,7 +43,7 @@
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  border: 1px solid #dad8d8;
+  border: 1px solid #e6e6e6;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -60,7 +60,7 @@
 }
 
 .blog_wrapper .left_column .blogs_container .blog_container .blog_link .thumbnail {
-  border-bottom: 1px solid #dad8d8;
+  border-bottom: 1px solid #e6e6e6;
   text-align: center;
   width: 100%;
 }

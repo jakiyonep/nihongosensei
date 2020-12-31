@@ -47,7 +47,7 @@ html.wf-active {
 }
 
 p, h1, h2, h3, h4 {
-  line-height: 1.5rem;
+  line-height: 2rem;
 }
 
 img {
@@ -632,7 +632,6 @@ li {
 .content h2, .content h3, .content h4 {
   font-size: 1.2rem;
   margin-top: 4rem;
-  margin-bottom: 2rem;
 }
 
 .content h2 {
@@ -654,10 +653,6 @@ li {
 .content h4 {
   border-left: 0.5rem solid #8b8b8b;
   padding-left: 0.5rem;
-}
-
-.content p {
-  line-height: 2rem;
 }
 
 .content strong {
@@ -732,7 +727,7 @@ li {
 }
 
 .content .point {
-  border: 2px solid #fad3d3;
+  border: 2px solid #f89f9f;
   border-radius: 0.2rem;
   padding: 1rem 0.5rem;
   position: relative;
@@ -744,7 +739,7 @@ li {
   position: absolute;
   top: -0.8rem;
   left: -0.5rem;
-  background-color: #fad3d3;
+  background-color: #f89f9f;
   color: white;
   padding: 0.2rem;
   -webkit-transform: rotate(-4deg);
@@ -762,16 +757,15 @@ li {
   width: fit-content;
   background-color: #f3f3f3;
   padding: 0.5rem 1rem;
-  font-style: italic;
-}
-
-.content .bun > * {
-  font-style: italic;
 }
 
 .content .bun em, .content .bun strong {
   border-bottom: 0.1rem solid #8b8b8b;
   font-weight: normal;
+}
+
+.content .dame {
+  background-color: #fae4e4;
 }
 
 .content .answer_exp_container {
@@ -787,10 +781,17 @@ li {
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
   margin-bottom: 1rem;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .content .answer_exp_container .answer_exp .answer_exp_left {
   margin-right: 1rem;
+}
+
+.content .answer_exp_container .answer_exp .answer_exp_right p:last-child {
+  margin-bottom: 0;
 }
 
 .note_content {
