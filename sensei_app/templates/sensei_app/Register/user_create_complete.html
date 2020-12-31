@@ -1,0 +1,19 @@
+{% extends "sensei_app/base.html" %}
+{% block content %}
+{% load static %}
+<head>
+	<link rel="stylesheet" href="{% static 'sensei_app/css/register.min.css' %}">
+</head>
+<body>
+	<div class="navbar">
+		{% include 'sensei_app/navbar.html' %}
+	</div><!-- /.navbar -->
+	<div class="wrapper register_wrapper">
+		<p class="plain_text">
+			会員登録が完了しました。
+		</p>
+		<a class="strong_button" href="{% url 'sensei_app:login' %}">ログイン</a>
+		<a class="weak_button" href="{% url 'sensei_app:toppage' %}">トップページに戻る</a>
+	</div>
+</body>
+{% endblock %}

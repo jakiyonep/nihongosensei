@@ -1,0 +1,22 @@
+{% extends "sensei_app/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+	<link rel="stylesheet" href="{% static 'sensei_app/css/register.min.css' %}">
+</head>
+	<div class="navbar">
+		{% include 'sensei_app/navbar.html' %}
+	</div><!-- /.navbar -->
+<div class="wrapper register_perk_wrapper">
+	<p class="section_head">会員になると？</p>
+	<div class="register_perk_list">
+		{% for perk in perks %}
+			<div class="register_perk_container">
+				<p class="perk">{{perk.perk}}</p>
+				<p class="perk_desc">{{perk.desc|safe}}</p>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
+
