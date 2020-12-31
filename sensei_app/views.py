@@ -84,7 +84,7 @@ def RegisterPerkList(request):
         "perks": perks
     }
 
-    return render(request, "sensei_app/register/register_perk.html", context)
+    return render(request, "sensei_app/Register/register_perk.html", context)
 
 def TermsConditionsView(request):
     selected_terms = get_object_or_404(TermsConditions, number=1)
@@ -890,7 +890,7 @@ class Logout(LogoutView):
 
 class UserCreate(generic.CreateView):
     """ユーザー仮登録"""
-    template_name = 'sensei_app/register/user_create.html'
+    template_name = 'sensei_app/Register/user_create.html'
     form_class = UserCreateForm
 
     def form_valid(self, form):
@@ -919,11 +919,11 @@ class UserCreate(generic.CreateView):
 
 class UserCreateDone(generic.TemplateView):
     """ユーザー仮登録したよ"""
-    template_name = 'sensei_app/register/user_create_done.html'
+    template_name = 'sensei_app/Register/user_create_done.html'
 
 class UserCreateComplete(generic.TemplateView):
     """メール内URLアクセス後のユーザー本登録"""
-    template_name = 'sensei_app/register/user_create_complete.html'
+    template_name = 'sensei_app/Register/user_create_complete.html'
     timeout_seconds = getattr(settings, 'ACTIVATION_TIMEOUT_SECONDS', 60 * 60 * 24)  # デフォルトでは1日以内
 
     def get(self, request, **kwargs):
