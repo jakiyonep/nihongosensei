@@ -549,8 +549,8 @@ li {
         font-weight: 800;
     }
     h2{
-        border-top: 0.1rem solid $border-primary;
-        border-bottom: 0.1rem solid $border-primary;
+        background-color: $border-primary;
+        color: white;
         padding: 0.5rem 0;
     }
     h3{

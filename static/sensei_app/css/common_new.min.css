@@ -626,8 +626,8 @@ li {
 }
 
 .content h2 {
-  border-top: 0.1rem solid #8b8b8b;
-  border-bottom: 0.1rem solid #8b8b8b;
+  background-color: #8b8b8b;
+  color: white;
   padding: 0.5rem 0;
 }
 

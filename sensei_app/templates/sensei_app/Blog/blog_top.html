@@ -24,41 +24,43 @@
 					{% include "sensei_app/result.html" %}
 				{% endif %}
 				{% for blog in blog_list %}
-					<div class="blog_container">
-						<a class="blog_link" href="{% url 'sensei_app:blog_detail' blog.pk %}">
-							<div class="thumbnail">
-								{% if blog.thumbnail %}
-									<img src="{{blog.thumbnail.url}}">
-								{% else %}
-									<img
-										src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/undraw_Design_thinking_re_644h.png"
-										alt="">
-								{% endif %}
-							</div>
-						</a>
-						<div class="bottom">
-							<div class="title">
-								{{blog.title}}
-							</div>
-							<div class="meta_info">
-								<div class="date">
-									{{blog.updated_at|date:"Y/m/d f"}}
+					{% if blog.public %}
+						<div class="blog_container">
+							<a class="blog_link" href="{% url 'sensei_app:blog_detail' blog.pk %}">
+								<div class="thumbnail">
+									{% if blog.thumbnail %}
+										<img src="{{blog.thumbnail.url}}">
+									{% else %}
+										<img
+											src="https://nihongosensei.s3-ap-northeast-1.amazonaws.com/media/Toppage/undraw_Design_thinking_re_644h.png"
+											alt="">
+									{% endif %}
 								</div>
-								<a class="category" href="{% url 'sensei_app:blog_category_list' blog.category.category_slug %}">
-								{{blog.category.category}}
-								</a>
-								{% if blog.tag.all %}
-								<div class="tags">
-									{% for tag in blog.tag.all %}
-									<div class="tag">
-										<a href="{% url 'sensei_app:blog_tag_list' tag.tag_slug %}">{{tag.tag}}</a>
+							</a>
+							<div class="bottom">
+								<div class="title">
+									{{blog.title}}
+								</div>
+								<div class="meta_info">
+									<div class="date">
+										{{blog.updated_at|date:"Y/m/d f"}}
 									</div>
-									{% endfor %}
+									<a class="category" href="{% url 'sensei_app:blog_category_list' blog.category.category_slug %}">
+									{{blog.category.category}}
+									</a>
+									{% if blog.tag.all %}
+									<div class="tags">
+										{% for tag in blog.tag.all %}
+										<div class="tag">
+											<a href="{% url 'sensei_app:blog_tag_list' tag.tag_slug %}">{{tag.tag}}</a>
+										</div>
+										{% endfor %}
+									</div>
+									{% endif %}
 								</div>
-								{% endif %}
 							</div>
 						</div>
-					</div>
+					{% endif %}
 				{% endfor %}
 			</div>
 		</div>
