@@ -41,22 +41,26 @@
 					{{ note.content|markdown_to_html}}
 				</div>
 				{% if note.jltctreference_set.all %}
-				<div class="reference sub">
-					<p class="sub_head">参考</p>
+				<div class="sub_subsection">
+					<p class="sub_subsection_head">参考</p>
 					{% for reference in note.jltctreference_set.all %}
-					<li>
-						<a href="{{reference.url}}">{{reference.name}}</a>
-					</li>
+					<ul>
+						<li>
+							<a href="{{reference.url}}">{{reference.name}}</a>
+						</li>
+					</ul>
 					{% endfor %}
 				</div>
 				{% endif %}
 				{% if note.related_note.all %}
-				<div class="related sub">
-					<p class="sub_head">関連ノート</p>
+				<div class="sub_subsection">
+					<p class="sub_subsection_head">関連ノート</p>
 					{% for related in note.related_note.all %}
-					<li>
-						<a href="{% url 'sensei_app:note_detail' related.title_slug %}">{{related.title}}</a>
-					</li>
+					<ul>
+						<li>
+							<a href="{% url 'sensei_app:note_detail' related.title_slug %}">{{related.title}}</a>
+						</li>
+					</ul>
 					{% endfor %}
 				</div>
 				{% endif %}

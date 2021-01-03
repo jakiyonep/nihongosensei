@@ -211,3 +211,17 @@ $(document).on('click', '.sidebar_head', function (event) {
 	$(this).next().slideToggle('fast')
 	$(this).classToggle('clicked')
 })
+
+/* content img click */
+
+$(document).on('click', '.content img', function(event){
+	var imgsrc = $(this).attr('src');
+	$('body').prepend('<div id="img_wrapper" onclick="closeimg()"></div ><div id="imgbox" onclick="closeimg()"><img src="'+imgsrc+'" /></div>	');
+
+})
+function closeimg() {	
+	$(function(){
+		$('#img_wrapper').remove();
+		$('#imgbox').remove();		
+	});
+};	
