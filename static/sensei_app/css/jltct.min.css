@@ -10,7 +10,7 @@
 /* highlight */
 /* difficulty */
 /* others */
-.fontawesome_before {
+.fontawesome_before, .jltct_wrapper .left_column .exp_detail .question_num_smalls_container .question_num_small_container .explanation .answer_exp_container .correct_answer::before {
   font-family: "Font Awesome 5 Free";
   display: inline-block;
   font-weight: 900;
@@ -318,6 +318,22 @@
 
 .jltct_wrapper .left_column .exp_detail .question_num_smalls_container .question_num_small_container .difficulty .difficulty_3 {
   background-color: #ce7a74;
+}
+
+.jltct_wrapper .left_column .exp_detail .question_num_smalls_container .question_num_small_container .explanation .answer_exp_container {
+  padding-left: 1rem;
+}
+
+.jltct_wrapper .left_column .exp_detail .question_num_smalls_container .question_num_small_container .explanation .answer_exp_container .correct_answer {
+  position: relative;
+}
+
+.jltct_wrapper .left_column .exp_detail .question_num_smalls_container .question_num_small_container .explanation .answer_exp_container .correct_answer::before {
+  content: "\f00c";
+  position: absolute;
+  left: -1rem;
+  top: -0.3rem;
+  color: #f89f9f;
 }
 
 .jltct_wrapper .left_column .exp_detail .related_exp {

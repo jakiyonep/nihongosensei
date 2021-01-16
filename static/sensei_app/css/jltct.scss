@@ -260,6 +260,25 @@
           .meta_info{
 
           }
+          .explanation{
+            .answer_exp_container{
+              padding-left: 1rem;
+              .answer_exp{
+
+              }
+              .correct_answer{
+                position: relative;
+                &::before{
+                  content: "\f00c";
+                  @extend .fontawesome_before;
+                  position: absolute;
+                  left: -1rem;
+                  top: -0.3rem;
+                  color: $strong-red;
+                }
+              }
+            }
+          }
         }
       }
       .related_exp{
@@ -289,7 +308,7 @@
             }
           }
         }
-        .right{;
+        .right{
           .exam_question_num_head{
             flex-direction: row-reverse;
           }

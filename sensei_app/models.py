@@ -371,35 +371,59 @@ class Material(models.Model):
         ordering = ["-upload_at"]
 
 # job listing
+class JobListingStudentType(models.Model):
+    student_type = models.CharField(max_length=30, null=True, blank=False)
 
 class JobListing(models.Model):
-    listing_id = models.CharField(blank=False, null=True, max_length=20)
-    organization_name = models.CharField(blank=False, null=True, max_length=50)
-    job_title = models.CharField(blank=False, null=True, max_length=50)
-    contract_type = models.CharField(blank=False, null=True, max_length=50)
-    workplace = CountryField()
-    job_desc = models.TextField(blank=False, null=True)
-    application_condition = models.TextField(blank=False, null=True)
-    treatment = models.TextField(blank=False, null=True)
-    deadline = models.DateField
-    deadline_supplement = models.TextField(blank=False, null=True)
-    notes = models.TextField(blank=False, null=True)
-    contact_person = models.CharField(blank=False, null=True, max_length=40)
-    email = models.EmailField(blank=False, null=True)
-    tel = models.IntegerField(blank=False, null=True)
-    postal_code = models.IntegerField
-    address = models.TextField(blank=False, null=True, default=1)
-    contact_person_private = models.CharField(blank=False, null=True, max_length=40)
-    email_private = models.EmailField
+    listing_id = models.CharField(max_length=50, null=True, blank=True)
+    title = models.CharField(max_length=50, null=True, blank=False)
+    posted_at = models.DateField(auto_now=True)
+    deadline = models.DateField(null=True, blank=False)
+    kimarishidai_end = models.IntegerField(default=False)
+    job_starting_date = models.DateField(null=True, blank=False)
+
+    #Desc
+    student_type = models.ManyToManyField(JobListingStudentType, null=True, blank=False, related_name="student_type_jobs")
+    class_scale = models.TextField(null=True, blank=False)
+
+    #Contract
+    class ContractTypeChoices(models.IntegerChoices):
+        easy = 1
+        normal = 2
+        difficult = 3
+    contract_type = models.IntegerField(choices=ContractTypeChoices.choices, null=True, blank=False)
+    contract_duration_year = models.IntegerField(null=True, blank=False)
+    contract_duration_month = models.IntegerField(null=True, blank=False)
+
+    #Location
+    class LocationCategoryChoices(models.IntegerChoices):
+        japan = 1
+        not_japan = 2
+    location_category =models.IntegerField(choices=LocationCategoryChoices.choices, null=True, blank=False)
+    location_country = models.CharField(max_length=20, null=True, blank=False)
+    location_city = models.CharField(max_length=20, null=True, blank=False)
+    location_other = models.CharField(max_length=20, null=True, blank=True)
+
+    working_hour = models.TextField(null=True, blank=False)
+    dayoff = models.TextField(null=True, blank=False)
+    salary = models.TextField(null=True, blank=False)
+    perk = models.TextField(null=True, blank=False)
+    requirement = models.TextField(null=True, blank=False)
+    requirement_3 = models.BooleanField(default=False)
+    requirement_novice = models.BooleanField(default=False)
+    selection_process = models.TextField(null=True, blank=False)
+    message_to_applicants = models.TextField(null=True, blank=False)
+
+    #Organization Info
+    organization_name = models.CharField(max_length=50, null=True, blank=False)
+    organization_address = models.CharField(max_length=100, null=True, blank=False)
+    organization_url = models.URLField(null=True, blank=False)
+    contact_person = models.CharField(max_length=30, null=True, blank=False)
+    contact_person_email = models.EmailField(null=True, blank=False)
+
 
     def __str__(self):
         return self.organization_name + self.job_title
-
-    def japan_or_not(self):
-        if not self.workplace == 'JP':
-            return 'not_japan'
-        else:
-            return 'japan'
 
 # Blog
 

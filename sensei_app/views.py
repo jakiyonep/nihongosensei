@@ -647,9 +647,11 @@ def JltctCommentAdd(request):
         comment.save()
         all_comments = JltctComment.objects.all()
         ajax_comments = all_comments.filter(note=note)
+        request_user = request.user
         context = {
             'ajax_comments': ajax_comments,
-            'note': note
+            'note': note,
+            'request_user': request_user,
         }
 
         html = render_to_string('sensei_app/JLTCT/Note/Comments/comments.html', context)

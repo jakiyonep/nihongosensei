@@ -105,7 +105,7 @@
 				$('.comment_add_container').slideToggle()
 				$.ajax({
 					type: "POST",
-					url: "{% url 'sensei_app:jltct_comment_add' %}",
+					url: "{% url 'sensei_app:jltct_comment_add' %}",					
 					data: {
 						'comment_content': comment_content,
 						'note_id': note_id,
@@ -113,7 +113,7 @@
 					},
 					dataType: "json",
 					success: function (response) {
-						$('.note_comments').html(response['form'])
+						$('.comments').html(response['form'])
 						$('#comment_content').val('')
 					},
 				});
