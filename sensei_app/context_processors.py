@@ -14,12 +14,12 @@ def common(request):
         'exp_tags': ExamTags.objects.annotate(
             num_notes=Count('tag', filter=Q(tags__public=True))),
         'material_categories': MaterialCategory.objects.annotate(
-            num_materials=Count('category')),
+            num_materials=Count('category',filter=Q(category_materials__public=True))),
         'material_tags': MaterialTag.objects.annotate(
-            num_materials=Count('tag')),
+            num_materials=Count('tag', filter=Q(tag_materials__public=True))),
         'blog_categories': BlogCategory.objects.annotate(
-            num_blogs=Count('category')),
+            num_blogs=Count('category', filter=Q(blog_category_posts__public=True))),
         'blog_tags': BlogTag.objects.annotate(
-            num_blogs=Count('tag')),
+            num_blogs=Count('tag', flter=Q(blog_tag_posts__public=True))),
     }
     return context

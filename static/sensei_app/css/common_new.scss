@@ -16,13 +16,14 @@ html {
     font-family: a-otf-ud-shin-maru-go-pr6n,sans-serif;
     font-weight: 300;
     font-style: normal;
-    font-size: 1.05rem;
+    font-size: 0.96rem;
     box-sizing: border-box;
     color: $base-font-color;
     word-break: break-all;
+    word-wrap: break-word;
 }
 p, h1, h2, h3, h4{
-    line-height: 2rem;
+    line-height: 1.7rem;
 }
 
 img { 
@@ -54,7 +55,7 @@ p {
 
 li {
     list-style: circle;
-    margin-left: 2rem;
+    margin-left: 1rem;
     margin-bottom: 1rem;
 }
 
@@ -656,9 +657,9 @@ li {
     .point{
         border: 2px solid $strong-red;
         border-radius: 0.2rem;
-        padding: 1rem 0.5rem;
+        padding: 1rem;
         position: relative;
-        margin: 2rem 0;
+        margin: 2rem 0;        
         &::before{ 
             content: "Point!";
             position: absolute;
@@ -713,6 +714,7 @@ li {
 }
 
 .comment_content {
+
 }
 /* comment_section */
 .comment_section {
@@ -949,6 +951,14 @@ li {
     top: 0; 
     max-width: 80vw;
     max-height: 80vh;
+}
+.movie_wrap{
+    width:100%;
+    object-fit: contain;
+    iframe{
+        width:100%;
+        object-fit: cover;
+    }
 }
 
 @media screen and (max-width: 1100px) {

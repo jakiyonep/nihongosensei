@@ -39,15 +39,16 @@ html.wf-active {
   font-family: a-otf-ud-shin-maru-go-pr6n,sans-serif;
   font-weight: 300;
   font-style: normal;
-  font-size: 1.05rem;
+  font-size: 0.96rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   color: #4b4b4b;
   word-break: break-all;
+  word-wrap: break-word;
 }
 
 p, h1, h2, h3, h4 {
-  line-height: 2rem;
+  line-height: 1.7rem;
 }
 
 img {
@@ -86,7 +87,7 @@ p {
 
 li {
   list-style: circle;
-  margin-left: 2rem;
+  margin-left: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -741,7 +742,7 @@ li {
 .content .point {
   border: 2px solid #f89f9f;
   border-radius: 0.2rem;
-  padding: 1rem 0.5rem;
+  padding: 1rem;
   position: relative;
   margin: 2rem 0;
 }
@@ -1054,6 +1055,18 @@ li {
   top: 0;
   max-width: 80vw;
   max-height: 80vh;
+}
+
+.movie_wrap {
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.movie_wrap iframe {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 @media screen and (max-width: 1100px) {

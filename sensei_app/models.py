@@ -363,6 +363,7 @@ class Material(models.Model):
     description = models.TextField(blank=True, null=True)
     upload_at = models.DateTimeField(auto_now=True)
     uploader = models.ForeignKey(User, on_delete=models.CASCADE, related_name='uploaded_materials', null=True, blank=True )
+    public = models.BooleanField(default=True, blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -444,8 +445,8 @@ class BlogTag(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=40, blank=False, null=True)
     content = MarkdownxField(blank=False, null=True)
-    category = models.ForeignKey(BlogCategory, on_delete=models.CASCADE, blank=False, null=True, related_name="blog_categoty_posts")
-    tag = models.ManyToManyField(BlogTag,blank=False, null=True, related_name="blog_tag_posts")
+    category = models.ForeignKey(BlogCategory, on_delete=models.CASCADE, blank=False, null=True, related_name="blog_category_posts")
+    tag = models.ManyToManyField(BlogTag, blank=False, null=True, related_name="blog_tag_posts")
     updated_at = models.DateTimeField(auto_now=True)
     public = models.BooleanField(default=False)
     thumbnail = models.ImageField(blank=True, null=True, upload_to='blog_thumbnail')
