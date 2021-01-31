@@ -1105,6 +1105,9 @@ li {
   .wrapper .right_column {
     width: 100%;
   }
+  .wrapper .right_column .sidebar .collapse_target {
+    display: none;
+  }
   .content .table {
     overflow-x: scroll;
   }

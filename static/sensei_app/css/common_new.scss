@@ -109,7 +109,6 @@ li {
 
     .right_column {
         width: 25%;
-
         .sidebar {
             width: 100%;
             background-color: $light-bg-bolor;
@@ -1001,6 +1000,11 @@ li {
 
         .right_column {
             width: 100%;
+            .sidebar{
+                .collapse_target{
+                    display: none;
+                }
+            }
         }
     }
     .content{
