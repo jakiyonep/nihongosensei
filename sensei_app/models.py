@@ -294,12 +294,12 @@ class ExamExp(models.Model):
     question_num = models.IntegerField(null=True, blank=True)
     question_num_small = models.IntegerField(null=True, blank=True)
     question_head = models.CharField(null=True, blank=True, max_length=200)
-    explanation = models.TextField(null=True, blank=True)
-    answer_1 = models.TextField(null=True, blank=True)
-    answer_2 = models.TextField(null=True, blank=True)
-    answer_3 = models.TextField(null=True, blank=True)
-    answer_4 = models.TextField(null=True, blank=True)
-    answer_5 = models.TextField(null=True, blank=True)
+    explanation = MarkdownxField(null=True, blank=True)
+    answer_1 = MarkdownxField(null=True, blank=True)
+    answer_2 = MarkdownxField(null=True, blank=True)
+    answer_3 = MarkdownxField(null=True, blank=True)
+    answer_4 = MarkdownxField(null=True, blank=True)
+    answer_5 = MarkdownxField(null=True, blank=True)
     answer_abc = models.BooleanField(default=False)
 
     class Answer(models.IntegerChoices):
