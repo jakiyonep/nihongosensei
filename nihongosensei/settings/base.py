@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django_countries',
+    'django.forms',
 ]
 
 MARKDOWNX_MARKDOWN_EXTENSIONS = [
@@ -189,9 +190,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-
-""" DON'T FORFET CONFIGURE THE FOLLOWING VALUES!!! """
-
-
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 SITE_ID = 1
