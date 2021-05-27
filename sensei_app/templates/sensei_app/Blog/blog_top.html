@@ -22,7 +22,19 @@
 			<div class="blogs_container">
 				{% if result == 1 %}
 					{% include "sensei_app/result.html" %}
+				{% else %}
+					<p>「きまま」とは、新人日本語教師である僕が、日本語教育に関することをきままに書いた日記みたいなものです。日本語教育業界では何物でもない僕の書くことなので、読むに値しないことだらけだと思いますので、息抜き程度に読んであげてください。</p>
 				{% endif %}
+				
+				<h2 class="subsection_head">特集</h2>
+				<div class="subsection">
+					<li><a class="link" href="https://www.atsumarenihongokyoushi.com/blog/5">新人日本語教師の奮闘記録 Part 1</a></li>
+					<li><a class="link" href="https://www.atsumarenihongokyoushi.com/blog/6">新人日本語教師の奮闘記録 Part 2</a></li>
+					<li><a class="link" href="https://www.atsumarenihongokyoushi.com/blog/7">新人日本語教師の奮闘記録 Part 3</a></li>				
+				</div>
+				<h2 class="subsection_head">きまま一覧</h2>
+
+				<!--Blog_List-->
 				{% for blog in blog_list %}
 					{% if blog.public %}
 						<div class="blog_container">

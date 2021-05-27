@@ -39,7 +39,7 @@ html.wf-active {
   font-family: a-otf-ud-shin-maru-go-pr6n,sans-serif;
   font-weight: 300;
   font-style: normal;
-  font-size: 0.96rem;
+  font-size: 1rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   color: #4b4b4b;
@@ -703,20 +703,37 @@ li {
 }
 
 .content .toc {
-  border: 2px solid #e0f2fc;
   padding: 1rem 0.5rem;
   margin-bottom: 5rem;
+  background-color: #eeffef;
 }
 
 .content .toc::before {
   content: "目次";
   display: block;
+  font-weight: bold;
   margin-bottom: 0.5rem;
   padding-bottom: 0.5rem;
 }
 
 .content .toc ul {
   margin-top: 1rem;
+}
+
+.content .toc ul li {
+  list-style: disc;
+}
+
+.content .toc ul li li {
+  list-style: circle;
+}
+
+.content .toc ul li li li {
+  list-style: '- ';
+}
+
+.content .toc a {
+  color: #4b4b4b;
 }
 
 .content .toc a:hover {

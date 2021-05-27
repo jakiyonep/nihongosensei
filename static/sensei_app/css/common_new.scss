@@ -16,7 +16,7 @@ html {
     font-family: a-otf-ud-shin-maru-go-pr6n,sans-serif;
     font-weight: 300;
     font-style: normal;
-    font-size: 0.96rem;
+    font-size: 1rem;
     box-sizing: border-box;
     color: $base-font-color;
     word-break: break-all;
@@ -614,19 +614,30 @@ li {
         }
     }
     .toc{
-        border: 2px solid $weak-blue;
         padding: 1rem 0.5rem;
         margin-bottom: 5rem;
+        background-color: $weak-green;
         &::before{
             content: "目次";
             display: block;
+            font-weight: bold;
             margin-bottom: 0.5rem;
             padding-bottom: 0.5rem;
         }
         ul{
             margin-top: 1rem;
+            li{
+                list-style: disc;
+                li{
+                    list-style: circle;
+                    li{
+                        list-style: '- ';
+                    }
+                }
+            }
         }
         a{
+            color: $base-font-color;
             &:hover{
                 color: $strong-blue;
             }
