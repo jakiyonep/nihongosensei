@@ -36,7 +36,7 @@ html.wf-active {
 
 /* html tags */
 * {
-  font-family: a-otf-ud-shin-maru-go-pr6n,sans-serif;
+  font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro", "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "メイリオ", sans-serif;
   font-weight: 300;
   font-style: normal;
   font-size: 1rem;
@@ -722,10 +722,21 @@ li {
 
 .content .toc ul li {
   list-style: disc;
+  margin-bottom: 1.4rem;
+}
+
+.content .toc ul li a {
+  font-size: 1.1rem;
 }
 
 .content .toc ul li li {
   list-style: circle;
+  margin-left: 0.5rem;
+}
+
+.content .toc ul li li a {
+  font-size: 1rem;
+  border-bottom: none;
 }
 
 .content .toc ul li li li {
@@ -733,11 +744,11 @@ li {
 }
 
 .content .toc a {
-  color: #4b4b4b;
+  color: #7dd5eb;
 }
 
 .content .toc a:hover {
-  color: #7dd5eb;
+  border-bottom: 1px solid #7dd5eb;
 }
 
 .content .table {

@@ -117,7 +117,6 @@
 				var comment_author = $('#comment_author_id').val()
 				var comment_content = $('#comment_content_id').val()
 				var selected_sort = $('.comment_sort').val()
-				alert(comment_content)
 				if (comment_author == undefined || comment_author == "") {
 					comment_author = '名無し'
 				}
@@ -134,10 +133,10 @@
 					},
 					dataType: "json",
 					success: function (response) {
-						console.log('okay')
 						$('.comments_container').html(response['form'])
 						$('#comment_author_id').val('')
 						$('#comment_content_id').val('')
+						$('.comment_sort').val('new')
 					},
 
 				});
@@ -227,6 +226,8 @@
 			})
 		{% endif %}
 	</script>
+
+
 	<!--answer_like -->
 	<script type="text/javascript">
 		$(document).on('click', '.answer_like_button', function (event) {

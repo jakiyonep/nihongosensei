@@ -13,7 +13,7 @@ html {
 
 /* html tags */
 * {
-    font-family: a-otf-ud-shin-maru-go-pr6n,sans-serif;
+    font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro", "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "メイリオ", sans-serif;
     font-weight: 300;
     font-style: normal;
     font-size: 1rem;
@@ -616,7 +616,7 @@ li {
     .toc{
         padding: 1rem 0.5rem;
         margin-bottom: 5rem;
-        background-color: $weak-green;
+        background-color: $weak-green;        
         &::before{
             content: "目次";
             display: block;
@@ -628,19 +628,29 @@ li {
             margin-top: 1rem;
             li{
                 list-style: disc;
+                margin-bottom: 1.4rem;
+                a{
+                    font-size: 1.1rem;
+                }
                 li{
                     list-style: circle;
+                    margin-left: 0.5rem;
+                    a{
+                        font-size: 1rem;
+                        border-bottom: none;
+                    }
                     li{
                         list-style: '- ';
+                        
                     }
                 }
             }
         }
         a{
-            color: $base-font-color;
+            color: $strong-blue;
             &:hover{
-                color: $strong-blue;
-            }
+                border-bottom: 1px solid $strong-blue;
+            }            
         }
     }
     .table{

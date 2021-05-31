@@ -149,25 +149,24 @@ def QuestionDetail(request, pk):
         context['already_voted'] = 1
 
     if request.method == 'POST':
-        if request.POST.get("comment_submit"):
-            selected_sort = request.POST['selected_sort']
+        selected_sort = request.POST['selected_sort']
 
-            if selected_sort == 'likes':
-                answers = answers\
-                        .annotate(num_likes=Count('likes'))\
-                        .order_by('-num_likes')
-            elif selected_sort == 'new':
-                answers = answers.order_by('-created_at')
-            elif selected_sort == 'old':
-                answers = answers.order_by('created_at')
+        if selected_sort == 'likes':
+            answers = answers\
+                    .annotate(num_likes=Count('likes'))\
+                    .order_by('-num_likes')
+        elif selected_sort == 'new':
+            answers = answers.order_by('-created_at')
+        elif selected_sort == 'old':
+            answers = answers.order_by('created_at')
 
 
-            context['question'] = question
-            context['answers'] = answers
+        context['question'] = question
+        context['answers'] = answers
 
-            html = render_to_string('sensei_app/Question/Detail/Answers/comments.html', context, request=request)
+        html = render_to_string('sensei_app/Question/Detail/Answers/comments.html', context, request=request)
 
-            return JsonResponse({'comment_sort': html})
+        return JsonResponse({'comment_sort': html})
 
     context['question'] = question
     context['answers'] = answers
@@ -803,7 +802,7 @@ def BlogTop(request):
                 Q(tag__tag__icontains=query_each) |
                 Q(content__icontains=query_each)
             ).distinct()
-    paginator = Paginator(blog_list, 20)
+    paginator = Paginator(blog_list, 15)
     page = request.GET.get('page')
     blog_list = paginator.get_page(page)
     num = request.GET.get('page')
@@ -813,6 +812,7 @@ def BlogTop(request):
         'blog_list': blog_list,
         'query': query,
         'page': page,
+        'paginator': paginator,
         'page_obj': page_obj,
         'result': result,
         'service_name': service_name,
@@ -1038,6 +1038,9 @@ def AllAnswersofUser(request, pk):
 
     all_answers = Answer.objects.all()
     answers = all_answers.filter(login_author=login_author)
+
+    
+
 
     paginator = Paginator(answers, 14)
     page = request.GET.get('page')
